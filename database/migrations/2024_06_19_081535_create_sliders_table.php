@@ -19,6 +19,7 @@ class CreateSlidersTable extends Migration
             $$table->text('caption')->nullable();
             $table->string('additional_text')->nullable();
             $table->string('button_url')->nullable();
+            $table->string('button_text')->nullable();
             $table->string('image');
             $table->timestamps();
         });

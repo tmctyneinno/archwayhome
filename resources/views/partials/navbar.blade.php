@@ -60,7 +60,7 @@
           </div>
           
           <ul class="rd-navbar-nav">
-            @foreach ($menuItems as $menuItem)
+            @forelse ($menuItems as $menuItem)
                 <li class="{{ request()->is($menuItem->url) ? 'active' : '' }}">
                     <a href="{{ route($menuItem->url) }}">
                         {{ $menuItem->name }}
@@ -73,7 +73,9 @@
                         @endif
                     </a>
                 </li>
-            @endforeach
+            @empty
+              <li class="#">No Navigation item</li>
+            @endforelse
         </ul>
         
           {{-- <ul class="rd-navbar-nav">

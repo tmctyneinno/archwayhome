@@ -5,118 +5,97 @@
    <!-- Swiper-->
    <section class="swiper-form-wrap">
     <div class="swiper-container swiper-slider swiper-slider_fullheight" data-simulate-touch="false" data-swiper='{"autoplay":{"delay":5500},"loop":true}'>
-      <div class="swiper-wrapper">
-        <div class="swiper-slide bg-gray-darker text-center" data-slide-bg="{{ asset ('assets/images/slider-slide-1.jpg')}}">
-          <div class="swiper-slide-caption"> 
-            <div class="container">
-              <div class="row justify-content-lg-center">
-                <div class="col-lg-10 col-xl-7">
-                  <h6 data-caption-animate="fadeInUpSmall" data-caption-delay="0">WE offer lots of</h6>
-                  <h1 data-caption-animate="fadeInUpSmall" data-caption-delay="100">Luxury <br/>Amenities</h1>
-                  <p class="swiper-caption-text" data-caption-animate="fadeInUpSmall" data-caption-delay="200">Every property we sell has numerous amenities that only add to your<br class="d-none d-md-block"/> comfort and create a great atmosphere.</p>
+        <div class="swiper-wrapper">
+            @foreach ($sliders as $slider)
+            <div class="swiper-slide bg-gray-darker text-center" data-slide-bg="{{ asset($slider->image) }}">
+                <div class="swiper-slide-caption">
+                    <div class="container">
+                        <div class="row justify-content-lg-center">
+                            <div class="col-lg-10 col-xl-10">
+                                <h6 data-caption-animate="fadeInUpSmall" data-caption-delay="0">{{ $slider->title }}</h6>
+                                <h1 data-caption-animate="fadeInUpSmall" data-caption-delay="100">{{ $slider->caption }}</h1>
+                                <p class="swiper-caption-text" data-caption-animate="fadeInUpSmall" data-caption-delay="200">{{ $slider->additional_text }}</p>
+                                @if ($slider->button_url)
+                                  <a class="button button-primary" href="{{ $slider->button_url }}">{{ $slider->button_text }}!</a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+            @endforeach
         </div>
-        <div class="swiper-slide bg-gray-darker text-center" data-slide-bg="{{ asset ('assets/images/slider-slide-2.jpg')}}">
-          <div class="swiper-slide-caption">
-            <div class="container">
-              <div class="row justify-content-lg-center">
-                <div class="col-lg-10 col-xl-7">
-                  <h6 data-caption-animate="fadeInUpSmall" data-caption-delay="0">A VARIETY OF</h6>
-                  <h1 data-caption-animate="fadeInUpSmall" data-caption-delay="100">New Properties</h1>
-                  <p class="swiper-caption-text" data-caption-animate="fadeInUpSmall" data-caption-delay="200"> We daily update our property catalog with new properties of all kinds to help you find your dream house.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide bg-gray-darker text-center" data-slide-bg="{{ asset ('assets/images/slider-slide-3.jpg')}}">
-          <div class="swiper-slide-caption">
-            <div class="container">
-              <div class="row justify-content-lg-center">
-                <div class="col-lg-10 col-xl-7">
-                  <h6 data-caption-animate="fadeInUpSmall" data-caption-delay="0">We are a team of</h6>
-                  <h1 data-caption-animate="fadeInUpSmall" data-caption-delay="100">Qualified Brokers</h1>
-                  <p class="swiper-caption-text" data-caption-animate="fadeInUpSmall" data-caption-delay="200">We employ highly-qualified brokers and real estate agents who are always ready to help you achieve your commercial real estate goals.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Swiper Pagination-->
-      <div class="swiper-pagination"> </div>
+        <!-- Swiper Pagination -->
+        <div class="swiper-pagination"></div>
     </div>
     <div class="container section-form">
-      <div class="section-form__inner">
-        <div class="section-form__content">
-          <!-- RD Mailform-->
-          <form class="rd-mailform_boxed rd-mailform_modern">
-            <h4>Find Your Property</h4>
-            <div class="rd-mailform_boxed__inner"> 
-              <div class="box-element box-element_md">
-                <div class="form-wrap">
-                  <!-- Select 2-->
-                  <select class="form-input select-filter" id="location"  name="location" >
-                    <option value="2">Chicago, IL</option>
-                    <option value="3">Seattle, WA</option>
-                    <option value="4">Miami, FL</option>
-                    <option value="5">Dallas, TX</option>
-                    <option value="6">Atlanta, GA</option>
-                    <option value="7">New York, NY</option>
-                  </select>
-                </div>
-              </div>
-              <div class="box-element box-element_md">
-                <div class="form-wrap">
-                  <!-- Select 2-->
-                  <select class="form-input select-filter" id="property" data-placeholder="Property Type:" name="property" >
-                    <option value="2">Single-Family</option>
-                    <option value="3">Multi-Unit</option>
-                    <option value="4">Modular Home</option>
-                    <option value="5">Townhouse</option>
-                    <option value="6">Condominium</option>
-                    <option value="7">Vacation Home</option>
-                  </select>
-                </div>
-              </div>
-              <div class="box-element box-element_xs">
-                <div class="form-wrap">
-                  <!-- Select 2-->
-                  <select class="form-input select-filter" id="beds" data-placeholder="1" name="Beds" >
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                  </select>
-                </div>
-              </div>
-              <div class="box-element box-element_xs">
-                <div class="form-wrap">
-                  <!-- Select 2-->
-                  <select class="form-input select-filter" id="baths" data-placeholder="0" name="Baths" >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>
-                </div>
-              </div>
-              <div class="box-element box-element_wide">
-                <button class="button button-primary button-lg">Search</button>
-              </div>
+        <div class="section-form__inner">
+            <div class="section-form__content">
+                <!-- RD Mailform -->
+                <form class="rd-mailform_boxed rd-mailform_modern">
+                    <h4>Find Your Property</h4>
+                    <div class="rd-mailform_boxed__inner">
+                        <div class="box-element box-element_md">
+                            <div class="form-wrap">
+                                <!-- Select 2 -->
+                                <select class="form-input select-filter" id="location" name="location">
+                                    <option value="2">Chicago, IL</option>
+                                    <option value="3">Seattle, WA</option>
+                                    <option value="4">Miami, FL</option>
+                                    <option value="5">Dallas, TX</option>
+                                    <option value="6">Atlanta, GA</option>
+                                    <option value="7">New York, NY</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="box-element box-element_md">
+                            <div class="form-wrap">
+                                <!-- Select 2 -->
+                                <select class="form-input select-filter" id="property" data-placeholder="Property Type:" name="property">
+                                    <option value="2">Single-Family</option>
+                                    <option value="3">Multi-Unit</option>
+                                    <option value="4">Modular Home</option>
+                                    <option value="5">Townhouse</option>
+                                    <option value="6">Condominium</option>
+                                    <option value="7">Vacation Home</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="box-element box-element_xs">
+                            <div class="form-wrap">
+                                <!-- Select 2 -->
+                                <select class="form-input select-filter" id="beds" data-placeholder="1" name="Beds">
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="box-element box-element_xs">
+                            <div class="form-wrap">
+                                <!-- Select 2 -->
+                                <select class="form-input select-filter" id="baths" data-placeholder="0" name="Baths">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="box-element box-element_wide">
+                            <button class="button button-primary button-lg">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </form>
         </div>
-      </div>
     </div>
-  </section>
+</section>
 
   <!-- Welcome to the Best Indianapolis Hotel!-->
   <section class="section-lg bg-100">
@@ -317,7 +296,8 @@
           <h4>Rent a New Apartment <br/>Get FREE Furniture</h4>
           <p>That's correct! We're so determined to make your experience at our properties better that we will even provide you with free furniture from the store of your choice!</p>
           <h5>Prices start at</h5>
-          <div class="price"><span class="price__aside-top">$</span><span class="price__main">249</span><span class="price__aside-bottom">/month</span></div><a class="button button-primary" href="single-property.html">Rent now!</a>
+          <div class="price"><span class="price__aside-top">$</span><span class="price__main">249</span><span class="price__aside-bottom">/month</span></div>
+          <a class="button button-primary" href="single-property.html">Rent now!</a>
         </div>
       </div>
     </div>

@@ -28,6 +28,16 @@
                                         {{ session('success') }}
                                     </div>
                                 @endif
+                                {{-- @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif --}}
+                
                                 
                                 <form method="POST"  action="{{ route('slider.store') }}" enctype="multipart/form-data">
                                     @csrf
@@ -40,13 +50,13 @@
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Caption</label>
                                         <div class="col-sm-9">
-                                            <textarea id="caption" class="form-control" name="caption"></textarea>
+                                            <textarea id="caption" class="form-control" placeholder="Caption"  name="caption" required></textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Additional Text</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Additional Text" name="additional_text"  id="additional_text" required>
+                                            <textarea id="caption" class="form-control" placeholder="Additional Text" name="additional_text" required></textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
@@ -56,9 +66,21 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Button Text</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Button Text" name="button_text"  id="button_text" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Image</label>
                                         <div class="col-sm-9">
-                                            <input id="image" type="file" class="form-control" name="image" required onchange="previewImage(event)">
+                                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required onchange="previewImage(event)">
+                                            @error('image')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
                                             <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
                                         </div>
                                     </div>

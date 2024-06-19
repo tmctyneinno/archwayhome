@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MenuItem;
+use App\Models\Slider;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $menuItems = MenuItem::with('dropdownItems')->get();
-        return view('home', compact('menuItems'));
+        $sliders = Slider::all();
+        return view('home', compact('menuItems', 'sliders'));
     }
 
      public function indexx()

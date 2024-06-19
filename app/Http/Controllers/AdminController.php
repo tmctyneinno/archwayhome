@@ -116,7 +116,8 @@ class AdminController extends Controller
             'caption' => 'nullable|string',
             'additional_text' => 'required|string|max:255',
             'button_url' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'button_text' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $imageName = time().'.'.$request->image->extension();  
@@ -127,6 +128,7 @@ class AdminController extends Controller
             'caption' => $request->caption,
             'additional_text' => $request->additional_text,
             'button_url' => $request->button_url,
+            'button_text' => $request->button_text,
             'image' => 'sliderImages/'.$imageName,
         ]);
 
@@ -141,21 +143,30 @@ class AdminController extends Controller
 
     public function updateSlider(Request $request, $slider)
     {
+       
         $request->validate([
             'title' => 'required|string|max:255',
             'caption' => 'nullable|string',
             'additional_text' => 'required|string|max:255',
             'button_url' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'button_text' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+       
         $slider = Slider::findOrFail($slider);
+        
         if ($request->hasFile('image')) {
             
-            $imageName = time().'.'.$request->image->extension();  
-            $request->image->move(public_path('sliderImages'), $imageName);
-            $slider->update([
-                'image' => 'sliderImages/'.$imageName,
-            ]);
+            try {
+               
+                $imageName = time().'.'.$request->image->extension();  
+                $request->image->move(public_path('sliderImages'), $imageName);
+            
+                $slider->update(['image' => 'sliderImages/' . $imageName]);
+            } catch (\Exception $e) {
+              
+                return redirect()->route('admin.slider.index')->with('image', 'Image upload failed.'.$e->getMessage());
+            }
         }
 
         $slider->update([
@@ -163,6 +174,7 @@ class AdminController extends Controller
             'caption' => $request->caption,
             'additional_text' => $request->additional_text,
             'button_url' => $request->button_url,
+            'button_text' => $request->button_text,
         ]);
 
         return redirect()->route('admin.slider.index')->with('success', 'Slider updated successfully.');

@@ -28,6 +28,11 @@
                                         {{ session('success') }}
                                     </div>
                                 @endif
+                                @if(session('error'))
+                                    <div id="success-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
                                 
                                 <form method="POST"  action="{{ route('admin.slider.update', $slider->id) }}" enctype="multipart/form-data">
                                     @csrf
@@ -41,13 +46,13 @@
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Caption</label>
                                         <div class="col-sm-9">
-                                            <textarea id="caption" class="form-control" name="caption">{{ $slider->caption }}</textarea>
+                                            <textarea id="caption" class="form-control" placeholder="Caption" name="caption">{{ $slider->caption }}</textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Additional Text</label>
                                         <div class="col-sm-9">
-                                            <textarea id="additional_text" class="form-control" name="additional_text">{{ $slider->additional_text }}</textarea>
+                                            <textarea id="additional_text" class="form-control" placeholder="Additional Text" name="additional_text" required>{{ $slider->additional_text }}</textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
@@ -57,12 +62,24 @@
                                             
                                         </div>
                                     </div>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Button Text</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Button Text" value="{{ $slider->button_text }}"  name="button_text"  id="button_text" required>
+                                        </div>
+                                    </div>
                                     <div class="mb-3 row ">
                                         <label class="col-sm-3 col-form-label form-label">Image</label>
                                         <div class="col-sm-9">
-                                            <input id="image" type="file" class="form-control" name="image"  onchange="previewImage(event)">
+                                            <input id="image" type="file"  class="form-control @error('image') is-invalid @enderror" name="image"  onchange="previewImage(event)" required>
+                                            @error('image')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                             <img src="{{ asset($slider->image) }}" alt="{{ $slider->title }}" class="img-thumbnail mt-2" width="200">
-                                        
+                                            <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
+                                          
                                             <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
                                         </div>
                                     </div>
