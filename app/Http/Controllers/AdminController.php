@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\MenuItem;
 use App\Models\DropdownItem;
 use App\Models\Slider;
+use App\Http\Traits\AdminTrait;
 
 class AdminController extends Controller
 {
+    use AdminTrait;
     public function __construct()
     {
         $this->middleware('auth.admin');
@@ -18,17 +20,15 @@ class AdminController extends Controller
     public function index()
     {
         $admin = Auth::guard('admin')->user();
-        // return view('admin.index', compact('admin'));
-        return view('admin.users.index')
-        ->with('bheading', 'Index')
-        ->with('admin', 'admin')
-        ->with('breadcrumb', 'Index');
+        return view('admin.users.index', [
+            'bheading' => 'Index',
+            'admin' => $admin,
+            'breadcrumb' => 'Index',
+        ]);
     }
 
     public function creatMenu(){
-        return view('admin.menu.create')
-        ->with('bheading', 'Add Menu')
-        ->with('breadcrumb', 'Index');
+        return view('admin.menu.create');
     }
 
     public function indexMenu(){
@@ -37,25 +37,14 @@ class AdminController extends Controller
     }
 
     public function storeMenu(Request $request){
-    
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'url' => 'required|string|max:255',
-            'dropdown_items.*' => 'nullable|string|max:255',
-        ]);
-
-        $menuItem = MenuItem::create([
-            'name' => $request->name,
-            'url' => $request->url
-        ]);
-
+        $this->validateMenu($request);
+        $menuItem = MenuItem::create($request->only('name', 'url'));
         if ($request->has('dropdown_items')) {
-            foreach ($request->dropdown_items as $dropdownItem) {
-                $menuItem->dropdownItems()->create(['name' => $dropdownItem]);
-            }
+            $this->createDropdownItems($menuItem, $request->dropdown_items);
         }
-        $request->session()->flash('success', 'Menu item created successfully!');
-        return redirect()->route('admin.menu.create');
+       
+        return redirect()->route('admin.menu.create')->with('success', 'Menu item created successfully!');
+    
     }
 
     public function editMenu($id)
@@ -66,24 +55,14 @@ class AdminController extends Controller
 
     public function updateMenu(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'url' => 'required|string|max:255',
-            'dropdown_items.*' => 'nullable|string|max:255',
-        ]);
+        $this->validateMenu($request);
 
         $menuItem = MenuItem::findOrFail($id);
-        $menuItem->update([
-            'name' => $request->name,
-            'url' => $request->url
-        ]);
+        $menuItem->update($request->only('name', 'url'));
 
-        
         $menuItem->dropdownItems()->delete();
         if ($request->has('dropdown_items')) {
-            foreach ($request->dropdown_items as $dropdownItem) {
-                $menuItem->dropdownItems()->create(['name' => $dropdownItem]);
-            }
+            $this->createDropdownItems($menuItem, $request->dropdown_items);
         }
 
         return redirect()->route('admin.menu.index')->with('success', 'Menu item updated successfully!');
@@ -104,78 +83,40 @@ class AdminController extends Controller
     }
 
     public function createSlider(){
-       
         return view('admin.slider.create');
     }
 
     public function storeSlider(Request $request)
     {
+        $this->validateSlider($request);
+        $imagePath = $this->uploadImageSlider($request->image);
        
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'caption' => 'nullable|string',
-            'additional_text' => 'required|string|max:255',
-            'button_url' => 'required',
-            'button_text' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $imageName = time().'.'.$request->image->extension();  
-        $request->image->move(public_path('sliderImages'), $imageName);
-
-        Slider::create([
-            'title' => $request->title,
-            'caption' => $request->caption,
-            'additional_text' => $request->additional_text,
-            'button_url' => $request->button_url,
-            'button_text' => $request->button_text,
-            'image' => 'sliderImages/'.$imageName,
-        ]);
+        Slider::create(array_merge($request->only([
+            'title', 'caption', 'additional_text', 'button_url', 'button_text'
+        ]), ['image' => $imagePath]));
 
         return redirect()->route('admin.slider.index')->with('success', 'Slider created successfully.');
     }
 
-    public function editSlider($slider)
+    public function editSlider($id)
     {
-        $slider = Slider::findOrFail(decrypt($slider));
+        $slider = Slider::findOrFail(decrypt($id));
         return view('admin.slider.edit', compact('slider'));
     }
 
-    public function updateSlider(Request $request, $slider)
+    public function updateSlider(Request $request, $id)
     {
        
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'caption' => 'nullable|string',
-            'additional_text' => 'required|string|max:255',
-            'button_url' => 'required',
-            'button_text' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-       
-        $slider = Slider::findOrFail($slider);
-        
+        $this->validateSlider($request, false);
+        $slider = Slider::findOrFail($id);
         if ($request->hasFile('image')) {
-            
-            try {
-               
-                $imageName = time().'.'.$request->image->extension();  
-                $request->image->move(public_path('sliderImages'), $imageName);
-            
-                $slider->update(['image' => 'sliderImages/' . $imageName]);
-            } catch (\Exception $e) {
-              
-                return redirect()->route('admin.slider.index')->with('image', 'Image upload failed.'.$e->getMessage());
-            }
+            $imagePath = $this->uploadImageSlider($request->image);
+            $slider->update(['image' => $imagePath]);
         }
 
-        $slider->update([
-            'title' => $request->title,
-            'caption' => $request->caption,
-            'additional_text' => $request->additional_text,
-            'button_url' => $request->button_url,
-            'button_text' => $request->button_text,
-        ]);
+        $slider->update($request->only([
+            'title', 'caption', 'additional_text', 'button_url', 'button_text'
+        ]));
 
         return redirect()->route('admin.slider.index')->with('success', 'Slider updated successfully.');
     }

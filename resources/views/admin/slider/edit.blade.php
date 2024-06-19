@@ -78,10 +78,11 @@
                                                 </span>
                                             @enderror
                                             <img src="{{ asset($slider->image) }}" alt="{{ $slider->title }}" class="img-thumbnail mt-2" width="200">
-                                            <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
-                                          
+                                           
                                             <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
                                         </div>
+                                        <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
+                                          
                                     </div>
                                     
                                   
