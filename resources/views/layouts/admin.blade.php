@@ -6,7 +6,7 @@
 
 <head>
     <!-- Title -->
-    <title>Omah - Real Estate backend Dashboard Template</title>
+    <title>{{$contactUs->company_name }}</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -22,13 +22,13 @@
     <meta property="og:title" content="Omah - Real Estate backend Dashboard Template">
     <meta property="og:description"
         content="Your Ultimate Real Estate backend Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
-    <meta property="og:image" content="social-image.png">
+    <meta property="og:image" content="{{ asset($contactUs->site_logo) }}">
     <meta name="format-detection" content="telephone=no">
 
     <meta name="twitter:title" content="Omah - Real Estate backend Dashboard Template">
     <meta name="twitter:description"
         content="Your Ultimate Real Estate backend Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
-    <meta name="twitter:image" content="social-image.png">
+    <meta name="twitter:image" content="{{ asset($contactUs->site_logo) }}">
     <meta name="twitter:card" content="summary_large_image">
 
     <!-- MOBILE SPECIFIC -->
@@ -36,7 +36,7 @@
 
 
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset ('backend/images/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset($contactUs->site_logo) }}">
     <!-- Vectormap -->
     <link href="{{ asset ('backend/vendor/jqvmap/css/jqvmap.min.css')}}" rel="stylesheet">
     <link href="{{ asset ('backend/vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
@@ -95,6 +95,9 @@
     <script src="{{ asset ('backend/js/dashboard/dashboard-1.js')}}"></script>
     <script src="{{ asset ('backend/js/custom.min.js')}}"></script>
     <script src="{{ asset ('backend/js/deznav-init.js')}}"></script>
+    <!-- ckeditor -->
+    <script src="{{ asset ('backend/vendor/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{ asset ('backend/vendor/ckeditor/ckeditorContent.js')}}"></script>
     <!-- Dashboard 1 -->
     <script>
         // JavaScript to automatically update the current year

@@ -4,12 +4,12 @@
 <html class="wide wow-animation" lang="en"> 
   <head>
     <!-- Site Title-->
-    <title>Home</title>
+    <title>{{$contactUs->company_name }}</title>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta charset="utf-8"/>
-    <link rel="icon" href="{{ asset ('assets/images/favicon.ico')}}" type="image/x-icon"/>
+    <link rel="icon" href="{{ asset($contactUs->site_logo) }}" type="image/x-icon"/>
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,900;1,400&amp;display=swap"/>
     <link rel="stylesheet" href="{{ asset ('assets/css/bootstrap.css')}}"/>
@@ -44,5 +44,6 @@
     <!-- Javascript-->
     <script src="{{ asset ('assets/js/core.min.js')}}"> </script>
     <script src="{{ asset ('assets/js/script.js')}}"></script>
+    <a href="#" id="ui-to-top" class="ui-to-top active"></a>
   </body>
 </html>

@@ -3,7 +3,7 @@
 @section('content')
    
    <!-- Swiper-->
-   <section class="swiper-form-wrap">
+   <section class="s">
     <div class="swiper-container swiper-slider swiper-slider_fullheight" data-simulate-touch="false" data-swiper='{"autoplay":{"delay":5500},"loop":true}'>
         <div class="swiper-wrapper">
             @foreach ($sliders as $slider)
@@ -28,198 +28,108 @@
         <!-- Swiper Pagination -->
         <div class="swiper-pagination"></div>
     </div>
-    <div class="container section-form">
-        <div class="section-form__inner">
-            <div class="section-form__content">
-                <!-- RD Mailform -->
-                <form class="rd-mailform_boxed rd-mailform_modern">
-                    <h4>Find Your Property</h4>
-                    <div class="rd-mailform_boxed__inner">
-                        <div class="box-element box-element_md">
-                            <div class="form-wrap">
-                                <!-- Select 2 -->
-                                <select class="form-input select-filter" id="location" name="location">
-                                    <option value="2">Chicago, IL</option>
-                                    <option value="3">Seattle, WA</option>
-                                    <option value="4">Miami, FL</option>
-                                    <option value="5">Dallas, TX</option>
-                                    <option value="6">Atlanta, GA</option>
-                                    <option value="7">New York, NY</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="box-element box-element_md">
-                            <div class="form-wrap">
-                                <!-- Select 2 -->
-                                <select class="form-input select-filter" id="property" data-placeholder="Property Type:" name="property">
-                                    <option value="2">Single-Family</option>
-                                    <option value="3">Multi-Unit</option>
-                                    <option value="4">Modular Home</option>
-                                    <option value="5">Townhouse</option>
-                                    <option value="6">Condominium</option>
-                                    <option value="7">Vacation Home</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="box-element box-element_xs">
-                            <div class="form-wrap">
-                                <!-- Select 2 -->
-                                <select class="form-input select-filter" id="beds" data-placeholder="1" name="Beds">
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="box-element box-element_xs">
-                            <div class="form-wrap">
-                                <!-- Select 2 -->
-                                <select class="form-input select-filter" id="baths" data-placeholder="0" name="Baths">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="box-element box-element_wide">
-                            <button class="button button-primary button-lg">Search</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+   
 </section>
-
-  <!-- Welcome to the Best Indianapolis Hotel!-->
-  <section class="section-lg bg-100">
-    <div class="container">
-      <div class="row row-50 justify-content-center text-center">
-        <div class="col-md-11 col-lg-9">
-          <h6>Welcome to the</h6>
-          <h4>Best Real Estate Agency</h4>
-          <p>Estancy is a full-service, luxury real estate brokerage and lifestyle company representing clients worldwide in a broad spectrum of classes, including residential, new development, resort real estate, residential leasing and luxury vacation rentals. Since our inception in 2011, we have redefined the business of real estate, modernizing and advancing the industry by fostering a culture of partnership, in which all clients and listings are represented by our agents.</p><a class="button button-primary" href="about.html">More about us</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Plenty of room...-->
   <section class="section-lg bg-default text-center">
     <div class="container">
       <div class="row justify-content-lg-center">
         <div class="col-lg-10 col-xl-8">
-          <h4>Featured Properties</h4>
+          <h4>Our projects </h4>
         </div>
       </div>
       <div class="row row-30">
-        <div class="col-sm-6 col-lg-4">
-          <!-- Post-->
-          <article class="product">
-            <div class="product-media"><img class="product-img" src="{{ asset ('assets/images/home-01-370x290.jpg')}}" alt="" width="370" height="290"/>
-              <div class="product-price">$2000/mo</div>
-            </div>
-            <div class="product-body">
-              <div class="product-title">
-                <h5><a href="single-property.html">401 Biscayne Blvd, Miami</a></h5>
+        @forelse ($homeprojects as $homeproject)
+          <div class="col-sm-6 col-lg-4">
+            <!-- Post-->
+            <article class="product">
+              <div class="product-media">
+                <img class="product-img" src="{{ asset ($homeproject->image)}}" alt="" width="370" height="290"/>
+                <div class="product-price">{{ $homeproject->land_size }}</div>
               </div>
-              <div class="product-meta">
-                <div class="group"><span>2 Bathrooms</span><span>2 Bedrooms</span>
+              <div class="product-body">
+                <div class="product-title">
+                  <h5><a href="{{ route('home.project.details', encrypt($homeproject->id))}}">{{ $homeproject->title}}</a></h5>
                 </div>
-              </div>
-            </div>
-          </article>
+                <div class="product-meta">
+                  <div class="group">
+                    <span style="font-size: 16px">
+                      <i class="lnr lnr-map-marker"></i>{{ $homeproject->location }},
+                  </span>
+                  </div>
+                  
+                  <a class="button button-gray-light-outline" href="{{ route('home.project.details', encrypt($homeproject->id))}}">View details</a>
+
+                </div>
+              </div> 
+            </article>
+          </div>
+        @empty
+            <p class="text-center">No Project Data available</p>
+        @endforelse
+      </div>
+      @if ($homeprojects)
+        <a class="button button-primary" href="">See more projects</a>
+      @endif
+    </div>
+  </section>
+  
+  <!-- Welcome to the Best Indianapolis Hotel!-->
+  <section class="section-lg bg-100">
+    <div class="container">
+      <div class="row row-50 justify-content-center text-center">
+        <div class="col-md-11 col-lg-9">
+          <h6>Why Choose Us</h6>
+          {{-- <h4>Best Real Estate Agency</h4> --}}
+          <p>
+            {{ $whyChooseUs->why_choose_us_statements}}
+          </p>
+         
         </div>
-        <div class="col-sm-6 col-lg-4">
-          <!-- Post-->
-          <article class="product">
-            <div class="product-media"><img class="product-img" src="{{ asset ('assets/images/home-02-370x290.jpg')}}" alt="" width="370" height="290"/>
-              <div class="product-price">$2000/mo</div>
+
+        <div class="row row-40 justify-content-center justify-content-lg-between align-items-center text-center text-lg-start">
+          <div class="col-sm-8 col-md-6 col-lg-5 col-xxl-6">
+            <div class="img-max-width-1"><img class="img-shadow mt-4 mt-md-0" src="{{ asset ('assets/images/home-07-500x530.jpg')}}" alt="" width="500" height="530"/>
             </div>
-            <div class="product-body">
-              <div class="product-title">
-                <h5><a href="single-property.html">225 Maywood Dr, San Francisco</a></h5>
-              </div>
-              <div class="product-meta">
-                <div class="group"><span>2 Bathrooms</span><span>2 Bedrooms</span>
-                </div>
-              </div>
-            </div>
-          </article>
+          </div>
+          <div class="col-md-6">
+            <h4>Our core value</h4>
+            <p>
+              {{ $whyChooseUs->core_values}}
+            </p>
+
+            <h4 class="mt-3">Mission</h4>
+            <p>
+              {{ $whyChooseUs->mission}}
+            </p>
+
+            <h4 class="mt-3">Vision</h4>
+            <p>
+              {{ $whyChooseUs->vision}}
+            </p>
+
+          </div>
         </div>
-        <div class="col-sm-6 col-lg-4">
-          <!-- Post-->
-          <article class="product">
-            <div class="product-media"><img class="product-img" src="{{ asset ('assets/images/home-03-370x290.jpg')}}" alt="" width="370" height="290"/>
-              <div class="product-price">$2000/mo</div>
-            </div>
-            <div class="product-body">
-              <div class="product-title">
-                <h5><a href="single-property.html">623 Willow Rd, Dallas</a></h5>
-              </div>
-              <div class="product-meta">
-                <div class="group"><span>2 Bathrooms</span><span>2 Bedrooms</span>
-                </div>
-              </div>
-            </div>
-          </article>
+     
+   
+      </div>
+    </div>
+  </section>
+  {{-- About us --}}
+  <section class="section-lg bg-100">
+    <div class="container">
+      <div class="row row-50 justify-content-center align-items-lg-center justify-content-xl-between text-center text-lg-start">
+        <div class="col-md-6">
+          <h6> About us</h6>
+          <h4>{{ $aboutUs->title}} </h4>
+          <p>{{ $aboutUs->content}}</p>
+          <a class="button button-primary" href="{{ route('about-us') }}">View more</a>
         </div>
-        <div class="col-sm-6 col-lg-4">
-          <!-- Post-->
-          <article class="product">
-            <div class="product-media"><img class="product-img" src="{{ asset ('assets/images/home-04-370x290.jpg')}}" alt="" width="370" height="290"/>
-              <div class="product-price">$2000/mo</div>
-            </div>
-            <div class="product-body">
-              <div class="product-title">
-                <h5><a href="single-property.html">923 Folsom St, San Francisco</a></h5>
-              </div>
-              <div class="product-meta">
-                <div class="group"><span>2 Bathrooms</span><span>2 Bedrooms</span>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="col-sm-6 col-lg-4">
-          <!-- Post-->
-          <article class="product">
-            <div class="product-media"><img class="product-img" src="{{ asset ('assets/images/home-05-370x290.jpg')}}" alt="" width="370" height="290"/>
-              <div class="product-price">$2000/mo</div>
-            </div>
-            <div class="product-body">
-              <div class="product-title">
-                <h5><a href="single-property.html">182 3rd St, Seattle</a></h5>
-              </div>
-              <div class="product-meta">
-                <div class="group"><span>2 Bathrooms</span><span>2 Bedrooms</span>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="col-sm-6 col-lg-4">
-          <!-- Post-->
-          <article class="product">
-            <div class="product-media"><img class="product-img" src="{{ asset ('assets/images/home-06-370x290.jpg')}}" alt="" width="370" height="290"/>
-              <div class="product-price">$2000/mo</div>
-            </div>
-            <div class="product-body">
-              <div class="product-title">
-                <h5><a href="single-property.html">35 Pond St, New York</a></h5>
-              </div>
-              <div class="product-meta">
-                <div class="group"><span>2 Bathrooms</span><span>2 Bedrooms</span>
-                </div>
-              </div>
-            </div>
-          </article>
+        <div class="col-sm-8 col-md-6 col-lg-5 col-xxl-6 text-md-end">
+          <div class="img-max-width-1">
+            <img class="img-shadow" src="{{ $aboutUs->image}} " alt="" width="500" height="530">
+          </div>
         </div>
       </div>
     </div>
@@ -283,6 +193,7 @@
       </div>
     </div>
   </section>
+
   <!-- Offers-->
   <section class="section-lg bg-default">
     <div class="container">

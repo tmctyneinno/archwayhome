@@ -3,7 +3,7 @@
 
 <head>
     <!-- Title -->
-	<title>Omah - Real Estate Admin Dashboard Template</title>
+	<title>{{ asset($contactUs->company_name) }}</title>
  
 	<!-- Meta -->
 	<meta charset="utf-8">
@@ -14,21 +14,16 @@
 	<meta name="keywords" content="admin, dashboard, admin dashboard, admin template, template, admin panel, administration, analytics, bootstrap, hospital admin, modern, property, real estate, responsive, creative, retina ready, modern Dashboard">
 	<meta name="description" content="Your Ultimate Real Estate Admin Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
    
-	<meta property="og:title" content="Omah - Real Estate Admin Dashboard Template">
 	<meta property="og:description" content="Your Ultimate Real Estate Admin Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
 	<meta property="og:image" content="https://omah.dexignzone.com/xhtml/social-image.png">
 	<meta name="format-detection" content="telephone=no">
    
-	<meta name="twitter:title" content="Omah - Real Estate Admin Dashboard Template">
-	<meta name="twitter:description" content="Your Ultimate Real Estate Admin Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
-	<meta name="twitter:image" content="https://omah.dexignzone.com/xhtml/social-image.png">
-	<meta name="twitter:card" content="summary_large_image">
 
 	<!-- MOBILE SPECIFIC -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/backend/images/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset($contactUs->company_name) }}">
     <link href="{{ asset('/backend/css/style.css')}}" rel="stylesheet">
 
 </head>
@@ -42,7 +37,7 @@
                         <div class="card-body">
                             <div class="text-center mb-3">
                                 <a href="#">
-                                    <img class="logo-auth" src="{{ asset('/backend/images/logo-full.png')}}" alt="">
+                                    <img class="logo-auth" src="{{ asset($contactUs->site_logo) }}" alt="">
                                 </a>
                             </div>
                             <h4 class="text-center mb-4">Admin sign in</h4>
@@ -77,7 +72,7 @@
                                         </span>
                                     @enderror
 								</div>
-                                <div class="form-row d-flex flex-wrap justify-content-between align-items-baseline mb-2">
+                                {{-- <div class="form-row d-flex flex-wrap justify-content-between align-items-baseline mb-2">
                                     <div class="form-group mb-sm-4 mb-1">
                                         <div class="form-check custom-checkbox ms-1">
                                             <input type="checkbox" class="form-check-input" id="basic_checkbox_1" checked="" >
@@ -89,14 +84,14 @@
                                         <a href="page-forgot-password.html">Forgot Password?</a>
 										
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                                 </div>
                             </form>
-                            <div class="new-account mt-3">
+                            {{-- <div class="new-account mt-3">
                                 <p>Don't have an account? <a class="text-primary" href="./page-register.html">Sign up</a></p>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

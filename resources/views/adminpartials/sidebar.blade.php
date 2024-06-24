@@ -7,7 +7,7 @@
                     <span class="nav-text">Dashboard</span>
                 </a>
                
-                <ul aria-expanded="false" class="mm-collapse mm-show">
+                {{-- <ul aria-expanded="false" class="mm-collapse mm-show">
                     <li class="mm-active"><a href="index.html" class="mm-active" previewlistener="true">Dashboard</a></li>
                     <li><a href="#" previewlistener="true">
                         <b>Website Menus</b></a>
@@ -25,9 +25,8 @@
                             
                         </ul>
                     </li>
-                    {{-- <li><a href="order-list.html" previewlistener="true">Order List</a></li> --}}
                     
-                </ul>
+                </ul> --}}
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
                     <i class="flaticon-381-user-5"></i>
@@ -42,18 +41,20 @@
                     
                 </ul>
             </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+            <li>
+                <a class="has-arrow ai-icon" href="{{ route('admin.project.index') }}" aria-expanded="false">
                     <i class="flaticon-381-layer-1"></i>
-                    <span class="nav-text">Property</span>
-                    <span class="badge badge-sm badge-danger ms-3">New</span>
+                    <span class="nav-text">Project</span>
                 </a>
-                <ul aria-expanded="false" class="mm-collapse">
-                    <li><a href="add-property.html" previewlistener="true">Add Property</a></li>
-                    <li><a href="property-list.html" previewlistener="true">Property List</a></li>
-                    <li><a href="property-details.html" previewlistener="true">Property Details</a></li>
-                    
-                </ul>
             </li>
+
+            <li>
+                <a class="has-arrow ai-icon" href="{{ route('admin.post.index') }}" aria-expanded="false">
+                    <i class="flaticon-381-layer-1"></i>
+                    <span class="nav-text">Post</span>
+                </a>
+            </li>
+            
             
            
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -72,12 +73,8 @@
                             <li><a href="{{route('admin.slider.index')}}" previewlistener="true">Manage Slider</a></li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"> Contents</a>
-                        <ul aria-expanded="false" class="mm-collapse">
-                            <li><a href="add-agent.html" previewlistener="true">Manage Contents</a></li>
-                            <li><a href="add-agent-wizard.html" previewlistener="true">Manage Menu</a></li>
-                            
-                        </ul>
+                    <li>
+                        <a class="has-arrow" href="{{ route('admin.settings.content') }}" aria-expanded="false">Contents</a>
                     </li>
                 </ul>
             </li>

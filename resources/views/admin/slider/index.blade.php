@@ -79,7 +79,7 @@
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="{{ route('admin.slider.edit',  encrypt($slider->id) ) }}">Edit</a>
-                                                        <a class="dropdown-item text-danger" href="{{ route('admin.slider.destroy', encrypt($slider->id) )  }}">Delete</a>
+                                                        <a class="dropdown-item text-danger" href="{{ route('admin.slider.destroy', encrypt($slider->id) )  }}" onclick="return confirm('Are you sure you want to delete this slider?');">Delete</a>
                                                     </div>
                                                 </div>
                                             </td>

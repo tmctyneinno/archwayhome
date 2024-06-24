@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\MenuItem;
 use App\Models\Slider;
@@ -25,9 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $menuItems = MenuItem::with('dropdownItems')->get();
-        $sliders = Slider::all();
-        return view('home', compact('menuItems', 'sliders'));
+       
+        return view('home');
     }
 
      public function indexx()
@@ -39,9 +39,7 @@ class HomeController extends Controller
         return view('home.properties');
     }
 
-    public function propertydetails(){
-        return view('home.property-details');
-    }
+   
 
     public function propertyalert(){
         return view('home.property-alert');
@@ -71,4 +69,11 @@ class HomeController extends Controller
     public function privacypolicy(){
         return view('home.privacypolicy');
     }
+
+    public function detailsProject($id){
+        $project = Project::findOrFail( decrypt($id));
+        return view('home.property-details', compact('project'));
+    }
+    
+   
 }

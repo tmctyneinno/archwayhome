@@ -35,8 +35,9 @@
           <!-- RD Navbar Brand-->
           <div class="rd-navbar-brand"> <a class="brand__name" href="{{ url('/')}}">
               <!-- Logo-->
-              <img class="logo-image-default" src="{{ asset ('assets/images/logo-default-374x103.png')}}" alt="Estancy" width="187" height="51"/>
-              <img class="logo-image-inverse" src="{{ asset ('assets/images/logo-inverse-374x103.png')}}" alt="Estancy" width="187" height="51"/></a></div>
+              <img style="width: 120px; height: 40px;" class="logo-image-default" src="{{ asset($contactUs->site_logo) }}" alt="Estancy" width="187" height="51"/>
+              {{-- <img class="logo-image-inverse" src="{{ asset ('assets/images/logo-inverse-374x103.png')}}" alt="Estancy" width="187" height="51"/></a></div> --}}
+              <img class="logo-image-inverse" src="{{ asset($contactUs->site_logo) }}" alt="Estancy" width="187" height="51"/></a></div>
         </div>
         <!-- RD Navbar Nav-->
         <div class="rd-navbar-nav-wrap"> 
@@ -78,24 +79,7 @@
             @endforelse
         </ul>
         
-          {{-- <ul class="rd-navbar-nav">
-            <li class="active"><a href="{{ url('/') }}">Home</a>
-            </li>
-            <li><a href="{{ route('home.properties') }}">Properties</a>
-              <ul class="rd-navbar-dropdown">
-                <li><a href="{{ route('home.property.details') }}">Single Property</a>
-                </li>
-                <li><a href="{{ route('home.checkout')}}">Checkout</a>
-                </li>
-              </ul>
-            </li>
-            <li><a href="{{ route('home.about')}}">About Us</a>
-            </li>
-           
-            
-            <li><a href="{{ route('home.contactUs')}}">Contacts</a>
-            </li>
-          </ul> --}}
+          
         </div>
       </div>
     </nav>

@@ -113,7 +113,7 @@ class AdminController extends Controller
             $imagePath = $this->uploadImageSlider($request->image);
             $slider->update(['image' => $imagePath]);
         }
-
+ 
         $slider->update($request->only([
             'title', 'caption', 'additional_text', 'button_url', 'button_text'
         ]));
@@ -128,4 +128,5 @@ class AdminController extends Controller
         return redirect()->route('admin.slider.index')->with('success', 'Slider deleted successfully.');
     }
 
+   
 }

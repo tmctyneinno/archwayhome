@@ -33,3 +33,5 @@ Route::get('/consultant-form', [HomeController::class, 'consultant-form'])->name
 // Route::get('/login', [HomeController::class, 'login'])->name('home.login');
 // Route::get('/registration', [HomeController::class, 'registration'])->name('home.registration');
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('home.privacypolicy');
+
+Route::get('home/{id}/project', [HomeController::class, 'detailsProject'])->name('home.project.details');
