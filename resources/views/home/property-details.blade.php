@@ -12,7 +12,7 @@
         </ul>
       </div>
     </div>
-  </section>
+  </section> 
   <!-- Single Property-->
   <section class="section-md section-md_smaller bg-default">
     <div class="container">
@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="col-md-6 col-xl-5">
-          <h4>{{$project->title}}</h4>
+          <h4>{{$projectDetails->title}}</h4>
           <p class="small">Neque egestas ut a consequat mi ornare. Ac posuere lectus amet risus tellus. Pellentesque lobortis sodales tristique augue orci, posuere massa. Lectus nisl sed in mi, egestas nunc. Etiam nec.</p>
           <h5>Features</h5>
           <div class="row row-15 row-content">

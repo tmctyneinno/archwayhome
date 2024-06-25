@@ -61,9 +61,9 @@
                                         <tr>
                                             <td><strong>{{  $index + 1 }}</strong></td>
                                             <td>{{ $post->title }}</td>
-                                            <td> {!! $post->content !!}</td>
+                                            <td>{!! Str::limit($post->content, 30) !!}</td>
                                             <td>
-                                                <img src="{{ asset($post->image) }}" class="img-thumbnail" height="30" alt="{{ $post->title }}"  style="max-width: 100px;"/>
+                                                <img style=" width: 100px; height: 100px; object-fit: cover; " src="{{ asset($post->image) }}" class="img-thumbnail" height="30" alt="{{ $post->title }}"  style="max-width: 100px;"/>
                                             </td>
                                             <td>{{ $post->created_at->format('d F Y') }}</td>
                                             <td>

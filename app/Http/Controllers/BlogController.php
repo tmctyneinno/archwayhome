@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\Post; 
 
@@ -61,7 +62,7 @@ class BlogController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-        return redirect()->route('admin.post.edit')->with('success', 'Post updated successfully.');
+        return redirect()->route('admin.post.index')->with('success', 'Post updated successfully.');
     }
 
     public function destroyPost($id)
@@ -70,5 +71,7 @@ class BlogController extends Controller
         $slider->delete();
         return redirect()->route('admin.post.index')->with('success', 'Post deleted successfully.');
     }
+
+    
 
 }

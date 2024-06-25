@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,6 @@ Route::get('/consultant-form', [HomeController::class, 'consultant-form'])->name
 // Route::get('/registration', [HomeController::class, 'registration'])->name('home.registration');
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('home.privacypolicy');
 
-Route::get('home/{id}/project', [HomeController::class, 'detailsProject'])->name('home.project.details');
+Route::get('/project/{id}', [HomeController::class, 'detailsProject'])->name('home.project.details');
+Route::get('/post/{id}', [HomeController::class, 'detailsPost'])->name('home.post.details');
+Route::post('/post/comment', [HomeController::class, 'storeComment'])->name('home.comments.store');

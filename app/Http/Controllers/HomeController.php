@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Post;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\MenuItem;
@@ -26,7 +28,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-       
         return view('home');
     }
 
@@ -38,8 +39,6 @@ class HomeController extends Controller
     public function properties(){
         return view('home.properties');
     }
-
-   
 
     public function propertyalert(){
         return view('home.property-alert');
@@ -70,10 +69,44 @@ class HomeController extends Controller
         return view('home.privacypolicy');
     }
 
-    public function detailsProject($id){
-        $project = Project::findOrFail( decrypt($id));
-        return view('home.property-details', compact('project'));
+    public function detailsPost($id){
+        $decryptedId = decrypt($id);
+        // $postDetails =  Post::findOrFail($decryptedId);
+        // $postDetails = Post::with('comments.replies')->findOrFail($decryptedId);
+        $postDetails = Post::with(['comments' => function($query) {
+            $query->whereNull('parent_id')->with('replies');
+        }])->findOrFail($decryptedId);
+
+        return view('home.post-details', compact('postDetails'));
     }
+    public function detailsProject($id) {
+        $decryptedId = decrypt($id);
+        $projectDetails = Project::findOrFail($decryptedId);
+        dd($projectDetails);
+        if (!$projectDetails) {
+            abort(404); 
+        }
+
+        return view('home.property-details', compact('projectDetails'));
+    }
+
+    public function storeComment(Request $request){
+        // Validate incoming request
+        $request->validate([
+            'author_name' => 'required|string|max:255',
+            'author_email' => 'required|email|max:255',
+            'content' => 'required|string',
+            'post_id' => 'required|exists:posts,id',
+            'parent_id' => 'nullable|exists:comments,id'
+        ]);
+    
+        Comment::create($request->all());
+
+        // Redirect back to the post with a success message
+        return back()->with('success', 'Your comment has been added.');
+    }
+
+    
     
    
 }

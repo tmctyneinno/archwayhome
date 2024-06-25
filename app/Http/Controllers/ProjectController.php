@@ -79,7 +79,7 @@ class ProjectController extends Controller
         $data = $request->only(['title', 'location', 'content','video_link','land_size']);
 
         if ($request->hasFile('brochure')) {
-            // Delete the old file
+          
             if ($project->brochure) {
                 $oldBrochurePath = public_path($project->brochure);
                 if (file_exists($oldBrochurePath)) {
@@ -93,7 +93,7 @@ class ProjectController extends Controller
         }
 
         if ($request->hasFile('landPaymentPlan')) {
-            // Delete the old file
+          
             if ($project->land_payment_plan) {
                 $oldLandPaymentPlanPath = public_path($project->land_payment_plan);
                 if (file_exists($oldLandPaymentPlanPath)) {
@@ -107,7 +107,7 @@ class ProjectController extends Controller
         }
 
         if ($request->hasFile('subscription_form')) {
-            // Delete the old file
+          
             if ($project->subscription_form) {
                 $oldSubscriptionFormPath = public_path($project->subscription_form);
                 if (file_exists($oldSubscriptionFormPath)) {
@@ -121,7 +121,7 @@ class ProjectController extends Controller
         }
 
         if ($request->hasFile('image')) {
-            // Delete the old file
+          
             if ($project->image) {
                 $oldImagePath = public_path($project->image);
                 if (file_exists($oldImagePath)) {

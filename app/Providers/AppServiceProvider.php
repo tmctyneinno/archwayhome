@@ -4,6 +4,7 @@ namespace App\Providers;
 use App\Models\ContactUs;
 use App\Models\AboutUs;
 use App\Models\MenuItem;
+use App\Models\Post;
 use App\Models\Project;
 use App\Models\Slider;
 use App\Models\Sociallink;
@@ -38,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
         View::share('homeprojects', Project::latest()->take(3)->get());
         View::share('menuItems', MenuItem::with('dropdownItems')->get());
         View::share('sliders', Slider::all());
+        View::share('posts', Post::latest()->take(3)->get());
+        View::share('recentPosts', Post::inRandomOrder()->take(3)->get());
 
     }
 }
