@@ -63,6 +63,19 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Select Project type</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control default-select mb-3" name="project_menu_id" required>
+                                                <option  selected disabled>Select Project type</option>
+                                                @foreach ($projectMenus as $menu)
+                                                    <option value="{{ $menu->id }}" {{ $menu->id == $project->project_menu_id ? 'selected' : '' }}>
+                                                        {{ $menu->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
                                         <div class="col-sm-9">
                                             <div class="">

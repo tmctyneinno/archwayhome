@@ -15,13 +15,18 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            @if(session('success'))
+                                <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <div class="col-sm-2">
                                 <div class="nav flex-column nav-pills mb-3" role="tablist">
                                     <a href="#v-pills-home" data-bs-toggle="pill" class="nav-link show active " aria-selected="false" role="tab" tabindex="-1">Why choose us</a>
                                     <a href="#v-pills-profile" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">About us</a>
                                     <a href="#v-pills-messages" data-bs-toggle="pill" class="nav-link" aria-selected="false" role="tab" tabindex="-1">Contact us</a>
                                     <a href="#v-pills-termsConditions" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Terms Conditions</a>
-                                    <a href="#v-pills-privacy" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Privacy </a>
+                                    <a href="#v-pills-privacy" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1"> Privacy Policy </a>
                                     <a href="#v-pills-settings" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Team</a>
                                     <a href="#v-pills-footer" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Footer Navigation</a>
                                     <a href="#v-pills-social" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Social Link</a>
@@ -39,14 +44,13 @@
                                         @include('admin.settings.contact_us')
                                     </div>
                                     <div id="v-pills-termsConditions" class="tab-pane fade " role="tabpanel">
-                                        {{-- @include('admin.settings.contact_us') --}}
-                                        <p> condition</p>
+                                        @include('admin.settings.termsConditions')
                                     </div>
                                     <div id="v-pills-privacy" class="tab-pane fade " role="tabpanel">
-                                        <p> privacy</p>
+                                        @include('admin.settings.privacyPolicy')
                                     </div>
                                     <div id="v-pills-settings" class="tab-pane fade " role="tabpanel">
-                                        <p>Team</p>
+                                        @include('admin.settings.team')
                                     </div>
                                     <div id="v-pills-footer" class="tab-pane fade" role="tabpanel">
                                         <p>Footer Nav</p>

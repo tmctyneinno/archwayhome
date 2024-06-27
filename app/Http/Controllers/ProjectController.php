@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\ProjectMenu;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -12,7 +13,8 @@ class ProjectController extends Controller
     }
 
     public function create(){
-        return view('admin.projects.create');
+        $projectMenus = ProjectMenu::all();
+        return view('admin.projects.create', $projectMenus);
     }
 
     public function store(Request $request)
@@ -21,6 +23,7 @@ class ProjectController extends Controller
             'title' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'land_size' => 'required|string|max:255',
+            'project_menu_id' => 'required|exists:project_menus,id',
             'content' => 'required|string',
             'brochure' => 'required|mimes:pdf|max:5048',
             'land_payment_plan' => 'required|mimes:jpeg,png,jpg,gif|max:5048',
@@ -46,6 +49,7 @@ class ProjectController extends Controller
             'title' => $request->title,
             'location' => $request->location,
             'land_size' =>  $request->land_size,
+            'project_menu_id' =>  $request->project_menu_id,
             'content' => $request->content,
             'brochure' => 'projectDocument/brochures/' . $brochurePath,
             'land_payment_plan' => 'projectDocument/landPaymentPlans/' . $landPaymentPlanPath,
@@ -59,7 +63,8 @@ class ProjectController extends Controller
 
     public function edit($id){
         $project = Project::findOrFail( decrypt($id));
-        return view('admin.projects.edit', compact('project'));
+        $projectMenus = ProjectMenu::all(); 
+        return view('admin.projects.edit', compact('project','projectMenus'));
     }
 
     public function update(Request $request,  $id)
@@ -68,6 +73,7 @@ class ProjectController extends Controller
             'title' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'land_size' => 'required|string|max:255',
+            'project_menu_id' => 'required|exists:project_menus,id',
             'content' => 'required|string',
             'brochure' => 'mimes:pdf|max:5048',
             'landPaymentPlan' => 'mimes:jpeg,png,jpg,gif|max:5048',
@@ -76,7 +82,7 @@ class ProjectController extends Controller
             'image' => 'mimes:jpeg,png,jpg,gif|max:5048',
         ]);
         $project = Project::findOrFail($id);
-        $data = $request->only(['title', 'location', 'content','video_link','land_size']);
+        $data = $request->only(['title', 'location', 'content','video_link','land_size','project_menu_id']);
 
         if ($request->hasFile('brochure')) {
           
@@ -138,4 +144,22 @@ class ProjectController extends Controller
 
         return redirect()->route('admin.project.index')->with('success', 'Project updated successfully.');
     }
+
+    public function projects(){
+        return view('home.projects');
+    }
+
+    public function projectsType($slug)
+    {
+        $projectType = ProjectMenu::where('slug', $slug)->first();
+
+        if (!$projectType) {
+            abort(404); 
+        }
+
+        $projectList = Project::where('project_menu_id', $projectType->id)->get();
+        // dd($projectDetails);
+        return view('home.project-type', compact('projectList','projectType'));
+    }
+
 }

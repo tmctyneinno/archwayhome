@@ -11,15 +11,19 @@
               <ul class="rd-navbar-items-list">
                 <li>
                   <div class="unit flex-row unit-spacing-xs">
-                    <div class="unit-left"><span class="icon icon-xxs material-icons-location_on"></span></div>
-                    <div class="unit-body"><a href="#">410 S Missouri St, Indianapolis, IN 46225, USA</a></div>
+                    <div class="unit-left">
+                      <span class="icon icon-xxs material-icons-location_on"></span>
+                    </div>
+                    <div class="unit-body">
+                      <a href="#">{{ $contactUs->first_address }}</a>
+                    </div>
                   </div>
                 </li>
                 <li>
                   <div class="unit flex-row unit-spacing-xs">
                     <div class="unit-left"><span class="icon icon-xxs material-icons-phone"></span></div>
                     <div class="unit-body">
-                      <p><a href="tel:#">+1.777.999.5000</a></p>
+                      <p><a href="tel:#">{{ $contactUs->first_phone }}</a></p>
                     </div>
                   </div>
                 </li>

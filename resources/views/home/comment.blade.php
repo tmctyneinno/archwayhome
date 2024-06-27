@@ -31,7 +31,7 @@
                     </form>
                 </div>
                 @foreach ($comment->replies as $reply)
-                    @include('home.second_comment', ['comment' => $reply])
+                    @include('home.reply', ['comment' => $reply])
                 @endforeach
             </div>
         </div>

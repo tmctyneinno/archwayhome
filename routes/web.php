@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\BlogController;
 
 /*
@@ -25,7 +26,9 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [HomeController::class, 'about'])->name('about-us');
-Route::get('/projects', [HomeController::class, 'projects'])->name('projects');
+Route::get('/projects', [ProjectController::class, 'projects'])->name('home.projects');
+Route::get('/projects/{type}', [ProjectController::class, 'projectsType'])->name('home.projects.type');
+
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/contact', [HomeController::class, 'contactus'])->name('contact');

@@ -58,7 +58,7 @@
             </li>
           </ul>
           <ul class="list-inline-xs">
-            <li><a class="icon icon-xxs icon-black custom-font-facebook" href="{{ $sociallink->facebook}}"></a></li>
+            <li><a class="icon icon-xxs material-icons-facebook" href="{{ $sociallink->facebook}}"></a></li>
             <li><a class="icon icon-xxs icon-black custom-font-twitter" href=" {{ $sociallink->twitter }} "></a></li>
             <li><a class="icon icon-xxs icon-black custom-font-linkedin" href="{{ $sociallink->linkedin  }}"></a></li>
           </ul>

@@ -19,6 +19,14 @@
                         </ul>
                     </div>
                 @endif
+                <script>
+                    window.setTimeout(function() {
+                       var alert = document.getElementById('success-alert');
+                       if (alert) {
+                           alert.remove();
+                       }
+                   }, 3000);
+               </script>
 
                  
                 <form method="POST" action="{{ isset($contactUs) ? route('admin.settings.updateContactUs', $contactUs->id) : route('admin.settings.storeContactUs') }}" enctype="multipart/form-data">

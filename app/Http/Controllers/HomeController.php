@@ -36,9 +36,7 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function properties(){
-        return view('home.properties');
-    }
+   
 
     public function propertyalert(){
         return view('home.property-alert');
@@ -71,8 +69,6 @@ class HomeController extends Controller
 
     public function detailsPost($id){
         $decryptedId = decrypt($id);
-        // $postDetails =  Post::findOrFail($decryptedId);
-        // $postDetails = Post::with('comments.replies')->findOrFail($decryptedId);
         $postDetails = Post::with(['comments' => function($query) {
             $query->whereNull('parent_id')->with('replies');
         }])->findOrFail($decryptedId);
@@ -82,12 +78,12 @@ class HomeController extends Controller
     public function detailsProject($id) {
         $decryptedId = decrypt($id);
         $projectDetails = Project::findOrFail($decryptedId);
-        dd($projectDetails);
+        // dd($projectDetails);
         if (!$projectDetails) {
             abort(404); 
         }
 
-        return view('home.property-details', compact('projectDetails'));
+        return view('home.project-details', compact('projectDetails'));
     }
 
     public function storeComment(Request $request){

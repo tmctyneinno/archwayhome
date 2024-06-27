@@ -12,6 +12,7 @@ class Project extends Model
         'title',
         'location',
         'land_size',
+        'project_menu_id',
         'content',
         'brochure',
         'land_payment_plan',
@@ -19,4 +20,10 @@ class Project extends Model
         'video_link',
         'image',
     ];
+
+    public function projectMenu()
+    {
+        return $this->belongsTo(ProjectMenu::class, 'project_menu_id');
+    }
+
 }

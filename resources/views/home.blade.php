@@ -70,7 +70,7 @@
         @endforelse
       </div>
       @if ($homeprojects)
-        <a class="button button-primary" href="">See more projects</a>
+        <a class="button button-primary" href="{{ route('home.projects') }}">See more projectss</a>
       @endif
     </div>
   </section>

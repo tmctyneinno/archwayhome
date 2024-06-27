@@ -15,6 +15,14 @@
                         </ul>
                     </div>
                 @endif
+                <script>
+                    window.setTimeout(function() {
+                       var alert = document.getElementById('success-alert');
+                       if (alert) {
+                           alert.remove();
+                       }
+                   }, 3000);
+               </script>
 
                  
                 <form method="POST" action="{{ isset($sociallink) ? route('admin.settings.updateSocialLinks', $sociallink->id) : route('admin.settings.storeSocialLinks') }}" enctype="multipart/form-data">

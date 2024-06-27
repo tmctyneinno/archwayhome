@@ -1,11 +1,16 @@
 <?php
 
+use App\Models\PrivacyPolicy;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\PrivacyController;
+use App\Http\Controllers\TermsCondition;
 
 
 
@@ -17,12 +22,18 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth.admin')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
         // Menu
-        Route::get('/menu/create', [AdminController::class, 'creatMenu'])->name('admin.menu.create');
-        Route::get('/manage/menuIndex', [AdminController::class, 'indexMenu'])->name('admin.menu.index');
-        Route::post('/menu', [AdminController::class, 'storeMenu'])->name('admin.menu.store');
-        Route::get('/menu/{id}/edit', [AdminController::class, 'editMenu'])->name('admin.menu.edit');
-        Route::put('/menu/{id}', [AdminController::class, 'updateMenu'])->name('admin.menu.update');
-        Route::get('/menu/{id}', [AdminController::class, 'destroyMenu'])->name('admin.menu.destroy');
+        Route::get('/manage/project/index', [MenuController::class, 'projectMenu'])->name('admin.project.projectMenu');
+        Route::post('/project/menu/store', [MenuController::class, 'storeProjectMenu'])->name('admin.projectMenu.store');
+        Route::get('/project/menu/store/{id}', [MenuController::class, 'editProjectMenu'])->name('admin.projectMenu.edit');
+        Route::put('/project-menu/update/{id}', [MenuController::class, 'updateProjectMenu'])->name('admin.projectMenu.update');
+        Route::get('/project-menu/destroy/{id}', [MenuController::class, 'destroyProjectMenu'])->name('admin.projectMenu.destroy');
+
+        Route::get('/menu/create', [MenuController::class, 'creatMenu'])->name('admin.menu.create');
+        Route::get('/manage/menu/index', [MenuController::class, 'indexMenu'])->name('admin.menu.index');
+        Route::post('/menu', [MenuController::class, 'storeMenu'])->name('admin.menu.store');
+        Route::get('/menu/{id}/edit', [MenuController::class, 'editMenu'])->name('admin.menu.edit');
+        Route::put('/menu/{id}', [MenuController::class, 'updateMenu'])->name('admin.menu.update');
+        Route::get('/menu/{id}', [MenuController::class, 'destroyMenu'])->name('admin.menu.destroy');
         //Slider
         Route::get('/manage/sliderIndex', [AdminController::class, 'indexSlider'])->name('admin.slider.index');
         Route::get('/manage/sliderCreate', [AdminController::class, 'createSlider'])->name('admin.slider.create');
@@ -40,9 +51,9 @@ Route::prefix('admin')->group(function () {
         //Contact Us
         Route::post('/settings/store/contact-us', [SettingsController::class, 'storeContactUs'])->name('admin.settings.storeContactUs');
         Route::put('/settings/update/contact-us/{id}', [SettingsController::class, 'updateContactUs'])->name('admin.settings.updateContactUs');
-       //Social Links 
-       Route::post('/settings/store/social-links', [SettingsController::class, 'storeSocialLinks'])->name('admin.settings.storeSocialLinks');
-       Route::put('/settings/update/social-links/{id}', [SettingsController::class, 'updateSocialLinks'])->name('admin.settings.updateSocialLinks');
+        //Social Links 
+        Route::post('/settings/store/social-links', [SettingsController::class, 'storeSocialLinks'])->name('admin.settings.storeSocialLinks');
+        Route::put('/settings/update/social-links/{id}', [SettingsController::class, 'updateSocialLinks'])->name('admin.settings.updateSocialLinks');
        
         //Project
         Route::get('/project/index', [ProjectController::class, 'index'])->name('admin.project.index');
@@ -59,6 +70,20 @@ Route::prefix('admin')->group(function () {
         Route::get('post/{id}/edit', [BlogController::class, 'editPost'])->name('admin.post.edit');
         Route::put('/post/{id}', [BlogController::class, 'updatePost'])->name('admin.post.update');
         Route::get('post/{id}', [BlogController::class, 'destroyPost'])->name('admin.post.destroy');
-
+        //Teams
+        Route::get('/team/create', [TeamController::class, 'create'])->name('admin.team.create');
+        Route::post('/team/store', [TeamController::class, 'store'])->name('admin.team.store');
+        Route::get('/team/{id}/edit', [TeamController::class, 'edit'])->name('admin.team.edit');
+        Route::put('/team/{id}', [TeamController::class, 'update'])->name('admin.team.update');
+        Route::get('/team/{id}', [TeamController::class, 'destroy'])->name('admin.team.destroy');
+       
+         //Privacy
+         Route::post('/store/privacypolicy', [PrivacyController::class, 'store'])->name('admin.privacy.store');
+         Route::put('/update/privacypolicy/{id}', [PrivacyController::class, 'update'])->name('admin.privacy.update');
+        
+        //Terms Conditions
+        Route::post('/terms/conditions/store/', [TermsCondition::class, 'store'])->name('admin.privacy.store');
+        Route::put('/terms/conditions/update/{id}', [TermsCondition::class, 'update'])->name('admin.privacy.update');
+         
     });
 });
