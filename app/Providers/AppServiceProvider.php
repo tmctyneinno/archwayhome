@@ -3,6 +3,7 @@
 namespace App\Providers;
 use App\Models\ContactUs;
 use App\Models\AboutUs;
+use App\Models\Gallery;
 use App\Models\MenuItem;
 use App\Models\Post;
 use App\Models\PrivacyPolicy;
@@ -11,7 +12,7 @@ use App\Models\ProjectMenu;
 use App\Models\Slider;
 use App\Models\Sociallink;
 use App\Models\Team;
-use App\Models\TermsCondition;
+use App\Models\TermsConditions;
 use App\Models\WhyChooseUs;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -45,10 +46,11 @@ class AppServiceProvider extends ServiceProvider
         View::share('sliders', Slider::all());
         View::share('teams', Team::all());
         View::share('policies', PrivacyPolicy::first());
-        View::share('termsCondition', TermsCondition::first());
+        View::share('termsCondition', TermsConditions::first());
         View::share('posts', Post::latest()->take(3)->get());
         View::share('recentPosts', Post::inRandomOrder()->take(3)->get());
         View::share('projectMenus',ProjectMenu::latest()->get());
+        View::share('galleries',Gallery::latest()->get());
 
     }
 }

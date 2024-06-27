@@ -42,6 +42,12 @@
                 </ul>
             </li>
             <li>
+                <a class="has-arrow ai-icon" href="{{ route('admin.gallery.index') }}" aria-expanded="false">
+                    <i class="flaticon-381-layer-1"></i>
+                    <span class="nav-text">Gallery</span>
+                </a>
+            </li>
+            <li>
                 <a class="has-arrow ai-icon" href="{{ route('admin.project.index') }}" aria-expanded="false">
                     <i class="flaticon-381-layer-1"></i>
                     <span class="nav-text">Project</span>

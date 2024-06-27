@@ -34,6 +34,6 @@ class PrivacyController extends Controller
         ]);
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'Privacy added successfully.');
+        return redirect()->back()->with('success', 'Privacy updated successfully.');
     }
 }

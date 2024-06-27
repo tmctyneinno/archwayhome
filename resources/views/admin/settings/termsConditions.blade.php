@@ -29,7 +29,7 @@
                    }, 3000);
                </script>
                 
-                <form method="POST" action="{{ isset($termsCondition) ? route('admin.termsCondition.update', $termsCondition->id) : route('admin.settings.store_why_choose_us') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ isset($termsCondition) ? route('admin.termsCondition.update', $termsCondition->id) : route('admin.termsCondition.store') }}" enctype="multipart/form-data">
                     @csrf
                     @if(isset($termsCondition))
                         @method('PUT')
@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Terms and Conditions</label>
-                            <textarea id="termsCondition" class="form-control" placeholder="Terms and Conditions" name="terms_condition" rows="8" spellcheck="false" required> {{ isset($termsCondition) ? $termsCondition->content : '' }}</textarea>
+                            <textarea id="termsCondition" class="form-control" placeholder="Terms and Conditions" name="content" rows="8" spellcheck="false" required> {{ isset($termsCondition) ? $termsCondition->content : '' }}</textarea>
                         </div>
                        
                        

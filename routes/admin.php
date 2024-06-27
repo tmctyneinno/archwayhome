@@ -10,7 +10,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PrivacyController;
-use App\Http\Controllers\TermsCondition;
+use App\Http\Controllers\TermsConditionController;
+use App\Http\Controllers\GalleryContoller;
 
 
 
@@ -82,8 +83,13 @@ Route::prefix('admin')->group(function () {
          Route::put('/update/privacypolicy/{id}', [PrivacyController::class, 'update'])->name('admin.privacy.update');
         
         //Terms Conditions
-        Route::post('/terms/conditions/store/', [TermsCondition::class, 'store'])->name('admin.privacy.store');
-        Route::put('/terms/conditions/update/{id}', [TermsCondition::class, 'update'])->name('admin.privacy.update');
+        Route::post('/terms/conditions/store/', [TermsConditionController::class, 'store'])->name('admin.termsCondition.store');
+        Route::put('/terms/conditions/update/{id}', [TermsConditionController::class, 'update'])->name('admin.termsCondition.update');
          
+        //Galleries
+        Route::get('gallery/index', [GalleryContoller::class, 'index'])->name('admin.gallery.index');
+        Route::get('gallery/create', [GalleryContoller::class, 'create'])->name('admin.gallery.create');
+        Route::post('gallery/store', [GalleryContoller::class, 'store'])->name('admin.gallery.store');
+
     });
 });

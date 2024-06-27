@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TermsConditions;
 use Illuminate\Http\Request;
 
-class TermsCondition extends Controller
+class TermsConditionController extends Controller
 {
     public function store(Request $request)
     {
@@ -12,7 +13,7 @@ class TermsCondition extends Controller
             'content' => 'required|string',
         ]);
 
-        TermsCondition::create([
+        TermsConditions::create([
             'content' => $validatedData['content'],
         ]);
 
@@ -27,12 +28,12 @@ class TermsCondition extends Controller
         ]);
 
         // Create a new PrivacyPolicy instance and store in the database
-        $item = TermsCondition::findOrFail($id);
+        $item = TermsConditions::findOrFail($id);
         $item->update([
             'content' => $validatedData['content'],
         ]);
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'Terms Condition added successfully.');
+        return redirect()->back()->with('success', 'Terms Condition updated successfully.');
     }
 }
