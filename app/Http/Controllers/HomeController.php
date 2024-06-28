@@ -102,6 +102,10 @@ class HomeController extends Controller
         return back()->with('success', 'Your comment has been added.');
     }
 
+    public function blog(){
+        $posts = Post::latest()->get();
+        return view('home.post', compact('posts'));
+    }
     
     
    

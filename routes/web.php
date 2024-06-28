@@ -30,7 +30,6 @@ Route::get('/projects', [ProjectController::class, 'projects'])->name('home.proj
 Route::get('/projects/{type}', [ProjectController::class, 'projectsType'])->name('home.projects.type');
 
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
-Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/contact', [HomeController::class, 'contactus'])->name('contact');
 
 Route::get('/consultant-form', [HomeController::class, 'consultant-form'])->name('consultant-form');
@@ -41,3 +40,5 @@ Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('ho
 Route::get('/project/{id}', [HomeController::class, 'detailsProject'])->name('home.project.details');
 Route::get('/post/{id}', [HomeController::class, 'detailsPost'])->name('home.post.details');
 Route::post('/post/comment', [HomeController::class, 'storeComment'])->name('home.comments.store');
+
+Route::get('/blog', [HomeController::class, 'blog'])->name('blog');

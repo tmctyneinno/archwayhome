@@ -6,7 +6,7 @@
         <div class="breadcrumbs-custom__inner">
             <ul class="breadcrumbs-custom__path">
             <li><a href="index.html">Home</a></li>
-            <li class="active">Projects</li>
+            <li class="active">Blog</li>
             </ul>
         </div>
         </div>
@@ -21,7 +21,7 @@
             <div class="container">
                 <div class="row justify-content-sm-center">
                 <div class="col-md-10 col-xl-8">
-                    <h2>Projects</h2>
+                    <h2>Blog</h2>
                     <p>
                       At Arckway home, we deliver value at its peak 
                     </p>
@@ -38,24 +38,24 @@
       <div class="container">
         
         <div class="row row-40">
-          @forelse ($projectMenus as $projectMenu)
+          @forelse ($posts as $post)
             <div class="col-sm-6 col-lg-4">
               <!-- Post-->
               <article class="product">
                 <div class="product-media">
-                  <img class="product-img" src="{{ asset ('assets/images/home-04-370x290.jpg') }}" alt="" width="370" height="290">
+                  <img class="product-img" src="{{ asset ( $post->image )}}" alt="" width="370" height="290"  style=" width: 370px; height: 290px; object-fit: cover; ">
               
                 </div>
                 <div class="product-body">
                   <div class="product-title">
-                    <h5><a href="{{ route('home.projects.type',  $projectMenu->slug ) }}" previewlistener="true">{{ $projectMenu->name }}</a></h5>
+                    <h5><a href="" previewlistener="true">{{  Str::limit($post->title, 50) }} </a></h6>
                   </div>
                  
                 </div>
               </article>
             </div>
           @empty
-              <p>No Project Menu</p>
+              <p>No Posts Data</p>
           @endforelse
          
           

@@ -57,7 +57,8 @@
                   
                 @endif
             @else
-
+              <a class="button button-primary" href="{{ route('logout')}}">Sign out</a>
+             
             @endguest
           
             

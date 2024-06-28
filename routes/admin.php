@@ -91,5 +91,5 @@ Route::prefix('admin')->group(function () {
         Route::get('gallery/create', [GalleryContoller::class, 'create'])->name('admin.gallery.create');
         Route::post('gallery/store', [GalleryContoller::class, 'store'])->name('admin.gallery.store');
 
-    });
+    }); 
 });
