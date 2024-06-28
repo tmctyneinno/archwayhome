@@ -1,212 +1,631 @@
-/* ==============
- ========= Js Documentation =========
+/*------------------------------------------------------------------
+* Project:        Realshield
+* Author:         Bizberg_Themes
+* URL:            https://themeforest.net/user/bizberg_themes
+* Created:        01/15/2022
+-------------------------------------------------------------------
+*/
 
- Template Name: Revest
- Version: 1.0
- Description: Real Estate Investment For Everyone
- Author: Pixelaxis
- Author URI: https://themeforest.net/user/pixelaxis
+ (function($) {
+     "use strict";
 
-    =========================
 
-     01. data background
-     ---------------------------
-     02. animated hamburger menu
-     ---------------------------
-     03. position navbar on scroll and resize
-     ---------------------------
-     04. job details tab
-     ---------------------------
-     05. property list and grid tabs
-     ---------------------------
-     06. faq tab
-     ---------------------------
-     07. property list and grid two
-     ---------------------------
-     08. Scroll Bottom To Top
+      /*======== Doucument Ready Function =========*/
+    jQuery(document).ready(function () {
+     //CACHE JQUERY OBJECTS
+      $("#status").fadeOut();
+      $("#preloader").delay(200).fadeOut("slow");
+      $("body").delay(200).css({ "overflow": "visible" });
 
-    =========================
-============== */
+      
+      /* Init Wow Js */
+      new WOW().init();
 
-(function ($) {
-  "use strict";
-
-  jQuery(document).ready(function () {
-    // data background
-    $("[data-background]").each(function () {
-      $(this).css(
-        "background-image",
-        "url(" + $(this).attr("data-background") + ")"
-      );
     });
 
-    // animated hamburger icon
-    $(".navbar-toggler").on("click", function () {
-      $(this).toggleClass("toggle-active");
-      $(".navbar").toggleClass("navbar__active");
-    });
+     //search categories
+    $('a[href="#search1"]').on('click', function(event) {
+         event.preventDefault();
+         $('#search1').addClass('open');
+         $('#search1 > form > input[type="search"]').focus();
+     });
+     $('#search1, #search1 button.close').on('click keyup', function(event) {
+         if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+             $(this).removeClass('open');
+         }
+     });
 
-    // position navbar on scroll and resize
-    $(window).on("scroll", function (e) {
-      var scroll = $(window).scrollTop();
-      if ((scroll > 10) | (scroll == 10)) {
-        $(".header").addClass("header__active");
-        $(".dashboard-header").addClass("dashboard-header__active");
-      } else {
-        $(".header").removeClass("header__active");
-        $(".dashboard-header").removeClass("dashboard-header__active");
+    jQuery(document).ready(() => {
+         jQuery('.js-video-button').modalVideo({
+             channel: 'vimeo'
+         });
+     });
+
+     // Range sliders activation
+     $(".range-slider-ui").each(function() {
+         var minRangeValue = $(this).attr('data-min');
+         var maxRangeValue = $(this).attr('data-max');
+         var minName = $(this).attr('data-min-name');
+         var maxName = $(this).attr('data-max-name');
+         var unit = $(this).attr('data-unit');
+         $(this).slider({
+             range: true,
+             min: minRangeValue,
+             max: maxRangeValue,
+             values: [minRangeValue, maxRangeValue],
+             slide: function(event, ui) {
+                 event = event;
+                 var currentMin = parseInt(ui.values[0]);
+                 var currentMax = parseInt(ui.values[1]);
+                 $(this).children(".min-value").text(currentMin + " " + unit);
+                 $(this).children(".max-value").text(currentMax + " " + unit);
+                 $(this).children(".current-min").val(currentMin);
+                 $(this).children(".current-max").val(currentMax);
+             }
+         });
+     });
+
+
+     /* ------------------------------------------------------------------------ */
+     /* BACK TO TOP
+    /* ------------------------------------------------------------------------ */
+     $(document).on('click', '#back-to-top, .back-to-top', () => {
+         $('html, body').animate({
+             scrollTop: 0
+         }, '500');
+         return false;
+     });
+     $(window).on('scroll', () => {
+         if ($(window).scrollTop() > 500) {
+             $('#back-to-top').fadeIn(200);
+         } else {
+             $('#back-to-top').fadeOut(200);
+         }
+     });
+
+     // Slick SLider
+     $('.slider-store').slick({
+         slidesToShow: 1,
+         slidesToScroll: 1,
+         direction: 'vertical',
+         arrows: false,
+         dots: false,
+         fade: true,
+         autoplay: true,
+         asNavFor: '.slider-thumbs'
+     });
+    
+
+     $('.slider-thumbs').slick({
+         slidesToShow: 5,
+         slidesToScroll: 1,
+         asNavFor: '.slider-store',
+         dots: false,
+         arrows: true,
+         autoplay: true,
+         direction: 'vertical',
+         centerMode: true,
+         focusOnSelect: true,
+         responsive: [{
+             breakpoint: 800,
+             settings: {
+                 arrows:false,
+             }
+         }]
+
+     });
+
+     $('.review-slider').slick({
+         infinite: true,
+         slidesToShow: 2,
+         slidesToScroll: 1,
+         arrows: false,
+         dots: false,
+         rows:0,
+         autoplay: true,
+         speed: 2000,
+         loop:true,
+         responsive: [{
+             breakpoint: 916,
+             settings: {
+                 slidesToShow: 1
+             }
+         }]
+     });
+
+     $('.review-slider1').slick({
+         infinite: true,
+         slidesToShow: 2,
+         slidesToScroll: 1,
+         arrows: false,
+         dots: false,
+         rows:0,
+         autoplay: true,
+         speed: 5000,
+         loop:true,
+         responsive: [{
+             breakpoint: 1100,
+             settings: {
+                 slidesToShow: 1
+             }
+         }]
+     });
+
+     $('.about-slider').slick({
+         infinite: true,
+         slidesToShow: 1,
+         slidesToScroll: 1,
+         arrows: false,
+         dots: false,
+         autoplay: true,
+         rows:0,
+         speed: 4000,
+         loop:true,
+         responsive: [{
+             breakpoint: 700,
+             settings: {
+                 arrows:false
+             }
+         }]
+     });
+
+     $('.side-slider').slick({
+         infinite: true,
+         slidesToShow: 5,
+         slidesToScroll: 1,
+         arrows: false,
+         rows:0,
+         dots: false,
+         autoplay: true,
+         speed: 4000,
+         loop:true,
+          responsive: [{
+             breakpoint: 1000,
+             settings: {
+                 slidesToShow: 3
+             }
+         }, 
+         {
+             breakpoint: 811,
+             settings: {
+                 slidesToShow: 2
+            }
+         }, 
+         {
+             breakpoint: 500,
+             settings: {
+                 slidesToShow: 1
+             }
+         }]
+     });
+
+      $('.attract-slider').slick({
+         infinite: true,
+         slidesToShow: 6,
+         slidesToScroll: 1,
+         arrows: false,
+         dots: false,
+         speed: 2000,
+         rows:0,
+         autoplay: true,
+         draggable:false,
+         responsive: [{
+             breakpoint: 1000,
+             settings: {
+                 slidesToShow: 3
+             }
+         }, 
+         {
+             breakpoint: 600,
+             settings: {
+                 slidesToShow: 2
+            }
+         }, 
+         {
+             breakpoint: 500,
+             settings: {
+                 slidesToShow: 2
+             }
+         }]
+     });
+
+     $('.team-slider').slick({
+         infinite: true,
+         slidesToShow: 3,
+         slidesToScroll: 1,
+         arrows: true,
+         dots: false,
+         autoplay: true,
+         speed: 1000,
+         rows:0,
+         loop:true,
+         responsive: [{
+             breakpoint: 1000,
+             settings: {
+                 slidesToShow: 2
+             }
+         }, {
+             breakpoint: 750,
+             settings: {
+                 slidesToShow: 1
+             }
+         }]
+     });
+
+     $('.item-slider').slick({
+         infinite: true,
+         slidesToShow: 3,
+         slidesToScroll: 1,
+         arrows: false,
+         dots: false,
+         autoplay: true,
+         speed: 2000,
+         rows:0,
+         loop:true,
+         responsive: [{
+             breakpoint: 1000,
+             settings: {
+                 slidesToShow: 2
+             }
+         }, {
+             breakpoint: 750,
+             settings: {
+                 slidesToShow: 1
+             }
+         }]
+     });
+
+     $('.shop-slider').slick({
+         infinite: true,
+         slidesToShow: 4,
+         slidesToScroll: 1,
+         arrows: false,
+         dots: false,
+         autoplay: true,
+         speed: 8000,
+         rows:0,
+         loop:true,
+         responsive: [{
+             breakpoint: 1000,
+             settings: {
+                 slidesToShow: 2
+             }
+         }, {
+             breakpoint: 800,
+             settings: {
+                 slidesToShow: 2
+             }
+         }, {
+             breakpoint: 600,
+             settings: {
+                 slidesToShow: 1
+             }
+         }]
+     });
+
+     $('.banner-slider').slick({
+         infinite: true,
+         slidesToShow: 4,
+         slidesToScroll: 1,
+         arrows: false,
+         dots: true,
+         autoplay: true,
+         speed: 2000,
+         rows:0,
+         cursor: false,
+         loop:true,
+         responsive: [{
+             breakpoint: 1000,
+             settings: {
+                 slidesToShow: 2
+             }
+         }, {
+             breakpoint: 800,
+             settings: {
+                 slidesToShow: 1
+             }
+         }]
+     });
+
+     // Slick Testimonial Slider
+        $('.sl-testimonial-slider').slick({
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          vertical: true,
+          verticalSwiping: true,
+          autoplay: true,
+          Speed: 8000,
+          rows:0,
+          infinite: true,
+          arrows: false,
+          dots: false,
+          adaptiveHeight: true
+        });
+
+     $('.partner-slider').slick({
+         infinite: true,
+         slidesToShow: 5,
+         slidesToScroll: 1,
+         arrows: false,
+         dots: false,
+         autoplay: true,
+         speed: 2000,
+         rows:0,
+         loop:true,
+         responsive: [{
+             breakpoint: 1000,
+             settings: {
+                 slidesToShow: 3
+             }
+         }, {
+             breakpoint: 800,
+             settings: {
+                 slidesToShow: 2
+             }
+         }, {
+             breakpoint: 500,
+             settings: {
+                 slidesToShow: 1
+             }
+         }]
+     });
+
+
+     $("#contactform2").validate({      
+      submitHandler: function() {
+        
+        $.ajax({
+          url : 'mail/contact.php',
+          type : 'POST',
+          data : {
+            fname : $('input[name="first_name"]').val(),
+            lname : $('input[name="last_name"]').val(),
+            email : $('input[name="email"]').val(),
+            phone : $('input[name="phone"]').val(),
+            comments : $('textarea[name="comments"]').val(),
+          },
+          success : function( result ){
+            $('#contactform-error-msg').html( result );
+            $("#contactform2")[0].reset();
+          }     
+        });
+
       }
     });
 
-    $(window).resize(function () {
-      if ($(".dropdown-menu").hasClass("show")) {
-        $(".dropdown-menu").removeClass("show");
-        $(".dropdown-toggle").removeClass("show");
-      }
+    // burgermenu
 
-      if ($(".alt__loan__grid").hasClass("col-12 alt__loan__list")) {
-        $(".alt__loan__grid")
-          .removeClass("col-12 alt__loan__list")
-          .addClass("col-md-6 col-xl-4");
-      }
-      $(".notification__wrapper").removeClass("notification__wrapper__active");
-      $(".sidebar").removeClass("sidebar__active");
+
+    $(document).on( 'click', '.menu-ham' , function(){
+        $('.menu').animate({right: '0px'}, 50)
+        $('.header_sidemenu_in .overlay').addClass('show').removeClass('hide');
     });
 
-    // job details tab
-    $(".position__details__content").hide();
-    $(".position__details__content:first").show();
-    $(".job__application__btn").on("click", function () {
-      $(".job__application__btn").addClass("button--secondary");
-      $(this).removeClass("button--secondary");
-      $(".position__details__content").hide();
-      var activeTransaction = $(this).attr("href");
-      $(activeTransaction).fadeIn(100);
-      return false;
+    $(document).on( 'click', '.close-menu' , function(){
+        $('.menu').animate({right: '-500px'}, 50)
+        $('.header_sidemenu_in .overlay').addClass('hide').removeClass('show');
     });
 
-    // property list and grid tabs
-    $(".grid__view").on("click", function () {
-      $(".property__grid__area__wrapper__inner").addClass(
-        "col-xl-4 col-md-6",
-        400
-      );
-      $(".property__grid__area__wrapper__inner__two").removeClass("col-xl-5");
-      $(".property__grid__area__wrapper__inner__three").removeClass("col-xl-7");
-      $(".property__list__wrapper").addClass("property__grid");
+    $(document).on( 'click', '.header_sidemenu_in .overlay' , function(){
+        $('.header_sidemenu_in .overlay').addClass('hide').removeClass('show');
+        $('.menu').animate({right: '-500px'}, 50)
     });
 
-    $(".grid__list").on("click", function () {
-      $(".property__grid__area__wrapper__inner").removeClass(
-        "col-xl-4 col-md-6",
-        400
-      );
-      $(".property__grid__area__wrapper__inner__two").addClass("col-xl-5");
-      $(".property__grid__area__wrapper__inner__three").addClass("col-xl-7");
-      $(".property__list__wrapper").removeClass("property__grid");
-    });
+    // bubbles ----------------- 
+    var bArray = [];
+    var sArray = [2, 4, 6, 8];
+    for (var i = 0; i < $('.bubbles').width(); i++) {
+        bArray.push(i);
+    }
+    function randomValue(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+    setInterval(function () {
+        var size = randomValue(sArray);
+        $('.bubbles').append('<div class="individual-bubble" style="left: ' + randomValue(bArray) + 'px; width: ' + size + 'px; height:' + size + 'px;"></div>');
+        $('.individual-bubble').animate({
+            'bottom': '100%',
+            'opacity': '-=0.7'
+        }, 4000, function () {
+            $(this).remove()
+        });
+    }, 350);
 
-    $(".grid__btn").on("click", function () {
-      $(".grid__btn").removeClass("grid__btn__active");
-      $(this).addClass("grid__btn__active");
-    });
+     //search categories
+    $('a[href="#search1"]').on('click', function(event) {
+         event.preventDefault();
+         $('#search1').addClass('open');
+         $('#search1 > form > input[type="search"]').focus();
+     });
+     $('#search1, #search1 button.close').on('click keyup', function(event) {
+         if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+             $(this).removeClass('open');
+         }
+     });
 
-    // faq tab
-    $(".faq__tab__content").hide();
-    $(".faq__tab__content:first").show();
-    $(".faq__tab__btn").on("click", function () {
-      $(".faq__tab__btn").removeClass("faq__tab__btn__active");
-      $(this).addClass("faq__tab__btn__active");
-      $(".faq__tab__content").hide();
-      var activeTransactionf = $(this).attr("href");
-      $(activeTransactionf).fadeIn(100);
-      return false;
-    });
+    /*--------------------------------------------
+    Wicked Picker
+    --------------------------------------------*/  
 
-    // property list and grid two
-    $(".grid__vieww").on("click", function () {
-      $(".alt__loan__grid").addClass("col-xl-4 col-md-6", 400);
-      $(".alt__loan__grid").removeClass("col-12 alt__loan__list");
-    });
+    $('.set-time').wickedpicker();
+    $('.selector').wickedpicker({
 
-    $(".grid__listt").on("click", function () {
-      $(".alt__loan__grid").removeClass("col-xl-4 col-md-6", 400);
-      $(".alt__loan__grid").addClass("col-12 alt__loan__list");
-    });
+      // current time
+      now: new Date(),
 
-    $(".grid__btnn").on("click", function () {
-      $(".grid__btnn").removeClass("grid__btnn__active");
-      $(this).addClass("grid__btnn__active");
-    });
+      // 12- or 24-hour format
+      twentyFour: false,
 
-    // notifcation popup
-    $(".notification__icon").on("click", function () {
-      $(".notification__wrapper").toggleClass("notification__wrapper__active");
-    });
+      // CSS classes
+      upArrow: 'wickedpicker__controls__control-up',
+      downArrow: 'wickedpicker__controls__control-down',
+      close: 'wickedpicker__close',
+      hoverState: 'hover-state',
 
-    // collapsible sidebar
-    $(".collapse__sidebar__btn").click(function () {
-      $(".sidebar").toggleClass("sidebar__active");
-    });
+      // title
 
-    // collapsible sidebar
-    $(".close__sidebar").click(function () {
-      $(".sidebar").toggleClass("sidebar__active");
-    });
+      title: 'Timepicker'
 
-    // add card tab
-    $(".card-tab-wrp").hide();
-    $(".card-tab-wrp:last").show();
-    $(".card-tab-btn").on("click", function () {
-      $(".card-tab-btn").removeClass("card-tab-btn-active");
-      $(this).addClass("card-tab-btn-active");
-      $(".card-tab-wrp").hide();
-      var activeCard = $(this).attr("href");
-      $(activeCard).fadeIn(100);
-      return false;
     });
+    
+     /*-----------------------------------------------------------------------------------*/
+    /*  COUNTDOWN
+    /*-----------------------------------------------------------------------------------*/
 
-    // account tab
-    $(".account-content").hide();
-    $(".account-content:first").show();
-    $(".account-info__btn").on("click", function () {
-      $(".account-info__btn").removeClass("account-info__btn-active");
-      $(this).addClass("account-info__btn-active");
-      $(".account-content").hide();
-      var activeAccount = $(this).attr("href");
-      $(activeAccount).fadeIn(100);
-      return false;
+     $(document).ready(() => {
+         loopcounter('coming-counter');
+     });
+
+    /*-----------------------------------------------------------------------------------*/
+    /*  COUNTER UP
+    /*-----------------------------------------------------------------------------------*/
+    $('.value').counterUp({
+        delay: 50,
+        time: 1000
     });
+    /*-----------------------------------------------------------------------------------*/
+    /*  MASONRY
+    /*-----------------------------------------------------------------------------------*/
+    
+     $('.blog-main').masonry({
+         // options
+         itemSelector: '.mansonry-item',
+     });
 
+     $('.trend-box1').masonry({
+         // options
+         itemSelector: '.mansonry-item1',
+     });
 
-    // Scroll Bottom To Top
-    var ScrollTop = $(".scrollToTop");
-    $(window).on("scroll", function () {
-      if ($(this).scrollTop() < 500) {
-        ScrollTop.removeClass("active");
-      } else {
-        ScrollTop.addClass("active");
-      }
+     // Nice Select JS
+     $('.niceSelect').niceSelect();
+
+     $('a[href="#search1"]').on('click', function(event) {
+         event.preventDefault();
+         $('#search1').addClass('open');
+         $('#search1 > form > input[type="search"]').focus();
+     });
+     $('#search1, #search1 button.close').on('click keyup', function(event) {
+         if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+             $(this).removeClass('open');
+         }
+     });
+     //Do not include! This prevents the form from submitting for DEMO purposes only!
+     $('form').submit(function(event) {
+         event.preventDefault();
+         return false;
+     });
+
+ })(jQuery);
+
+ /*Title: Cool Modal Popup Sign In/Out Form*/
+
+$(function() {
+  //defining all needed variables
+  var $overlay = $('.overlay');
+  var $mainPopUp = $('.main-popup')
+  var $signIn = $('#sign-in');
+  var $register = $('#register');
+  var $formSignIn = $('form.sign-in');
+  var $formRegister = $('form.register');
+  
+  var $firstChild = $('nav ul li:first-child');
+  var $secondChild = $('nav ul li:nth-child(2)');
+  var $thirdChild = $('nav ul li:nth-child(3)');
+  
+  //defining function to create underline initial state on document load
+  function initialState() {
+    $('.underline').css({
+      "width": $firstChild.width(),
+      "left": $firstChild.position().left,
+      "top": $firstChild.position().top + $firstChild.outerHeight(true) + 'px'
     });
-
-    $(".scrollToTop").on("click", function () {
-      $("html, body").animate(
-        {
-          scrollTop: 0,
-        },
-        500
-      );
-      return false;
+  }
+  initialState(); //() used after calling function to call function immediately on doc load
+  
+  //defining function to change underline depending on which li is active
+  function changeUnderline(el) {
+    $('.underline').css({
+      "width": el.width(),
+      "left": el.position().left,
+      "top": el.position().top + el.outerHeight(true) + 'px'
     });
+  } //note: have not called the function...don't want it called immediately
+  
+  $firstChild.on('click', function(){
+    var el = $firstChild;
+    changeUnderline(el); //call the changeUnderline function with el as the perameter within the called function
+    $secondChild.removeClass('active');
+    $thirdChild.removeClass('active');
+    $(this).addClass('active');
   });
-})(jQuery);
-
-// onclick outside hide notification
-$(document).on("click", function (e) {
-  if ($(e.target).closest(".notification-area").length === 0) {
-    $(".notification__wrapper").removeClass("notification__wrapper__active");
-  }
-  if ($(e.target).closest(".sidebar, .collapse__sidebar__btn").length === 0) {
-    $(".sidebar").removeClass("sidebar__active");
-  }
+  
+  $secondChild.on('click', function(){
+    var el = $secondChild;
+    changeUnderline(el); //call the changeUnderline function with el as the perameter within the called function
+    $firstChild.removeClass('active');
+    $thirdChild.removeClass('active');
+    $(this).addClass('active');
+  });
+  
+  $thirdChild.on('click', function(){
+    var el = $thirdChild;
+    changeUnderline(el); //call the changeUnderline function with el as the perameter within the called function
+    $firstChild.removeClass('active');
+    $secondChild.removeClass('active');
+    $(this).addClass('active');
+  });
+  
+  
+  $('button').on('click', function(){
+    $overlay.addClass('visible');
+    $mainPopUp.addClass('visible');
+    $signIn.addClass('active');
+    $register.removeClass('active');
+    $formRegister.removeClass('move-left');
+    $formSignIn.removeClass('move-left');
+  });
+  $overlay.on('click', function(){
+    $(this).removeClass('visible');
+    $mainPopUp.removeClass('visible');
+  });
+  $('#popup-close-button a').on('click', function(e){
+    e.preventDefault();
+    $overlay.removeClass('visible');
+    $mainPopUp.removeClass('visible');
+  });
+  
+  $signIn.on('click', function(){
+    $signIn.addClass('active');
+    $register.removeClass('active');
+    $formSignIn.removeClass('move-left');
+    $formRegister.removeClass('move-left');
+  });
+  
+  $register.on('click', function(){
+    $signIn.removeClass('active');
+    $register.addClass('active');
+    $formSignIn.addClass('move-left');
+    $formRegister.addClass('move-left');
+  });
+  
+  $('input').on('submit', function(e){
+    e.preventDefault(); //used to prevent submission of form...remove for real use
+  });
 });
+
+
+
+ jQuery(window).on('resize load', () => {
+     resize_eb_slider();
+ }).resize();
+ /**
+  * Resize slider
+  */
+ function resize_eb_slider() {
+     let bodyheight = jQuery(this).height();
+     if (jQuery(window).width() > 1400) {
+         bodyheight *= 0.90;
+         jQuery('.slider').css('height', `${bodyheight}px`);
+     }
+ }

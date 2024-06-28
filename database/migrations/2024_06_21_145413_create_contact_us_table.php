@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('second_email')->nullable();
             $table->text('first_address')->nullable();
             $table->text('second_address')->nullable();
+            $table->string('website_link')->nullable();
             $table->string('site_logo')->nullable();
             $table->timestamps();
         });

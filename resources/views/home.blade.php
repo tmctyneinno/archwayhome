@@ -2,138 +2,151 @@
 
 @section('content')
    
-   <!-- Swiper-->
-   <section class="s">
-    <div class="swiper-container swiper-slider swiper-slider_fullheight" data-simulate-touch="false" data-swiper='{"autoplay":{"delay":5500},"loop":true}'>
-        <div class="swiper-wrapper">
-            @foreach ($sliders as $slider)
-            <div class="swiper-slide bg-gray-darker text-center" data-slide-bg="{{ asset($slider->image) }}">
-                <div class="swiper-slide-caption">
-                    <div class="container">
-                        <div class="row justify-content-lg-center">
-                            <div class="col-lg-10 col-xl-10">
-                                <h6 data-caption-animate="fadeInUpSmall" data-caption-delay="0">{{ $slider->title }}</h6>
-                                <h1 data-caption-animate="fadeInUpSmall" data-caption-delay="100">{{ $slider->caption }}</h1>
-                                <p class="swiper-caption-text" data-caption-animate="fadeInUpSmall" data-caption-delay="200">{{ $slider->additional_text }}</p>
-                                @if ($slider->button_url)
-                                  <a class="button button-primary" href="{{ $slider->button_url }}">{{ $slider->button_text }}!</a>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-        <!-- Swiper Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
-   
+<section class="banner overflow-hidden">
+  <div class="slider top50">
+      <div class="swiper-container">
+          <div class="swiper-wrapper">
+              @foreach ($sliders as $sliderItem)
+                  <div class="swiper-slide">
+                      <div class="slide-inner">
+                          <div class="slide-image" style="background-image:url({{ asset($sliderItem->image) }})"></div>
+                          <div class="swiper-content">
+                              <div class="entry-meta mb-2">
+                                  <span class="entry-category">
+                                    <a href="" class="white">
+                                      {{ $sliderItem->title }}
+                                    </a>
+                                  </span>
+                              </div>
+                              <h1 class="mb-2"><a href="{{ $sliderItem->button_url }}" class="white">{{ $sliderItem->title}}</a></h1>
+                              
+                              <p class="white mb-4">{{ $sliderItem->caption }}</p>
+
+                              {{-- <a href="{{ $sliderItem->button_url  }}" class="nir-btn">{{ $sliderItem->additional_text }}</a> --}}
+
+                              @if ($sliderItem->button_url)
+                                  <a href="{{ $sliderItem->button_url }}" class="nir-btn-black">{{ $sliderItem->button_text }}</a>
+                              @endif
+                          </div>
+                          <div class="overlay"></div>
+                      </div>
+                  </div>
+              @endforeach
+          </div>
+      </div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
 </section>
 
-  <!-- Project...-->
-  <section class="section-lg bg-default text-center">
-    <div class="container">
-      <div class="row justify-content-lg-center">
-        <div class="col-lg-10 col-xl-8">
-          <h4>Our projects </h4>
-        </div>
+<!-- Project...-->
+<section class="trending bg-grey pt-9">
+  <div class="container">
+      <div class="section-title mb-6 pb-1 w-75 mx-auto text-center">
+          <h2 class="m-0">Our <span>Projects</span></h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
-      <div class="row row-30">
-        @forelse ($homeprojects as $homeproject)
-          <div class="col-sm-6 col-lg-4">
-            <!-- Post-->
-            <article class="product">
-              <div class="product-media">
-                <img class="product-img" src="{{ asset ($homeproject->image)}}" alt="" width="370" height="290"/>
-                <div class="product-price">{{ $homeproject->land_size }}</div>
-              </div>
-              <div class="product-body">
-                <div class="product-title">
-                  <h5><a href="{{ route('home.project.details', encrypt($homeproject->id))}}">{{ $homeproject->title}}</a></h5>
-                </div>
-                <div class="product-meta">
-                  <div class="group">
-                    <span style="font-size: 16px">
-                      <i class="lnr lnr-map-marker"></i>{{ $homeproject->location }},
-                  </span>
+      <div class="trend-box">
+          <div class="row">
+            @forelse ($homeprojects as $homeproject)
+              <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                  <div class="trend-item box-shadow rounded">
+                      <div class="trend-image">
+                          <img src="{{ asset ($homeproject->image)}}" alt="image" style=" width: 370px; height: 290px; object-fit: cover; ">
+                          <a href="#" class="flash bg-theme1 white px-3 py-2"><i class="fa fa-flash"></i></a>
+                          <div class="trend-meta d-flex align-items-center justify-content-between">
+                              <div class="entry-author">
+                                <i class="flaticon-location-pin theme"></i>
+                                  <span>{{ $homeproject->location }}</span>
+                              </div>
+                              <a href="{{ route('home.project.details', encrypt($homeproject->id))}}" class="tags bg-theme2 white px-3 py-1">{{ $homeproject->projectMenu->name  }}</a>
+                          </div>
+                      </div>
+                      <div class="trend-content p-4 bg-white">
+                          <h4><a href="{{ route('home.project.details', encrypt($homeproject->id))}}">{{ $homeproject->title}}</a>
+                          </h4>
+                         
+                          <p class="mb-0">
+                            {!! Str::limit($homeproject->content, 30) !!}
+                          </p>
+                      </div>
+                      <ul class="d-flex align-items-center justify-content-between bg-lgrey p-3 px-4">
+                          {{-- <li class="me-2"><i class="fa fa-eye"></i> 3 Beds</li> --}}
+                          {{-- <li class="me-2"><i class="fa fa-heart"></i> 2 Baths</li> --}}
+                          <li><i class="fa fa-comments"></i>{{ $homeproject->land_size }}</li>
+                      </ul>
                   </div>
-                  
-                  <a class="button button-gray-light-outline" href="{{ route('home.project.details', encrypt($homeproject->id))}}">View details</a>
-
-                </div>
-              </div> 
-            </article>
+              </div>
+            @empty
+              <p class="text-center">No Project Data available</p>
+            @endforelse
+             
           </div>
-        @empty
-            <p class="text-center">No Project Data available</p>
-        @endforelse
+          <div class="trend-btn text-center">
+            @if ($homeprojects)
+              <a class="nir-btn" href="{{ route('home.projects') }}">See more projectss</a>
+            @endif
+          </div>
       </div>
-      @if ($homeprojects)
-        <a class="button button-primary" href="{{ route('home.projects') }}">See more projectss</a>
-      @endif
-    </div>
-  </section>
-  
-  <!-- Welcome to the Best Indianapolis Hotel!-->
-  <section class="section-lg bg-100">
-    <div class="container">
-      <div class="row row-50 justify-content-center text-center">
-        <div class="col-md-11 col-lg-9">
-          <h6>Why Choose Us</h6>
-          {{-- <h4>Best Real Estate Agency</h4> --}}
-          <p>
-            {{ $whyChooseUs->why_choose_us_statements}}
-          </p>
-         
-        </div>
+  </div>
+</section>
 
-        <div class="row row-40 justify-content-center justify-content-lg-between align-items-center text-center text-lg-start">
-          <div class="col-sm-8 col-md-6 col-lg-5 col-xxl-6">
-            <div class="img-max-width-1"><img class="img-shadow mt-4 mt-md-0" src="{{ asset ('assets/images/home-07-500x530.jpg')}}" alt="" width="500" height="530"/>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <h4>Our core value</h4>
-            <p>
-              {{ $whyChooseUs->core_values}}
-            </p>
-
-            <h4 class="mt-3">Mission</h4>
-            <p>
-              {{ $whyChooseUs->mission}}
-            </p>
-
-            <h4 class="mt-3">Vision</h4>
-            <p>
-              {{ $whyChooseUs->vision}}
-            </p>
-
-          </div>
-        </div>
-     
-   
+{{-- Why Choose us --}}
+<section class="about-us pb-5 pt-10">
+  <div class="container">
+      <div class="section-title mb-6 pb-1 w-75 mx-auto text-center">
+        <h2 class="m-0">Why <span>Choose</span> Us?</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
-    </div>
-  </section>
-  {{-- About us --}}
-  <section class="section-lg bg-100">
-    <div class="container">
-      <div class="row row-50 justify-content-center align-items-lg-center justify-content-xl-between text-center text-lg-start">
-        <div class="col-md-6">
-          <h6> About us</h6>
-          <h4>{{ $aboutUs->title}} </h4>
-          <p>{{ $aboutUs->content}}</p>
-          <a class="button button-primary" href="{{ route('about-us') }}">View more</a>
-        </div>
-        <div class="col-sm-8 col-md-6 col-lg-5 col-xxl-6 text-md-end">
-          <div class="img-max-width-1">
-            <img class="img-shadow" src="{{ $aboutUs->image}} " alt="" width="500" height="530">
+
+      <div class="about-image-box">
+          <div class="row d-flex align-items-center justify-content-between">
+              <div class="col-lg-6 col-sm-12 mb-4">
+                  <div class="about-content">
+                      <h4 class="bg-theme white px-4 py-1 d-inline-block">Core value</h4>
+                      {{-- <h2 class="border-b mb-2 pb-2">Dream Living Spaces Setting New Build</h2> --}}
+                      <p class="mb-0">
+                        {!! ($whyChooseUs->core_values) !!}
+                      </p>
+                  </div>
+              </div>
+              <div class="col-lg-6 col-sm-12 mb-4">
+                  <div class="about-image p-3 box-shadow">
+                      <img src="{{ asset('assets/images/trending/trending5.jpg')}}" alt class="w-100">
+                  </div>
+              </div>
           </div>
-        </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-12 mb-4">
+                  <div
+                      class="trend-item box-shadow bg-white d-flex align-items-center justify-content-between p-3">
+                      
+                      <div class="trend-content-main w-75">
+                          <div class="trend-content">
+                              <h5 class="theme mb-1">Vision Statement</h5>
+                              <p class="mb-0">{{ $whyChooseUs->vision }}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-6 mb-4">
+                  <div
+                      class="trend-item box-shadow bg-white d-flex align-items-center justify-content-between p-3">
+                      
+                      <div class="trend-content-main w-100">
+                          <div class="trend-content">
+                              <h5 class="theme mb-1">Mission Statement</h5>
+                              <p class="mb-0">{{ $whyChooseUs->mission }} </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+          </div>
       </div>
-    </div>
-  </section>
+  </div>
+</section>
+
 
    <!-- Blog...-->
    <section class="section-lg bg-default text-center">

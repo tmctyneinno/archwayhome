@@ -16,7 +16,7 @@
     ***********************************-->
     <div class="nav-header">
         <a href="index.html" class="brand-logo">
-            <img class="logo-compact"  src="{{ asset($contactUs->site_logo) }}" alt="/">
+            <img class="logo-compact"  src="{{ asset($contactUs->site_logo) }}" alt="/" style=" width: 100px; height:60px; object-fit: cover; ">
             {{-- <img class="brand-title"  src="{{ asset($contactUs->site_logo) }}" alt="/"> --}}
             {{-- <img class="logo-compact" src="{{ asset($contactUs->site_logo) }}" alt="/"> --}}
             {{-- <img class="brand-title" src="{{ asset($contactUs->site_logo) }}" alt="/"> --}}

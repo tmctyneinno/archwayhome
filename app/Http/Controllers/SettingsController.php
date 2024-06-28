@@ -41,7 +41,7 @@ class SettingsController extends Controller
             'why_choose_us' => 'required|string',
             'mission' => 'required|string',
             'vision' => 'required|string',
-            'core_value' => 'required|string',
+            'core_value' => 'required',
         ]);
 
         $whyChooseUs = WhyChooseUs::findOrFail($id);
@@ -67,7 +67,7 @@ class SettingsController extends Controller
         AboutUs::create(array_merge($validated, ['image' => $imagePath]));
 
         return redirect()->route('admin.settings.content')->with([
-            'successAboutus' => 'Data created successfully.',
+            'successAboutus' => 'About us created successfully.',
             'active_tab' => 'v-pills-profile' 
         ]);
         //  return redirect()->route('admin.settings.content')->with('success', 'Data created successfully.');
@@ -89,7 +89,7 @@ class SettingsController extends Controller
         ]);
  
         return redirect()->route('admin.settings.content')->with([
-            'success' => 'Data updated successfully.',
+            'success' => 'About us updated successfully.',
         ]);
     }
 
@@ -103,6 +103,7 @@ class SettingsController extends Controller
             'second_email' => 'required|email',
             'first_address' => 'required|string',
             'second_address' => 'required|string',
+            'website_link' =>  'required|string',
             'site_logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -128,6 +129,7 @@ class SettingsController extends Controller
             'second_email' => 'required|email',
             'first_address' => 'required|string',
             'second_address' => 'required|string',
+            'website_link' =>  'required|string',
             'site_logo' => 'image|mimes:jpeg,png,jpg,gif|max:4048',
         ]);
 
@@ -156,6 +158,7 @@ class SettingsController extends Controller
         $contactUs->second_email = $validated['second_email'];
         $contactUs->first_address = $validated['first_address'];
         $contactUs->second_address = $validated['second_address'];
+        $contactUs->website_link = $validated['website_link'];
 
         $contactUs->save();
 

@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('why_choose_us', function (Blueprint $table) {
             $table->id();
-            $table->string('why_choose_us_statements')->nullable();
-            $table->string('core_values')->nullable();
-            $table->string('mission')->nullable();
-            $table->string('vision')->nullable();
+            $table->text('why_choose_us_statements')->nullable();
+            $table->text('core_values')->nullable();
+            $table->text('mission')->nullable();
+            $table->text('vision')->nullable();
             $table->timestamps();
         });
     }

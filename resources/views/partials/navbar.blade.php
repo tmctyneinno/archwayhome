@@ -1,92 +1,95 @@
-<header class="page-header">
-  <!-- RD Navbar-->
-  <div class="rd-navbar-wrap">
-    <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-sm-device-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fixed" data-xl-device-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-stick-up-clone="false" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-md-stick-up-offset="150px" data-lg-stick-up-offset="50px">
-      <!-- RD Navbar Top Panel-->
-      <div class="rd-navbar-top-panel__outer"> 
-        <div class="rd-navbar-top-panel">
-          <div class="rd-navbar-top-panel__main">
-            <div class="rd-navbar-top-panel__toggle rd-navbar-fixed__element-1 rd-navbar-static--hidden" data-rd-navbar-toggle=".rd-navbar-top-panel__main"><span></span></div>
-            <div class="rd-navbar-top-panel__content">
-              <ul class="rd-navbar-items-list">
-                <li>
-                  <div class="unit flex-row unit-spacing-xs">
-                    <div class="unit-left">
-                      <span class="icon icon-xxs material-icons-location_on"></span>
-                    </div>
-                    <div class="unit-body">
-                      <a href="#">{{ $contactUs->first_address }}</a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="unit flex-row unit-spacing-xs">
-                    <div class="unit-left"><span class="icon icon-xxs material-icons-phone"></span></div>
-                    <div class="unit-body">
-                      <p><a href="tel:#">{{ $contactUs->first_phone }}</a></p>
-                    </div>
-                  </div>
-                </li>
+<header class="main_header_area">
+  <div class="header-content py-1 bg-theme1">
+      <div class="container d-flex align-items-center justify-content-between">
+          <div class="links">
+              <ul>
+                  <li><a href="#" class="white"><i class="fa fa-calendar white"></i> Thursday, Mar 26, 2021</a>
+                  </li>
+                  <li><a href="#" class="white"><i class="fa fa-map-marker white"></i>{{ $contactUs->first_address }}</a></li>
+                  <li><a href="#" class="white"><i class="fa fa-clock white"></i> Mon-Fri: 10 AM – 5 PM</a></li>
               </ul>
-            </div>
           </div>
-        </div>
-      </div>
-      <div class="rd-navbar-inner">
-        <!-- RD Navbar Panel-->
-        <div class="rd-navbar-panel">
-          <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-          <!-- RD Navbar Brand-->
-          <div class="rd-navbar-brand"> <a class="brand__name" href="{{ url('/')}}">
-              <!-- Logo-->
-              <img style="width: 120px; height: 40px;" class="logo-image-default" src="{{ asset($contactUs->site_logo) }}" alt="Estancy" width="187" height="51"/>
-              {{-- <img class="logo-image-inverse" src="{{ asset ('assets/images/logo-inverse-374x103.png')}}" alt="Estancy" width="187" height="51"/></a></div> --}}
-              <img class="logo-image-inverse" src="{{ asset($contactUs->site_logo) }}" alt="Estancy" width="187" height="51"/></a></div>
-        </div>
-        <!-- RD Navbar Nav-->
-        <div class="rd-navbar-nav-wrap"> 
-          <div class="rd-navbar-nav-wrap__element">
-            @guest
-                {{-- @if (Route::has('login'))
-                  <a class="button button-outline-primary" href="{{ route('login') }}">Login</a>
-                    
-                @endif --}}
-
-                @if (Route::has('register'))
-                  <a class="button button-primary" href="{{ route('register')}}">Join us</a>
-                  
-                @endif
-            @else
-              <a class="button button-primary" href="{{ route('logout')}}">Sign out</a>
-             
-            @endguest
-          
-            
-            
+          <div class="links float-right">
+              <ul>
+                  <li><a href="{{ $sociallink->facebook }}" class="white"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                  <li><a href="{{ $sociallink->twitter }}" class="white"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                  <li><a href="{{ $sociallink->instagram }}" class="white"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                  <li><a href="{{ $sociallink->linkedin }}" class="white"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+              </ul>
           </div>
-          
-          <ul class="rd-navbar-nav">
-            @forelse ($menuItems as $menuItem)
-                <li class="{{ request()->is($menuItem->url) ? 'active' : '' }}">
-                    <a href="{{ route($menuItem->url) }}">
-                        {{ $menuItem->name }}
-                        @if ($menuItem->dropdownItems->count() > 0)
-                            <ul class="rd-navbar-dropdown">
-                                @foreach ($menuItem->dropdownItems as $dropdownItem)
-                                    <li><a href="{{ route($menuItem->url) }}">{{ $dropdownItem->name }}</a></li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </a>
-                </li>
-            @empty
-              <li class="#">No Navigation item</li>
-            @endforelse
-        </ul>
-        
-          
-        </div>
       </div>
-    </nav>
   </div>
+
+  <div class="header_menu" id="header_menu">
+      <nav class="navbar navbar-default">
+          <div class="container">
+              <div class="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
+
+                  <div class="navbar-header">
+                      <a class="navbar-brand" href="{{ url('/') }}">
+                          <img src="{{ asset($contactUs->site_logo) }}" style=" width: 100px; height: 60px; object-fit: cover; " alt="image">
+                      </a>
+                  </div>
+
+                  <div class="navbar-collapse1 d-flex align-items-center" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav" id="responsive-menu">
+                        @forelse ($menuItems as $menuItem)
+                            <li class="dropdown submenu {{ request()->is($menuItem->url) ? 'active' : '' }}">
+                                <a href="{{ route($menuItem->url) }}" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    {{ $menuItem->name }} 
+                                    @if ($menuItem->dropdownItems->count() > 0)
+                                        <i class="icon-arrow-down" aria-hidden="true"></i>
+                                    @endif
+                                </a>
+                                @if ($menuItem->dropdownItems->count() > 0)
+                                    <ul class="dropdown-menu">
+                                        @foreach ($menuItem->dropdownItems as $dropdownItem)
+                                            <li><a href="{{ route($menuItem->url) }}">{{ $dropdownItem->name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </li>
+                        @empty
+                            <li><a href="#">No Navigation item</a></li>
+                        @endforelse
+                    </ul>
+                </div>
+                
+                  <div class="register-login d-flex align-items-center">
+                    @guest
+                          {{-- @if (Route::has('login'))
+                            <a class="button button-outline-primary" href="{{ route('login') }}">Login</a>
+                              
+                          @endif --}}
+
+                          @if (Route::has('register'))
+                            {{-- <a class="button button-primary" href="{{ route('register')}}">Join us</a> --}}
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="me-2">
+                                <i class="fa fa-user"></i> Login/Register
+                            </a>
+                          @endif
+                      @else
+                        <a href="{{ route('logout')}}" class="me-2">
+                          <i class="fa fa-user"></i> Sign out
+                        </a>
+                      
+                      @endguest
+                      
+                      <div class="header_sidemenu me-3">
+                          <div class="mhead">
+                              <span class="menu-ham">
+                                  <a href="#" class="cart-icon d-flex align-items-center ms-1"><i
+                                          class="fa fa-th-large fs-5 black bg-grey p-2"></i></a>
+                              </span>
+                          </div>
+                      </div>
+                      {{-- <a href="#" class="nir-btn white">Add Listing</a> --}}
+                  </div>
+                  <div id="slicknav-mobile"></div>
+              </div>
+          </div>
+      </nav>
+  </div>
+
 </header>

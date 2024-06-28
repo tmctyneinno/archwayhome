@@ -23,13 +23,13 @@
                         @method('PUT')
                     @endif
                     <div class="row">
-                        <div class="mb-3 col-md-10">
+                        <div class="mb-3 col-md-10"> 
                             <label class="form-label">Why Choose Us Statements</label>
                             <textarea id="caption" class="form-control" placeholder="Why Choose Us Statements" name="why_choose_us" rows="8" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->why_choose_us_statements : '' }}</textarea>
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Our core value </label>
-                            <textarea id="caption" class="form-control" placeholder="Mission Statements" name="core_value" rows="8" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->core_values : '' }} </textarea>
+                            <textarea id="core_value" class="form-control" placeholder="Mission Statements" name="core_value" rows="8" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->core_values : '' }} </textarea>
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Mission statement</label>
@@ -46,3 +46,7 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('core_value');
+</script>
