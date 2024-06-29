@@ -28,8 +28,8 @@
                                     <a href="#v-pills-termsConditions" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Terms Conditions</a>
                                     <a href="#v-pills-privacy" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1"> Privacy Policy </a>
                                     <a href="#v-pills-settings" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Team</a>
-                                    <a href="#v-pills-footer" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Footer Navigation</a>
                                     <a href="#v-pills-social" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Social Link</a>
+                                    <a href="#v-pills-quicklink" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Quick Link</a>
                                 </div>
                             </div>
                             <div class="col-sm-10">
@@ -52,8 +52,8 @@
                                     <div id="v-pills-settings" class="tab-pane fade " role="tabpanel">
                                         @include('admin.settings.team')
                                     </div>
-                                    <div id="v-pills-footer" class="tab-pane fade" role="tabpanel">
-                                        <p>Footer Nav</p>
+                                    <div id="v-pills-quicklink" class="tab-pane fade" role="tabpanel">
+                                        @include('admin.settings.quicklink')
                                     </div>
                                     <div id="v-pills-social" class="tab-pane fade" role="tabpanel">
                                         @include('admin.settings.socialLink')

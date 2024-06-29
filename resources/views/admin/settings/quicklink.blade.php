@@ -25,10 +25,10 @@
 
                     <div class="card-header border-0 pb-0">
                         <div class="clearfix">
-                            <h3 class="card-title">Teams List</h3>
+                            <h3 class="card-title">Quicklink List</h3>
                         </div>
                         <div class="clearfix text-center">
-                            <a href="{{route('admin.team.create')}}" class="btn btn-primary">Add Teams</a>
+                            <a href="{{route('admin.quicklink.create')}}" class="btn btn-primary">Add Quick link</a>
                         </div>
                     </div>
 
@@ -40,32 +40,25 @@
                                     <tr>
                                         <th class="width80">#</th>
                                         <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Content</th>
-                                        <th>Image</th>
                                         <th>DATE   </th>
                                         <th>ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($teams as $index => $team)
+                                    @forelse ($quicklinks as $index => $quicklink)
                                         <tr>
                                             <td><strong>{{  $index + 1 }}</strong></td>
-                                            <td>{{ $team->name }}</td>
-                                            <td>{{ $team->position }}</td>
-                                            <td>{!! Str::limit($team->content, 30) !!}</td>
-                                            <td>
-                                                <img src="{{ asset($team->image) }}" class="img-thumbnail" height="20" alt="{{ $team->title }}"  style="max-width: 100px;"/>
-                                            </td>
-                                            <td>{{ $team->created_at->format('d F Y') }}</td>
+                                            <td>{{ $quicklink->name }}</td>
+                                           
+                                            <td>{{ $quicklink->created_at->format('d F Y') }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
                                                         <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{ route('admin.team.edit',  encrypt($team->id) ) }}">Edit</a>
-                                                        <a class="dropdown-item text-danger" href="{{ route('admin.team.destroy', encrypt($team->id) )  }}" onclick="return confirm('Are you sure you want to delete this team?');">Delete</a>
+                                                        <a class="dropdown-item" href="{{ route('admin.team.edit',  encrypt($quicklink->id) ) }}">Edit</a>
+                                                        <a class="dropdown-item text-danger" href="{{ route('admin.team.destroy', encrypt($quicklink->id) )  }}" onclick="return confirm('Are you sure you want to delete this team?');">Delete</a>
                                                     </div>
                                                 </div>
                                             </td>

@@ -18,7 +18,7 @@
               </ul>
           </div>
       </div>
-  </div>
+  </div> 
 
   <div class="header_menu" id="header_menu">
       <nav class="navbar navbar-default">
@@ -35,7 +35,7 @@
                     <ul class="nav navbar-nav" id="responsive-menu">
                         @forelse ($menuItems as $menuItem)
                             <li class="dropdown submenu {{ request()->is($menuItem->url) ? 'active' : '' }}">
-                                <a href="{{ route($menuItem->url) }}" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                <a href="{{ route( 'home.pages', $menuItem->url )}}" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">
                                     {{ $menuItem->name }} 
                                     @if ($menuItem->dropdownItems->count() > 0)
@@ -45,7 +45,7 @@
                                 @if ($menuItem->dropdownItems->count() > 0)
                                     <ul class="dropdown-menu">
                                         @foreach ($menuItem->dropdownItems as $dropdownItem)
-                                            <li><a href="{{ route($menuItem->url) }}">{{ $dropdownItem->name }}</a></li>
+                                            <li><a href="{{ route( 'home.pages', $menuItem->url )}}">{{ $dropdownItem->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 @endif

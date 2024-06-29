@@ -61,10 +61,17 @@ class SettingsController extends Controller
             'title' => 'required',
             'content' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
+            'header_image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
         
         $imagePath = $this->uploadImageAboutUs($request, 'image', 'aboutUsImages');
-        AboutUs::create(array_merge($validated, ['image' => $imagePath]));
+        $headerImagePath = $this->uploadHeaderImageAboutUs($request, 'header_image', 'aboutUsImages');
+        AboutUs::create(array_merge($validated, 
+        [
+            'image' => $imagePath,
+            'header_image' => $headerImagePath
+        ]
+        ));
 
         return redirect()->route('admin.settings.content')->with([
             'successAboutus' => 'About us created successfully.',
@@ -79,6 +86,7 @@ class SettingsController extends Controller
             'title' => 'required',
             'content' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
+            'header_image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
         $aboutUs = AboutUs::findOrFail($id);
        

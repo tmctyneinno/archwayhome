@@ -12,7 +12,7 @@ class ProjectController extends Controller
         return view('admin.projects.index');
     }
 
-    public function create(){
+    public function create(){ 
         $projectMenus = ProjectMenu::all();
         return view('admin.projects.create', $projectMenus);
     }
@@ -154,12 +154,12 @@ class ProjectController extends Controller
         $projectType = ProjectMenu::where('slug', $slug)->first();
 
         if (!$projectType) {
-            abort(404); 
+            return view('errors.404');
         }
 
-        $projectList = Project::where('project_menu_id', $projectType->id)->get();
-        // dd($projectDetails);
-        return view('home.project-type', compact('projectList','projectType'));
+        $projectList = Project::where('project_menu_id', $projectType->id)->paginate(8);
+      
+        return view('users.pages.project-type', compact('projectList','projectType'));
     }
 
 }

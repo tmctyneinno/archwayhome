@@ -1,5 +1,23 @@
 
 
+<div class="content-line m-0">
+  <div class="content-line-inner bg-theme2 pb-6 pt-6 p-5">
+      <div class="container">
+          <div class="row d-md-flex align-items-center justify-content-between text-lg-start text-center">
+              <div class="col-lg-9">
+                  <h2 class="mb-0 white">
+                      Looking for a dream home?
+                  </h2>
+                  <p class="white">We can help you realize your dream of a new home</p>
+              </div>
+              <div class="col-lg-3">
+                  <a href="{{ route('home.pages', 'projects') }}" class="nir-btn-black float-lg-end float-none">Fine More
+                      Project</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> 
 
  <footer class="pt-10 footermain">
   <div class="footer-upper pb-4">
@@ -7,12 +25,12 @@
           <div class="row">
               <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                   <div class="footer-about">
-                      <img src="{{ asset($contactUs->site_logo) }}" alt style=" width: 200px; height:100px; object-fit: cover; ">
+                      <img src="{{ asset($contactUs->site_logo) }}" alt style=" width: 160px; height:80px; object-fit: cover; ">
                       <p class="mt-3 mb-3 white text-white">
-                          {!! Str::limit($aboutUs->content, 150) !!}
+                          {!! Str::limit($aboutUs->content, 60) !!}
                       </p>
                       <p>
-                        <a href="{{ route('about-us')}}" class=" " style="color: #2db838">Read more</a>
+                        <a href="{{ route( 'home.pages', 'about-us' )}}" class=" " style="color: #2db838">Read more</a>
                       </p>
                       <ul>
                           <li class="white"><strong>Phone:</strong> {{ $contactUs->first_phone }} </li><br>
@@ -31,83 +49,56 @@
                   <div class="footer-links">
                       <h3 class="white">Quick link</h3>
                       <ul>
-                          <li><a href="about-us.html">About Us</a></li>
-                          <li><a href="about-us.html">Privacy Policy</a></li>
-                          <li><a href="about-us.html">Terms &amp; Conditions</a></li>
-                          <li><a href="about-us.html">Pravicy Policy</a></li>
+                        @forelse ($quicklinks as $index => $quicklink)
+                          <li><a href="{{ route( 'home.pages', $quicklink->slug )}}">{{ $quicklink->name}}</a></li>
+                        @empty
+                          <li>No quick link</li>
+                        @endforelse
+                        
+                        
                       </ul>
                   </div>
               </div>
               <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
                   <div class="footer-links">
-                      <h3 class="white">Popular Tags</h3>
+                      <h3 class="white">Project Tags</h3>
                       <div class="tagcloud">
-                          <a class="tag-cloud-link bg-white black p-2 mb-1" href="post-grid-1.html">Beautiful</a>
-                          <a class="tag-cloud-link bg-white black p-2 mb-1" href="post-grid-1.html">Public</a>
-                          <a class="tag-cloud-link bg-white black p-2 mb-1" href="post-grid-1.html">Technology</a>
-                          <a class="tag-cloud-link bg-white black p-2 mb-1" href="post-grid-1.html">Travel</a>
-                          <a class="tag-cloud-link bg-white black p-2 mb-1"
-                              href="post-grid-1.html">Entertainment</a>
-                          <a class="tag-cloud-link bg-white black p-2 mb-1" href="post-grid-1.html">Blog</a>
-                          <a class="tag-cloud-link bg-white black p-2 mb-1" href="post-grid-1.html">Sports </a>
-                      </div>
+                        @forelse ($projectMenus as $projectMenu)
+                          <a class="tag-cloud-link bg-white black p-2 mb-1" href="{{ route('users.projects.type',  $projectMenu->slug ) }}">{{ $projectMenu->name }}</a>
+                        @empty
+                          <p> No Post</p>
+                        @endforelse
+                        </div>
                   </div>
               </div>
               <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                   <div class="footer-links">
                       <h3 class="white">Popular Posts</h3>
                       <div class="trend-main">
+                         @forelse ($recentPosts as $recentPost)
                           <div class="trend-item d-flex align-items-center mb-2">
                               <div class="trend-image w-25 me-4">
-                                  <img src="images/trending/trending4.jpg" alt="image">
+                                  <img src="{{ asset( $recentPost->image ) }}" alt="image" style=" width: 87px; height: 58px; object-fit: cover; ">
                               </div>
                               <div class="trend-content-main w-75">
                                   <div class="trend-content">
-                                      <h5 class="mb-1"><a href="detail-1.html">3 Easy Ways To Make Your iPhone
-                                              Faster</a></h5>
+                                      <h5 class="mb-1">
+                                        <a href="{{ route('home.post.detail', $recentPost->id) }}">
+                                          {{ Str::limit($recentPost->title, 30) }}</a></h5>
                                       <div class="entry-meta">
                                           <div class="entry-metalist d-flex align-items-center">
-                                              <small><a href="post-grid-1.html" class="white"><i
-                                                          class="fa fa-calendar"></i> 22 Mar 2021</a></small>
+                                              <small>
+                                                <a href="{{ route('home.post.detail', $recentPost->id) }}" class="white"><i
+                                                          class="fa fa-calendar"></i> {{ $recentPost->created_at->format('d F Y') }}</a></small>
                                           </div>
                                       </div>
                                   </div>
                               </div>
                           </div>
-                          <div class="trend-item d-flex align-items-center mb-2">
-                              <div class="trend-image w-25 me-4">
-                                  <img src="images/trending/trending5.jpg" alt="image">
-                              </div>
-                              <div class="trend-content-main w-75">
-                                  <div class="trend-content">
-                                      <h5 class="mb-1"><a href="detail-1.html">Facts About Business That Will Help
-                                              You Success</a></h5>
-                                      <div class="entry-meta">
-                                          <div class="entry-metalist d-flex align-items-center">
-                                              <small><a href="post-grid-1.html" class="white"><i
-                                                          class="fa fa-calendar"></i> 22 Mar 2021</a></small>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="trend-item d-flex align-items-center">
-                              <div class="trend-image w-25 me-4">
-                                  <img src="images/trending/trending6.jpg" alt="image">
-                              </div>
-                              <div class="trend-content-main w-75">
-                                  <div class="trend-content">
-                                      <h5 class="mb-1"><a href="detail-1.html">Your Light Is About To Stop Being
-                                              Relevant</a></h5>
-                                      <div class="entry-meta">
-                                          <div class="entry-metalist d-flex align-items-center">
-                                              <small><a href="post-grid-1.html" class="white"><i
-                                                          class="fa fa-calendar"></i> 22 Mar 2021</a></small>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
+                         @empty
+                             <p> No Post</p>
+                         @endforelse
+                         
                       </div>
                   </div>
               </div>
@@ -118,14 +109,14 @@
       <div class="container">
           <div class="copyright-inner d-md-flex align-items-center justify-content-between">
               <div class="copyright-text">
-                  <p class="m-0 white">2022 Realshield. All rights reserved.</p>
+                  <p class="m-0 white">  &copy; {{ date('Y') }}  {{$contactUs->company_name }}. All rights reserved.</p>
               </div>
               <div class="social-links">
                   <ul>
-                      <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                      <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                      <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                      <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                      <li><a href="{{ $sociallink->facebook }}"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                      <li><a href="{{ $sociallink->twitter }}"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                      <li><a href="{{ $sociallink->instagram }}"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                      <li><a href="{{ $sociallink->linkedin }}"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
                   </ul>
               </div>
           </div>

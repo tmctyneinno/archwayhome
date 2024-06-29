@@ -48,6 +48,7 @@
                                     <tr>
                                         <th class="width80">#</th>
                                         <th>Title</th>
+                                        <th>Image</th>
                                         <th>DATE   </th>
                                         <th>ACTION</th>
                                     </tr>
@@ -57,7 +58,9 @@
                                         <tr>
                                             <td><strong>{{  $index + 1 }}</strong></td>
                                             <td>{{ $projectMenu->name }}</td>
-
+                                            <td>
+                                                <img src="{{ asset($projectMenu->image) }}" class="img-thumbnail" height="30" alt="{{ $projectMenu->name }}"  style="max-width: 70px;"/>
+                                            </td>
                                             <td>{{ $projectMenu->created_at->format('d F Y') }}</td>
                                             <td>
                                                 <div class="dropdown">
@@ -70,7 +73,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr> 
                                     @empty
                                         <tr>
                                             <td colspan="7" class="text-center">No Project items found.</td>
@@ -116,6 +119,21 @@
                                         <input type="text" class="form-control" placeholder="Name" name="name" id="name" required>
                                     </div>
                                 </div>
+
+                                <div class="mb-3 row align-items-center">
+                                    <label class="col-sm-3 col-form-label form-label">Image</label>
+                                    <div class="col-sm-9">
+                                        <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required onchange="previewImage(event)">
+                                        @error('image')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
+                                        <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
+                               
+                                    </div>
+                                </div>
                                 
                                 
                                 <br><br>
@@ -131,6 +149,23 @@
                             <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
                             <script>
                                 CKEDITOR.replace('content');
+                            </script>
+                            <script>
+                                function previewImage(event) {
+                                    const input = event.target;
+                                    const preview = document.getElementById('image-preview');
+                                    
+                                    if (input.files && input.files[0]) {
+                                        const reader = new FileReader();
+                                        
+                                        reader.onload = function(e) {
+                                            preview.src = e.target.result;
+                                            preview.style.display = 'block';
+                                        };
+                                        
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                }
                             </script>
                         </div>
                         

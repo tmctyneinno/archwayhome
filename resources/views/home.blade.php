@@ -53,7 +53,6 @@
                   <div class="trend-item box-shadow rounded">
                       <div class="trend-image">
                           <img src="{{ asset ($homeproject->image)}}" alt="image" style=" width: 370px; height: 290px; object-fit: cover; ">
-                          <a href="#" class="flash bg-theme1 white px-3 py-2"><i class="fa fa-flash"></i></a>
                           <div class="trend-meta d-flex align-items-center justify-content-between">
                               <div class="entry-author">
                                 <i class="flaticon-location-pin theme"></i>
@@ -65,7 +64,6 @@
                       <div class="trend-content p-4 bg-white">
                           <h4><a href="{{ route('home.project.details', encrypt($homeproject->id))}}">{{ $homeproject->title}}</a>
                           </h4>
-                         
                           <p class="mb-0">
                             {!! Str::limit($homeproject->content, 30) !!}
                           </p>
@@ -92,106 +90,52 @@
 </section>
 
 {{-- Why Choose us --}}
-<section class="about-us pb-5 pt-10">
+@include('users.pages.why_choose_us')
+
+
+{{-- Latest update --}}
+<section class="top-post pt-0">
   <div class="container">
       <div class="section-title mb-6 pb-1 w-75 mx-auto text-center">
-        <h2 class="m-0">Why <span>Choose</span> Us?</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h2 class="m-0">Latest <span>Update</span></h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
-
-      <div class="about-image-box">
-          <div class="row d-flex align-items-center justify-content-between">
-              <div class="col-lg-6 col-sm-12 mb-4">
-                  <div class="about-content">
-                      <h4 class="bg-theme white px-4 py-1 d-inline-block">Core value</h4>
-                      {{-- <h2 class="border-b mb-2 pb-2">Dream Living Spaces Setting New Build</h2> --}}
-                      <p class="mb-0">
-                        {!! ($whyChooseUs->core_values) !!}
-                      </p>
-                  </div>
-              </div>
-              <div class="col-lg-6 col-sm-12 mb-4">
-                  <div class="about-image p-3 box-shadow">
-                      <img src="{{ asset('assets/images/trending/trending5.jpg')}}" alt class="w-100">
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6 col-md-12 mb-4">
-                  <div
-                      class="trend-item box-shadow bg-white d-flex align-items-center justify-content-between p-3">
-                      
-                      <div class="trend-content-main w-75">
-                          <div class="trend-content">
-                              <h5 class="theme mb-1">Vision Statement</h5>
-                              <p class="mb-0">{{ $whyChooseUs->vision }}</p>
+      <div class="row team-slider">
+        @forelse ($posts as $post)
+          <div class="col-lg-4">
+              <div class="trend-item">
+                  <div class="trend-image">
+                      <img src="{{ asset($post->image) }}" alt="{{ $post->title }}" style=" width: 376px; height: 251px;   object-fit: cover; ">
+                      <div class="trend-content p-4 bg-lgrey border-b">
+                          <h5 class="theme">{{ $post->category }}</h5>
+                          <h4><a href="{{ route('home.post.detail',  encrypt($post->id) ) }} ">
+                            {{ Str::limit($post->title, 30) }}
+                          </a></h4>
+                          <p class="mb-2">{{ $post->excerpt }}</p>
+                          <div class="entry-meta d-flex align-items-center justify-content-between border-t pt-2">
+                             
+                              <div class="entry-metalist">
+                                  <small><i class="fa fa-calendar"></i> {{ date('d M Y', strtotime($post->created_at)) }}</small>
+                              </div>
                           </div>
                       </div>
                   </div>
               </div>
-              <div class="col-lg-6 mb-4">
-                  <div
-                      class="trend-item box-shadow bg-white d-flex align-items-center justify-content-between p-3">
-                      
-                      <div class="trend-content-main w-100">
-                          <div class="trend-content">
-                              <h5 class="theme mb-1">Mission Statement</h5>
-                              <p class="mb-0">{{ $whyChooseUs->mission }} </p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              
           </div>
+          @endforeach
       </div>
+      <div class="mt-6 pb-1 w-75 mx-auto text-center">
+        @if ($posts)
+          <a class="nir-btn mx-auto text-center" href="{{ route('blog') }}">See more post</a>
+        @endif
+      </div>
+    
   </div>
+  
 </section>
 
 
-   <!-- Blog...-->
-   <section class="section-lg bg-default text-center">
-    <div class="container">
-      <div class="row justify-content-lg-center">
-        <div class="col-lg-10 col-xl-8">
-          {{-- <h6>Our Updates </h6> --}}
-          <h4>Latest Updates</h4>
-        </div>
-      </div>
-      <div class="row row-30">
-        @forelse ($posts as $post)
-          <div class="col-sm-6 col-lg-4">
-            <!-- Post-->
-            <article class="product">
-              <div class="product-media">
-                <img style=" width: 370px; height: 290px;   object-fit: cover; " class="product-img" src="{{ asset ($post->image)}}" alt="" width="370" height="290"/>
-              </div>
-              <div class="product-body">
-                <div class="product-title">
-                  <h6>
-                    <a href="{{ route('home.post.details', encrypt($post->id))}}">
 
-                    <td>{!! Str::limit($post->title, 50) !!}</td>
-                    </a>
-                  </h6>
-                </div>
-                <div class="product-meta">
-                 {{-- link-primary --}}
-                  
-                  <a class="button button-gray-light-outline" href="{{ route('home.post.details', encrypt($post->id))}}">see more</a>
-
-                </div>
-              </div> 
-            </article>
-          </div>
-        @empty
-            <p class="text-center">No Project Data available</p>
-        @endforelse
-      </div>
-      @if ($posts)
-        <a class="button button-primary" href="">See more projects</a>
-      @endif
-    </div>
-  </section>
 
  
 

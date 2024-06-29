@@ -19,6 +19,17 @@ trait SettingsTrait
         return null;
     }
 
+    public function uploadHeaderImageAboutUs($request, $fieldName, $destinationPath)
+    {
+        if ($request->hasFile($fieldName)) {
+            $image = $request->file($fieldName);
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path($destinationPath), $imageName);
+            return $destinationPath . '/' . $imageName;
+        }
+        return null;
+    }
+
     public function handleUpdateAboutUsImage($request, $aboutUs){
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -28,6 +39,16 @@ trait SettingsTrait
                 unlink(public_path($aboutUs->image));
             }
             $aboutUs->image = 'aboutUsImages/' . $imageName;
+            $aboutUs->save();
+        }
+        if ($request->hasFile('header_image')) {
+            $image = $request->file('header_image');
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path('aboutUsImages'), $imageName);
+            if ($aboutUs->header_image) {
+                unlink(public_path($aboutUs->header_image));
+            }
+            $aboutUs->header_image = 'aboutUsImages/' . $imageName;
             $aboutUs->save();
         }
     }

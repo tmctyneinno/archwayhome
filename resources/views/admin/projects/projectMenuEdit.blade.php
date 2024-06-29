@@ -21,9 +21,9 @@
                     </div>
                     <div class="card-body">
                         <div class="basic-form">
-                            @if(session('addProjectMenu'))
+                            @if(session('success'))
                                 <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ session('addProjectMenu') }}
+                                    {{ session('success') }}
                                 </div>
                             @endif
                             @if ($errors->any())
@@ -44,6 +44,23 @@
                                     <label class="col-sm-3 col-form-label form-label">Name</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ $projectMenu->name}}" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 row align-items-center">
+                                    <label class="col-sm-3 col-form-label form-label">Image</label>
+                                    <div class="col-sm-9">
+                                        <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required onchange="previewImage(event)">
+                                        @error('image')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <img  src="{{ asset($projectMenu->image) }}" alt="Image Preview" class="img-thumbnail mt-2" style=" max-width: 70px;">
+                                        <br>
+                                        <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
+                                        <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
+                               
                                     </div>
                                 </div>
                                 

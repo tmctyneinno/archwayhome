@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('quick_links', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->text('position')->nullable();
-            $table->text('content')->nullable();
-            $table->string('image')->nullable();
+            $table->text('name');
+            $table->text('slug');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('quick_links');
     }
 };

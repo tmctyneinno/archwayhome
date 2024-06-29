@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AboutUs extends Model
+class QuickLink extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'title', 
-        'image', 
-        'content', 
-        'header_image'
+        'name','slug'
     ];
 }

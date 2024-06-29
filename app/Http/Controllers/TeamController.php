@@ -46,36 +46,36 @@ class TeamController extends Controller
     }
 
     public function update(Request $request,  $id)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'position' => 'required|string|max:255',
-        'content' => 'required|string',
-        'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:5048',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:5048',
+        ]);
 
-    $teamData = $request->only(['name', 'position', 'content']);
-    $team = Team::findOrFail($id); 
-    if ($request->hasFile('image')) {
-        // Delete old image if exists
-        if ($team->image) {
-            $oldImagePath = public_path($team->image);
-            if (file_exists($oldImagePath)) {
-                unlink($oldImagePath);
+        $teamData = $request->only(['name', 'position', 'content']);
+        $team = Team::findOrFail($id); 
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($team->image) {
+                $oldImagePath = public_path($team->image);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
             }
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path('teams'), $imageName);
+            $teamData['image'] = 'teams/' . $imageName;
         }
 
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->extension();
-        $image->move(public_path('teams'), $imageName);
-        $teamData['image'] = 'teams/' . $imageName;
+        $team->update($teamData);
+
+        return redirect()->route('admin.settings.content')
+                        ->with('success', 'Team updated successfully.');
     }
-
-    $team->update($teamData);
-
-    return redirect()->route('admin.settings.content')
-                     ->with('success', 'Team updated successfully.');
-}
 
     public function destroy($id)
     {
@@ -84,6 +84,11 @@ class TeamController extends Controller
 
         return redirect()->route('admin.settings.content')
                          ->with('success', 'Team deleted successfully.');
+    }
+
+    public function show($id){
+        $team = Team::findOrFail(decrypt($id));
+        return view('users.pages.team_detail', compact('team'));
     }
     
 }

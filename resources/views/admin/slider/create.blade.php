@@ -59,12 +59,7 @@
                                             <textarea id="caption" class="form-control" placeholder="Additional Text" name="additional_text" required></textarea>
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Button URL</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Button URL" name="button_url"  id="button_url" required>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Button Text</label>
                                         <div class="col-sm-9">

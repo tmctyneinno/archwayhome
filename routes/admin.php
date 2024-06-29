@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuicklinkController;
 use App\Models\PrivacyPolicy;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -90,6 +91,10 @@ Route::prefix('admin')->group(function () {
         Route::get('gallery/index', [GalleryContoller::class, 'index'])->name('admin.gallery.index');
         Route::get('gallery/create', [GalleryContoller::class, 'create'])->name('admin.gallery.create');
         Route::post('gallery/store', [GalleryContoller::class, 'store'])->name('admin.gallery.store');
-
+        
+        //QuickLink
+        Route::get('/quicklink/create', [QuicklinkController::class, 'create'])->name('admin.quicklink.create');
+        Route::post('/quicklink/store', [QuicklinkController::class, 'store'])->name('admin.quicklink.store');
+        
     }); 
 });

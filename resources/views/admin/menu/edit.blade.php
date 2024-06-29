@@ -38,12 +38,7 @@
                                             <input type="text" class="form-control" placeholder="Menu Item Name" value="{{ $menuItem->name }}" name="name" id="name" required>
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Url Name</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Menu Item Name" value="{{ $menuItem->url }}" name="url" required>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="mb-3 row align-items-center" >
                                         <label class="col-sm-3 col-form-label form-label">Dropdown Items</label>
                                         

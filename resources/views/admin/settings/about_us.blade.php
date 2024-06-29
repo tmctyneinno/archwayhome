@@ -35,13 +35,26 @@
                         @method('PUT')
                     @endif
                     <div class="row">
-                        <div class="mb-3 col-md-10">
+                        <div class="mb-3 col-md-10"> 
                             <label class="form-label">Title</label>
                             <input type="text" class="form-control" placeholder="Title" name="title" value=" {{ isset($aboutUs) ? $aboutUs->title : '' }}" required>
                          </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Content</label>
                             <textarea id="content" class="form-control" placeholder="Content" name="content" rows="8" spellcheck="false" required> {{ isset($aboutUs) ? $aboutUs->content : '' }}</textarea>
+                        </div>
+                        <div class="mb-3 col-md-10">
+                            <label class="form-label">Background Image </label>
+                            <input id="header_image" type="file" class="form-control @error('image') is-invalid @enderror" name="header_image"  onchange="previewImagebg(event)">
+                            @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            @if(isset($aboutUs))
+                            <img src="{{ asset($aboutUs->header_image) }}" alt="{{ $aboutUs->title }}" class="img-thumbnail mt-2" width="200">
+                            @endif
+                            <img id="image-previewbg" src="" alt="Image Previewbg" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label"> Image </label>
@@ -65,6 +78,21 @@
                     function previewImage(event) {
                         const input = event.target;
                         const preview = document.getElementById('image-preview');
+                        
+                        if (input.files && input.files[0]) {
+                            const reader = new FileReader();
+                            
+                            reader.onload = function(e) {
+                                preview.src = e.target.result;
+                                preview.style.display = 'block';
+                            };
+                            
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                    function previewImagebg(event) {
+                        const input = event.target;
+                        const preview = document.getElementById('image-previewbg');
                         
                         if (input.files && input.files[0]) {
                             const reader = new FileReader();
