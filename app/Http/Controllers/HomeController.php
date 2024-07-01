@@ -8,6 +8,8 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\MenuItem;
 use App\Models\Slider;
+use Alert;
+use RealRashid\SweetAlert\SweetAlertServiceProvider;
 
 class HomeController extends Controller
 {
@@ -35,8 +37,6 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
-   
 
     public function propertyalert(){
         return view('home.property-alert');
@@ -73,12 +73,11 @@ class HomeController extends Controller
             $query->whereNull('parent_id')->with('replies');
         }])->findOrFail($decryptedId);
 
-        return view('home.post-details', compact('postDetails'));
+        return view('users.posts.post-details', compact('postDetails'));
     }
     public function detailsProject($id) {
         $decryptedId = decrypt($id);
         $projectDetails = Project::findOrFail($decryptedId);
-        // dd($projectDetails);
         if (!$projectDetails) {
             abort(404); 
         }
@@ -97,9 +96,8 @@ class HomeController extends Controller
         ]);
     
         Comment::create($request->all());
-
-        // Redirect back to the post with a success message
-        return back()->with('success', 'Your comment has been added.');
+        
+        return response()->json(['message' => 'Comment submitted successfully']);
     }
 
     public function blog(){

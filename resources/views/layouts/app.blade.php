@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{$contactUs->company_name }}</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset($contactUs->site_logo) }}">
 
@@ -19,6 +20,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
   <link rel="stylesheet" href="{{ asset ('assets/fonts/line-icons.css')}}" type="text/css">
+  <!-- Include SweetAlert CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
   <div id="preloader">
@@ -55,7 +58,9 @@
         data-cf-beacon='{"rayId":"89abb0ddcb1f416b","r":1,"version":"2024.4.1","token":"e2e296138d64407b8469055f5cbf0b42"}'
         crossorigin="anonymous">
     </script>
-    
 
+   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
   </body>
 </html>

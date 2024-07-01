@@ -17,11 +17,18 @@ class PagesController extends Controller
                     // Assuming 'HomeController' is your actual controller class name and 'index' is the method name
                     return view('users.pages.projects');
                     break;
+            case "contact":
+                // Assuming 'HomeController' is your actual controller class name and 'index' is the method name
+                return view('users.pages.contact');
+                break;
+            case "blog":
+                return view('users.pages.post');
+                break;
             default:
                 return view('errors.404');
                 break;
         }
     
             
-    }
+    } 
 }

@@ -158,8 +158,10 @@ class ProjectController extends Controller
         }
 
         $projectList = Project::where('project_menu_id', $projectType->id)->paginate(8);
+        $relatedProject = Project::where('project_menu_id', $projectType->id)->inRandomOrder()->get();
       
-        return view('users.pages.project-type', compact('projectList','projectType'));
+      
+        return view('users.pages.project-type', compact('projectList','projectType','relatedProject'));
     }
 
 }

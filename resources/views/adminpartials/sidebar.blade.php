@@ -60,6 +60,13 @@
                     <span class="nav-text">Post</span>
                 </a>
             </li>
+
+            <li>
+                <a class="has-arrow ai-icon" href="{{ route('admin.service.index') }}" aria-expanded="false">
+                    <i class="flaticon-381-layer-1"></i>
+                    <span class="nav-text">Services</span>
+                </a>
+            </li>
             
             
            

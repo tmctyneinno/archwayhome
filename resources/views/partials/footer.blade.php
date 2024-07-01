@@ -83,12 +83,12 @@
                               <div class="trend-content-main w-75">
                                   <div class="trend-content">
                                       <h5 class="mb-1">
-                                        <a href="{{ route('home.post.detail', $recentPost->id) }}">
+                                        <a href="{{ route('post-details', encrypt($recentPost->id)) }}">
                                           {{ Str::limit($recentPost->title, 30) }}</a></h5>
                                       <div class="entry-meta">
                                           <div class="entry-metalist d-flex align-items-center">
                                               <small>
-                                                <a href="{{ route('home.post.detail', $recentPost->id) }}" class="white"><i
+                                                <a href="{{ route('post-details', encrypt($recentPost->id)) }}" class="white"><i
                                                           class="fa fa-calendar"></i> {{ $recentPost->created_at->format('d F Y') }}</a></small>
                                           </div>
                                       </div>
@@ -146,112 +146,105 @@
 
                   <ul class="nav nav-tabs nav-pills nav-fill" id="postsTab" role="tablist">
                       <li class="nav-item" role="presentation">
-                          <button aria-controls="login" aria-selected="false" class="nav-link active"
-                              data-bs-target="#login" data-bs-toggle="tab" id="login-tab" role="tab"
-                              type="button">Login</button>
-                      </li>
-                      <li class="nav-item" role="presentation">
                           <button aria-controls="register" aria-selected="true" class="nav-link"
                               data-bs-target="#register" data-bs-toggle="tab" id="register-tab" role="tab"
-                              type="button">Register</button>
+                              type="button">Book Inspection</button>
                       </li>
                   </ul>
 
                   <div class="tab-content blog-full" id="postsTabContent">
 
-                      <div aria-labelledby="login-tab" class="tab-pane fade active show" id="login"
-                          role="tabpanel">
-                          <div class="row">
-                              <div class="col-lg-6">
-                                  <div class="blog-image">
-                                      <a href="#"
-                                          style="background-image: url(images/trending/trending5.jpg);"></a>
-                                  </div>
-                              </div>
-                              <div class="col-lg-6">
-                                  <h4 class="text-center border-b pb-2">Login</h4>
-                                  <div class="log-reg-button d-flex align-items-center justify-content-between">
-                                      <button type="submit" class="btn btn-fb">
-                                          <i class="fab fa-facebook"></i> Login with Facebook
-                                      </button>
-                                      <button type="submit" class="btn btn-google">
-                                          <i class="fab fa-google"></i> Login with Google
-                                      </button>
-                                  </div>
-                                  <hr class="log-reg-hr position-relative my-4 overflow-visible">
-                                  <form method="post" action="#" name="contactform" id="contactform">
-                                      <div class="form-group mb-2">
-                                          <input type="text" name="user_name" class="form-control" id="fname"
-                                              placeholder="User Name or Email Address">
-                                      </div>
-                                      <div class="form-group mb-2">
-                                          <input type="password" name="password_name" class="form-control"
-                                              id="lpass" placeholder="Password">
-                                      </div>
-                                      <div class="form-group mb-2">
-                                          <input type="checkbox" class="custom-control-input" id="exampleCheck">
-                                          <label class="custom-control-label mb-0" for="exampleCheck1">Remember
-                                              me</label>
-                                          <a class="float-end" href="#">Lost your password?</a>
-                                      </div>
-                                      <div class="comment-btn mb-2 pb-2 text-center border-b">
-                                          <input type="submit" class="nir-btn w-100" id="submit" value="Login">
-                                      </div>
-                                      <p class="text-center">Don't have an account? <a href="#"
-                                              class="theme">Register</a></p>
-                                  </form>
-                              </div>
-                          </div>
-                      </div>
 
-                      <div aria-labelledby="register-tab" class="tab-pane fade" id="register" role="tabpanel">
+                      <div aria-labelledby="register-tab" class="tab-pane fade active show" role="tabpanel">
                           <div class="row">
                               <div class="col-lg-6">
                                   <div class="blog-image">
                                       <a href="#"
-                                          style="background-image: url(images/trending/trending5.jpg);"></a>
+                                          style="background-image: url( {{ asset('assets/images/trending/trending5.jpg')}});"></a>
                                   </div>
                               </div>
                               <div class="col-lg-6">
-                                  <h4 class="text-center border-b pb-2">Register</h4>
-                                  <div class="log-reg-button d-flex align-items-center justify-content-between">
-                                      <button type="submit" class="btn btn-fb">
-                                          <i class="fab fa-facebook"></i> Login with Facebook
-                                      </button>
-                                      <button type="submit" class="btn btn-google">
-                                          <i class="fab fa-google"></i> Login with Google
-                                      </button>
-                                  </div>
-                                  <hr class="log-reg-hr position-relative my-4 overflow-visible">
-                                  <form method="post" action="#" name="contactform1" id="contactform1">
-                                      <div class="form-group mb-2">
-                                          <input type="text" name="user_name" class="form-control" id="fname1"
-                                              placeholder="User Name">
+                                  <h4 class="text-center border-b pb-2">Book Inspection</h4>
+                                  <form method="post" action="{{ route('submit-inspection') }}" >
+                                    @csrf  
+                                    <div class="form-group mb-2">
+                                          <input type="text" name="full_name" class="form-control" id="fullname"
+                                              placeholder="Full Name">
                                       </div>
                                       <div class="form-group mb-2">
-                                          <input type="text" name="user_name" class="form-control" id="femail"
+                                          <input type="email" name="email" class="form-control" id="email"
                                               placeholder="Email Address">
                                       </div>
                                       <div class="form-group mb-2">
-                                          <input type="password" name="password_name" class="form-control"
-                                              id="lpass1" placeholder="Password">
+                                          <input type="phone" name="phone" class="form-control"
+                                              id="phone" placeholder="Phone">
                                       </div>
                                       <div class="form-group mb-2">
-                                          <input type="password" name="password_name" class="form-control"
-                                              id="lrepass" placeholder="Re-enter Password">
+                                        <label>Project to Inspect</label>
+                                        <select class="form-select" name="project">
+                                            <option disabled selected>Select project</option>
+                                            @foreach ($projects as $project)
+                                                <option value="{{ $project->title}}">{{ $project->title}}</option>
+                                            @endforeach
+                                        </select>
+                                         
                                       </div>
-                                      <div class="form-group mb-2 d-flex">
-                                          <input type="checkbox" class="custom-control-input" id="exampleCheck1">
-                                          <label class="custom-control-label mb-0 ms-1 lh-1" for="exampleCheck1">I
-                                              have read and accept the Terms and Privacy Policy?</label>
-                                      </div>
+                                      <div class="form-group mb-2">
+                                        <label>Date of Inspection</label>
+                                        <input type="date" name="inspectionDate" class="form-control"
+                                            id="phone" placeholder="Date">
+                                    </div>
                                       <div class="comment-btn mb-2 pb-2 text-center border-b">
-                                          <input type="submit" class="nir-btn w-100" id="submit1"
-                                              value="Register">
+                                          <input type="submit" class="nir-btn w-100" 
+                                              value="Submit">
                                       </div>
-                                      <p class="text-center">Already have an account? <a href="#"
-                                              class="theme">Login</a></p>
+                                     
                                   </form>
+                                  <script type="text/javascript">
+                                    jQuery(document).ready(function ($) {
+                                        $('#contactform1').submit(function (e) {
+                                            e.preventDefault();
+                                
+                                            $.ajaxSetup({
+                                                headers: {
+                                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                }
+                                            });
+                                
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: "{{ route('submit-inspection') }}",
+                                                data: $('#contactform1').serialize(),
+                                                success: function (response) {
+                                                    if (response.success) {
+                                                        // Show Toastify success notification
+                                                        Toastify({
+                                                            text: "Inspection booked successfully!",
+                                                            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                                                            duration: 3000
+                                                        }).showToast();
+                                                    } else {
+                                                        // Show Toastify error notification if needed
+                                                        Toastify({
+                                                            text: "Something went wrong!",
+                                                            backgroundColor: "linear-gradient(to right, #FF416C, #FF4B2B)",
+                                                            duration: 3000
+                                                        }).showToast();
+                                                    }
+                                                },
+                                                error: function (xhr, status, error) {
+                                                    // Show Toastify error notification
+                                                    Toastify({
+                                                        text: "Something went wrong!",
+                                                        backgroundColor: "linear-gradient(to right, #FF416C, #FF4B2B)",
+                                                        duration: 3000
+                                                    }).showToast();
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                                
                               </div>
                           </div>
                       </div>
@@ -271,25 +264,23 @@
           <div class="m-contentmain">
               <div class="m-contentmain">
                   <div class="m-logo mb-5">
-                      <img src="images/logo.png" alt="m-logo">
+                      <img src="{{ asset($contactUs->site_logo) }}"  style=" width: 100px; height: 60px; object-fit: cover; " alt="m-logo">
                   </div>
                   <div class="content-box mb-5">
                       <h3 class>Get In Touch</h3>
-                      <p class="mb-2">We must explain to you how all seds this mistakens idea off denouncing
-                          pleasures and praising pain was born and I will give you a completed accounts..</p>
-                      <a href="#" class="nir-btn">Consultation</a>
+                      <p class="mb-2">We’ll get back to you soon</p>
+                      <a href="{{ route('home.pages', 'contact') }}" class="nir-btn">Consultation</a>
                   </div>
                   <div class="contact-info1">
                       <h3 class>Contact Info</h3>
                       <ul>
-                          <li class="d-block mb-1"><i class="fa fa-map-marker-alt me-2"></i> Brozon Mall 26,
-                              Newyrok NY 10005</li>
-                          <li class="d-block mb-1"><i class="fa fa-phone-alt me-2"></i>555 626-0234</li>
+                          <li class="d-block mb-1"><i class="fa fa-map-marker-alt me-2"></i>{{ $contactUs->first_address}}</li>
+                          <li class="d-block mb-1"><i class="fa fa-phone-alt me-2"></i>{{ $contactUs->first_phone}}</li>
                           <li class="d-block mb-1"><i class="fa fa-envelope-open me-2"></i><a
-                                  href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                  data-cfemail="85f6f0f5f5eaf7f1c5f7e0e4e9f6edece0e9e1abe6eae8">[email&#160;protected]</a>
+                                  href="#" class="__cf_email__"
+                                  data-cfemail="85f6f0f5f5eaf7f1c5f7e0e4e9f6edece0e9e1abe6eae8">{{ $contactUs->first_email}}</a>
                           </li>
-                          <li class="d-block"><i class="fa fa-clock me-2"></i> Open Time: 09.00 to 18.00</li>
+                          <li class="d-block"><i class="fa fa-clock me-2"></i> Open Time: 09.00am to 6.00pm</li>
                       </ul>
                   </div>
               </div>

@@ -39,6 +39,38 @@
   <div class="swiper-button-prev"></div>
 </section>
 
+<section class="about-us bg-white pb-6 pt-10">
+  <div class="container">
+      <div class="section-title mb-6 pb-1 w-75 text-center mx-auto">
+          <h2 class="m-0">Our Core <span>Services</span></h2>
+          <p>
+            At Archway Homes and Investment Limited, we offer a comprehensive suite of services designed to meet the diverse needs of our clients. Our expertise and innovative approaches ensure exceptional value across all areas of real estate. Here’s a brief overview of our key services:
+          </p>
+      </div>
+
+      <div class="why-us">
+          <div class="why-us-box">
+              <div class="row">
+                @foreach ($services as $service)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="why-us-item text-center bg-lgrey">
+                        <div class="why-us-icon">
+                            <i class="{{ $service->icon_class }} theme"></i>
+                        </div>
+                        <div class="why-us-content">
+                            <h3><a href="{{ route('service.detail', $service->id) }}">{{ $service->title }}</a></h3>
+                            <p class="mb-0">{{ $service->description }}</p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+              </div>
+          </div>
+      </div>
+
+  </div>
+</section>
+
 <!-- Project...-->
 <section class="trending bg-grey pt-9">
   <div class="container">
@@ -52,7 +84,7 @@
               <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
                   <div class="trend-item box-shadow rounded">
                       <div class="trend-image">
-                          <img src="{{ asset ($homeproject->image)}}" alt="image" style=" width: 370px; height: 290px; object-fit: cover; ">
+                          <img src="{{ asset ($homeproject->image)}}" alt="{{ $homeproject->title}}" style=" width: 400px; height: 290px; object-fit: cover; ">
                           <div class="trend-meta d-flex align-items-center justify-content-between">
                               <div class="entry-author">
                                 <i class="flaticon-location-pin theme"></i>
@@ -82,7 +114,7 @@
           </div>
           <div class="trend-btn text-center">
             @if ($homeprojects)
-              <a class="nir-btn" href="{{ route('home.projects') }}">See more projectss</a>
+              <a class="nir-btn" href="{{ route('home.pages', 'projects') }}">See more projectss</a>
             @endif
           </div>
       </div>
@@ -108,7 +140,7 @@
                       <img src="{{ asset($post->image) }}" alt="{{ $post->title }}" style=" width: 376px; height: 251px;   object-fit: cover; ">
                       <div class="trend-content p-4 bg-lgrey border-b">
                           <h5 class="theme">{{ $post->category }}</h5>
-                          <h4><a href="{{ route('home.post.detail',  encrypt($post->id) ) }} ">
+                          <h4><a href="{{ route('post-details',  encrypt($post->id) ) }} ">
                             {{ Str::limit($post->title, 30) }}
                           </a></h4>
                           <p class="mb-2">{{ $post->excerpt }}</p>
@@ -126,7 +158,7 @@
       </div>
       <div class="mt-6 pb-1 w-75 mx-auto text-center">
         @if ($posts)
-          <a class="nir-btn mx-auto text-center" href="{{ route('blog') }}">See more post</a>
+          <a class="nir-btn mx-auto text-center" href="{{ route('home.pages', 'blog') }}">See more post</a>
         @endif
       </div>
     

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('projects/{type}', [ProjectController::class, 'projectsType'])->name('users.projects.type');
 
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
-Route::get('/contact', [HomeController::class, 'contactus'])->name('contact');
 
 Route::get('/consultant-form', [HomeController::class, 'consultant-form'])->name('consultant-form');
 // Route::get('/login', [HomeController::class, 'login'])->name('home.login');
@@ -40,10 +40,12 @@ Route::get('/consultant-form', [HomeController::class, 'consultant-form'])->name
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('home.privacypolicy');
 
 Route::get('/project/{id}', [HomeController::class, 'detailsProject'])->name('home.project.details');
-Route::get('/post/{id}', [HomeController::class, 'detailsPost'])->name('home.post.detail');
-Route::post('/post/comment', [HomeController::class, 'storeComment'])->name('home.comments.store');
+Route::get('/post/details/{id}', [HomeController::class, 'detailsPost'])->name('post-details');
+Route::post('/post/comment', [HomeController::class, 'storeComment'])->name('comments.store');
 
-Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/{page}', [PagesController::class, 'index'])->name('home.pages');
 
 Route::get('/team/{id}', [TeamController::class, 'show'])->name('users.team.detail');
+Route::get('/team', [FormController::class, 'submitForm'])->name('users.submit.form');
+Route::post('/submit-inspection', [FormController::class, 'submitInspection'])->name('submit-inspection');
+Route::get('/service/details/{id}', [HomeController::class, 'detailsService'])->name('service.detail');

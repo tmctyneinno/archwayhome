@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\QuicklinkController;
+use App\Http\Controllers\ServiceController;
 use App\Models\PrivacyPolicy;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -95,6 +96,13 @@ Route::prefix('admin')->group(function () {
         //QuickLink
         Route::get('/quicklink/create', [QuicklinkController::class, 'create'])->name('admin.quicklink.create');
         Route::post('/quicklink/store', [QuicklinkController::class, 'store'])->name('admin.quicklink.store');
-        
+        //Services
+        Route::get('service/index', [ServiceController::class, 'index'])->name('admin.service.index');
+        Route::get('service/create', [ServiceController::class, 'create'])->name('admin.service.create');
+        Route::post('post/service', [ServiceController::class, 'store'])->name('admin.service.store');
+        Route::get('service/{id}/edit', [ServiceController::class, 'edit'])->name('admin.service.edit');
+        Route::put('service/{id}', [ServiceController::class, 'update'])->name('admin.service.update');
+        Route::get('service/{id}', [ServiceController::class, 'destroy'])->name('admin.service.destroy');
+       
     }); 
 });

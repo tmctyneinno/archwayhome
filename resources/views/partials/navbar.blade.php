@@ -57,24 +57,13 @@
                 </div>
                 
                   <div class="register-login d-flex align-items-center">
-                    @guest
-                          {{-- @if (Route::has('login'))
-                            <a class="button button-outline-primary" href="{{ route('login') }}">Login</a>
-                              
-                          @endif --}}
-
-                          @if (Route::has('register'))
-                            {{-- <a class="button button-primary" href="{{ route('register')}}">Join us</a> --}}
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="me-2">
-                                <i class="fa fa-user"></i> Login/Register
-                            </a>
-                          @endif
-                      @else
-                        <a href="{{ route('logout')}}" class="me-2">
-                          <i class="fa fa-user"></i> Sign out
-                        </a>
-                      
-                      @endguest
+                   
+                    {{-- <a class="button button-primary" href="{{ route('register')}}">Join us</a> --}}
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="me-2">
+                        <i class="fa fa-user"></i> Book Inspection
+                    </a>
+                        
+                     
                       
                       <div class="header_sidemenu me-3">
                           <div class="mhead">

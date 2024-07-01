@@ -9,7 +9,7 @@
             <h3 class="m-0">we are sorry, but the page you requested was not found</h3>
             <div class="error-btn mt-4">
                 <a href="{{ url('/') }}" class="nir-btn mr-2">GO TO HOMEPAGE</a>
-                <a href="{{ route('contact') }}" class="nir-btn-black">GO TO CONTACT PAGE</a>
+                <a href="{{ route('home.pages', 'contact') }}" class="nir-btn-black">GO TO CONTACT PAGE</a>
             </div>
         </div>
     </div>

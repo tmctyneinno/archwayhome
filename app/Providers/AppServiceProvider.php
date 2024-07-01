@@ -10,6 +10,7 @@ use App\Models\PrivacyPolicy;
 use App\Models\Project;
 use App\Models\ProjectMenu;
 use App\Models\QuickLink;
+use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Sociallink;
 use App\Models\Team;
@@ -48,11 +49,12 @@ class AppServiceProvider extends ServiceProvider
         View::share('teams', Team::all());
         View::share('policies', PrivacyPolicy::first());
         View::share('termsCondition', TermsConditions::first());
-        View::share('posts', Post::all());
+        View::share('posts', Post::paginate(8));
         View::share('recentPosts', Post::inRandomOrder()->take(3)->get());
         View::share('projectMenus',ProjectMenu::latest()->get());
         View::share('galleries',Gallery::latest()->get());
         View::share('quicklinks', QuickLink::inRandomOrder()->take(4)->get());
+        View::share('services', Service::latest()->get());
       
     }
 }

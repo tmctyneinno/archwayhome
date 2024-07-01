@@ -10,16 +10,16 @@
         <div class="container-fluid">
             <div class="form-head d-md-flex mb-sm-4 mb-3 align-items-start">
                 <div class="me-auto d-lg-block d-block">
-                    <h2 class="text-black font-w600">Slider</h2>
+                    <h2 class="text-black font-w600">Service</h2>
                     <p class="mb-0">Welcome to  {{ $contactUs->company_name}} backend</p>
                 </div>
-                <a href="{{route('admin.slider.index')}}" class="btn btn-primary rounded light">View Slider</a>
+                <a href="{{route('admin.service.index')}}" class="btn btn-primary rounded light">View Service</a>
             </div>
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-12 align-center">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Add Slider</h4>
+                            <h4 class="card-title">Add Service</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
@@ -28,7 +28,7 @@
                                         {{ session('success') }}
                                     </div>
                                 @endif
-                                {{-- @if ($errors->any())
+                                @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
                                             @foreach ($errors->all() as $error)
@@ -36,10 +36,10 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                @endif --}}
+                                @endif
                 
                                 
-                                <form method="POST"  action="{{ route('slider.store') }}" enctype="multipart/form-data">
+                                <form method="POST"  action="{{ route('admin.service.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Title</label>
@@ -47,30 +47,29 @@
                                             <input type="text" class="form-control" placeholder="Title" name="title" id="title" required>
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Caption</label>
+                                    {{-- <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Description</label>
                                         <div class="col-sm-9">
-                                            <textarea id="caption" class="form-control" placeholder="Caption"  name="caption" required></textarea>
+                                            <div class="">
+                                                <textarea name="description" class="form-control" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div> --}}
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Content</label>
+                                        <div class="col-sm-9">
+                                            <div class="">
+                                                <textarea name="content" id="content" class="form-control" ></textarea>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Additional Text</label>
+                                    
+                                    
+                                    {{-- <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Upload Icon</label>
                                         <div class="col-sm-9">
-                                            <textarea id="caption" class="form-control" placeholder="Additional Text" name="additional_text" required></textarea>
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Button Text</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Button Text" name="button_text"  id="button_text" required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Image</label>
-                                        <div class="col-sm-9">
-                                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required onchange="previewImage(event)">
-                                            @error('image')
+                                            <input id="image" type="file" class="form-control @error('icons') is-invalid @enderror" name="icon" required onchange="previewImage(event)">
+                                            @error('icons')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -78,17 +77,20 @@
                                             <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
                                             <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     
                                   
                                     <div class="mb-3 row">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Create Slider</button>
+                                            <button type="submit" class="btn btn-primary">Create Service</button>
                                         </div>
                                     </div>
                                    
                                 </form>
                                 <script>
+                                    // Initialize CKEditor
+                                    CKEDITOR.replace('ckeditor');
+
                                     function previewImage(event) {
                                         const input = event.target;
                                         const preview = document.getElementById('image-preview');
@@ -104,6 +106,10 @@
                                             reader.readAsDataURL(input.files[0]);
                                         }
                                     }
+                                </script>
+                                <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+                                <script>
+                                    CKEDITOR.replace('content');
                                 </script>
                             </div>
                             
