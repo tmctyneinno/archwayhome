@@ -48,19 +48,19 @@
                                             <input type="text" class="form-control" placeholder="Title" name="title" id="title" value="{{ $service->title }}" required>
                                         </div>
                                     </div>
-                                    {{-- <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Description</label>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Icon class</label>
                                         <div class="col-sm-9">
                                             <div class="">
-                                                <textarea name="description" class="form-control" required>{{ $service->description }}</textarea>
+                                                <textarea name="icon_class" class="form-control" required>{{ $service->icon_class }}</textarea>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
                                         <div class="col-sm-9">
                                             <div class="">
-                                                <textarea name="content" id="content" class="form-control" required>{{ $service->description }}</textarea>
+                                                <textarea name="content" id="content" class="form-control" required>{{ $service->content }}</textarea>
                                             </div>
                                         </div>
                                     </div>

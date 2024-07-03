@@ -39,44 +39,14 @@
   <div class="swiper-button-prev"></div>
 </section>
 
-<section class="about-us bg-white pb-6 pt-10">
-  <div class="container">
-      <div class="section-title mb-6 pb-1 w-75 text-center mx-auto">
-          <h2 class="m-0">Our Core <span>Services</span></h2>
-          <p>
-            At Archway Homes and Investment Limited, we offer a comprehensive suite of services designed to meet the diverse needs of our clients. Our expertise and innovative approaches ensure exceptional value across all areas of real estate. Here’s a brief overview of our key services:
-          </p>
-      </div>
-
-      <div class="why-us">
-          <div class="why-us-box">
-              <div class="row">
-                @foreach ($services as $service)
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="why-us-item text-center bg-lgrey">
-                        <div class="why-us-icon">
-                            <i class="{{ $service->icon_class }} theme"></i>
-                        </div>
-                        <div class="why-us-content">
-                            <h3><a href="{{ route('service.detail', $service->id) }}">{{ $service->title }}</a></h3>
-                            <p class="mb-0">{{ $service->description }}</p>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-              </div>
-          </div>
-      </div>
-
-  </div>
-</section>
+@include('users.pages.services')
 
 <!-- Project...-->
 <section class="trending bg-grey pt-9">
   <div class="container">
       <div class="section-title mb-6 pb-1 w-75 mx-auto text-center">
           <h2 class="m-0">Our <span>Projects</span></h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> --}}
       </div>
       <div class="trend-box">
           <div class="row">
@@ -93,18 +63,21 @@
                               <a href="{{ route('home.project.details', encrypt($homeproject->id))}}" class="tags bg-theme2 white px-3 py-1">{{ $homeproject->projectMenu->name  }}</a>
                           </div>
                       </div>
+                      
                       <div class="trend-content p-4 bg-white">
                           <h4><a href="{{ route('home.project.details', encrypt($homeproject->id))}}">{{ $homeproject->title}}</a>
                           </h4>
                           <p class="mb-0">
                             {!! Str::limit($homeproject->content, 30) !!}
                           </p>
+                          <div class="entry-meta d-flex align-items-center justify-content-between border-b pb-1 mb-2">
+                            <div class="entry-author">
+                            <p>Start From<span class="d-block theme fw-bold">$20,000.00</span></p>
+                            </div>
+                            
+                          </div>
                       </div>
-                      <ul class="d-flex align-items-center justify-content-between bg-lgrey p-3 px-4">
-                          {{-- <li class="me-2"><i class="fa fa-eye"></i> 3 Beds</li> --}}
-                          {{-- <li class="me-2"><i class="fa fa-heart"></i> 2 Baths</li> --}}
-                          <li><i class="fa fa-comments"></i>{{ $homeproject->land_size }}</li>
-                      </ul>
+                      
                   </div>
               </div>
             @empty
@@ -130,7 +103,7 @@
   <div class="container">
       <div class="section-title mb-6 pb-1 w-75 mx-auto text-center">
           <h2 class="m-0">Latest <span>Update</span></h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> --}}
       </div>
       <div class="row team-slider">
         @forelse ($posts as $post)

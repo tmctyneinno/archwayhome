@@ -41,8 +41,40 @@ class GalleryContoller extends Controller
         return view('admin.gallery.edit', compact('gallery'));
     }
 
-    public function update(Request $request){
-        return view('admin.gallery.create');
+    public function update(Request $request,$id )
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:32768', // Changed 'image' validation
+        ]);
+
+       
+        $gallery = Gallery::findOrFail($id);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path('gallery'), $imageName);
+            
+            $gallery->update(['images' =>  'gallery/' . $imageName]);
+        }
+        $gallery->update([
+            'title' => $request->title,
+        ]);
+
+        return redirect()->back()->with('success', 'Gallery updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $galleryItem = Gallery::find($id);
+
+        if (!$galleryItem) {
+            return redirect()->back()->with('error', 'Gallery item not found.');
+        }
+
+        $galleryItem->delete();
+
+        return redirect()->back()->with('success', 'Gallery item deleted successfully.');
     }
 
 }

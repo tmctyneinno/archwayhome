@@ -9,7 +9,7 @@ class ServiceController extends Controller
 {
     public function index(){
        
-        return view('admin.service.index', compact('services'));
+        return view('admin.service.index');
     }
 
     public function create(){
@@ -20,18 +20,11 @@ class ServiceController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required',
-            // 'description' => 'required',
+            'icon_class' => 'required',
             'content' => 'required',
-            'icon' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
 
-        if ($request->hasFile('icon') && $request->file('icon')->isValid()) {
-            $image = $request->file('icon');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('postIcons'), $imageName);
-
-            $validated['icon'] = 'postIcons/' . $imageName;
-        }
+       
 
         Service::create($validated);
         return redirect()->route('admin.service.create')->with('success', 'Service created successfully.');
@@ -49,32 +42,15 @@ class ServiceController extends Controller
         // Validate the incoming request data
         $validated = $request->validate([
             'title' => 'required',
-            // 'description' => 'required',
+            'icon_class' => 'required',
             'content' => 'required',
-            'icon' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
     
         // Find the service record by ID
-        $service = Service::findOrFail($id);
-    
-       
-        if ($request->hasFile('icon') && $request->file('icon')->isValid()) {
-
-            if ($service->icon && file_exists(public_path($service->icon))) {
-                unlink(public_path($service->icon));
-            }
-    
-            // Upload new image
-            $image = $request->file('icon');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('postIcons'), $imageName);
-            $validated['icon'] = 'postIcons/' . $imageName;
-        }
-    
+        $service = Service::findOrFail($id);    
         $service->update($validated);
     
-    
-        return redirect()->route('admin.service.index', $id)->with('success', 'Service updated successfully.');
+        return redirect()->route('admin.service.index')->with('success', 'Service updated successfully.');
     }
     
 

@@ -10,16 +10,16 @@
         <div class="container-fluid">
             <div class="form-head d-md-flex mb-sm-4 mb-3 align-items-start">
                 <div class="me-auto d-lg-block d-block">
-                    <h2 class="text-black font-w600">Post</h2>
+                    <h2 class="text-black font-w600">Gallery</h2>
                     <p class="mb-0">Welcome to Archway Home backend</p>
                 </div>
-                <a href="{{route('admin.post.index')}}" class="btn btn-primary rounded light">View Post</a>
+                <a href="{{route('admin.gallery.index')}}" class="btn btn-primary rounded light">View gallery</a>
             </div>
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-12 align-center">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Edit Post</h4>
+                            <h4 class="card-title">Edit Gallery</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
@@ -39,24 +39,15 @@
                                 @endif
                 
                                 
-                                <form method="POST"  action="{{ route('admin.post.update', $post->id) }}" enctype="multipart/form-data">
+                                <form method="POST"  action="{{ route('admin.gallery.update', $gallery->id) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Title</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Title" name="title" id="title" required value="{{ $post->title }}">
+                                            <input type="text" class="form-control" placeholder="Title" name="title" id="title" required value="{{ $gallery->title }}">
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Content</label>
-                                        <div class="col-sm-9">
-                                            <div class="">
-                                                <textarea name="content" id="content" class="form-control" required>{{ $post->content }}</textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
                                     
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Image</label>
@@ -67,9 +58,10 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                            <img src="{{ asset($post->image) }}" alt="{{ $post->title }}" class="img-thumbnail mt-2" width="200">
+                                            <img src="{{ asset($gallery->images) }}" alt="{{ $gallery->title }}" class="img-thumbnail mt-2" width="200">
                                            
                                             <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
+                                           <br>
                                             <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
                                     
                                          </div>
@@ -80,7 +72,7 @@
                                   
                                     <div class="mb-3 row">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Update Post</button>
+                                            <button type="submit" class="btn btn-primary">Update gallery</button>
                                         </div>
                                     </div>
                                    

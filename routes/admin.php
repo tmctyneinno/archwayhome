@@ -92,6 +92,9 @@ Route::prefix('admin')->group(function () {
         Route::get('gallery/index', [GalleryContoller::class, 'index'])->name('admin.gallery.index');
         Route::get('gallery/create', [GalleryContoller::class, 'create'])->name('admin.gallery.create');
         Route::post('gallery/store', [GalleryContoller::class, 'store'])->name('admin.gallery.store');
+        Route::get('/gallery/{id}/edit', [GalleryContoller::class, 'edit'])->name('admin.gallery.edit');
+        Route::put('/gallery/{id}', [GalleryContoller::class, 'update'])->name('admin.gallery.update');
+        Route::get('/gallery/{id}', [GalleryContoller::class, 'destroy'])->name('admin.gallery.destroy');
         
         //QuickLink
         Route::get('/quicklink/create', [QuicklinkController::class, 'create'])->name('admin.quicklink.create');

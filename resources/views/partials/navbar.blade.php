@@ -45,7 +45,7 @@
                                 @if ($menuItem->dropdownItems->count() > 0)
                                     <ul class="dropdown-menu">
                                         @foreach ($menuItem->dropdownItems as $dropdownItem)
-                                            <li><a href="{{ route( 'home.pages', $menuItem->url )}}">{{ $dropdownItem->name }}</a></li>
+                                            <li><a href="{{ route( 'home.pages', $dropdownItem->slug )}}">{{ $dropdownItem->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 @endif

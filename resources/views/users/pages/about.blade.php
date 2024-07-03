@@ -66,7 +66,7 @@
   </div>
 </section>
 
-
+@include('users.pages.services')
 @include('users.pages.why_choose_us')
 
 <section class="discount-action bg-grey">

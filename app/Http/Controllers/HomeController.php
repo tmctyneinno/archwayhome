@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Project;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Models\MenuItem;
 use App\Models\Slider;
@@ -82,7 +83,7 @@ class HomeController extends Controller
             abort(404); 
         }
 
-        return view('home.project-details', compact('projectDetails'));
+        return view('users.pages.project-details', compact('projectDetails'));
     }
 
     public function storeComment(Request $request){
@@ -103,6 +104,16 @@ class HomeController extends Controller
     public function blog(){
         $posts = Post::latest()->get();
         return view('home.post', compact('posts'));
+    }
+
+    public function detailsService($id){
+        $decryptedId = decrypt($id);
+        $service = Service::findOrFail($decryptedId);
+        if (!$service) {
+            abort(404); 
+        }
+
+        return view('users.pages.service-details', compact('service'));
     }
     
     

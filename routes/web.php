@@ -28,13 +28,9 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-// Route::get('/about-us', [HomeController::class, 'about'])->name('about-us');
-// Route::get('/projects', [ProjectController::class, 'projects'])->name('users.projects');
 Route::get('projects/{type}', [ProjectController::class, 'projectsType'])->name('users.projects.type');
 
-Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
-
-Route::get('/consultant-form', [HomeController::class, 'consultant-form'])->name('consultant-form');
+// Route::get('/consultant-form', [HomeController::class, 'consultant-form'])->name('consultant-form');
 // Route::get('/login', [HomeController::class, 'login'])->name('home.login');
 // Route::get('/registration', [HomeController::class, 'registration'])->name('home.registration');
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('home.privacypolicy');

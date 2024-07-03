@@ -29,20 +29,19 @@
                   <div class="col-lg-4 col-md-6 mb-4">
                       <div class="trend-item box-shadow rounded">
                           <div class="trend-image">
-                              <img src="{{ asset( $projectMenu->image ) }}" alt="{{ $projectMenu->name }}" style="width: 800px; height: 535px; object-fit: cover;">
-                              <a href="{{ route('users.projects.type',  $projectMenu->slug ) }}" class="flash bg-theme1 white px-3 py-2"><i class="fa fa-flash"></i></a>
+                              <img src="{{ asset( $projectMenu->image ) }}" alt="{{ $projectMenu->name }}" style="width: 800px; height: 350px; object-fit: cover;">
                               <div class="trend-meta d-flex align-items-center justify-content-between">
                                 <a href="{{ route('users.projects.type',  $projectMenu->slug ) }}" class="tags bg-theme2 white px-3 py-1">
                                   {{ $projectMenu->name }}
                               </a>
-                              
-                                 
                               </div>
                           </div>
-                          <div class="trend-content p-4">
-                              {{-- <h5 class="theme"><a href="{{ route('users.projects.type',  $projectMenu->slug ) }}">{{ $projectMenu->name }}</a></h5> --}}
-                            
-                          </div>
+                          <div class="trend-content p-4 bg-white">
+                            <h5 class="theme"><a href="{{ route('users.projects.type',  $projectMenu->slug ) }}">Click to Explore </a></h5>
+                            {{-- <h4><a href="detail-leftside.html">425 Vine 012 Street, Montreal Canada, UHW45Q</a></h4> --}}
+                           
+                         </div>
+                          
                          
                       </div>
                   </div>
