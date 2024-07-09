@@ -87,7 +87,7 @@
           </div>
           <div class="trend-btn text-center">
             @if ($homeprojects)
-              <a class="nir-btn" href="{{ route('home.pages', 'projects') }}">See more projectss</a>
+              <a class="nir-btn" href="{{ route('home.pages', 'projects') }}">See more projects</a>
             @endif
           </div>
       </div>
@@ -104,7 +104,7 @@
       <div class="section-title mb-6 pb-1 w-75 mx-auto text-center">
           <h2 class="m-0">Latest <span>Update</span></h2>
           {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> --}}
-      </div>
+      </div> 
       <div class="row team-slider">
         @forelse ($posts as $post)
           <div class="col-lg-4">
@@ -131,7 +131,7 @@
       </div>
       <div class="mt-6 pb-1 w-75 mx-auto text-center">
         @if ($posts)
-          <a class="nir-btn mx-auto text-center" href="{{ route('home.pages', 'blog') }}">See more post</a>
+          <a class="nir-btn mx-auto text-center" href="{{ route('home.pages', 'blog') }}">See more posts</a>
         @endif
       </div>
     

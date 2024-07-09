@@ -65,10 +65,10 @@
                 success: function(response) {
                     toastr.success("Reply submitted successfully");
                     setTimeout(function() {
-                        window.location.reload(); // Reload the page after a short delay
-                    }, 2000); // Reload after 2 seconds (adjust as needed)
+                        window.location.reload(); 
+                    }, 2000); 
 
-                    $('#' + formId)[0].reset(); // Reset form fields using the form ID
+                    $('#' + formId)[0].reset(); 
                 },
                 error: function(error) {
                     toastr.error('Error submitting reply');

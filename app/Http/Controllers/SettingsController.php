@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\SettingsTrait;
 use App\Models\ContactUs;
+use App\Models\ExecutiveSummary;
 use App\Models\Sociallink;
 use Illuminate\Http\Request;
 use App\Models\WhyChooseUs;
@@ -105,13 +106,13 @@ class SettingsController extends Controller
     {
         $validated = $request->validate([
             'company_name' => 'required|string',
+            'website_link' => 'string',
             'first_phone' => 'required|string',
-            'second_phone' => 'required|string',
+            'second_phone' => '',
             'first_email' => 'required|email',
-            'second_email' => 'required|email',
+            'second_email' => '',
             'first_address' => 'required|string',
-            'second_address' => 'required|string',
-            'website_link' =>  'required|string',
+            'second_address' => '',
             'site_logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -131,13 +132,13 @@ class SettingsController extends Controller
     {
         $validated = $request->validate([
             'company_name' => 'required|string',
+            'website_link' => 'string',
             'first_phone' => 'required|string',
-            'second_phone' => 'required|string',
+            'second_phone' => '',
             'first_email' => 'required|email',
-            'second_email' => 'required|email',
+            'second_email' => '',
             'first_address' => 'required|string',
-            'second_address' => 'required|string',
-            'website_link' =>  'required|string',
+            'second_address' => '',
             'site_logo' => 'image|mimes:jpeg,png,jpg,gif|max:4048',
         ]);
 
@@ -202,5 +203,43 @@ class SettingsController extends Controller
         $socialLink->update($data);
 
         return redirect()->route('admin.settings.index')->with('success', 'Social Link updated successfully.');
+    }
+
+    public function storeExecutiveSummary(Request $request){
+        $validated = $request->validate([
+            'content' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
+        ]);
+        
+        $imagePath = $this->uploadImageExecutiveSummary($request, 'image', 'executiveSummaryImage');
+        ExecutiveSummary::create(array_merge($validated, 
+        [
+            'image' => $imagePath,
+        ]
+        ));
+
+        return redirect()->route('admin.settings.content')->with([
+            'successAboutus' => 'Executive Summarysuccessfully.',
+            'active_tab' => 'v-pills-profile' 
+        ]);
+        //  return redirect()->route('admin.settings.content')->with('success', 'Data created successfully.');
+   
+    }
+
+    public function updateExecutiveSummary(Request $request, $id){
+        $validated = $request->validate([
+            'content' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
+        ]);
+        $executiveSummary = ExecutiveSummary::findOrFail($id);
+       
+        $this->handleUpdateExecutiveSummaryImage($request, $executiveSummary);
+        $executiveSummary->update([
+            'content' => $validated['content'],
+        ]);
+ 
+        return redirect()->route('admin.settings.content')->with([
+            'success' => 'Executive Summary updated successfully.',
+        ]);
     }
 }

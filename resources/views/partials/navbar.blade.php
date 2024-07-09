@@ -3,8 +3,32 @@
       <div class="container d-flex align-items-center justify-content-between">
           <div class="links">
               <ul>
-                  <li><a href="#" class="white"><i class="fa fa-calendar white"></i> Thursday, Mar 26, 2021</a>
-                  </li>
+                 
+                  <li>
+                    <a href="#" class="white">
+                        <i class="fa fa-calendar white"></i>
+                        <span id="currentDate"></span>
+                    </a>
+                </li>
+                
+                <script>
+                    // Get current date
+                    var currentDate = new Date();
+                
+                    // Define days of the week and months arrays
+                    var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                
+                    // Construct the date string in the required format
+                    var dateString = daysOfWeek[currentDate.getDay()] + ', ' +
+                                     months[currentDate.getMonth()] + ' ' +
+                                     currentDate.getDate() + ', ' +
+                                     currentDate.getFullYear();
+                
+                    // Update the span with id "currentDate"
+                    document.getElementById('currentDate').textContent = dateString;
+                </script>
+                
                   <li><a href="#" class="white"><i class="fa fa-map-marker white"></i>{{ $contactUs->first_address }}</a></li>
                   <li><a href="#" class="white"><i class="fa fa-clock white"></i> Mon-Fri: 10 AM – 5 PM</a></li>
               </ul>
@@ -27,7 +51,7 @@
 
                   <div class="navbar-header">
                       <a class="navbar-brand" href="{{ url('/') }}">
-                          <img src="{{ asset($contactUs->site_logo) }}" style=" width: 100px; height: 60px; object-fit: cover; " alt="image">
+                          <img src="{{ asset($contactUs->site_logo) }}" style=" width: 225; height: 60px; object-fit: cover; " alt="image">
                       </a>
                   </div>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConsultantFormController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\TeamController;
@@ -29,6 +30,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('projects/{type}', [ProjectController::class, 'projectsType'])->name('users.projects.type');
+Route::post('/consultant-form', [ConsultantFormController::class, 'store'])->name('consultant-form.store');
 
 // Route::get('/consultant-form', [HomeController::class, 'consultant-form'])->name('consultant-form');
 // Route::get('/login', [HomeController::class, 'login'])->name('home.login');

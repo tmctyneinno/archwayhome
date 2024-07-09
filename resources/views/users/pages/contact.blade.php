@@ -9,8 +9,8 @@
           {{-- <iframe height="500"
               src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=+(mangal%20bazar)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
             </iframe> --}}
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126846.01084595696!2d3.3635289999999998!3d6.529535450000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b9228fa2a3999%3A0xd7a8324bddbba1f0!2sIkeja%2C%20Lagos!5e0!3m2!1sen!2sng!4v1719916085625!5m2!1sen!2sng" width="100" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d7928.887062767875!2d3.5876326430759757!3d6.465360274105142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sRamotu%20Raji%20street%2C%20Atlantic%20Nominee%2C%20Metro%20homes%20Estate%2C%20General%20Paint%2C%20Ajah!5e0!3m2!1sen!2sus!4v1720180602726!5m2!1sen!2sus" width="100" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+       </div>
   </div>
   <div class="container">
       <div class="contact-info-main">

@@ -51,6 +51,13 @@ Route::prefix('admin')->group(function () {
         //About us
         Route::post('/settings/store/about-us', [SettingsController::class, 'storeAboutUs'])->name('admin.settings.storeAboutus');
         Route::put('/settings/update/about-us/{id}', [SettingsController::class, 'updateAboutUs'])->name('admin.settings.updateAboutus');
+        //Executive Summary
+        Route::post('/settings/store/executive-summary', [SettingsController::class, 'storeExecutiveSummary'])->name('admin.settings.storeExecutiveSummary');
+        Route::put('/settings/update/executive-summary/{id}', [SettingsController::class, 'updateExecutiveSummary'])->name('admin.settings.updateExecutiveSummary');
+        //Office Hours
+        Route::post('/settings/store/office-hours', [SettingsController::class, 'storeOfficeHours'])->name('admin.settings.storeExecutiveSummary');
+        Route::put('/settings/update/office-hours/{id}', [SettingsController::class, 'updatestoreOfficeHours'])->name('admin.settings.updateExecutiveSummary');
+         
         //Contact Us
         Route::post('/settings/store/contact-us', [SettingsController::class, 'storeContactUs'])->name('admin.settings.storeContactUs');
         Route::put('/settings/update/contact-us/{id}', [SettingsController::class, 'updateContactUs'])->name('admin.settings.updateContactUs');

@@ -23,6 +23,7 @@
                             <div class="col-sm-2">
                                 <div class="nav flex-column nav-pills mb-3" role="tablist">
                                     <a href="#v-pills-home" data-bs-toggle="pill" class="nav-link show active " aria-selected="false" role="tab" tabindex="-1">Why choose us</a>
+                                    <a href="#v-pills-executive" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Executive Summary</a>
                                     <a href="#v-pills-profile" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">About us</a>
                                     <a href="#v-pills-messages" data-bs-toggle="pill" class="nav-link" aria-selected="false" role="tab" tabindex="-1">Contact us</a>
                                     <a href="#v-pills-termsConditions" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Terms Conditions</a>
@@ -30,12 +31,16 @@
                                     <a href="#v-pills-settings" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Team</a>
                                     <a href="#v-pills-social" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Social Link</a>
                                     <a href="#v-pills-quicklink" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Quick Link</a>
+                                    <a href="#v-pills-officeHours" data-bs-toggle="pill" class="nav-link " aria-selected="false" role="tab" tabindex="-1">Office Hours</a>
                                 </div>
                             </div>
                             <div class="col-sm-10">
                                 <div class="tab-content">
                                     <div id="v-pills-home" class="tab-pane fade show active " role="tabpanel">
                                         @include('admin.settings.why_choose_us_statement')
+                                    </div>
+                                    <div id="v-pills-executive" class="tab-pane fade" role="tabpanel">
+                                        @include('admin.settings.executive_summary')
                                     </div>
                                     <div id="v-pills-profile" class="tab-pane fade" role="tabpanel">
                                         @include('admin.settings.about_us')
@@ -57,6 +62,9 @@
                                     </div>
                                     <div id="v-pills-social" class="tab-pane fade" role="tabpanel">
                                         @include('admin.settings.socialLink')
+                                    </div>
+                                    <div id="v-pills-officeHours" class="tab-pane fade" role="tabpanel">
+                                        @include('admin.settings.officeHours')
                                     </div>
                                 </div>
                             </div>

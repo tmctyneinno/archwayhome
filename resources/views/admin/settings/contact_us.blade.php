@@ -41,7 +41,7 @@
                        </div>
                        <div class="mb-3 col-md-10">
                             <label class="form-label">Website link </label>
-                            <input autocomplete="off" type="text" class="form-control" placeholder="Website link " name="website_link " value=" {{ isset($contactUs) ? $contactUs->website_link : '' }}" required>
+                            <input autocomplete="off" type="text" class="form-control" placeholder="Website link " name="website_link" value=" {{ isset($contactUs) ? $contactUs->website_link : '' }}" required>
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">First Phone number</label>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Second Phone number</label>
-                            <input autocomplete="off" type="phone" class="form-control" placeholder="Second Phone number" name="second_phone" value=" {{ isset($contactUs) ? $contactUs->second_phone : '' }}" required>
+                            <input autocomplete="off" type="phone" class="form-control" placeholder="Second Phone number" name="second_phone" value=" {{ isset($contactUs) ? $contactUs->second_phone : '' }}" >
                         </div>
 
                         <div class="mb-3 col-md-10">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Second Email </label>
-                            <input autocomplete="off" type="email" class="form-control" placeholder="Second Email" name="second_email" value=" {{ isset($contactUs) ? $contactUs->second_email : '' }}" required>
+                            <input autocomplete="off" type="email" class="form-control" placeholder="Second Email" name="second_email" value=" {{ isset($contactUs) ? $contactUs->second_email : '' }}" >
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">First Address </label>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Second Address </label>
-                            <textarea  class="form-control" placeholder="Second Address" name="second_address" rows="3" spellcheck="false" required> {{ isset($contactUs) ? $contactUs->second_address : '' }}</textarea>
+                            <textarea  class="form-control" placeholder="Second Address" name="second_address" rows="3" spellcheck="false" > {{ isset($contactUs) ? $contactUs->second_address : '' }}</textarea>
                         </div>
                        
                         <div class="mb-3 col-md-10">

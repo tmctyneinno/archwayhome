@@ -25,7 +25,7 @@
           <div class="row">
               <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                   <div class="footer-about">
-                      <img src="{{ asset($contactUs->site_logo) }}" alt style=" width: 160px; height:80px; object-fit: cover; ">
+                      <img src="{{ asset($contactUs->site_logo) }}" alt style=" width: 225; height: 60px; object-fit: cover; ">
                       <p class="mt-3 mb-3 white text-white">
                           {!! Str::limit($aboutUs->content, 60) !!}
                       </p>
@@ -54,21 +54,19 @@
                         @empty
                           <li>No quick link</li>
                         @endforelse
-                        
-                        
                       </ul>
                   </div>
               </div>
               <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
                   <div class="footer-links">
-                      <h3 class="white">Project Tags</h3>
-                      <div class="tagcloud">
-                        @forelse ($projectMenus as $projectMenu)
-                          <a class="tag-cloud-link bg-white black p-2 mb-1" href="{{ route('users.projects.type',  $projectMenu->slug ) }}">{{ $projectMenu->name }}</a>
-                        @empty
-                          <p> No Post</p>
-                        @endforelse
-                        </div>
+                        <h3 class="white">Project Tags</h3>
+                        <ul >
+                            @forelse ($projectMenus as $projectMenu)
+                            <li><a class="" href="{{ route('users.projects.type',  $projectMenu->slug ) }}">{{ $projectMenu->name }}</a></li>
+                            @empty
+                            <li> No Post</li>
+                            @endforelse
+                        </ul>
                   </div>
               </div>
               <div class="col-lg-4 col-md-6 col-sm-12 mb-4">

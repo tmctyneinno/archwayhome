@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{$contactUs->company_name }}</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
-
+ 
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset($contactUs->site_logo) }}">
 
   <link href="{{ asset ('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
@@ -22,6 +22,11 @@
   <link rel="stylesheet" href="{{ asset ('assets/fonts/line-icons.css')}}" type="text/css">
   <!-- Include SweetAlert CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="{{ asset('assets/fonts/Aeonik/Aeonik_Black.ttf') }}" rel="stylesheet">
+  <link href="{{ asset('assets/fonts/Aeonik/Aeonik_Block.ttf') }}" rel="stylesheet">
+  <link href="{{ asset('assets/fonts/Aeonik/Aeonik_Light.ttf') }}" rel="stylesheet">
+  <link href="{{ asset('assets/fonts/Aeonik/Aeonik_Regular.ttf') }}" rel="stylesheet">
+
 </head>
 <body>
   <div id="preloader">
@@ -51,7 +56,7 @@
     <script src="{{ asset ('assets/js/main.js')}}"></script>
     <script src="{{ asset ('assets/js/custom-swiper1.js')}}"></script>
     <script src=" {{ asset ('assets/js/custom-nav.js')}}"></script>
-    <script src="{{ asset ('assets/js/custom-accordian.js')}}"></script>
+    <script src="{{ asset ('assets/js/custom-accordian.js')}}"></script> 
     <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'89abb0ddcb1f416b',t:'MTcxOTU1Njg4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
     <script defer
         src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"

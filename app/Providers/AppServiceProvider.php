@@ -3,6 +3,7 @@
 namespace App\Providers;
 use App\Models\ContactUs;
 use App\Models\AboutUs;
+use App\Models\ExecutiveSummary;
 use App\Models\Gallery;
 use App\Models\MenuItem;
 use App\Models\Post;
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::share('contactUs', ContactUs::first());
         View::share('aboutUs', AboutUs::first());
+        View::share('executiveSummary', ExecutiveSummary::first());
         View::share('whyChooseUs', WhyChooseUs::first());
         View::share('sociallink', Sociallink::first());
         View::share('projects', Project::latest()->get());

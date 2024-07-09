@@ -82,7 +82,7 @@ class HomeController extends Controller
         if (!$projectDetails) {
             abort(404); 
         }
-
+ 
         return view('users.pages.project-details', compact('projectDetails'));
     }
 

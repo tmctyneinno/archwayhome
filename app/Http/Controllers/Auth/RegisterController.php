@@ -49,12 +49,22 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'fullname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'con_email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['required', 'string', 'max:255'],
+            'dateofbirth' => ['required', 'date'],
+            'gender' => ['required', 'string', 'in:Male,Female'],
+            'city' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string', 'max:255'],
+            'state' => ['required', 'string', 'max:255'],
+            'address' => ['nullable', 'string'],
+            'accountName' => ['required', 'string', 'max:255'],
+            'accountNumber' => ['required', 'string', 'max:255'],
+            'bank' => ['required', 'string', 'max:255'],
         ]);
     }
-
     /**
      * Create a new user instance after a valid registration.
      *
@@ -64,9 +74,19 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'name' => $data['fullname'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            // 'password' => Hash::make($data['password']),
+            'phone' => $data['phone'],
+            'date_of_birth' => $data['dateofbirth'],
+            'gender' => $data['gender'],
+            'city' => $data['city'],
+            'country' => $data['country'],
+            'state' => $data['state'],
+            'address' => $data['address'],
+            'account_name' => $data['accountName'],
+            'account_number' => $data['accountNumber'],
+            'bank' => $data['bank'],
         ]);
     }
 }

@@ -48,6 +48,12 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Sub title</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Sub title" name="sub_title" id="sub_title" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Location</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" placeholder="Location" name="location"  id="location" required>
@@ -81,26 +87,26 @@
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Brochure</label>
                                         <div class="col-sm-9">
-                                            <input type="file" class="form-control" placeholder="Location" name="brochure" id="brochure" accept="application/pdf" required>
+                                            <input type="file" class="form-control" placeholder="Location" name="brochure" id="brochure" accept="application/pdf" >
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Land Payment Plan</label>
                                         <div class="col-sm-9">
-                                            <input type="file" class="form-control" placeholder="Location" name="land_payment_plan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" required>
+                                            <input type="file" class="form-control" placeholder="Location" name="land_payment_plan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" >
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Subcription Form</label>
                                         <div class="col-sm-9">
-                                            <input type="file" class="form-control"  name="subscription_form" id="landPaymentPlan" accept="application/pdf" required>
+                                            <input type="file" class="form-control"  name="subscription_form" id="landPaymentPlan" accept="application/pdf" >
                                         </div>
                                     </div>
                                     
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label"> Video Link</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Video link"  name="video_link" id="video_link" required>
+                                            <input type="text" class="form-control" placeholder="Video link"  name="video_link" id="video_link" >
                                         </div>
                                     </div>
                                     

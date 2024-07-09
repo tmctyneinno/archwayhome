@@ -51,6 +51,12 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Sub title</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Sub title" value="{{ old('title', $project->sub_title ?? '') }}" name="sub_title" id="sub_title" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Location</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" placeholder="Location" name="location" id="location" value="{{ $project->location }}"  required>

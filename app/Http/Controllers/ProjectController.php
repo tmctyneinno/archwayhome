@@ -21,6 +21,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'sub_title' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'land_size' => 'required|string|max:255',
             'project_menu_id' => 'required|exists:project_menus,id',
@@ -36,7 +37,7 @@ class ProjectController extends Controller
         $brochurePath = $request->file('brochure')->getClientOriginalName();
         $request->file('brochure')->move(public_path('projectDocument/brochures'), $brochurePath);
 
-        $landPaymentPlanPath = $request->file('landPaymentPlan')->getClientOriginalName();
+        $landPaymentPlanPath = $request->file('land_payment_plan')->getClientOriginalName();
         $request->file('land_payment_plan')->move(public_path('projectDocument/landPaymentPlans'), $landPaymentPlanPath);
 
         $subscriptionFormPath = $request->file('subscription_form')->getClientOriginalName();
@@ -47,6 +48,7 @@ class ProjectController extends Controller
 
         Project::create([
             'title' => $request->title,
+            'sub_title' => $request->title,
             'location' => $request->location,
             'land_size' =>  $request->land_size,
             'project_menu_id' =>  $request->project_menu_id,
@@ -71,6 +73,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'sub_title' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'land_size' => 'required|string|max:255',
             'project_menu_id' => 'required|exists:project_menus,id',
@@ -82,7 +85,7 @@ class ProjectController extends Controller
             'image' => 'mimes:jpeg,png,jpg,gif|max:5048',
         ]);
         $project = Project::findOrFail($id);
-        $data = $request->only(['title', 'location', 'content','video_link','land_size','project_menu_id']);
+        $data = $request->only(['title', 'sub_title','location', 'content','video_link','land_size','project_menu_id']);
 
         if ($request->hasFile('brochure')) {
           
@@ -107,7 +110,7 @@ class ProjectController extends Controller
                 }
             }
 
-            $landPaymentPlanPath = $request->file('landPaymentPlan')->getClientOriginalName();
+            $landPaymentPlanPath = $request->file('land_payment_plan')->getClientOriginalName();
             $request->file('landPaymentPlan')->move(public_path('projectDocument/landPaymentPlans'), $landPaymentPlanPath);
             $data['land_payment_plan'] = 'projectDocument/landPaymentPlans/' . $landPaymentPlanPath;
         }

@@ -33,82 +33,138 @@
                         </div>
                         
                         <div id="contact-form1" class="contact-form px-5">
-                            
-                            <div id="contactform-error-msg"></div>
-                            <form method="post" action="#" name="contactform2" id="contactform2">
+                           
+                            <form method="post" action="#" name="contactform2" id="signup-form">
                                 <div class="row">
-                                    <div class=" mb-2 col-6">
+                                    <div class="mb-2 col-6">
                                         <label>Fullname</label>
-                                        <input type="text" name="first_name" class="form-control" id="fullname"
-                                            placeholder="Full Name">
+                                        <input type="text" name="fullname" class="form-control" id="fullname" placeholder="Full Name">
                                     </div>
-                                    <div class=" mb-2 col-6">
+                                    <div class="mb-2 col-6">
                                         <label>Mobile Number</label>
-                                        <input type="text" name="phone" class="form-control" id="phone"
-                                            placeholder="Mobile Number">
+                                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Mobile Number">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class=" mb-2 col-6">
+                                    <div class="mb-2 col-6">
                                         <label>Email Address</label>
-                                        <input type="email" name="email" class="form-control" id="email"
-                                            placeholder="Email">
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="Email">
                                     </div>
-                                    <div class=" mb-2 col-6">
+                                    <div class="mb-2 col-6">
                                         <label>Confirm Email Address</label>
-                                        <input type="email" name="con_email" class="form-control" id="email"
-                                            placeholder="confirm Email">
+                                        <input type="email" name="con_email" class="form-control" id="con_email" placeholder="Confirm Email">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class=" mb-2 col-6">
-                                        <label>Date of birth</label>
-                                        <input type="date" name="dateofbirth" class="form-control" id="dateofbirth"
-                                            placeholder="Date of birth">
+                                    <div class="mb-2 col-6">
+                                        <label>Date of Birth</label>
+                                        <input type="date" name="dateofbirth" class="form-control" id="dateofbirth" placeholder="Date of Birth">
                                     </div>
-                                    <div class=" mb-2 col-6">
+                                    <div class="mb-2 col-6">
                                         <label>Gender</label>
-                                        <select class="form-group" name="gender">
-                                            <option disabled selected>select gender</option>
+                                        <select name="gender" class="form-control">
+                                            <option disabled selected>Select Gender</option>
                                             <option>Male</option>
                                             <option>Female</option>
                                         </select>
-                                       
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class=" mb-2 col-6">
+                                    <div class="mb-2 col-6">
                                         <label>City</label>
-                                        <input type="text" name="city" class="form-control" id="city"
-                                            placeholder="City">
+                                        <input type="text" name="city" class="form-control" id="city" placeholder="City">
                                     </div>
-                                    <div class=" mb-2 col-6">
+                                    <div class="mb-2 col-6">
                                         <label>Country</label>
-                                        <input type="text" name="country" class="form-control" id="country"
-                                            placeholder="Country">
+                                        <input type="text" name="country" class="form-control" id="country" placeholder="Country">
                                     </div>
                                 </div>
-
-                                <div class="textarea mb-2">
-                                    <label>Address</label>
-                                    <textarea name="comments" placeholder="Address"></textarea>
-                                </div>
-                                {{-- <div class="form-group text-center">
-                                    <div class="">
-                                      <div class="form-check col-sm-10">
-                                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-                                        <label class="form-check-label" for="gridCheck1">
-                                            I agree to terms and conditions
-                                        </label>
-                                      </div>
+                                <div class="row">
+                                    <div class="mb-2 col-6">
+                                        <label>State</label>
+                                        <input type="text" name="state" class="form-control" id="state" placeholder="State">
                                     </div>
-                                </div> --}}
-
+                                    <div class="mb-2 col-6">
+                                        <label>Address</label>
+                                        <textarea name="address" class="form-control" rows="3" placeholder="Address"></textarea>
+                                    </div>
+                                </div>
+                                <h4 class="mb-1">Bank Details</h4>
+                                <div class="row">
+                                    <div class="mb-2 col-6">
+                                        <label>Account Name</label>
+                                        <input type="text" name="account_name" class="form-control" id="accountName" placeholder="Account Name">
+                                    </div>
+                                    <div class="mb-2 col-6">
+                                        <label>Account Number</label>
+                                        <input type="text" name="account_number" class="form-control" id="accountNumber" placeholder="Account Number">
+                                    </div>
+                                    <div class="mb-2 col-6">
+                                        <label>Bank</label>
+                                        <select name="bank" id="bank" class="form-control">
+                                            <option value="">Select Bank</option>
+                                            {{-- Assuming $banks variable is passed from the controller --}}
+                                            @foreach ($banks as $bank)
+                                                <option value="{{ $bank->name }}">{{ $bank->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="contactform-error-msg"></div>
                                 <div class="comment-btn text-center">
-                                    <input type="submit" class="nir-btn" id="submit2" value="Submit">
+                                    <button class="nir-btn" type="submit">Submit</button>
                                 </div>
                             </form>
                         </div>
+                        
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script>
+                            jQuery(document).ready(function ($) {
+                                $('#signup-form').submit(function (event) {
+                                    event.preventDefault(); 
+                        
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        }
+                                    });
+                                    var formData = $(this).serialize();
+                                    // alert(formData);
+                        
+                                    // AJAX request
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '{{ route("consultant-form.store") }}',
+                                        data: formData,
+                                        dataType: 'json',
+                                        success: function (response) {
+                                            if (response.success) {
+                                                toastr.success("Consultant form submitted successfully");
+                                                setTimeout(function() {
+                                                    window.location.reload(); 
+                                                }, 2000); 
+                                                console.log('Form submitted successfully.');
+                                                
+                                            } else {
+                                                if (response.errors) {
+                                                    toastr.error("Failed to submit form. Please check your input.");
+                                                    console.error('Error occurred:', response.errors);
+                                                    // Display validation errors if any
+                                                    $.each(response.errors, function (key, value) {
+                                                        $('#contactform-error-msg').html('<div class="alert alert-danger alert-dismissible fade show">'+value+'</div>');
+                                                    });
+                                                } else {
+                                                    toastr.error("Failed to submit form. Unknown error occurred.");
+                                                    console.error('Unknown error occurred:', response);
+                                                }
+                                            }
+                                        },
+                                    });
+                                });
+                            });
+                        </script>
+                        
+                        
                     </div>
                 </div>
             </div>
