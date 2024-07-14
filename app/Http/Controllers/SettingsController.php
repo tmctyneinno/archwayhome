@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Traits\SettingsTrait;
 use App\Models\ContactUs;
 use App\Models\ExecutiveSummary;
+use App\Models\OfficeHours;
 use App\Models\Sociallink;
 use Illuminate\Http\Request;
 use App\Models\WhyChooseUs;
@@ -240,6 +241,31 @@ class SettingsController extends Controller
  
         return redirect()->route('admin.settings.content')->with([
             'success' => 'Executive Summary updated successfully.',
+        ]);
+    }
+
+    public function storeOfficeHours(Request $request){
+        $validated = $request->validate([ 
+            'content' => 'required',
+        ]);
+        
+        OfficeHours::create($validated);
+        return redirect()->back()->with('success', 'Office Hours created successfully.');
+   
+    }
+
+    public function updatestoreOfficeHours(Request $request, $id){
+        $validated = $request->validate([
+            'content' => 'required',
+        ]);
+        $officeHours = OfficeHours::findOrFail($id);
+       
+        $officeHours->update([
+            'content' => $validated['content'],
+        ]);
+ 
+        return redirect()->back()->with([
+            'success' => 'Office Hours updated successfully.',
         ]);
     }
 }

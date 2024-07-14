@@ -34,7 +34,8 @@
                         
                         <div id="contact-form1" class="contact-form px-5">
                            
-                            <form method="post" action="#" name="contactform2" id="signup-form">
+                            <form method="post" action="{{ route("consultant-form.store") }}" name="contactform2" id="consultantForm">
+                                @csrf
                                 <div class="row">
                                     <div class="mb-2 col-6">
                                         <label>Fullname</label>
@@ -112,58 +113,19 @@
                                 </div>
                                 <div id="contactform-error-msg"></div>
                                 <div class="comment-btn text-center">
-                                    <button class="nir-btn" type="submit">Submit</button>
+                                    <button type="submit" class="nir-btn g-recaptcha"
+                                        data-sitekey="{{ config('services.recaptcha.siteKey') }}"
+                                        data-callback="onSubmitconsultantForm" data-action="submit" id="submit2">Submit
+                                </button>
                                 </div>
                             </form>
                         </div>
-                        
-                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                         <script>
-                            jQuery(document).ready(function ($) {
-                                $('#signup-form').submit(function (event) {
-                                    event.preventDefault(); 
-                        
-                                    $.ajaxSetup({
-                                        headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                        }
-                                    });
-                                    var formData = $(this).serialize();
-                                    // alert(formData);
-                        
-                                    // AJAX request
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: '{{ route("consultant-form.store") }}',
-                                        data: formData,
-                                        dataType: 'json',
-                                        success: function (response) {
-                                            if (response.success) {
-                                                toastr.success("Consultant form submitted successfully");
-                                                setTimeout(function() {
-                                                    window.location.reload(); 
-                                                }, 2000); 
-                                                console.log('Form submitted successfully.');
-                                                
-                                            } else {
-                                                if (response.errors) {
-                                                    toastr.error("Failed to submit form. Please check your input.");
-                                                    console.error('Error occurred:', response.errors);
-                                                    // Display validation errors if any
-                                                    $.each(response.errors, function (key, value) {
-                                                        $('#contactform-error-msg').html('<div class="alert alert-danger alert-dismissible fade show">'+value+'</div>');
-                                                    });
-                                                } else {
-                                                    toastr.error("Failed to submit form. Unknown error occurred.");
-                                                    console.error('Unknown error occurred:', response);
-                                                }
-                                            }
-                                        },
-                                    });
-                                });
-                            });
+                            function onSubmitconsultantForm(token) {
+                              document.getElementById("consultantForm").submit();
+                            }
                         </script>
-                        
+                      
                         
                     </div>
                 </div>

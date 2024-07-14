@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\BookInspection;
 use App\Http\Controllers\ConsultantFormController;
+use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\FAQController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\TeamController;
@@ -31,8 +34,8 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('projects/{type}', [ProjectController::class, 'projectsType'])->name('users.projects.type');
 Route::post('/consultant-form', [ConsultantFormController::class, 'store'])->name('consultant-form.store');
+Route::post('/book-inspection', [BookInspection::class, 'store'])->name('book-inspection.store');
 
-// Route::get('/consultant-form', [HomeController::class, 'consultant-form'])->name('consultant-form');
 // Route::get('/login', [HomeController::class, 'login'])->name('home.login');
 // Route::get('/registration', [HomeController::class, 'registration'])->name('home.registration');
 Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('home.privacypolicy');
@@ -47,3 +50,6 @@ Route::get('/team/{id}', [TeamController::class, 'show'])->name('users.team.deta
 Route::get('/team', [FormController::class, 'submitForm'])->name('users.submit.form');
 Route::post('/submit-inspection', [FormController::class, 'submitInspection'])->name('submit-inspection');
 Route::get('/service/details/{id}', [HomeController::class, 'detailsService'])->name('service.detail');
+Route::post('/contact/store', [ContactFormController::class, 'store'])->name('contact.store');
+Route::post('/faq/store', [FAQController::class, 'submitForm'])->name('submit.faq.form');
+

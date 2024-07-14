@@ -1,11 +1,17 @@
 <?php
 
 namespace App\Providers;
+use App\Models\Consultant;
+use App\Models\Contact;
 use App\Models\ContactUs;
 use App\Models\AboutUs;
 use App\Models\ExecutiveSummary;
+use App\Models\Faqs;
+use App\Models\FaqsSubmitForm;
 use App\Models\Gallery;
+use App\Models\Inspection;
 use App\Models\MenuItem;
+use App\Models\OfficeHours;
 use App\Models\Post;
 use App\Models\PrivacyPolicy;
 use App\Models\Project;
@@ -39,12 +45,44 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $projects = Project::latest()->get();
+        View::share('projects', $projects);
+        $totalProjects = $projects->count();
+        View::share('totalProjects', $totalProjects);
+        $consultant = Consultant::latest()->get();
+        $totalConsultant = $consultant->count();
+        View::share('totalConsultant', $totalConsultant);
+        $inspection = Inspection::latest()->get();
+        $totalInspection = $inspection->count();
+        View::share('totalInspection', $totalInspection);
+        $contact = Contact::latest()->get();
+        $totalContact = $contact->count();
+        View::share('totalContacts', $totalContact);
+        View::share('contacts', $contact);
+        $posts = Post::latest()->get();
+        $totalPost = $posts->count();
+        View::share('totalPost', $totalPost);
+        $galleries = Gallery::latest()->get();
+        $totalGallery = $galleries->count();
+        View::share('galleries', $galleries);
+        View::share('totalGallery', $totalGallery);
+        $faqs = Faqs::latest()->get();
+        $totalFaqs = $faqs->count();
+        View::share('totalFaqs', $totalFaqs);
+        View::share('faqs', $faqs);
+        $faqsSubmitForm = FaqsSubmitForm::latest()->get();
+        $totalSubmitForm = $faqsSubmitForm->count();
+        View::share('totalFaqSubmitForm', $totalSubmitForm);
+
+       
+        View::share('consultants', $consultant);
+        View::share('inspections', $inspection);
         View::share('contactUs', ContactUs::first());
         View::share('aboutUs', AboutUs::first());
         View::share('executiveSummary', ExecutiveSummary::first());
+        View::share('officeHour', OfficeHours::first());
         View::share('whyChooseUs', WhyChooseUs::first());
         View::share('sociallink', Sociallink::first());
-        View::share('projects', Project::latest()->get());
         View::share('homeprojects', Project::latest()->take(3)->get());
         View::share('menuItems', MenuItem::with('dropdownItems')->get());
         View::share('sliders', Slider::all());
@@ -54,7 +92,6 @@ class AppServiceProvider extends ServiceProvider
         View::share('posts', Post::paginate(8));
         View::share('recentPosts', Post::inRandomOrder()->take(3)->get());
         View::share('projectMenus',ProjectMenu::latest()->get());
-        View::share('galleries',Gallery::latest()->get());
         View::share('quicklinks', QuickLink::inRandomOrder()->take(4)->get());
         View::share('services', Service::latest()->get());
       

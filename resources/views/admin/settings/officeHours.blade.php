@@ -29,20 +29,20 @@
                </script>
 
                  
-                <form method="POST" action="{{ isset($executiveSummary) ? route('admin.office-hours.update', $executiveSummary->id) : route('admin.office-hours.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ isset($officeHour) ? route('admin.office-hours.update', $officeHour->id) : route('admin.office-hours.store') }}" enctype="multipart/form-data">
                     @csrf
-                    @if(isset($executiveSummary))
+                    @if(isset($officeHour))
                         @method('PUT')
                     @endif
                     <div class="row">
                         
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Content</label>
-                            <textarea class="form-control" placeholder="Content" name="content" rows="3" spellcheck="false" required> {{ isset($executiveSummary) ? $executiveSummary->content : '' }}</textarea>
+                            <textarea class="form-control" placeholder="Content" name="content" rows="3" spellcheck="false" required> {{ isset($officeHour) ? $officeHour->content : '' }}</textarea>
                         </div>
                        
                     </div>
-                    <button type="submit" class="btn btn-primary">{{ isset($executiveSummary) ? 'Update' : 'Add' }}</button>
+                    <button type="submit" class="btn btn-primary">{{ isset($officeHour) ? 'Update' : 'Add' }}</button>
                 </form>
                 
             </div>
@@ -50,7 +50,3 @@
     </div>
 </div>
 
-<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace('content');
-</script>

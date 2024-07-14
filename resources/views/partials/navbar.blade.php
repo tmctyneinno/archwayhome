@@ -29,8 +29,8 @@
                     document.getElementById('currentDate').textContent = dateString;
                 </script>
                 
-                  <li><a href="#" class="white"><i class="fa fa-map-marker white"></i>{{ $contactUs->first_address }}</a></li>
-                  <li><a href="#" class="white"><i class="fa fa-clock white"></i> Mon-Fri: 10 AM – 5 PM</a></li>
+                  <li><a href="#" class="white"><i class="fa fa-map-marker white"></i> {{ $contactUs->first_address }}</a></li>
+                  <li><a href="#" class="white"><i class="fa fa-clock white"></i> {{ $officeHour->content }}</a></li>
               </ul>
           </div>
           <div class="links float-right">
@@ -99,6 +99,7 @@
                       </div>
                       {{-- <a href="#" class="nir-btn white">Add Listing</a> --}}
                   </div>
+                 
                   <div id="slicknav-mobile"></div>
               </div>
           </div>

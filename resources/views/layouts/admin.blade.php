@@ -42,6 +42,9 @@
     <link href="{{ asset ('backend/vendor/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
     <link href="{{ asset ('backend/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet">
     <link href="{{ asset ('backend/css/style.css')}}" rel="stylesheet">
+    <!-- Datatable -->
+    <link href="{{ asset ('backend/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{ asset ('backend/vendor/datatables/responsive/responsive.css')}}" rel="stylesheet">
 
 </head>
 
@@ -98,6 +101,11 @@
     <!-- ckeditor -->
     <script src="{{ asset ('backend/vendor/ckeditor/ckeditor.js')}}"></script>
     <script src="{{ asset ('backend/vendor/ckeditor/ckeditorContent.js')}}"></script>
+    <!-- Datatable -->
+    <script src="{{ asset ('backend/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
+	<script src="{{ asset ('backend/vendor/datatables/responsive/responsive.js')}}"></script>
+    <script src="{{ asset ('backend/vendor/js/plugins-init/datatables.init.js')}}"></script>
+
     <!-- Dashboard 1 -->
     <script>
         // JavaScript to automatically update the current year

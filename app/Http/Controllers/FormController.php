@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Inspection;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
@@ -28,26 +29,9 @@ class FormController extends Controller
         return redirect()->back()->with('success', 'Form submitted successfully!');
     }
 
-    public function submitInspection(Request $request)
-    {
-        $request->validate([
-            'full_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
-            'project' => 'required|string',
-            'inspectionDate' => 'required|date',
-        ]);
+   
 
-        $inspection = new Inspection();
+  
+   
 
-        $inspection->full_name = $request->input('full_name');
-        $inspection->email = $request->input('email');
-        $inspection->phone = $request->input('phone');
-        $inspection->project = $request->input('project');
-        $inspection->inspection_date = $request->input('inspectionDate');
-
-        $inspection->save();
-
-        return response()->json(['success' => true]);
-    }
 }

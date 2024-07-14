@@ -21,7 +21,7 @@ class Project extends Model
         'video_link',
         'image',
     ];
-
+ 
     public function projectMenu()
     {
         return $this->belongsTo(ProjectMenu::class, 'project_menu_id');

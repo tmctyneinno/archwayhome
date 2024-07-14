@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\BookInspection;
+use App\Http\Controllers\ConsultantFormController;
+use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\FAQController;
 use App\Http\Controllers\QuicklinkController;
 use App\Http\Controllers\ServiceController;
 use App\Models\PrivacyPolicy;
@@ -55,8 +59,8 @@ Route::prefix('admin')->group(function () {
         Route::post('/settings/store/executive-summary', [SettingsController::class, 'storeExecutiveSummary'])->name('admin.settings.storeExecutiveSummary');
         Route::put('/settings/update/executive-summary/{id}', [SettingsController::class, 'updateExecutiveSummary'])->name('admin.settings.updateExecutiveSummary');
         //Office Hours
-        Route::post('/settings/store/office-hours', [SettingsController::class, 'storeOfficeHours'])->name('admin.settings.storeExecutiveSummary');
-        Route::put('/settings/update/office-hours/{id}', [SettingsController::class, 'updatestoreOfficeHours'])->name('admin.settings.updateExecutiveSummary');
+        Route::post('/settings/store/office-hours', [SettingsController::class, 'storeOfficeHours'])->name('admin.office-hours.store');
+        Route::put('/settings/update/office-hours/{id}', [SettingsController::class, 'updatestoreOfficeHours'])->name('admin.office-hours.update');
          
         //Contact Us
         Route::post('/settings/store/contact-us', [SettingsController::class, 'storeContactUs'])->name('admin.settings.storeContactUs');
@@ -113,6 +117,30 @@ Route::prefix('admin')->group(function () {
         Route::get('service/{id}/edit', [ServiceController::class, 'edit'])->name('admin.service.edit');
         Route::put('service/{id}', [ServiceController::class, 'update'])->name('admin.service.update');
         Route::get('service/{id}', [ServiceController::class, 'destroy'])->name('admin.service.destroy');
+        //Faqs
+        Route::get('faq/index', [FAQController::class, 'index'])->name('admin.faq.index');
+        Route::get('faq/create', [FAQController::class, 'create'])->name('admin.faq.create');
+        Route::post('post/faq', [FAQController::class, 'store'])->name('admin.faq.store');
+        Route::get('faq/{id}/edit', [FAQController::class, 'edit'])->name('admin.faq.edit');
+        Route::put('faq/{id}', [FAQController::class, 'update'])->name('admin.faq.update');
+        Route::get('faq/{id}', [FAQController::class, 'destroy'])->name('admin.faq.destroy');
+        Route::get('faq/submt/form', [FAQController::class, 'submtFormView'])->name('admin.faq.submtForm');
+        Route::get('/faq/form/view/{id}', [FAQController::class, 'submitFormShow'])->name('admin.faq.submitForm.show');
+        Route::get('/faq/form/destroy/{id}', [FAQController::class, 'submitFormDestroy'])->name('admin.faq.submitForm.destroy');
+
+        //Consultant
+        Route::get('/consultant/index', [ConsultantFormController::class, 'index'])->name('admin.consultant.index');
+        Route::get('/consultant/show/{id}', [ConsultantFormController::class, 'show'])->name('admin.consultant.show');
+        Route::get('/consultant/destroy/{id}', [ConsultantFormController::class, 'destroy'])->name('admin.consultant.destroy');
+        //Book Inspection
+        Route::get('/inspection/index', [BookInspection::class, 'index'])->name('admin.inspection.index');
+        Route::get('/inspection/show/{id}', [BookInspection::class, 'show'])->name('admin.inspection.show');
+        Route::get('/inspection/destroy/{id}', [BookInspection::class, 'destroy'])->name('admin.inspection.destroy');
+        //Contact
+        Route::get('/contact/index', [ContactFormController::class, 'index'])->name('admin.contact.index');
+        Route::get('/contact/show/{id}', [ContactFormController::class, 'show'])->name('admin.contact.show');
+        Route::get('/contact/destroy/{id}', [ContactFormController::class, 'destroy'])->name('admin.contact.destroy');
        
-    }); 
+        
+    });  
 });

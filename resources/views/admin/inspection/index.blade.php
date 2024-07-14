@@ -6,7 +6,7 @@
         <div class="page-titles">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Gallery</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Booking inspection</a></li>
                 
             </ol>
         </div>
@@ -35,11 +35,9 @@
 
                     <div class="card-header border-0 pb-0">
                         <div class="clearfix">
-                            <h3 class="card-title">Gsllery List</h3>
+                            <h3 class="card-title">Booking inspection List</h3>
                         </div>
-                        <div class="clearfix text-center">
-                            <a href="{{route('admin.gallery.create')}}" class="btn btn-primary">Add Gallery</a>
-                        </div>
+                      
                     </div>
 
                     
@@ -49,36 +47,41 @@
                                 <thead>
                                     <tr>
                                         <th class="width80">#</th>
-                                        <th>Title</th>
-                                        <th>Image</th>
+                                        <th>Full Name</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Project</th>
+                                        <th>Inspection Date</th>
                                         <th>DATE   </th>
                                         <th>ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($galleries as $index => $gallery)
+                                    @forelse ($inspections as $index => $inspection)
                                         <tr>
                                             <td><strong>{{  $index + 1 }}</strong></td>
-                                            <td>{{ $gallery->title }}</td>
-                                            <td>
-                                                <img style=" width: 100px; height: 100px; object-fit: cover; " src="{{ asset($gallery->images) }}" class="img-thumbnail" height="30" alt="{{ $gallery->title }}"  style="max-width: 100px;"/>
-                                            </td>
-                                            <td>{{ $gallery->created_at->format('d F Y') }}</td>
+                                            <td>{{ $inspection->full_name }}</td>
+                                            <td>{{ $inspection->phone }}</td>
+                                            <td>{{ $inspection->email }}</td>
+                                            <td>{{ $inspection->project }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($inspection->inspectionDate)->format('d F Y') }}</td>
+                                            <td>{{ $inspection->created_at->format('d F Y') }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
                                                         <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{ route('admin.gallery.edit',  encrypt($gallery->id) ) }}">Edit</a>
-                                                        <a class="dropdown-item text-danger" href="{{ route('admin.gallery.destroy', encrypt($gallery->id) )  }}" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+                                                       <a class="dropdown-item text-primary" href="{{ route('admin.inspection.show', encrypt($inspection->id) )  }}" >View</a>
+
+                                                       <a class="dropdown-item text-danger" href="{{ route('admin.inspection.destroy', encrypt($inspection->id) )  }}" onclick="return confirm('Are you sure you want to delete this Booking Inspection?');">Delete</a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="7" class="text-center">No Gallery items found.</td>
+                                            <td colspan="7" class="text-center">No Booking Inspection items found.</td>
                                         </tr>
                                     @endforelse
                                     

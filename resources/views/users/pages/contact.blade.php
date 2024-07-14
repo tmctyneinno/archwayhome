@@ -68,21 +68,20 @@
                               <p class="mb-0">We’ll get back to you soon</p>
                           </div>
                           <div id="contactform-error-msg"></div>
-                              @if(session('success'))
-                              <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
-                                  {{ session('success') }}
-                              </div>
-                          @endif
-                          @if ($errors->any())
-                              <div class="alert alert-danger">
-                                  <ul>
-                                      @foreach ($errors->all() as $error)
-                                          <li>{{ $error }}</li>
-                                      @endforeach
-                                  </ul>
-                              </div>
-                          @endif
-                          <form method="post" action="{{ route('users.submit.form') }}" name="contactform2" id="contactform2">
+                            @if (session('success'))
+                                <script>
+                                    toastr.success("{{ session('success') }}");
+                                </script>
+                            @endif
+                      
+                            @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <script>
+                                        toastr.error("{{ $error }}");
+                                    </script>
+                                @endforeach
+                            @endif
+                        <form method="post" action="{{ route('contact.store') }}" name="contactform2" id="contactform">
                             @csrf
                             <div class="form-group mb-2">
                                 <input type="text" name="first_name" class="form-control" id="fullname" placeholder="First Name">
@@ -99,10 +98,68 @@
                             <div class="textarea mb-2">
                                 <textarea name="comments" placeholder="Enter a message"></textarea>
                             </div>
+                            
                             <div class="comment-btn text-center">
-                                <input type="submit" class="nir-btn" id="submit2" value="Send Message">
+                                <button type="submit" class="nir-btn g-recaptcha"
+                                        data-sitekey="{{ config('services.recaptcha.siteKey') }}"
+                                        data-callback="onSubmit" data-action="submit" id="submit2">Send Message
+                                </button>
                             </div>
-                        </form>
+                        </form> 
+                        <script>
+                            function onSubmit(token) {
+                              document.getElementById("contactform").submit();
+                            }
+                        </script>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function ($) {
+                               $('#contactform').submit(function (event) {
+                                   event.preventDefault(); 
+                                   
+                                   $.ajaxSetup({
+                                       headers: {
+                                           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                       }
+                                   });
+                                   var formData = $(this).serialize();
+                                    // Clear any previous error messages
+                                    $('#contactform-error-msg').html('');
+                                    alert(formData);
+                       
+                                   $.ajax({
+                                       type: 'POST',
+                                    //    url: $(this).attr('action'),
+                                       url: '{{ route("contact.store") }}',
+                                       data: formData,
+                                       dataType: 'json',
+                                       success: function (response) {
+                                           if (response.success) {
+                                               toastr.success(response.message);
+                                               // Clear the form fields if needed
+                                                $('#contactform')[0].reset();
+                                            //    setTimeout(function() {
+                                            //        window.location.reload(); 
+                                            //    }, 2000); 
+                                               console.log('Form submitted successfully.');
+                                               
+                                           } else {
+                                               if (response.errors) {
+                                                   toastr.error("Failed to submit form. Please check your input.");
+                                                   console.error('Error occurred:', response.errors);
+                                                   // Display validation errors if any
+                                                   $.each(response.errors, function (key, value) {
+                                                       $('#contactform-error-msg').html('<div class="alert alert-danger alert-dismissible fade show">'+value+'</div>');
+                                                   });
+                                               } else {
+                                                   toastr.error("Failed to submit form. Unknown error occurred.");
+                                                   console.error('Unknown error occurred:', response);
+                                               }
+                                           }
+                                       },
+                                   });
+                               });
+                           });
+                       </script>
                         
                       </div>
                   </div>

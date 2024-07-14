@@ -20,7 +20,32 @@
   font-family: 'AeonikRegular';
   src: url('../assets/fonts/Aeonik/Aeonik_Regular.ttf') format('truetype');
 }
+@keyframes fadeInUpAnimation {
+  0% {
+      opacity: 0;
+      transform: translate3d(0,100%,0);
+  }
+  100% {
+      opacity: 1;
+      transform: none;
+  }
+}
+.hidden{
+  opacity: 0;
+}
+.animation {
+  position: relative;
+  overflow: hidden;
+  animation-duration: 1.25s;
+  animation-name: fadeInUpAnimation;
+}
 
+
+.delayed-animation {
+  animation-name: fadeInUpAnimation;
+  animation-delay: 0.3s; /* Adjust delay as needed */
+  animation-fill-mode: forwards; 
+}
 
 p {
   font-family: 'AeonikRegular', Arial, sans-serif;
@@ -1091,7 +1116,8 @@ input#submit:hover {
   from {
     opacity: 0;
     transform: scale(0.1) rotate(30deg);
-    transform-origin: center bottom; }
+    transform-origin: center bottom; 
+  }
   50% {
     transform: rotate(-10deg); }
   70% {
