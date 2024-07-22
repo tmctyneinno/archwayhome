@@ -51,7 +51,8 @@
 
                   <div class="navbar-header">
                       <a class="navbar-brand" href="{{ url('/') }}">
-                          <img src="{{ asset($contactUs->site_logo) }}" style=" width: 225; height: 60px; object-fit: cover; " alt="image">
+                          <img src="{{ asset($contactUs->site_logo) }}" style=" width: 100px; height: 70px; object-fit: cover; " alt="image">
+                          {{-- <img src="{{ asset('assets/images/blue_arc.jpg') }}" style=" width: 120px; height: 60px; object-fit: cover; " alt="image"> --}}
                       </a>
                   </div>
 

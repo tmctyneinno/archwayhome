@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookInspection;
 use App\Http\Controllers\ConsultantFormController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\QuicklinkController;
 use App\Http\Controllers\ServiceController;
@@ -99,13 +100,21 @@ Route::prefix('admin')->group(function () {
         Route::post('/terms/conditions/store/', [TermsConditionController::class, 'store'])->name('admin.termsCondition.store');
         Route::put('/terms/conditions/update/{id}', [TermsConditionController::class, 'update'])->name('admin.termsCondition.update');
          
+        //Events
+        Route::get('events/index', [EventController::class, 'index'])->name('admin.events.index');
+        Route::get('events/create', [EventController::class, 'create'])->name('admin.events.create');
+        Route::post('events/store', [EventController::class, 'store'])->name('admin.events.store');
+        Route::get('/events/{id}/edit', [EventController::class, 'edit'])->name('admin.events.edit');
+        Route::put('/events/{id}', [EventController::class, 'update'])->name('admin.events.update');
+        Route::get('/events/{id}', [EventController::class, 'destroy'])->name('admin.events.destroy');
+
         //Galleries
-        Route::get('gallery/index', [GalleryContoller::class, 'index'])->name('admin.gallery.index');
-        Route::get('gallery/create', [GalleryContoller::class, 'create'])->name('admin.gallery.create');
-        Route::post('gallery/store', [GalleryContoller::class, 'store'])->name('admin.gallery.store');
-        Route::get('/gallery/{id}/edit', [GalleryContoller::class, 'edit'])->name('admin.gallery.edit');
-        Route::put('/gallery/{id}', [GalleryContoller::class, 'update'])->name('admin.gallery.update');
-        Route::get('/gallery/{id}', [GalleryContoller::class, 'destroy'])->name('admin.gallery.destroy');
+        Route::get('projects/status/index', [GalleryContoller::class, 'index'])->name('admin.projects.status.index');
+        Route::get('projects/status/create', [GalleryContoller::class, 'create'])->name('admin.projects.status.create');
+        Route::post('projects/status/store', [GalleryContoller::class, 'store'])->name('admin.projects.status.store');
+        Route::get('/projects/status/{id}/edit', [GalleryContoller::class, 'edit'])->name('admin.projects.status.edit');
+        Route::put('/projects/status/{id}', [GalleryContoller::class, 'update'])->name('admin.gallery.update');
+        Route::get('/gaprojects/statusllery/{id}', [GalleryContoller::class, 'destroy'])->name('admin.projects.status.destroy');
         
         //QuickLink
         Route::get('/quicklink/create', [QuicklinkController::class, 'create'])->name('admin.quicklink.create');

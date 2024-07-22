@@ -14,7 +14,8 @@ class ConsultantFormController extends Controller
     }
 
     public function store(Request $request)
-    {
+    { 
+        // $request->validate([
         $validator = Validator::make($request->all(), [
             'fullname' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
@@ -30,29 +31,16 @@ class ConsultantFormController extends Controller
             'account_name' => 'required|string|max:255',
             'account_number' => 'required|string|max:255',
             'bank' => 'required|string|max:255',
-            'g-recaptcha-response' => 'required',
+            'captcha' => 'required|captcha',
         ],[
             'con_email.same' => 'The confirm email must match the email.'
         ]);
 
        
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $recaptcha = $request->input('g-recaptcha-response');
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => config('services.recaptcha.secretKey'),
-            'response' => $recaptcha,
-            'remoteip' => \request()->ip()
-        ]);
-        // dd($response->json());
-        $recaptcha_success = $response['success'];
-
-        if (!$recaptcha_success) {
-            return redirect()->back()->withErrors(['recaptcha' => 'Please verify that you are not a robot.']);
-        }
-       
+            // return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json(['success' => false, 'errors' => $validator->errors()->all()]);
+        }       
 
         $consultant = new Consultant();
         $consultant->fullname = $request->fullname;
@@ -69,7 +57,8 @@ class ConsultantFormController extends Controller
         $consultant->bank = $request->bank;
         $consultant->save();
 
-        return redirect()->back()->with('success', 'Consultant form sent successfully!');
+        // return redirect()->back()->with('success', 'Consultant form sent successfully!');
+        return response()->json(['success' => true, 'successs' => 'Consultant form sent successfully!']);
     }
 
     public function show($id){

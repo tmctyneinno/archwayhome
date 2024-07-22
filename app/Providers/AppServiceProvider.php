@@ -5,6 +5,7 @@ use App\Models\Consultant;
 use App\Models\Contact;
 use App\Models\ContactUs;
 use App\Models\AboutUs;
+use App\Models\Event;
 use App\Models\ExecutiveSummary;
 use App\Models\Faqs;
 use App\Models\FaqsSubmitForm;
@@ -62,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
         $posts = Post::latest()->get();
         $totalPost = $posts->count();
         View::share('totalPost', $totalPost);
-        $galleries = Gallery::latest()->get();
+        $galleries = Gallery::orderBy('created_at', 'desc')->paginate(10);
         $totalGallery = $galleries->count();
         View::share('galleries', $galleries);
         View::share('totalGallery', $totalGallery);
@@ -73,6 +74,12 @@ class AppServiceProvider extends ServiceProvider
         $faqsSubmitForm = FaqsSubmitForm::latest()->get();
         $totalSubmitForm = $faqsSubmitForm->count();
         View::share('totalFaqSubmitForm', $totalSubmitForm);
+
+        // $events = Event::latest()->get();
+        $events = Event::orderBy('created_at', 'desc')->paginate(10);
+        $totalEvent = $events->count();
+        View::share('events', $events);
+        View::share('totalEvent', $totalEvent);
 
        
         View::share('consultants', $consultant);

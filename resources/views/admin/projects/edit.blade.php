@@ -101,18 +101,18 @@
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Land Payment Plan</label>
                                         <div class="col-sm-9">
-                                            <input type="file" class="form-control" placeholder="Location" name="land_payment_plan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" >
+                                            <input type="file" class="form-control" placeholder="Location" name="landPaymentPlan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" >
                                             @if(isset($project) && $project->land_payment_plan)
-                                                <a href="{{ asset($project->land_payment_plan) }}" target="_blank" class="text-primary">View Land Payment Plan</a>
-                                            @endif
+                                                <img id="image-preview" src="{{ isset($project) ? asset($project->land_payment_plan) : '' }}" alt="Image Preview" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
+                                             @endif
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Subcription Form</label>
                                         <div class="col-sm-9">
-                                            <input type="file" class="form-control"  name="subscription_form" id="landPaymentPlan" accept="application/pdf" >
+                                            <input type="file" class="form-control"  name="subscription_forms" id="subscription_forms" accept="application/pdf" >
                                             @if(isset($project) && $project->subscription_form)
-                                                <a href="{{ asset($project->subscription_form) }}" target="_blank" class="text-primary">View Subcription Form</a>
+                                               <a href="{{ asset($project->subscription_form) }}" target="_blank" class="text-primary">View Subcription Form</a>
                                             @endif
                                         </div>
                                     </div>

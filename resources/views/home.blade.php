@@ -68,14 +68,13 @@
                           <h4><a href="{{ route('home.project.details', encrypt($homeproject->id))}}">{{ $homeproject->title}}</a>
                           </h4>
                           <p class="mb-0">
-                            {!! Str::limit($homeproject->content, 30) !!}
+                            {!! Str::limit($homeproject->content, 50) !!}
                           </p>
-                          <div class="entry-meta d-flex align-items-center justify-content-between border-b pb-1 mb-2">
+                          {{-- <div class="entry-meta d-flex align-items-center justify-content-between border-b pb-1 mb-2">
                             <div class="entry-author">
                             <p>Start From<span class="d-block theme fw-bold">$20,000.00</span></p>
                             </div>
-                            
-                          </div>
+                          </div> --}}
                       </div>
                       
                   </div>

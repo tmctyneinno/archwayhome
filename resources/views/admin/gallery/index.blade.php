@@ -6,7 +6,7 @@
         <div class="page-titles">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Gallery</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Projects status</a></li>
                 
             </ol>
         </div>
@@ -35,10 +35,10 @@
 
                     <div class="card-header border-0 pb-0">
                         <div class="clearfix">
-                            <h3 class="card-title">Gsllery List</h3>
+                            <h3 class="card-title">Projects Status List</h3>
                         </div>
                         <div class="clearfix text-center">
-                            <a href="{{route('admin.gallery.create')}}" class="btn btn-primary">Add Gallery</a>
+                            <a href="{{route('admin.projects.status.create')}}" class="btn btn-primary">Add Projects Status</a>
                         </div>
                     </div>
 
@@ -58,11 +58,20 @@
                                 <tbody>
                                     @forelse ($galleries as $index => $gallery)
                                         <tr>
-                                            <td><strong>{{  $index + 1 }}</strong></td>
+                                            <td><strong>{{ $galleries->firstItem() + $index }}</strong></td>
                                             <td>{{ $gallery->title }}</td>
+                                            <td>{{ $gallery->video_link }}</td>
                                             <td>
-                                                <img style=" width: 100px; height: 100px; object-fit: cover; " src="{{ asset($gallery->images) }}" class="img-thumbnail" height="30" alt="{{ $gallery->title }}"  style="max-width: 100px;"/>
+                                                @if ($gallery->images)
+                                                    @foreach (json_decode($gallery->images, true) as $image)
+                                                        <img style="width: 100px; height: 100px; object-fit: cover;" src="{{ asset($image) }}" class="img-thumbnail" alt="{{ $gallery->title }}">
+                                                    @endforeach
+                                                @else
+                                                    <p>No images found</p>
+                                                @endif
                                             </td>
+                                             
+                                            
                                             <td>{{ $gallery->created_at->format('d F Y') }}</td>
                                             <td>
                                                 <div class="dropdown">
@@ -70,22 +79,24 @@
                                                         <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{ route('admin.gallery.edit',  encrypt($gallery->id) ) }}">Edit</a>
-                                                        <a class="dropdown-item text-danger" href="{{ route('admin.gallery.destroy', encrypt($gallery->id) )  }}" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+                                                        <a class="dropdown-item" href="{{ route('admin.projects.status.edit', encrypt($gallery->id)) }}">Edit</a>
+                                                        <a class="dropdown-item text-danger" href="{{ route('admin.projects.status.destroy', encrypt($gallery->id)) }}" onclick="return confirm('Are you sure you want to delete this Project status?');">Delete</a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="7" class="text-center">No Gallery items found.</td>
+                                            <td colspan="6" class="text-center">No Project status items found.</td>
                                         </tr>
                                     @endforelse
-                                    
-                                </tbody>
-                                
-                                
+                                 </tbody>
                             </table>
+                            <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center mt-4">
+                                    {{ $galleries->links('vendor.pagination.bootstrap-4') }} 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -79,11 +79,14 @@ class HomeController extends Controller
     public function detailsProject($id) {
         $decryptedId = decrypt($id);
         $projectDetails = Project::findOrFail($decryptedId);
+        $id = $projectDetails->project_menu_id;
+        $relatedProject = Project::where('project_menu_id', $id)->get();
+       
         if (!$projectDetails) {
-            abort(404); 
+            return view('errors.404');
         }
- 
-        return view('users.pages.project-details', compact('projectDetails'));
+  
+        return view('users.pages.project-details', compact('projectDetails','relatedProject')); 
     }
 
     public function storeComment(Request $request){

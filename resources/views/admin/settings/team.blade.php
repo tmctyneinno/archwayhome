@@ -52,7 +52,7 @@
                                         <tr>
                                             <td><strong>{{  $index + 1 }}</strong></td>
                                             <td>{{ $team->name }}</td>
-                                            <td>{{ $team->position }}</td>
+                                            <td class="text-uppercase">{{ $team->position }}</td>
                                             <td>{!! Str::limit($team->content, 30) !!}</td>
                                             <td>
                                                 <img src="{{ asset($team->image) }}" class="img-thumbnail" height="20" alt="{{ $team->title }}"  style="max-width: 100px;"/>

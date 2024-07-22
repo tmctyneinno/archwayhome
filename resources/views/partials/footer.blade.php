@@ -6,7 +6,7 @@
             <div class="row d-md-flex align-items-center justify-content-between text-lg-start text-center">
                 <div class="col-lg-9">
                     <h2 class="mb-0 white">
-                        Looking for a dream home?
+                        Looking for a dream home? 
                     </h2>
                     <p class="white">We can help you realize your dream of a new home</p>
                 </div>
@@ -25,12 +25,13 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="footer-about">
-                        <img src="{{ asset($contactUs->site_logo) }}" alt style=" width: 225; height: 60px; object-fit: cover; ">
+                        {{-- <img src="{{ asset($contactUs->site_logo) }}" alt style=" width: 150px; height: 80px; object-fit: cover; "> --}}
+                        <img src="{{ asset('assets/images/footer_logo.jpg') }}" alt style=" width: 120px; height: 80px; object-fit: cover; ">
                         <p class="mt-3 mb-3 white text-white">
                             {!! Str::limit($aboutUs->content, 60) !!}
                         </p>
                         <p>
-                          <a href="{{ route( 'home.pages', 'about-us' )}}" class=" " style="color: #2db838">Read more</a>
+                          <a href="{{ route( 'home.pages', 'about-us' )}}" class=" " style="color: #fedc56">Read more</a>
                         </p>
                         <ul>
                             <li class="white"><strong>Phone:</strong> {{ $contactUs->first_phone }} </li><br>
@@ -143,7 +144,7 @@
                 <div class="post-tabs">
   
                     <ul class="nav nav-tabs nav-pills nav-fill" id="postsTab" role="tablist">
-                        <li class="nav-item" role="presentation">
+                        <li class="nav-item active" role="presentation">
                             <button aria-controls="register" aria-selected="true" class="nav-link"
                                 data-bs-target="#register" data-bs-toggle="tab" id="register-tab" role="tab"
                                 type="button">Book Inspection</button>
@@ -175,6 +176,111 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <h4 class="text-center border-b pb-2">Book Inspection</h4>
+                                    <form method="post" action="{{ route('book-inspection.store') }}" id="bookInspection">
+                                      @csrf  
+                                      <div class="form-group mb-2">
+                                            <input required type="text" name="fullname" class="form-control" id="fullname"
+                                                placeholder="Full Name">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <input required type="email" name="email" class="form-control" id="email"
+                                                placeholder="Email Address">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                             <input required type="phone" name="phone" class="form-control"
+                                                id="phone" placeholder="Phone">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                          <label>Project to Inspect</label>
+                                          <select required class="form-group" name="project">
+                                              <option disabled selected>Select project</option>
+                                              @foreach ($projects as $project)
+                                                  <option value="{{ $project->title}}">{{ $project->title}}</option>
+                                              @endforeach
+                                          </select>
+                                           
+                                        </div>
+                                        <div class="form-group mb-2">
+                                          <label>Date of Inspection</label>
+                                          <input required type="date" name="inspectionDate" class="form-control"
+                                              id="phone" placeholder="Date">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <div class="mb-2 captcha">
+                                                <span>{!! captcha_img('math') !!}</span>
+                                                <button type="button" class="btn btn-danger reload" id="reload">&#x21bb;</button>
+                                            </div>
+                                            <label>Enter Captcha</label>
+                                            <input type="text" name="captcha" class="form-control @error('captcha') is-invalid @enderror" placeholder="Enter Captcha" >
+                                       
+                                          </div>
+                                        <div class="comment-btn mb-2 pb-2 text-center border-b ">
+                                            <button type="submit" class="nir-btn" id="bookInspection">Send Message
+                                            </button>
+                                        </div>
+                                        <div id="contactform-error-msg"></div>
+                                       
+                                    </form>
+                                    <script>
+                                        function onSubmit(token) {
+                                          document.getElementById("bookInspection").submit();
+                                        }
+                                        $('#bookInspection').submit(function(event) {
+                                            event.preventDefault(); 
+                                             $('#bookInspection').unbind('submit').submit(); 
+                                        });
+                                    </script>
+                                    
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="modal fade log-reg" id="bookInspectionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="post-tabs">
+  
+                    <ul class="nav nav-tabs nav-pills nav-fill" id="postsTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button aria-controls="register" aria-selected="true" class="nav-link"
+                                data-bs-target="#register" data-bs-toggle="tab" id="register-tab" role="tab"
+                                type="button">Schedule an Inspection</button>
+                        </li>
+                    </ul>
+  
+                    <div class="tab-content blog-full" id="postsTabContent ">
+                        {{-- @if (session('success'))
+                            <script>
+                                toastr.success("{{ session('success') }}");
+                            </script>
+                        @endif --}}
+                
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <script>
+                                    toastr.error("{{ $error }}");
+                                </script>
+                            @endforeach
+                        @endif
+  
+                        <div aria-labelledby="register-tab" class="tab-pane fade active show" role="tabpanel">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="blog-image">
+                                        <a href="#"
+                                            style="background-image: url( {{ asset('assets/images/trending/trending5.jpg')}});"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h4 class="text-center border-b pb-2">Schedule an Inspection</h4>
                                     <form method="post" action="{{ route('book-inspection.store') }}" id="bookInspection">
                                       @csrf  
                                       <div class="form-group mb-2">

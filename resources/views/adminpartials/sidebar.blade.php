@@ -28,11 +28,18 @@
             </li>
            
             <li>
-                <a class="has-arrow ai-icon" href="{{ route('admin.gallery.index') }}" aria-expanded="false">
+                <a class="has-arrow ai-icon" href="{{ route('admin.events.index') }}" aria-expanded="false">
                     <i class="flaticon-381-layer-1"></i>
-                    <span class="nav-text">Gallery</span>
+                    <span class="nav-text">Events</span>
                 </a>
             </li>
+            <li>
+                <a class="has-arrow ai-icon" href="{{ route('admin.projects.status.index') }}" aria-expanded="false">
+                    <i class="flaticon-381-layer-1"></i>
+                    <span class="nav-text">Project Status</span>
+                </a>
+            </li>
+
             <li>
                 <a class="has-arrow ai-icon" href="{{ route('admin.project.index') }}" aria-expanded="false">
                     <i class="flaticon-381-layer-1"></i>

@@ -45,6 +45,7 @@
     <!-- Datatable -->
     <link href="{{ asset ('backend/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{ asset ('backend/vendor/datatables/responsive/responsive.css')}}" rel="stylesheet">
+    <link href="{{ asset ('backend/vendor/dropzone/dist/dropzone.css')}}" rel="stylesheet">
 
 </head>
 
@@ -101,10 +102,11 @@
     <!-- ckeditor -->
     <script src="{{ asset ('backend/vendor/ckeditor/ckeditor.js')}}"></script>
     <script src="{{ asset ('backend/vendor/ckeditor/ckeditorContent.js')}}"></script>
-    <!-- Datatable -->
+    <!-- Datatable --> 
     <script src="{{ asset ('backend/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 	<script src="{{ asset ('backend/vendor/datatables/responsive/responsive.js')}}"></script>
     <script src="{{ asset ('backend/vendor/js/plugins-init/datatables.init.js')}}"></script>
+    <script src="{{ asset ('backend/vendor/dropzone/dist/dropzone.js')}}"></script>
 
     <!-- Dashboard 1 -->
     <script>

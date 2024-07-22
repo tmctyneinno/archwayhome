@@ -50,7 +50,7 @@
             var formId = $(this).attr('id');
 
             $.ajaxSetup({
-                headers: {
+                headers: { 
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });

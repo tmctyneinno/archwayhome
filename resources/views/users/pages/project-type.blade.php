@@ -15,6 +15,7 @@
           </div>
       </div>
   </div>
+  <br>
   <div class="dot-overlay"></div>
 </section>
 
@@ -131,61 +132,8 @@
                                       </select>
                                   </div>
                               </div>
-                              <div class="form-group mb-2">
-                                  <div class="input-box">
-                                      <select class="niceSelect">
-                                          <option value="1">All Status</option>
-                                          <option value="2">For Rent</option>
-                                          <option value="3">For Sale</option>
-                                      </select>
-                                  </div>
-                              </div>
-                              <div class="form-group mb-2 d-flex justify-content-between">
-                                  <div class="input-box w-50 me-1">
-                                      <select class="niceSelect">
-                                          <option value="1">Bedrooms</option>
-                                          <option value="2">2</option>
-                                          <option value="3">3</option>
-                                      </select>
-                                  </div>
-                                  <div class="input-box w-50 ms-1">
-                                      <select class="niceSelect">
-                                          <option value="1">Bathrooms</option>
-                                          <option value="2">2</option>
-                                          <option value="3">3</option>
-                                      </select>
-                                  </div>
-                              </div>
-                              <div class="form-group mb-2">
-                                  <div class="range-slider mt-0">
-                                      <p class="text-start mb-2">Price Range</p>
-                                      <div data-min="0" data-max="2000" data-unit="$" data-min-name="min_price"
-                                          data-max-name="max_price"
-                                          class="range-slider-ui ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                                          aria-disabled="false">
-                                          <span class="min-value">500 $</span>
-                                          <span class="max-value">20000 $</span>
-                                          <div class="ui-slider-range ui-widget-header ui-corner-all full"
-                                              style="left: 0%; width: 100%;"></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                  </div>
-                              </div>
-                              <div class="form-group mb-2">
-                                  <div class="range-slider mt-0">
-                                      <p class="text-start mb-2">Area Size</p>
-                                      <div data-min="0" data-max="2000" data-unit="$" data-min-name="min_price"
-                                          data-max-name="max_price"
-                                          class="range-slider-ui ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                                          aria-disabled="false">
-                                          <span class="min-value">100 sqft</span>
-                                          <span class="max-value">20000 sqft</span>
-                                          <div class="ui-slider-range ui-widget-header ui-corner-all full"
-                                              style="left: 0%; width: 100%;"></div>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                  </div>
-                              </div>
+                            
+                              
                               <div class="form-group text-center w-100">
                                   <input type="submit" class="nir-btn w-100" id="submit3" value="Search">
                               </div>

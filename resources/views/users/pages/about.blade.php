@@ -16,6 +16,7 @@
           </div>
       </div>
   </div>
+  <br>
   <div class="dot-overlay"></div>
 </section>
 
@@ -77,17 +78,17 @@
       <div class="section-title mb-6 pb-1 w-75 text-center mx-auto">
         <h2 class="m-0"> Our <span>Team </span></h2>
       </div>
-      <div class="team-main hidden animation">
+      <div class="team-main  animation">
         <div class="row shop-slider">
           @forelse ($teams as $team)
           <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
             <div class="team-list">
               <div class="team-image">
-                <img src="{{ asset($team->image) }}" alt="team">
+                <img src="{{ asset($team->image) }}" alt="team" style=" width: 320px; height: 400;   object-fit: cover; ">
               </div>
               <div class="team-content text-center p-3 bg-white">
-                <h4 class="mb-0"><a href="{{ route('users.team.detail', encrypt($team->id))}}">{{$team->name}}</a></h4>
-                <p class="mb-0">{{$team->position}}</p>
+                <h4 class="mb-0 text-uppercase"><a href="{{ route('users.team.detail', encrypt($team->id))}}">{{$team->name}}</a></h4>
+                <p class="mb-0 text-uppercase">{{$team->position}}</p>
               </div>
             </div>
           </div>

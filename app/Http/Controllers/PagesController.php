@@ -29,9 +29,10 @@ class PagesController extends Controller
             'projects' => 'users.pages.projects',
             'contact' => 'users.pages.contact',
             'blog' => 'users.pages.post',
-            'galleries' => 'users.pages.gallery',
+            'project-status' => 'users.pages.project-status',
             'consultant-form' => 'users.pages.consultant-form',
             'faqs' => 'users.pages.faqs',
+            'events'=> 'users.pages.events',
         ];
         $url = "https://api.paystack.co/bank";
         $secret_key = "YOUR_SECRET_KEY"; 
@@ -63,13 +64,13 @@ class PagesController extends Controller
             'closed-sales',
             'sold-out',
             'upcoming-projects',
-        ];
+        ]; 
 
         if (in_array($slug, $specialPages)) {
             $projectType = ProjectMenu::where('slug', $slug)->first();
 
             if (!$projectType) {
-                return view('errors.404');
+                return view('errors.404'); 
             }
 
             $projectList = Project::where('project_menu_id', $projectType->id)->paginate(8);

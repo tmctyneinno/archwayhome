@@ -16,24 +16,37 @@ class GalleryContoller extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
+        //  dd($request->all());
+        $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:32768',
+            'video_link' => 'required|string|max:255',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
-    
-        $teamData = $request->only(['title']);
-    
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->extension();
-            $image->move(public_path('gallery'), $imageName);
-            $teamData['images'] = 'gallery/'.$imageName;
+       
+        $images = $request->file('images');
+        $numImages = count($images);
+
+        if ($numImages < 3 || $numImages > 7) {
+            return redirect()->back()->withErrors(['images' => 'Please upload between 3 and 7 images.']);
         }
-    
-        Gallery::create($teamData);
+        
+       
+        $imagePaths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('gallery'), $imageName);
+                $imagePaths[] = 'gallery/' . $imageName;
+            }
+        }
 
-        return redirect()->back()->with('success', 'Gallery added successfully.');
+        $event = new Gallery();
+        $event->title = $validatedData['title'];
+        $event->video_link = $validatedData['video_link'];
+        $event->images = json_encode($imagePaths); 
+        $event->save();
 
+        return redirect()->back()->with('success', 'Gallery created successfully.');
     }
 
     public function edit($id){
@@ -41,40 +54,48 @@ class GalleryContoller extends Controller
         return view('admin.gallery.edit', compact('gallery'));
     }
 
-    public function update(Request $request,$id )
+    public function update(Request $request, $id)
     {
-        $request->validate([
+        $event = Gallery::findOrFail($id);
+
+        $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:32768', // Changed 'image' validation
+            'video_link' => 'required|string|max:255',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
 
-       
-        $gallery = Gallery::findOrFail($id);
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->extension();
-            $image->move(public_path('gallery'), $imageName);
-            
-            $gallery->update(['images' =>  'gallery/' . $imageName]);
-        }
-        $gallery->update([
-            'title' => $request->title,
-        ]);
+        $event->title = $validatedData['title'];
+        $event->video_link = $validatedData['video_link'];
 
-        return redirect()->back()->with('success', 'Gallery updated successfully.');
+        
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+            $imagePaths = [];
+
+            foreach ($images as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('gallery'), $imageName);
+                $imagePaths[] = 'gallery/' . $imageName;
+            }
+           
+            $event->images = json_encode($imagePaths);
+            }
+
+        $event->save();
+
+        return redirect()->back()->with('success', 'Projects status updated successfully.');
     }
-
     public function destroy($id)
     {
-        $galleryItem = Gallery::find($id);
+        $projectsStatusItem = Gallery::find(decrypt($id));
 
-        if (!$galleryItem) {
-            return redirect()->back()->with('error', 'Gallery item not found.');
+        if (!$projectsStatusItem) {
+            return redirect()->back()->with('error', 'Projects status item not found.');
         }
 
-        $galleryItem->delete();
+        $projectsStatusItem->delete();
 
-        return redirect()->back()->with('success', 'Gallery item deleted successfully.');
+        return redirect()->back()->with('success', 'Projects status item deleted successfully.');
     }
 
 }

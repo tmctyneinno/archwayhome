@@ -6,16 +6,19 @@
     <div class="breadcrumb-outer">
         <div class="container">
             <div class="breadcrumb-content d-md-flex align-items-center pt-6">
-                <h1 class="mb-0">Services Detail</h1>
+                <h1 class="mb-0">Service Detail</h1>
+               
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Services Detail</li>
+                        <li class="breadcrumb-item active" aria-current="page">Service Detail</li>
                     </ul>
                 </nav>
+             
             </div>
         </div>
     </div>
+    <br>
     <div class="dot-overlay"></div>
 </section>
 
@@ -23,9 +26,9 @@
 <section class="about-us pb-6">
     <div class="container">
         <div class="about-image-box">
-            <div class="row d-flex align-items-center justify-content-between">
+            <div class="row d-flex ">
                 <div class="col-lg-5 col-sm-12 mb-4">
-                    <div class="about-image p-3 box-shadow position-relative">
+                    <div class="about-image box-shadow position-relative">
                         <img src="{{ asset('assets/images/destination/destination3.jpg')}} " alt class="w-100">
                         <div class="video-button text-center">
                            
@@ -47,7 +50,5 @@
     </div>
 </section>
 
-
-@include('users.pages.services')
 
 @endsection

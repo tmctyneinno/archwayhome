@@ -26,11 +26,11 @@ class ProjectController extends Controller
             'land_size' => 'required|string|max:255',
             'project_menu_id' => 'required|exists:project_menus,id',
             'content' => 'required|string',
-            'brochure' => 'required|mimes:pdf|max:5048',
-            'land_payment_plan' => 'required|mimes:jpeg,png,jpg,gif|max:5048',
-            'subscription_form' => 'required|mimes:pdf|max:5048',
+            'brochure' => 'required|mimes:pdf|max:20240',
+            'land_payment_plan' => 'required|mimes:jpeg,png,jpg,gif|max:20240',
+            'subscription_form' => 'required|mimes:pdf|max:20240',
             'video_link' => 'required|string', 
-            'image' => 'required|mimes:jpeg,png,jpg,gif|max:5048', 
+            'image' => 'required|mimes:jpeg,png,jpg,gif|max:20240', 
         ]);
 
        
@@ -71,6 +71,8 @@ class ProjectController extends Controller
 
     public function update(Request $request,  $id)
     {
+        // dd($request->file('subscription_forms'));
+
         $request->validate([
             'title' => 'required|string|max:255',
             'sub_title' => 'required|string|max:255',
@@ -78,14 +80,14 @@ class ProjectController extends Controller
             'land_size' => 'required|string|max:255',
             'project_menu_id' => 'required|exists:project_menus,id',
             'content' => 'required|string',
-            'brochure' => 'mimes:pdf|max:5048',
-            'landPaymentPlan' => 'mimes:jpeg,png,jpg,gif|max:5048',
-            'subscription_form' => 'mimes:pdf|max:5048',
+            'brochure' => 'nullable|mimes:pdf|max:20240',
+            'landPaymentPlan' => 'nullable|mimes:jpeg,png,jpg,gif|max:20240',
+            'subscription_forms' => 'nullable|mimes:pdf|max:20240', 
             'video_link' => 'required|string',
-            'image' => 'mimes:jpeg,png,jpg,gif|max:5048',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:20240', 
         ]);
         $project = Project::findOrFail($id);
-        $data = $request->only(['title', 'sub_title','location', 'content','video_link','land_size','project_menu_id']);
+        $data = $request->only(['title', 'sub_title', 'location', 'content', 'brochure', 'video_link', 'land_size', 'project_menu_id', 'subscription_form']);
 
         if ($request->hasFile('brochure')) {
           
@@ -101,6 +103,7 @@ class ProjectController extends Controller
             $data['brochure'] = 'projectDocument/brochures/' . $brochurePath;
         }
 
+       
         if ($request->hasFile('landPaymentPlan')) {
           
             if ($project->land_payment_plan) {
@@ -110,23 +113,23 @@ class ProjectController extends Controller
                 }
             }
 
-            $landPaymentPlanPath = $request->file('land_payment_plan')->getClientOriginalName();
-            $request->file('landPaymentPlan')->move(public_path('projectDocument/landPaymentPlans'), $landPaymentPlanPath);
-            $data['land_payment_plan'] = 'projectDocument/landPaymentPlans/' . $landPaymentPlanPath;
+            $imagePath = $request->file('landPaymentPlan')->getClientOriginalName();
+            $request->file('landPaymentPlan')->move(public_path('projectDocument/landPaymentPlans'), $imagePath);
+            $data['land_payment_plan'] = 'projectDocument/landPaymentPlans/' . $imagePath;
         }
 
-        if ($request->hasFile('subscription_form')) {
-          
+        if ($request->hasFile('subscription_forms')) {
+            $subscriptionFormPath = $request->file('subscription_forms')->getClientOriginalName();
+            $request->file('subscription_forms')->move(public_path('projectDocument/subscriptionForms'), $subscriptionFormPath);
+            $data['subscription_form'] = 'projectDocument/subscriptionForms/' . $subscriptionFormPath;
+
+            // Remove old file if exists
             if ($project->subscription_form) {
                 $oldSubscriptionFormPath = public_path($project->subscription_form);
                 if (file_exists($oldSubscriptionFormPath)) {
                     unlink($oldSubscriptionFormPath);
                 }
             }
-
-            $subscriptionFormPath = $request->file('subscription_form')->getClientOriginalName();
-            $request->file('subscription_form')->move(public_path('projectDocument/subscriptionForms'), $subscriptionFormPath);
-            $data['subscription_form'] = 'projectDocument/subscriptionForms/' . $subscriptionFormPath;
         }
 
         if ($request->hasFile('image')) {
@@ -145,7 +148,7 @@ class ProjectController extends Controller
 
         $project->update($data);
 
-        return redirect()->route('admin.project.index')->with('success', 'Project updated successfully.');
+        return redirect()->back()->with('success', 'Project updated successfully.');
     }
 
     public function projects(){

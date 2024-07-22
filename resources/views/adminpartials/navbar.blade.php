@@ -16,11 +16,11 @@
     ***********************************-->
     <div class="nav-header">
         <a href="{{ route('admin.index') }}" class="brand-logo">
-            <img class="logo-compact"  src="{{ asset($contactUs->site_logo) }}" alt="/" style=" width: 223px; height:45px; object-fit: cover; ">
-           
-            {{-- <img class="brand-title"  src="{{ asset($contactUs->site_logo) }}" alt="/"> --}}
-            {{-- <img class="logo-compact" src="{{ asset($contactUs->site_logo) }}" alt="/"> --}}
-            {{-- <img class="brand-title" src="{{ asset($contactUs->site_logo) }}" alt="/"> --}}
+            <img class="logo"  src="{{ asset('backend/arc logo png.png') }}" alt="/" style=" width: 100px; height:45px; object-fit: cover; ">
+            {{-- {{ asset('backend/white arc logo png.png') }} --}}
+            {{-- <img class="brand-title"  src="{{ asset($contactUs->site_logo) }}" alt="/" style=" width: 150px; height:45px; object-fit: cover; "> --}}
+            {{-- <img class="logo-compact" src="{{ asset($contactUs->site_logo) }}" alt="/" style=" width: 150px; height:45px; object-fit: cover; "> --}}
+            {{-- <img class="brand-title" src="{{ asset($contactUs->site_logo) }}" alt="/" style=" width: 150px; height:45px; object-fit: cover; "> --}}
         </a>
 
         <div class="nav-control">
