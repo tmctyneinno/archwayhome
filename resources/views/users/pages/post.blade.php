@@ -57,8 +57,8 @@
                       </div>
                   @empty
                       <div class="col-lg-12">
-                          <div class="alert alert-info" role="alert">
-                              No posts found.
+                          <div class="text-center  " >
+                              Coming soon
                           </div>
                       </div>
                   @endforelse
@@ -66,33 +66,37 @@
 
                    
                   </div>
-
+                  @if(empty($posts))
+                        
                   <div class="pagination-main text-center">
                     <ul class="pagination">
-                           
-                      @if ($posts->onFirstPage())
-                          <li class="disabled"><span><i class="fa fa-angle-double-left" aria-hidden="true"></i></span></li>
-                      @else
-                          <li><a href="{{ $posts->previousPageUrl() }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-                      @endif
-              
-        
-                      @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
-                          @if ($page == $posts->currentPage())
-                              <li class="active"><span>{{ $page }}</span></li>
-                          @else
-                              <li><a href="{{ $url }}">{{ $page }}</a></li>
-                          @endif
-                      @endforeach
-              
+                       
+                            @if ($posts->onFirstPage())
+                                <li class="disabled"><span><i class="fa fa-angle-double-left" aria-hidden="true"></i></span></li>
+                            @else
+                                <li><a href="{{ $posts->previousPageUrl() }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+                            @endif
                     
-                      @if ($posts->hasMorePages())
-                          <li><a href="{{ $posts->nextPageUrl() }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                      @else
-                          <li class="disabled"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></li>
-                      @endif
+                
+                            @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
+                                @if ($page == $posts->currentPage())
+                                    <li class="active"><span>{{ $page }}</span></li>
+                                @else
+                                    <li><a href="{{ $url }}">{{ $page }}</a></li>
+                                @endif
+                            @endforeach
+                    
+                            
+                            @if ($posts->hasMorePages())
+                                <li><a href="{{ $posts->nextPageUrl() }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                            @else
+                                <li class="disabled"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span></li>
+                            @endif
+                       
                   </ul>
                   </div>
+                  @else
+                  @endif
               </div>
           </div>
 
@@ -135,8 +139,8 @@
                                         </article>
                                         @empty
                                         <div class="col-lg-12">
-                                            <div class="alert alert-info" role="alert">
-                                                No posts found.
+                                            <div class="text-center " role="alert">
+                                               Coming soon
                                             </div>
                                         </div>
                                         @endforelse  

@@ -53,10 +53,10 @@
                                   </div>
                                   <div class="info-content ps-4">
                                       <p class="m-0"><a href="#" class="__cf_email__"
-                                              data-cfemail="cca5a2aaa38cbea9ada0bfa4a5a9a0a8e2afa3a1">{{ $contactUs->first_email}}</a>
+                                              data-cfemail="">{{ $contactUs->first_email}}</a>
                                       </p>
                                       <p class="m-0"><a href="#" class="__cf_email__"
-                                              data-cfemail="0c6469607c4c7e696d607f6465696068226f6361">{{ $contactUs->second_email}}</a>
+                                              data-cfemail="">{{ $contactUs->second_email}}</a>
                                       </p>
                                   </div>
                               </div>

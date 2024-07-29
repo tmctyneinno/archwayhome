@@ -80,12 +80,12 @@
                   </div>
               </div>
             @empty
-              <p class="text-center">No Project Data available</p>
+              <p class="text-center">Coming soon</p>
             @endforelse
              
           </div>
           <div class="trend-btn text-center">
-            @if ($homeprojects)
+            @if (empty($homeprojects))
               <a class="nir-btn" href="{{ route('home.pages', 'projects') }}">See more projects</a>
             @endif
           </div>
@@ -93,7 +93,7 @@
   </div>
 </section>
 
-{{-- Why Choose us --}}
+{{-- Why Choose us --}} 
 @include('users.pages.why_choose_us')
 
 
@@ -106,32 +106,37 @@
       </div> 
       <div class="row team-slider">
         @forelse ($posts as $post)
-          <div class="col-lg-4">
-              <div class="trend-item">
-                  <div class="trend-image">
-                      <img src="{{ asset($post->image) }}" alt="{{ $post->title }}" style=" width: 376px; height: 251px;   object-fit: cover; ">
-                      <div class="trend-content p-4 bg-lgrey border-b">
-                          <h5 class="theme">{{ $post->category }}</h5>
-                          <h4><a href="{{ route('post-details',  encrypt($post->id) ) }} ">
-                            {{ Str::limit($post->title, 30) }}
-                          </a></h4>
-                          <p class="mb-2">{{ $post->excerpt }}</p>
-                          <div class="entry-meta d-flex align-items-center justify-content-between border-t pt-2">
-                             
-                              <div class="entry-metalist">
-                                  <small><i class="fa fa-calendar"></i> {{ date('d M Y', strtotime($post->created_at)) }}</small>
-                              </div>
+        <div class="col-lg-4">
+          <div class="trend-item">
+              <div class="trend-image">
+                  <img src="{{ asset($post->image) }}" alt="{{ $post->title }}" style=" width: 376px; height: 251px;   object-fit: cover; ">
+                  <div class="trend-content p-4 bg-lgrey border-b">
+                      <h5 class="theme">{{ $post->category }}</h5>
+                      <h4><a href="{{ route('post-details',  encrypt($post->id) ) }} ">
+                        {{ Str::limit($post->title, 30) }}
+                      </a></h4>
+                      <p class="mb-2">{{ $post->excerpt }}</p>
+                      <div class="entry-meta d-flex align-items-center justify-content-between border-t pt-2">
+                         
+                          <div class="entry-metalist">
+                              <small><i class="fa fa-calendar"></i> {{ date('d M Y', strtotime($post->created_at)) }}</small>
                           </div>
                       </div>
                   </div>
               </div>
           </div>
-          @endforeach
+      </div>
+        @empty
+            <p class="text-center">Coming soon</p>
+        @endforelse
+   
+         
       </div>
       <div class="mt-6 pb-1 w-75 mx-auto text-center">
-        @if ($posts)
+        @if (empty($homeprojects))
           <a class="nir-btn mx-auto text-center" href="{{ route('home.pages', 'blog') }}">See more posts</a>
         @endif
+      
       </div>
     
   </div>

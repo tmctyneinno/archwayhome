@@ -18,7 +18,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-12 align-center">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header"> 
                             <h4 class="card-title">Add Events</h4>
                         </div>
                         <div class="card-body">
@@ -50,9 +50,10 @@
                                         </div>
                     
                                         <div class="mb-3 row align-items-center">
-                                            <label class="col-sm-3 col-form-label form-label">Video YouTube link</label>
+                                            <label class="col-sm-3 col-form-label form-label">Video Embed Code link</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" placeholder="Video YouTube link" name="video_link" id="video_link" required>
+                                                <input type="text" class="form-control" placeholder="Video Embed Code link" name="video_link" id="video_link" required>
+                                                <small class="text-info">Get the Embed Code not the youTube link</small>
                                             </div>
                                         </div>
                     

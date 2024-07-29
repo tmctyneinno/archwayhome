@@ -60,9 +60,28 @@
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
                                         <div class="col-sm-9">
                                             <div class="">
-                                                <textarea name="content" id="content" class="form-control" required>{{ $service->content }}</textarea>
+                                                <textarea name="content" id="ckeditor" class="form-control" required>{{ $service->content }}</textarea>
                                             </div>
                                         </div>
+                                    </div> 
+
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Image</label>
+                                        <div class="col-sm-9">
+                                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" onchange="previewImage(event)">
+                                            @error('image')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <img src="{{ asset($service->image) }}" alt="{{ $service->title }}" class="img-thumbnail mt-2" width="200">
+                                           
+                                            <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
+                                            <br>
+                                            <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
+                                    
+                                         </div>
+                                         
                                     </div>
                                     
                                     
@@ -110,10 +129,7 @@
                                         }
                                     }
                                 </script>
-                                <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-                                <script>
-                                    CKEDITOR.replace('content');
-                                </script>
+                                
                             </div>
                             
                         </div>

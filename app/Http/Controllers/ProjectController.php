@@ -75,7 +75,7 @@ class ProjectController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'sub_title' => 'required|string|max:255',
+            'sub_title' => 'required|string|max:255', 
             'location' => 'required|string|max:255',
             'land_size' => 'required|string|max:255',
             'project_menu_id' => 'required|exists:project_menus,id',
@@ -169,5 +169,10 @@ class ProjectController extends Controller
       
         return view('users.pages.project-type', compact('projectList','projectType','relatedProject'));
     }
-
+    public function destroy($id)
+    {
+        $service= Project::findOrFail(decrypt($id));
+        $service->delete();
+        return redirect()->route('admin.project.index')->with('success', 'Project deleted successfully.');
+    }
 }

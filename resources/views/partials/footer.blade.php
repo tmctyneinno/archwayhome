@@ -20,27 +20,29 @@
   </div> 
   
    <footer class="pt-10 footermain">
-    <div class="footer-upper pb-4">
+    <div class="footer-upper pb-4" >
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="footer-about">
                         {{-- <img src="{{ asset($contactUs->site_logo) }}" alt style=" width: 150px; height: 80px; object-fit: cover; "> --}}
-                        <img src="{{ asset('assets/images/footer_logo.jpg') }}" alt style=" width: 120px; height: 80px; object-fit: cover; ">
-                        <p class="mt-3 mb-3 white text-white">
+                        <img src="{{ asset($contactUs->site_logo) }}" alt style=" width: 120px;  object-fit: cover; ">
+                        {{-- <p class="mt-3 mb-3 white text-white">
                             {!! Str::limit($aboutUs->content, 60) !!}
-                        </p>
-                        <p>
+                        </p> --}}
+                        {{-- <p>
                           <a href="{{ route( 'home.pages', 'about-us' )}}" class=" " style="color: #fedc56">Read more</a>
-                        </p>
+                        </p> --}}
+                        <br><br>
                         <ul>
-                            <li class="white"><strong>Phone:</strong> {{ $contactUs->first_phone }} </li><br>
+                            <li class="white"><strong>Phone:</strong> {{ $contactUs->first_phone }},  {{ $contactUs->second_phone }}  </li><br>
                             <li class="white"><strong>Location:</strong> {{ $contactUs->first_address }}</li><br>
                             <li class="white"><strong>Email:</strong> 
                               <a href="#"
                                     class="__cf_email__"
-                                    data-cfemail="">{{ $contactUs->first_email }}
+                                    data-cfemail="">{{ $contactUs->first_email }}, {{ $contactUs->second_email }}
                               </a>
+                             
                             </li><br>
                             <li class="white"><strong>Website:</strong> {{ $contactUs->website_link}}</li>
                         </ul>
@@ -65,7 +67,7 @@
                               @forelse ($projectMenus as $projectMenu)
                               <li><a class="" href="{{ route('users.projects.type',  $projectMenu->slug ) }}">{{ $projectMenu->name }}</a></li>
                               @empty
-                              <li> No Post</li>
+                              <li> Coming Soon</li>
                               @endforelse
                           </ul>
                     </div>
@@ -108,13 +110,13 @@
         <div class="container">
             <div class="copyright-inner d-md-flex align-items-center justify-content-between">
                 <div class="copyright-text">
-                    <p class="m-0 white">  &copy; {{ date('Y') }}  {{$contactUs->company_name }}. All rights reserved.</p>
+                    <p class="m-0 white">  &copy; {{ date('Y') }}  {{$contactUs->company_name }} . All rights reserved.</p>
                 </div>
                 <div class="social-links">
                     <ul>
                         <li><a href="{{ $sociallink->facebook }}"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                         <li><a href="{{ $sociallink->twitter }}"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="{{ $sociallink->instagram }}"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                        {{-- <li><a href="{{ $sociallink->instagram }}"><i class="fab fa-instagram" aria-hidden="true"></i></a></li> --}}
                         <li><a href="{{ $sociallink->linkedin }}"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>

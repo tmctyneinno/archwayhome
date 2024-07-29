@@ -51,9 +51,10 @@
                                         </div>
                     
                                         <div class="mb-3 row align-items-center">
-                                            <label class="col-sm-3 col-form-label form-label">Video YouTube link</label>
+                                            <label class="col-sm-3 col-form-label form-label">Video Embed Code link</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" placeholder="Video YouTube link" name="video_link" id="video_link" required>
+                                                <small class="text-info">Get the Embed Code not the youTube link</small>
                                             </div>
                                         </div>
                     

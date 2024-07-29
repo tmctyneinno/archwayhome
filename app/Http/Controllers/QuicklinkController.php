@@ -18,14 +18,42 @@ class QuicklinkController extends Controller
             'name' => 'required|string|max:255',
         ]);
     
-        $teamData = $request->only(['name']);
+        $quickLinkData = $request->only(['name']);
         // Generate slug from the name
-        $teamData['slug'] = Str::slug($request->name); 
+        $quickLinkData['slug'] = Str::slug($request->name); 
        
     
-        QuickLink::create($teamData);
+        QuickLink::create($quickLinkData);
     
         return redirect()->route('admin.quicklink.create')
                          ->with('success', 'Quicke link created successfully.');
+    }
+
+    public function edit($id){
+        $quickLink = QuickLink::findOrFail(decrypt($id));
+        return view('admin.quicklink.edit', compact('quickLink'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        $quickLink = QuickLink::findOrFail($id);
+        $quickLink->update([
+            'name' => $validatedData['name'],
+        ]);
+
+        return redirect()->back()->with('success', 'Data updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $quickLink = QuickLink::findOrFail(decrypt($id));
+        $quickLink->delete();
+
+        return redirect()->route('admin.settings.content')
+                         ->with('success', 'Data deleted successfully.');
     }
 }

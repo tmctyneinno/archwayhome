@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('core_values')->nullable();
             $table->text('mission')->nullable();
             $table->text('vision')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

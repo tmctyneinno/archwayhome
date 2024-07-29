@@ -22,11 +22,17 @@ class ServiceController extends Controller
             'title' => 'required',
             'icon_class' => 'required',
             'content' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
 
-       
-
-        Service::create($validated);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path('services'), $imageName);
+        }
+        
+        Service::create(array_merge($validated, ['image' => 'services/'.$imageName]));
+    
         return redirect()->route('admin.service.create')->with('success', 'Service created successfully.');
     }
 
@@ -43,12 +49,25 @@ class ServiceController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'icon_class' => 'required',
-            'content' => 'required',
+            'content' => 'required', 
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:32768', 
         ]);
     
         // Find the service record by ID
-        $service = Service::findOrFail($id);    
-        $service->update($validated);
+        $service = Service::findOrFail($id);   
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path('services'), $imageName);
+            
+            $service->update(['image' =>  'services/' . $imageName]);
+        } 
+       
+        $service->update([
+            'title' => $request->title,
+            'icon_class' => $request->icon_class,
+            'content' => $request->content,
+        ]);
     
         return redirect()->route('admin.service.index')->with('success', 'Service updated successfully.');
     }
@@ -58,6 +77,6 @@ class ServiceController extends Controller
     {
         $service= Service::findOrFail(decrypt($id));
         $service->delete();
-        return redirect()->route('admin.post.index')->with('success', 'Service deleted successfully.');
+        return redirect()->route('admin.service.index')->with('success', 'Service deleted successfully.');
     }
 }

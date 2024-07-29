@@ -233,7 +233,7 @@ img {
   background: #fbfbfb !important; }
 
 .bg-theme {
-  background: #000052 !important; }
+  background: #000052 !important; } 
 
 .bg-theme2 {
   background: #fedc56 !important; }
@@ -4633,7 +4633,7 @@ footer.footermain {
   position: relative; }
   footer.footermain::before {
     content: '';
-    background: #181d20 url(../images/testimonial.png);
+    background: #000052 url(../images/testimonial.png);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

@@ -43,7 +43,7 @@ class TeamController extends Controller
     public function edit($id){
         $team = Team::findOrFail(decrypt($id));
         return view('admin.teams.edit', compact('team'));
-    }
+    } 
 
     public function update(Request $request,  $id)
     {
@@ -77,7 +77,7 @@ class TeamController extends Controller
                         ->with('success', 'Team updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy($id) 
     {
         $team = Team::findOrFail(decrypt($id));
         $team->delete();

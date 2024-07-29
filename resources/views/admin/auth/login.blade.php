@@ -37,9 +37,15 @@
                         <div class="card-body">
                             <div class="text-center mb-3">
                                 <a href="#">
-                                    <img class="logo-auth" src="{{ asset($contactUs->site_logo) }}" alt="">
+                                    <img class="logo-auth"src="{{ asset('backend/arc logo png.png') }}" width="20" alt="">
                                 </a>
                             </div>
+
+                            @if(session('success'))
+                                <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <h4 class="text-center mb-4">Admin sign in</h4>
                             <form action="{{route('admin.login.submit')}}" method="POST">
                                 @csrf

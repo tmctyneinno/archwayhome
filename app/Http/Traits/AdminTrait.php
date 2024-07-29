@@ -30,7 +30,7 @@ trait AdminTrait
             'additional_text' => 'required|string|max:255',
             'button_url' => 'required',
             'button_text' => 'required',
-            'image' => ($isNew ? 'required|' : 'nullable|') . 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => ($isNew ? 'required|' : 'nullable|') . 'image|mimes:jpeg,png,jpg,gif',
         ];
         $request->validate($rules);
     }

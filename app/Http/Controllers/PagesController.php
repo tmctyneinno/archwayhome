@@ -32,7 +32,9 @@ class PagesController extends Controller
             'project-status' => 'users.pages.project-status',
             'consultant-form' => 'users.pages.consultant-form',
             'faqs' => 'users.pages.faqs',
-            'events'=> 'users.pages.events',
+            'events' => 'users.pages.events',
+            'terms-conditions'  => 'users.pages.terms-conditions',
+            'privacy-policy'  => 'users.pages.privacy-policy',
         ];
         $url = "https://api.paystack.co/bank";
         $secret_key = "YOUR_SECRET_KEY"; 

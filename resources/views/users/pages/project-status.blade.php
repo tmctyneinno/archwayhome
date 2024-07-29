@@ -49,7 +49,7 @@
             <a class="nir-btn mx-auto text-center" target="_blank" href="{{ $gallery->video_link }}">Watch YouTube Video Here</a>
         </div>
         @empty
-        <p>No Project status found.</p>
+        <p class="mx-auto  text-center">Comming soon</p>
         @endforelse
     </div>
 </section>

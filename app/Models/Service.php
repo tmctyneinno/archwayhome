@@ -12,5 +12,6 @@ class Service extends Model
         'title',
         'icon_class', 
         'content', 
+        'image',
     ];
 }

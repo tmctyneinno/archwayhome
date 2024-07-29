@@ -7,6 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\QuicklinkController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SliderController;
 use App\Models\PrivacyPolicy;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -28,6 +29,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/manage/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
     
     Route::middleware('auth.admin')->group(function () {
+        Route::post('/settings/update-password', [AdminLoginController::class, 'updatePassword'])->name('admin.password.update');
+        Route::get('/settings/show-password', [AdminLoginController::class, 'showChangePasswordForm'])->name('admin.show.password');
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
         // Menu
         Route::get('/manage/project/index', [MenuController::class, 'projectMenu'])->name('admin.project.projectMenu');
@@ -42,13 +45,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/menu/{id}/edit', [MenuController::class, 'editMenu'])->name('admin.menu.edit');
         Route::put('/menu/{id}', [MenuController::class, 'updateMenu'])->name('admin.menu.update');
         Route::get('/menu/{id}', [MenuController::class, 'destroyMenu'])->name('admin.menu.destroy');
-        //Slider
-        Route::get('/manage/sliderIndex', [AdminController::class, 'indexSlider'])->name('admin.slider.index');
-        Route::get('/manage/sliderCreate', [AdminController::class, 'createSlider'])->name('admin.slider.create');
-        Route::post('/slider', [AdminController::class, 'storeSlider'])->name('slider.store');
-        Route::get('/slider/{id}/edit', [AdminController::class, 'editSlider'])->name('admin.slider.edit');
-        Route::put('/slider/{id}', [AdminController::class, 'updateSlider'])->name('admin.slider.update');
-        Route::get('/slider/{id}', [AdminController::class, 'destroySlider'])->name('admin.slider.destroy');
+        //Slider 
+        Route::get('/manage/sliderIndex', [SliderController::class, 'indexSlider'])->name('admin.slider.index');
+        Route::get('/manage/sliderCreate', [SliderController::class, 'createSlider'])->name('admin.slider.create');
+        Route::post('/slider', [SliderController::class, 'storeSlider'])->name('slider.store');
+        Route::get('/slider/{id}/edit', [SliderController::class, 'editSlider'])->name('admin.slider.edit');
+        Route::put('/slider/{id}', [SliderController::class, 'updateSlider'])->name('admin.slider.update');
+        Route::get('/slider/{id}', [SliderController::class, 'destroySlider'])->name('admin.slider.destroy');
         //Why choose us
         Route::get('/settings/content', [SettingsController::class, 'WhyChooseUs'])->name('admin.settings.content');
         Route::post('/settings/store/why-choose-us', [SettingsController::class, 'storeWhyChooseUs'])->name('admin.settings.store_why_choose_us');
@@ -63,7 +66,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/settings/store/office-hours', [SettingsController::class, 'storeOfficeHours'])->name('admin.office-hours.store');
         Route::put('/settings/update/office-hours/{id}', [SettingsController::class, 'updatestoreOfficeHours'])->name('admin.office-hours.update');
          
-        //Contact Us
+        //Contact Us 
         Route::post('/settings/store/contact-us', [SettingsController::class, 'storeContactUs'])->name('admin.settings.storeContactUs');
         Route::put('/settings/update/contact-us/{id}', [SettingsController::class, 'updateContactUs'])->name('admin.settings.updateContactUs');
         //Social Links 
@@ -119,6 +122,10 @@ Route::prefix('admin')->group(function () {
         //QuickLink
         Route::get('/quicklink/create', [QuicklinkController::class, 'create'])->name('admin.quicklink.create');
         Route::post('/quicklink/store', [QuicklinkController::class, 'store'])->name('admin.quicklink.store');
+        Route::get('quicklink/{id}/edit', [QuicklinkController::class, 'edit'])->name('admin.quicklink.edit');
+        Route::put('quicklink/{id}', [QuicklinkController::class, 'update'])->name('admin.quicklink.update');
+        Route::get('quicklink/{id}', [QuicklinkController::class, 'destroy'])->name('admin.quicklink.destroy');
+
         //Services
         Route::get('service/index', [ServiceController::class, 'index'])->name('admin.service.index');
         Route::get('service/create', [ServiceController::class, 'create'])->name('admin.service.create');

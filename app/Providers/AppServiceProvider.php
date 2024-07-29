@@ -26,6 +26,7 @@ use App\Models\TermsConditions;
 use App\Models\WhyChooseUs;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -68,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('galleries', $galleries);
         View::share('totalGallery', $totalGallery);
         $faqs = Faqs::latest()->get();
-        $totalFaqs = $faqs->count();
+        $totalFaqs = $faqs->count(); 
         View::share('totalFaqs', $totalFaqs);
         View::share('faqs', $faqs);
         $faqsSubmitForm = FaqsSubmitForm::latest()->get();
@@ -81,7 +82,6 @@ class AppServiceProvider extends ServiceProvider
         View::share('events', $events);
         View::share('totalEvent', $totalEvent);
 
-       
         View::share('consultants', $consultant);
         View::share('inspections', $inspection);
         View::share('contactUs', ContactUs::first());
@@ -101,6 +101,9 @@ class AppServiceProvider extends ServiceProvider
         View::share('projectMenus',ProjectMenu::latest()->get());
         View::share('quicklinks', QuickLink::inRandomOrder()->take(4)->get());
         View::share('services', Service::latest()->get());
+        $admin = Auth::guard('admin')->user();
+        View::share('admin', Auth::guard('admin')->user());
+         
       
     }
 }

@@ -38,7 +38,7 @@
                     <i class="flaticon-381-layer-1"></i>
                     <span class="nav-text">Project Status</span>
                 </a>
-            </li>
+            </li> 
 
             <li>
                 <a class="has-arrow ai-icon" href="{{ route('admin.project.index') }}" aria-expanded="false">
@@ -98,6 +98,9 @@
                     </li>
                     <li>
                         <a class="has-arrow" href="{{ route('admin.settings.content') }}" aria-expanded="false">Contents</a>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="{{ route('admin.show.password') }}" aria-expanded="false">Reset Password</a>
                     </li>
                 </ul>
             </li>

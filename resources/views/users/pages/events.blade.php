@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -11,7 +10,7 @@
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Events </li>
+                        <li class="breadcrumb-item active" aria-current="page">Events</li>
                     </ul>
                 </nav>
             </div>
@@ -20,7 +19,6 @@
     <br>
     <div class="dot-overlay"></div>
 </section>
-
 
 <section class="top-post pt-10">
     <div class="container">
@@ -47,13 +45,15 @@
             @endif
         </div>
         <div class="mt-6 pb-1 w-75 mx-auto text-center">
-            <a class="nir-btn mx-auto text-center" target="_blank" href="{{ $event->video_link }}">Watch YouTube Video Here</a>
+            <iframe  height="315" src="{{ $event->video_link }}" frameborder="0" allowfullscreen></iframe>
+
         </div>
         @empty
-        <p>No events found.</p>
+        <p class="mx-auto  text-center">Coming soon</p>
         @endforelse
     </div>
 </section>
 
 
 @endsection
+

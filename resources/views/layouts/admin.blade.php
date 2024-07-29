@@ -15,26 +15,21 @@
     <meta name="robots" content="index, follow">
 
     <meta name="keywords"
-        content="backend, dashboard, backend dashboard, backend template, template, backend panel, backendistration, analytics, bootstrap, hospital backend, modern, property, real estate, responsive, creative, retina ready, modern Dashboard">
+        content="">
     <meta name="description"
-        content="Your Ultimate Real Estate backend Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
+        content="">
 
-    <meta property="og:title" content="Omah - Real Estate backend Dashboard Template">
+    <meta property="og:title" content="{{ asset($contactUs->company_name) }}">
     <meta property="og:description"
-        content="Your Ultimate Real Estate backend Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
+        content="">
     <meta property="og:image" content="{{ asset($contactUs->site_logo) }}">
     <meta name="format-detection" content="telephone=no">
 
-    <meta name="twitter:title" content="Omah - Real Estate backend Dashboard Template">
-    <meta name="twitter:description"
-        content="Your Ultimate Real Estate backend Dashboard Template. Streamline property management, analyze market trends, and boost productivity with our intuitive and feature-rich solution. Elevate your real estate business today!">
-    <meta name="twitter:image" content="{{ asset($contactUs->site_logo) }}">
-    <meta name="twitter:card" content="summary_large_image">
 
     <!-- MOBILE SPECIFIC -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+ 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset($contactUs->site_logo) }}">
     <!-- Vectormap -->
@@ -69,7 +64,7 @@
     ***********************************-->
     <div class="footer">
         <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="#"
+            <p>Copyright © Designed &amp; Developed by <a href="https://morgansconsortium.com/"
                     target="_blank"> The Morgans</a> <span id="currentYear"></span> </p>
         </div>
     </div>

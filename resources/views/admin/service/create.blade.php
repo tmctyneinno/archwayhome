@@ -59,8 +59,22 @@
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
                                         <div class="col-sm-9">
                                             <div class="">
-                                                <textarea name="content" id="content" class="form-control" ></textarea>
+                                                <textarea name="content" id="ckeditor" class="form-control" ></textarea>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Image</label>
+                                        <div class="col-sm-9">
+                                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required onchange="previewImage(event)">
+                                            @error('image')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
+                                            <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
                                         </div>
                                     </div>
                                     
@@ -89,13 +103,13 @@
                                 </form>
                                 <script>
                                     // Initialize CKEditor
-                                    CKEDITOR.replace('ckeditor');
+                                    CKEDITOR.replace('ckeditor'); 
 
                                     function previewImage(event) {
                                         const input = event.target;
                                         const preview = document.getElementById('image-preview');
                                         
-                                        if (input.files && input.files[0]) {
+                                        if (input.files && input.files[0]) { 
                                             const reader = new FileReader();
                                             
                                             reader.onload = function(e) {
@@ -107,10 +121,7 @@
                                         }
                                     }
                                 </script>
-                                <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-                                <script>
-                                    CKEDITOR.replace('content');
-                                </script>
+                                
                             </div>
                             
                         </div>

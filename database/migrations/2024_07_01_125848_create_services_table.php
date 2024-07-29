@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('title');
             $table->text('icon_class');
             $table->text('content');
+            $table->text('image');
             $table->timestamps();
         });
     }

@@ -42,11 +42,11 @@
 
                         <div class="mb-3 col-md-10">
                             <label class="form-label">WhatsApp Link</label>
-                            <input type="text" class="form-control" placeholder="WhatsApp Link" name="whatsapp" value=" {{ isset($sociallink) ? $sociallink->whatsapp : '' }}" required>
+                            <input type="text" class="form-control" placeholder="WhatsApp Link" name="whatsapp" value=" {{ isset($sociallink) ? $sociallink->whatsapp : '' }}" >
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Instagram Link </label>
-                            <input type="text" class="form-control" placeholder="Title" name="instagram" value=" {{ isset($sociallink) ? $sociallink->instagram : '' }}" required>
+                            <input type="text" class="form-control" placeholder="Title" name="instagram" value=" {{ isset($sociallink) ? $sociallink->instagram : '' }}" >
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label"> Linkedin Link </label>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">YouTube Link</label>
-                            <input type="text" class="form-control" placeholder="YouTube Link" name="youtube" value=" {{ isset($sociallink) ? $sociallink->youtube : '' }}" required>
+                            <input type="text" class="form-control" placeholder="YouTube Link" name="youtube" value=" {{ isset($sociallink) ? $sociallink->youtube : '' }}" >
                         </div>
                          
                     </div>

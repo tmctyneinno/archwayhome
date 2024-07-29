@@ -37,7 +37,7 @@
               <ul>
                   <li><a href="{{ $sociallink->facebook }}" class="white"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                   <li><a href="{{ $sociallink->twitter }}" class="white"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                  <li><a href="{{ $sociallink->instagram }}" class="white"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                  {{-- <li><a href="{{ $sociallink->instagram }}" class="white"><i class="fab fa-instagram" aria-hidden="true"></i></a></li> --}}
                   <li><a href="{{ $sociallink->linkedin }}" class="white"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
               </ul>
           </div>
@@ -60,7 +60,7 @@
                     <ul class="nav navbar-nav" id="responsive-menu">
                         @forelse ($menuItems as $menuItem)
                             <li class="dropdown submenu {{ request()->is($menuItem->url) ? 'active' : '' }}">
-                                <a href="{{ route( 'home.pages', $menuItem->url )}}" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                <a href="{{ route( 'home.pages', $menuItem->url )}}" class="dropdown-toggle" role="button"
                                     aria-haspopup="true" aria-expanded="false">
                                     {{ $menuItem->name }} 
                                     @if ($menuItem->dropdownItems->count() > 0)

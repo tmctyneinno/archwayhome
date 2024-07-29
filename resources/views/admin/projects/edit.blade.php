@@ -103,8 +103,8 @@
                                         <div class="col-sm-9">
                                             <input type="file" class="form-control" placeholder="Location" name="landPaymentPlan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" >
                                             @if(isset($project) && $project->land_payment_plan)
-                                                <img id="image-preview" src="{{ isset($project) ? asset($project->land_payment_plan) : '' }}" alt="Image Preview" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
-                                             @endif
+                                                <img id="image-preview" src="{{ isset($project) ? asset($project->land_payment_plan) : '' }}" alt="Image" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
@@ -125,17 +125,17 @@
                                         
                                     </div>
                                     
-                                    <div class="mb-3 row align-items-center">
+                                    <div class="mb-3 row ">
                                         <label class="col-sm-3 col-form-label form-label">Project Image</label>
                                         <div class="col-sm-9">
-                                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/jpeg,image/png,image/gif" onchange="previewImage(event)">
+                                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/jpeg,image/png,image/gif" onchange="previewProjectImage(event)">
                                             @error('image')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                             <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
-                                            <img id="image-preview" src="{{ isset($project) ? asset($project->image) : '' }}" alt="Image Preview" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
+                                            <img id="image-project-preview" src="{{ isset($project) ? asset($project->image) : '' }}" alt="Image Preview" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
                                         </div>
                                     </div>
                                   
@@ -149,6 +149,21 @@
                                 <script>
                                     // Initialize CKEditor
 
+                                    function previewProjectImage(event) {
+                                        const input = event.target;
+                                        const preview = document.getElementById('image-project-preview');
+                                        
+                                        if (input.files && input.files[0]) {
+                                            const reader = new FileReader();
+                                            
+                                            reader.onload = function(e) {
+                                                preview.src = e.target.result;
+                                                preview.style.display = 'block';
+                                            };
+                                            
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+                                    }
                                     function previewImage(event) {
                                         const input = event.target;
                                         const preview = document.getElementById('image-preview');
@@ -165,7 +180,9 @@
                                         }
                                     }
                                 </script>
-                                <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+                                <script src="https://cdn.ckeditor.com/4.22.0/standard/ckeditor.js"></script>
+                                {{-- <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.css" /> --}}
+
                                 <script>
                                     CKEDITOR.replace('content');
                                 </script>

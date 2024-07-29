@@ -14,5 +14,6 @@ class WhyChooseUs extends Model
         'core_values', 
         'mission', 
         'vision', 
+        'image'
     ];
 }

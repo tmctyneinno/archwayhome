@@ -48,15 +48,15 @@ class BlogController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048', 
         ]);
         $post = Post::findOrFail($id);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->extension();
-            $image->move(public_path('sliderImages'), $imageName);
+            $image->move(public_path('postImages'), $imageName);
             
-            $post->update(['image' =>  'sliderImages/' . $imageName]);
+            $post->update(['image' =>  'postImages/' . $imageName]);
         }
         $post->update([
             'title' => $request->title,
@@ -67,8 +67,8 @@ class BlogController extends Controller
 
     public function destroyPost($id)
     {
-        $slider = Post::findOrFail(decrypt($id));
-        $slider->delete();
+        $post = Post::findOrFail(decrypt($id));
+        $post->delete();
         return redirect()->route('admin.post.index')->with('success', 'Post deleted successfully.');
     }
 

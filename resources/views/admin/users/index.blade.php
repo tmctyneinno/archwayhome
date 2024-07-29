@@ -13,12 +13,12 @@
             <div class="form-head d-md-flex mb-sm-4 mb-3 align-items-start">
                 <div class="me-auto d-lg-block d-block">
                     <h2 class="text-black font-w600">Dashboard</h2>
-                    <p class="mb-0">Welcome to Omah Property backend</p>
+                    <p class="mb-0">Welcome to {{ $contactUs->company_name}} backend</p>
                 </div>
                 <a href="{{ route('admin.index') }}" class="btn btn-primary rounded light">Refresh</a>
             </div>
             <div class="row">
-                <div class="col-xl-12 col-xxl-12">
+                <div class="col-xl-12 col-xxl-12"> 
                     <div class="row">
                         <div class="col-xl-6">
                             <div class="card bg-danger property-bx text-white">
@@ -91,7 +91,7 @@
                                             <span class="fs-13"><a href="{{ route('admin.projects.status.index')}}" class="text-muted">Click here</a></span>
                                       
                                         </div>
-                                       
+                                        
                                     </div>
                                 </div>
                             </div>

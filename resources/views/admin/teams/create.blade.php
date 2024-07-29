@@ -15,7 +15,7 @@
                 </div>
                 <a href="{{route('admin.slider.index')}}" class="btn btn-primary rounded light">View Teams</a>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center"> 
                 <div class="col-xl-6 col-lg-12 align-center">
                     <div class="card">
                         <div class="card-header">

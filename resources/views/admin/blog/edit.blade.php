@@ -52,7 +52,7 @@
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
                                         <div class="col-sm-9">
                                             <div class="">
-                                                <textarea name="content" id="content" class="form-control" required>{{ $post->content }}</textarea>
+                                                <textarea name="content" id="ckeditor" class="form-control" required>{{ $post->content }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -105,10 +105,7 @@
                                         }
                                     }
                                 </script>
-                                  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-                                  <script>
-                                      CKEDITOR.replace('content');
-                                  </script>
+                                
                             </div>
                             
                         </div>

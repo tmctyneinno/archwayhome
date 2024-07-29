@@ -20,7 +20,7 @@
   <div class="dot-overlay"></div>
 </section>
 
-<section class="about-us pb-6">
+<section class="about-us pb-3">
   <div class="container">
       <div class="about-image-box">
          
@@ -66,9 +66,9 @@
       </div>
   </div>
 </section>
-
+@include('users.pages.core_value')
 @include('users.pages.services')
-@include('users.pages.why_choose_us')
+@include('users.pages.why_choose_us_aboutus')
 
     
   

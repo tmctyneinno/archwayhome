@@ -10,52 +10,102 @@ use App\Models\Sociallink;
 use Illuminate\Http\Request;
 use App\Models\WhyChooseUs;
 use App\Models\AboutUs;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SettingsController extends Controller
 {
     use SettingsTrait;
-    public function WhyChooseUs(){
+    public function WhyChooseUs(){ 
         return view('admin.settings.index');
     }
 
     public function storeWhyChooseUs(Request $request)
     {
-        $validatedData = $request->validate([
-            'why_choose_us' => 'required|string',
-            'mission' => 'required|string',
-            'vision' => 'required|string',
-            'core_value' => 'required|string',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'why_choose_us' => 'required|string',
+                'mission' => 'required|string',
+                'vision' => 'required|string',
+                'core_value' => 'required|string',
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
+            ]);
 
-        WhyChooseUs::create([
-            'why_choose_us_statements' => $validatedData['why_choose_us'],
-            'mission' => $validatedData['mission'],
-            'vision' => $validatedData['vision'],
-            'core_values' => $validatedData['core_value'],
-        ]);
-
-        return redirect()->back()->with('success', 'Why Choose Us statement added successfully.');
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->extension();
+                $image->move(public_path('whyChooseUsImage'), $imageName);
+            }
+    
+            WhyChooseUs::create([
+                'why_choose_us_statements' => $validatedData['why_choose_us'],
+                'mission' => $validatedData['mission'],
+                'vision' => $validatedData['vision'],
+                'core_values' => $validatedData['core_value'],
+                'image' => 'whyChooseUsImage/'.$imageName
+            ]);
+    
+            return redirect()->back()->with('success', 'Why Choose Us statement added successfully.');
+        } catch (ValidationException $e) {
+            // Handle validation errors
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
+        } catch (QueryException $e) {
+            // Handle database query errors
+            return redirect()->back()->with('error', 'Failed to add Why Choose Us statement. Please try again.');
+        } catch (\Exception $e) {
+            // Catch any other unexpected exceptions
+            return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.');
+        }
     }
-
+ 
     public function updateWhyChooseUs(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'why_choose_us' => 'required|string',
-            'mission' => 'required|string',
-            'vision' => 'required|string',
-            'core_value' => 'required',
-        ]);
-
-        $whyChooseUs = WhyChooseUs::findOrFail($id);
-
-        $whyChooseUs->update([
-            'why_choose_us_statements' => $validatedData['why_choose_us'],
-            'mission' => $validatedData['mission'],
-            'vision' => $validatedData['vision'],
-            'core_values' => $validatedData['core_value'],
-        ]);
-
-        return redirect()->back()->with('success', 'Why Choose Us statement updated successfully.');
+        try {
+            $validatedData = $request->validate([
+                'why_choose_us' => 'required|string',
+                'mission' => 'required|string',
+                'vision' => 'required|string',
+                'core_value' => 'required', 
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
+            ]);
+    
+            $whyChooseUs = WhyChooseUs::findOrFail($id);
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->extension();
+                $image->move(public_path('whyChooseUsImage'), $imageName);
+                
+                $whyChooseUs->update(['image' =>  'whyChooseUsImage/' . $imageName]);
+            } 
+    
+            $whyChooseUs->update([
+                'why_choose_us_statements' => $validatedData['why_choose_us'],
+                'mission' => $validatedData['mission'],
+                'vision' => $validatedData['vision'],
+                'core_values' => $validatedData['core_value'],
+            ]);
+    
+            return redirect()->back()->with('success', 'Why Choose Us statement updated successfully.');
+        } catch (ValidationException $e) {
+            // Handle validation errors
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
+        } catch (ModelNotFoundException $e) {
+            // Handle model not found exception
+            return redirect()->back()->with('error', 'Record not found. Please try again.')->withInput();
+        } catch (QueryException $e) {
+            // Handle database query errors
+            $errorCode = $e->errorInfo[1]; // Get the error code
+    
+            if ($errorCode === 1062) {
+                return redirect()->back()->with('error', 'Duplicate entry. Please provide unique values.')->withInput();
+            } else {
+                return redirect()->back()->with('error', 'Database error: ' . $e->getMessage())->withInput();
+            }
+        } catch (\Exception $e) {
+            // Catch any other unexpected exceptions
+            return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.')->withInput();
+        }
     }
 
     public function storeAboutUs(Request $request){
@@ -101,7 +151,7 @@ class SettingsController extends Controller
         return redirect()->route('admin.settings.content')->with([
             'success' => 'About us updated successfully.',
         ]);
-    }
+    } 
 
     public function storeContactUs(Request $request)
     {
@@ -203,7 +253,7 @@ class SettingsController extends Controller
         $socialLink = Sociallink::findOrFail($id);
         $socialLink->update($data);
 
-        return redirect()->route('admin.settings.index')->with('success', 'Social Link updated successfully.');
+        return redirect()->back()->with('success', 'Social Link updated successfully.');
     }
 
     public function storeExecutiveSummary(Request $request){

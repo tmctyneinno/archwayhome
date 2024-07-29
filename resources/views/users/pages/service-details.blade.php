@@ -29,17 +29,14 @@
             <div class="row d-flex ">
                 <div class="col-lg-5 col-sm-12 mb-4">
                     <div class="about-image box-shadow position-relative">
-                        <img src="{{ asset('assets/images/destination/destination3.jpg')}} " alt class="w-100">
-                        <div class="video-button text-center">
-                           
-                        </div>
+                        <img src="{{ asset($service->image)}} " alt class="w-100">
+                       
                     </div>
                 </div>
                 <div class="col-lg-7 col-sm-12 mb-4">
                     <div class="about-content">
-                        <h4 class="theme d-inline-block">Service</h4>
                         <h2 class="border-b mb-2 pb-1"> {{$service->title }} </h2>
-                        <p class="border-b mb-2 pb-2">
+                        <p class=" mb-2 pb-2">
                             {!! $service->content !!}
                         </p>
                        

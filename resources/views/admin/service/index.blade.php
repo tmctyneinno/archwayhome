@@ -52,6 +52,7 @@
                                         <th>Title</th>
                                         <th>Icon</th>
                                         <th>Content</th>
+                                        <th>Image</th>
                                         <th>DATE   </th>
                                         <th>ACTION</th>
                                     </tr>
@@ -63,7 +64,9 @@
                                             <td>{{ $service->title }}</td>
                                             <td>{{  Str::limit($service->icon_class, 20) }}</td>
                                             <td>{!! Str::limit($service->content, 30) !!}</td>
-                                            
+                                            <td>
+                                                <img style=" width: 100px; height: 100px; object-fit: cover; " src="{{ asset($service->image) }}" class="img-thumbnail" height="30" alt="{{ $service->title }}"  style="max-width: 100px;"/>
+                                            </td>
                                             <td>{{ $service->created_at->format('d F Y') }}</td>
                                             <td>
                                                 <div class="dropdown">

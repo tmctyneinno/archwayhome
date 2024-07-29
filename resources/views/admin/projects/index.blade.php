@@ -82,7 +82,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr> 
                                     @empty
                                         <tr>
                                             <td colspan="7" class="text-center">No Project items found.</td>

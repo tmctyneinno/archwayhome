@@ -39,8 +39,6 @@ Route::post('/book-inspection', [BookInspection::class, 'store'])->name('book-in
 
 // Route::get('/login', [HomeController::class, 'login'])->name('home.login');
 // Route::get('/registration', [HomeController::class, 'registration'])->name('home.registration');
-Route::get('privacy-policy', [HomeController::class, 'privacypolicy'])->name('home.privacypolicy');
-
 Route::get('/project/{id}', [HomeController::class, 'detailsProject'])->name('home.project.details');
 Route::get('/post/details/{id}', [HomeController::class, 'detailsPost'])->name('post-details');
 Route::post('/post/comment', [HomeController::class, 'storeComment'])->name('comments.store');
