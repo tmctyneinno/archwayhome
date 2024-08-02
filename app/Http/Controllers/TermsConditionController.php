@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class TermsConditionController extends Controller
 {
+    public function index(Request $request){
+        return view('admin.settings.termsCondition.index');
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

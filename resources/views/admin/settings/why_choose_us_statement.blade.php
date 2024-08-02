@@ -29,6 +29,7 @@
                             @enderror
                             <br>
                             <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
+                            <br>
                             <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
                             @if(empty($whyChooseUs->image))
                             @else

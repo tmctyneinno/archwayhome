@@ -57,7 +57,7 @@
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
                                         <div class="col-sm-9">
-                                            <textarea id="content" class="form-control" placeholder="Content"  name="content" required>{{ $team->content}}</textarea>
+                                            <textarea id="ckeditor" class="form-control" placeholder="Content"  name="content" required>{{ $team->content}}</textarea>
                                         </div>
                                     </div>
                                    
@@ -104,9 +104,8 @@
                                         }
                                     }
                                 </script>
-                                <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
                                 <script>
-                                    CKEDITOR.replace('content');
+                                    CKEDITOR.replace('ckeditor');
                                 </script>
                             </div>
                             

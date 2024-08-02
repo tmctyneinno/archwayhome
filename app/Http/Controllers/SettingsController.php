@@ -6,11 +6,10 @@ use App\Http\Traits\SettingsTrait;
 use App\Models\ContactUs;
 use App\Models\ExecutiveSummary;
 use App\Models\OfficeHours;
-use App\Models\Sociallink;
 use Illuminate\Http\Request;
 use App\Models\WhyChooseUs;
 use App\Models\AboutUs;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\ValidationException; 
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -48,13 +47,10 @@ class SettingsController extends Controller
     
             return redirect()->back()->with('success', 'Why Choose Us statement added successfully.');
         } catch (ValidationException $e) {
-            // Handle validation errors
             return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (QueryException $e) {
-            // Handle database query errors
             return redirect()->back()->with('error', 'Failed to add Why Choose Us statement. Please try again.');
         } catch (\Exception $e) {
-            // Catch any other unexpected exceptions
             return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.');
         }
     }
@@ -88,14 +84,11 @@ class SettingsController extends Controller
     
             return redirect()->back()->with('success', 'Why Choose Us statement updated successfully.');
         } catch (ValidationException $e) {
-            // Handle validation errors
             return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (ModelNotFoundException $e) {
-            // Handle model not found exception
             return redirect()->back()->with('error', 'Record not found. Please try again.')->withInput();
         } catch (QueryException $e) {
-            // Handle database query errors
-            $errorCode = $e->errorInfo[1]; // Get the error code
+            $errorCode = $e->errorInfo[1]; 
     
             if ($errorCode === 1062) {
                 return redirect()->back()->with('error', 'Duplicate entry. Please provide unique values.')->withInput();
@@ -103,11 +96,13 @@ class SettingsController extends Controller
                 return redirect()->back()->with('error', 'Database error: ' . $e->getMessage())->withInput();
             }
         } catch (\Exception $e) {
-            // Catch any other unexpected exceptions
             return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.')->withInput();
         }
     }
 
+    public function getAboutUs(Request $request){
+        return view('admin.settings.aboutUs.index');
+    }
     public function storeAboutUs(Request $request){
         $validated = $request->validate([
             'title' => 'required',
@@ -125,7 +120,7 @@ class SettingsController extends Controller
         ]
         ));
 
-        return redirect()->route('admin.settings.content')->with([
+        return redirect()->back()->with([
             'successAboutus' => 'About us created successfully.',
             'active_tab' => 'v-pills-profile' 
         ]);
@@ -148,10 +143,14 @@ class SettingsController extends Controller
             'content' => $validated['content'],
         ]);
  
-        return redirect()->route('admin.settings.content')->with([
+        return redirect()->back()->with([
             'success' => 'About us updated successfully.',
         ]);
     } 
+
+    public function getContactUs(Request $request){
+        return view('admin.settings.contactUs.index');
+    }
 
     public function storeContactUs(Request $request)
     {
@@ -176,7 +175,7 @@ class SettingsController extends Controller
 
         ContactUs::create($validated);
 
-        return redirect()->route('admin.settings.content')->with('success', 'Contact us created successfully.');
+        return redirect()->back()->with('success', 'Contact us created successfully.');
     }
  
     public function updateContactUs(Request $request, $id)
@@ -222,38 +221,7 @@ class SettingsController extends Controller
 
         $contactUs->save();
 
-        return redirect()->route('admin.settings.content')->with('success', 'Contact us updated successfully.');
-    }
-
-
-    public function storeSocialLinks(Request $request){
-        $data = $request->validate([
-            'facebook' => 'required|string|max:255',
-            'twitter' => 'required|string|max:255',
-            'whatsapp' => 'required|string|max:255',
-            'instagram' => 'required|string|max:255',
-            'linkedin' => 'required|string',
-            'youtube' => 'required|string',
-        ]);
-
-        Sociallink::create($data);
-        return redirect()->route('admin.settings.content')->with('success', 'Social Link created successfully.');
-    }
-
-    public function updateSocialLinks(Request $request, $id)
-    {
-        $data = $request->validate([
-            'facebook' => 'required|string|max:255',
-            'twitter' => 'required|string|max:255',
-            'whatsapp' => 'required|string|max:255',
-            'instagram' => 'required|string|max:255',
-            'linkedin' => 'required|string',
-            'youtube' => 'required|string',
-        ]);
-        $socialLink = Sociallink::findOrFail($id);
-        $socialLink->update($data);
-
-        return redirect()->back()->with('success', 'Social Link updated successfully.');
+        return redirect()->back()->with('success', 'Contact us updated successfully.');
     }
 
     public function storeExecutiveSummary(Request $request){
@@ -269,7 +237,7 @@ class SettingsController extends Controller
         ]
         ));
 
-        return redirect()->route('admin.settings.content')->with([
+        return redirect()->back()->with([
             'successAboutus' => 'Executive Summarysuccessfully.',
             'active_tab' => 'v-pills-profile' 
         ]);
@@ -292,6 +260,10 @@ class SettingsController extends Controller
         return redirect()->route('admin.settings.content')->with([
             'success' => 'Executive Summary updated successfully.',
         ]);
+    }
+ 
+    public function indexOfficeHours(Request $request){
+        return view('admin.settings.officeHours.index');
     }
 
     public function storeOfficeHours(Request $request){

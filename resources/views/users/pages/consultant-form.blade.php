@@ -26,12 +26,28 @@
             <div class="row">
                 <div class="col-lg-10 col-offset-lg-1 mx-auto">
                     <div class="contact-info bg-white pt-10 pb-10 px-5">
-                        <div class="contact-info-title text-center mb-4 px-5">
+                        
+                        <div class="contact-info-title text-center mb-2 px-5">
                             <h3 class="mb-1">Realtors Registration Form
                             </h3>
                         </div>
+                        @if(isset($referralDetails))
+                        <div style="background:#000052; border-radius:8px" class="text-center alert alert-info alert-dismissible fade show p-2" role="alert">
+                            <span style="color: #fff; padding-right:20px">You are being refered by {{$referralDetails->fullname}}</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @else
+                        <div style="background:#000052; border-radius:8px" class="text-center alert alert-warning alert-dismissible fade show p-2" role="alert">
+                            <span style="color: #fff; padding-right:20px">You are being refered by Ackwayhome and Investment Limited</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
                         
-                        <div id="contact-form1" class="contact-form px-5">
+                        <div id="contact-form1" class="contact-form px-5 pt-2">
                            
                             <form method="post" action="#" name="contactform2" id="consultantForm">
                                 @csrf
@@ -111,23 +127,30 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="mb-2 captcha">
-                                        <span>{!! captcha_img('math') !!}</span>
-                                        <button type="button" class="btn btn-danger reload" id="reload">&#x21bb;</button>
-                                    </div>
                                     <div class="mb-2 col-6">
                                         <label>Enter Captcha</label>
                                         <input type="text" name="captcha" class="form-control @error('captcha') is-invalid @enderror" placeholder="Enter Captcha" >
                                         @error('captcha') 
                                             <div class="invalid-feedback">{{ $message }}</div> 
                                         @enderror 
+                                        <div class="mt-2 captcha">
+                                            <span>{!! captcha_img('math') !!}</span>
+                                            <button type="button" class="btn btn-danger reload" id="reload">&#x21bb;</button>
+                                        </div>
                                     </div>
+                                    <div class="mb-2 col-6">
+                                        <input type="hidden" name="referral_code" class="form-control" id="referralCode" value="{{ isset($referralDetails) ? $referralDetails->referralCode : '' }}" placeholder="Referral Code" readonly>
+                                    </div>
+                                     
                                 </div>
                                 <div id="contactform-error-msg" class="invalid-feedback"></div>
                                 <div class="comment-btn text-center">
-                                    <button type="submit" class="nir-btn" id="consultantForm"
-                                    >Submit 
-                                </button>
+                                    <button type="submit" class="nir-btn" id="consultantForm">
+                                        <span id="buttonText">Submit</span>
+                                        <span id="loadingSpinner" style="display: none;">
+                                            <i class="fa fa-spinner fa-spin"></i> Loading...
+                                        </span>
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -153,6 +176,9 @@
                                 });
                                 $('#consultantForm').submit(function(event) {
                                     event.preventDefault(); 
+                                    // Show loading spinner and hide button text
+                                    $('#loadingSpinner').show();
+                                    $('#buttonText').hide();
 
                                     // Perform Ajax validation
                                     $.ajax({
@@ -175,6 +201,11 @@
                                         },
                                         error: function(xhr, textStatus, errorThrown) {
                                             console.error('Error:', errorThrown);
+                                        },
+                                        complete: function() {
+                                            // Hide loading spinner and show button text
+                                            $('#loadingSpinner').hide();
+                                            $('#buttonText').show();
                                         }
                                     });
                                 });

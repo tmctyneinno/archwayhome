@@ -92,10 +92,36 @@
                                     @endforelse
                                  </tbody>
                             </table>
-                            <div class="d-flex justify-content-center">
-                                <div class="d-flex justify-content-center mt-4">
-                                    {{ $galleries->links('vendor.pagination.bootstrap-4') }} 
-                                </div>
+                            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                <p class="mb-2 me-3">
+                                    Page {{ $galleries->currentPage() }} of {{ $galleries->lastPage() }}, showing {{ $galleries->count() }} records out of {{ $galleries->total() }} total, starting on record {{ $galleries->firstItem() }}, ending on record {{ $galleries->lastItem() }}
+                                </p> 
+                                <nav aria-label="Page navigation example mb-2">
+                                  <ul class="pagination mb-2 mb-sm-0">
+                                    <!-- Previous Page Link -->
+                                    <li class="page-item {{ $galleries->onFirstPage() ? 'disabled' : '' }}">
+                                      <a class="page-link" href="{{ $galleries->previousPageUrl() }}">
+                                        {{-- <i class="fa-solid fa-angle-left"></i> --}}
+                                        <i>Previous</i>
+                                      </a>
+                                    </li>
+
+                                    <!-- Pagination Elements -->
+                                    @for ($i = 1; $i <= $galleries->lastPage(); $i++)
+                                      <li class="page-item {{ $galleries->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $galleries->url($i) }}">{{ $i }}</a>
+                                      </li>
+                                    @endfor
+
+                                    <!-- Next Page Link -->
+                                    <li class="page-item {{ $galleries->hasMorePages() ? '' : 'disabled' }}">
+                                      <a class="page-link" href="{{ $galleries->nextPageUrl() }}">
+                                        {{-- <i class="fa-solid fa-angle-right"></i> --}}
+                                        <i>Next</i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>

@@ -4,10 +4,12 @@ use App\Http\Controllers\BookInspection;
 use App\Http\Controllers\ConsultantFormController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ExecutiveSummaryController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\QuicklinkController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SociallinkController;
 use App\Models\PrivacyPolicy;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -57,21 +59,26 @@ Route::prefix('admin')->group(function () {
         Route::post('/settings/store/why-choose-us', [SettingsController::class, 'storeWhyChooseUs'])->name('admin.settings.store_why_choose_us');
         Route::put('/settings/update/why-choose-us/{id}', [SettingsController::class, 'updateWhyChooseUs'])->name('admin.settings.update_why_choose_us');
         //About us
+        Route::get('/settings/about-us', [SettingsController::class, 'getAboutUs'])->name('admin.settings.aboutUs');
         Route::post('/settings/store/about-us', [SettingsController::class, 'storeAboutUs'])->name('admin.settings.storeAboutus');
         Route::put('/settings/update/about-us/{id}', [SettingsController::class, 'updateAboutUs'])->name('admin.settings.updateAboutus');
         //Executive Summary
+        Route::get('/settings/executive-summary', [ExecutiveSummaryController::class, 'index'])->name('admin.settings.executiveSummary');
         Route::post('/settings/store/executive-summary', [SettingsController::class, 'storeExecutiveSummary'])->name('admin.settings.storeExecutiveSummary');
         Route::put('/settings/update/executive-summary/{id}', [SettingsController::class, 'updateExecutiveSummary'])->name('admin.settings.updateExecutiveSummary');
-        //Office Hours
+        //Office Hours 
+        Route::get('/settings/office/hours/index', [SettingsController::class, 'indexOfficeHours'])->name('admin.officeHours.index');
         Route::post('/settings/store/office-hours', [SettingsController::class, 'storeOfficeHours'])->name('admin.office-hours.store');
         Route::put('/settings/update/office-hours/{id}', [SettingsController::class, 'updatestoreOfficeHours'])->name('admin.office-hours.update');
          
         //Contact Us 
+        Route::get('/settings/contact-us', [SettingsController::class, 'getcontactUs'])->name('admin.settings.contactUs');
         Route::post('/settings/store/contact-us', [SettingsController::class, 'storeContactUs'])->name('admin.settings.storeContactUs');
         Route::put('/settings/update/contact-us/{id}', [SettingsController::class, 'updateContactUs'])->name('admin.settings.updateContactUs');
         //Social Links 
-        Route::post('/settings/store/social-links', [SettingsController::class, 'storeSocialLinks'])->name('admin.settings.storeSocialLinks');
-        Route::put('/settings/update/social-links/{id}', [SettingsController::class, 'updateSocialLinks'])->name('admin.settings.updateSocialLinks');
+        Route::get('/sociallinks/index', [SociallinkController::class, 'index'])->name('admin.socialLink.index');
+        Route::post('/settings/store/social-links', [SociallinkController::class, 'storeSocialLinks'])->name('admin.settings.storeSocialLinks');
+        Route::put('/settings/update/social-links/{id}', [SociallinkController::class, 'updateSocialLinks'])->name('admin.settings.updateSocialLinks');
        
         //Project
         Route::get('/project/index', [ProjectController::class, 'index'])->name('admin.project.index');
@@ -89,6 +96,7 @@ Route::prefix('admin')->group(function () {
         Route::put('/post/{id}', [BlogController::class, 'updatePost'])->name('admin.post.update');
         Route::get('post/{id}', [BlogController::class, 'destroyPost'])->name('admin.post.destroy');
         //Teams
+        Route::get('/team/index', [TeamController::class, 'getTeam'])->name('admin.team.getTeam');
         Route::get('/team/create', [TeamController::class, 'create'])->name('admin.team.create');
         Route::post('/team/store', [TeamController::class, 'store'])->name('admin.team.store');
         Route::get('/team/{id}/edit', [TeamController::class, 'edit'])->name('admin.team.edit');
@@ -96,10 +104,12 @@ Route::prefix('admin')->group(function () {
         Route::get('/team/{id}', [TeamController::class, 'destroy'])->name('admin.team.destroy');
        
          //Privacy
-         Route::post('/store/privacypolicy', [PrivacyController::class, 'store'])->name('admin.privacy.store');
-         Route::put('/update/privacypolicy/{id}', [PrivacyController::class, 'update'])->name('admin.privacy.update');
+        Route::get('/index/privacypolicy', [PrivacyController::class, 'index'])->name('admin.privacyPolicy.index');
+        Route::post('/store/privacypolicy', [PrivacyController::class, 'store'])->name('admin.privacy.store');
+        Route::put('/update/privacypolicy/{id}', [PrivacyController::class, 'update'])->name('admin.privacy.update');
         
         //Terms Conditions
+        Route::get('/terms/conditions', [TermsConditionController::class, 'index'])->name('admin.termsCondition.index');
         Route::post('/terms/conditions/store/', [TermsConditionController::class, 'store'])->name('admin.termsCondition.store');
         Route::put('/terms/conditions/update/{id}', [TermsConditionController::class, 'update'])->name('admin.termsCondition.update');
          
@@ -119,7 +129,8 @@ Route::prefix('admin')->group(function () {
         Route::put('/projects/status/{id}', [GalleryContoller::class, 'update'])->name('admin.gallery.update');
         Route::get('/gaprojects/statusllery/{id}', [GalleryContoller::class, 'destroy'])->name('admin.projects.status.destroy');
         
-        //QuickLink
+        //QuickLink 
+        Route::get('/quicklink/index', [QuicklinkController::class, 'index'])->name('admin.quicklink.index');
         Route::get('/quicklink/create', [QuicklinkController::class, 'create'])->name('admin.quicklink.create');
         Route::post('/quicklink/store', [QuicklinkController::class, 'store'])->name('admin.quicklink.store');
         Route::get('quicklink/{id}/edit', [QuicklinkController::class, 'edit'])->name('admin.quicklink.edit');

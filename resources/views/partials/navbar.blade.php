@@ -49,7 +49,7 @@
           <div class="container">
               <div class="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
 
-                  <div class="navbar-header">
+                  <div class="navbar-header"> 
                       <a class="navbar-brand" href="{{ url('/') }}">
                           <img src="{{ asset($contactUs->site_logo) }}" style=" width: 100px; height: 70px; object-fit: cover; " alt="image">
                           {{-- <img src="{{ asset('assets/images/blue_arc.jpg') }}" style=" width: 120px; height: 60px; object-fit: cover; " alt="image"> --}}

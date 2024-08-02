@@ -47,24 +47,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $projects = Project::latest()->get();
+        $projects = Project::latest()->paginate(20);
         View::share('projects', $projects);
         $totalProjects = $projects->count();
         View::share('totalProjects', $totalProjects);
         $consultant = Consultant::latest()->get();
+        $consultants = Consultant::select('*')
+            ->withCount(['referralsMade as total_referrals_made', 'referralsReceived as total_referrals_received'])
+            ->latest()->paginate(20);
+            
         $totalConsultant = $consultant->count();
         View::share('totalConsultant', $totalConsultant);
-        $inspection = Inspection::latest()->get();
+        $inspection = Inspection::latest()->paginate(20);
         $totalInspection = $inspection->count();
         View::share('totalInspection', $totalInspection);
-        $contact = Contact::latest()->get();
+        $contact = Contact::latest()->paginate(20);
         $totalContact = $contact->count();
         View::share('totalContacts', $totalContact);
         View::share('contacts', $contact);
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->paginate(20);
         $totalPost = $posts->count();
         View::share('totalPost', $totalPost);
-        $galleries = Gallery::orderBy('created_at', 'desc')->paginate(10);
+        $galleries = Gallery::orderBy('created_at', 'desc')->paginate(20);
         $totalGallery = $galleries->count();
         View::share('galleries', $galleries);
         View::share('totalGallery', $totalGallery);
@@ -77,12 +81,13 @@ class AppServiceProvider extends ServiceProvider
         View::share('totalFaqSubmitForm', $totalSubmitForm);
 
         // $events = Event::latest()->get();
-        $events = Event::orderBy('created_at', 'desc')->paginate(10);
+        $events = Event::orderBy('created_at', 'desc')->paginate(20);
         $totalEvent = $events->count();
         View::share('events', $events);
         View::share('totalEvent', $totalEvent);
 
-        View::share('consultants', $consultant);
+        View::share('consultant', $consultant);
+        View::share('consultants', $consultants);
         View::share('inspections', $inspection);
         View::share('contactUs', ContactUs::first());
         View::share('aboutUs', AboutUs::first());

@@ -14,15 +14,12 @@
                     <p class="mb-0">Welcome to {{ $contactUs->company_name}} backend</p>
                 </div>
                 <a href="{{route('admin.consultant.index')}}" class="btn btn-primary rounded light">View Consultant</a>
-            </div>
+            </div> 
             <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-12 align-center">
+                <div class="col-xl-6 col-lg-8 align-center">
                     <div class="card">
-                    
                         <div class="card-body">
                             <div class="basic-form">
-                              
-                                
                                 <form method="POST"  action="#" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3 row align-items-center">
@@ -101,7 +98,40 @@
                                    
                                    
                                 </form>
-                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-4 align-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <h4 class="text-black font-w600">Referral details</h4>
+                                <h5>Referred by:</h5>
+                                @if($referrerDetails->isNotEmpty())
+                                   
+                                    <ul>
+                                        @foreach($referrerDetails as $referrer)
+                                            <li>{{ $referrer->fullname }} ({{ $referrer->email }})</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p >ARCHWAYHOMES AND INVESTMENT LIMITED </p>
+                                @endif
+                                <br/>
+                                <h5>Referrals Made:</h5>
+                                @if($consultant->referralsMade->isNotEmpty())
+                                    
+                                    <ul>
+                                        @foreach($consultant->referralsMade as $referral)
+                                            <li>Referred: {{ $referral->consultant->fullname }} ({{ $referral->consultant->email }})</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p>No referrals made.</p>
+                                @endif
+
                             </div>
                             
                         </div>

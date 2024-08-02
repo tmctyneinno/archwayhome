@@ -11,6 +11,10 @@ class TeamController extends Controller
         return view('admin.settings.index');
     }
 
+    public function getTeam(Request $request){
+        return view('admin.settings.team.index');
+    }
+
     public function create(){
      
         return view('admin.teams.create');

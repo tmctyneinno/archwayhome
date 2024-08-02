@@ -5,7 +5,17 @@
         </div>
         <div class="card-body">
             <div class="basic-form">
-               
+                @if(session('success'))
+                    <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div id="success-danger" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

@@ -1,7 +1,7 @@
 <div class="col-xl-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title"> Privacy Policy</h4>
+            <h4 class="card-title"> Terms and Conditions</h4>
         </div>
         <div class="card-body">
             <div class="basic-form">
@@ -19,6 +19,7 @@
                         </ul>
                     </div>
                 @endif
+
                 <script>
                     window.setTimeout(function() {
                        var alert = document.getElementById('success-alert');
@@ -27,27 +28,27 @@
                        }
                    }, 3000);
                </script>
-
                 
-                <form method="POST" action="{{ isset($policies) ? route('admin.privacy.update', $policies->id) : route('admin.privacy.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ isset($termsCondition) ? route('admin.termsCondition.update', $termsCondition->id) : route('admin.termsCondition.store') }}" enctype="multipart/form-data">
                     @csrf
-                    @if(isset($policies))
+                    @if(isset($termsCondition))
                         @method('PUT')
                     @endif
                     <div class="row">
                         <div class="mb-3 col-md-10">
-                            <label class="form-label">Privacy Policy</label>
-                            <textarea id="privacy" class="form-control" placeholder="Privacy Policy" name="content" rows="8" spellcheck="false" required>{{ isset($policies) ? $policies->content : '' }}</textarea>
+                            <label class="form-label">Terms and Conditions</label>
+                            <textarea id="ckeditor" class="form-control" placeholder="Terms and Conditions" name="content" rows="8" spellcheck="false" required> {{ isset($termsCondition) ? $termsCondition->content : '' }}</textarea>
                         </div>
+                       
+                       
                     </div>
-                    <button type="submit" class="btn btn-primary">{{ isset($policies) ? 'Update' : 'Add' }}</button>
+                    <button type="submit" class="btn btn-primary">{{ isset($termsCondition) ? 'Update' : 'Add' }}</button>
                 </form>
-                
             </div>
         </div>
     </div>
 </div>
-<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
 <script>
-    CKEDITOR.replace('privacy');
+    CKEDITOR.replace('ckeditor');
 </script>

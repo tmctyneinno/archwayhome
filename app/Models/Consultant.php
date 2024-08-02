@@ -9,6 +9,7 @@ class Consultant extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'fullname',
         'phone',
         'email',
@@ -21,5 +22,21 @@ class Consultant extends Model
         'account_name',
         'account_number',
         'bank',
+        'referralCode',
+        'password',
     ];
+
+    
+    public function referralsMade()
+    {
+        return $this->hasMany(ReferralLog::class, 'referrer_id', 'id');
+    }
+ 
+    public function referralsReceived()
+    {
+        return $this->hasMany(ReferralLog::class, 'consultant_id', 'id');
+    }
+
+   
+
 }

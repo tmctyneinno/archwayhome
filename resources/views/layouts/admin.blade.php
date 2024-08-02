@@ -41,7 +41,7 @@
     <link href="{{ asset ('backend/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{ asset ('backend/vendor/datatables/responsive/responsive.css')}}" rel="stylesheet">
     <link href="{{ asset ('backend/vendor/dropzone/dist/dropzone.css')}}" rel="stylesheet">
-
+    <link href="{{ asset ('backend/vendor/nestable2/css/jquery.nestable.min.css')}}" rel="stylesheet">
 </head>
 
 <body>
@@ -102,7 +102,8 @@
 	<script src="{{ asset ('backend/vendor/datatables/responsive/responsive.js')}}"></script>
     <script src="{{ asset ('backend/vendor/js/plugins-init/datatables.init.js')}}"></script>
     <script src="{{ asset ('backend/vendor/dropzone/dist/dropzone.js')}}"></script>
-
+    <script src="{{ asset ('backend/vendor/nestable2/js/jquery.nestable.min.js')}}"></script>
+    <script src="{{ asset ('backend/vendor/global/global.min.js')}}"></script>
     <!-- Dashboard 1 -->
     <script>
         // JavaScript to automatically update the current year
@@ -144,7 +145,7 @@
 			   $('.testimonial-one').trigger('prev.owl.carousel');
 			});
 			/*Custom Navigation work*/
-		}
+		} 
 		
 		jQuery(window).on('load',function(){
 			setTimeout(function(){

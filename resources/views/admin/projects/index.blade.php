@@ -93,6 +93,37 @@
                                 
                                 
                             </table>
+                            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                <p class="mb-2 me-3">
+                                    Page {{ $projects->currentPage() }} of {{ $projects->lastPage() }}, showing {{ $projects->count() }} records out of {{ $projects->total() }} total, starting on record {{ $projects->firstItem() }}, ending on record {{ $projects->lastItem() }}
+                                </p> 
+                                <nav aria-label="Page navigation example mb-2">
+                                  <ul class="pagination mb-2 mb-sm-0">
+                                    <!-- Previous Page Link -->
+                                    <li class="page-item {{ $projects->onFirstPage() ? 'disabled' : '' }}">
+                                      <a class="page-link" href="{{ $projects->previousPageUrl() }}">
+                                        {{-- <i class="fa-solid fa-angle-left"></i> --}}
+                                        <i>Previous</i>
+                                      </a>
+                                    </li>
+
+                                    <!-- Pagination Elements -->
+                                    @for ($i = 1; $i <= $projects->lastPage(); $i++)
+                                      <li class="page-item {{ $projects->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $projects->url($i) }}">{{ $i }}</a>
+                                      </li>
+                                    @endfor
+
+                                    <!-- Next Page Link -->
+                                    <li class="page-item {{ $projects->hasMorePages() ? '' : 'disabled' }}">
+                                      <a class="page-link" href="{{ $projects->nextPageUrl() }}">
+                                        {{-- <i class="fa-solid fa-angle-right"></i> --}}
+                                        <i>Next</i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>

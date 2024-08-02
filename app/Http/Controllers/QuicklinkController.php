@@ -6,7 +6,11 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class QuicklinkController extends Controller
-{
+{ 
+    public function index(Request $request){
+        return view('admin.settings.quickLink.index');
+    }
+
     public function create(){
      
         return view('admin.quicklink.create');

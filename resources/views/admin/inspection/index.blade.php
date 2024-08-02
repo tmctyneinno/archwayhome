@@ -22,7 +22,7 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                        </div>
+                        </div> 
                     </div>
                     <script>
                          window.setTimeout(function() {
@@ -89,6 +89,37 @@
                                 
                                 
                             </table>
+                            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                <p class="mb-2 me-3">
+                                    Page {{ $inspections->currentPage() }} of {{ $inspections->lastPage() }}, showing {{ $inspections->count() }} records out of {{ $inspections->total() }} total, starting on record {{ $inspections->firstItem() }}, ending on record {{ $inspections->lastItem() }}
+                                </p> 
+                                <nav aria-label="Page navigation example mb-2">
+                                  <ul class="pagination mb-2 mb-sm-0">
+                                    <!-- Previous Page Link -->
+                                    <li class="page-item {{ $inspections->onFirstPage() ? 'disabled' : '' }}">
+                                      <a class="page-link" href="{{ $inspections->previousPageUrl() }}">
+                                        {{-- <i class="fa-solid fa-angle-left"></i> --}}
+                                        <i>Previous</i>
+                                      </a>
+                                    </li>
+
+                                    <!-- Pagination Elements -->
+                                    @for ($i = 1; $i <= $inspections->lastPage(); $i++)
+                                      <li class="page-item {{ $inspections->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $inspections->url($i) }}">{{ $i }}</a>
+                                      </li>
+                                    @endfor
+
+                                    <!-- Next Page Link -->
+                                    <li class="page-item {{ $inspections->hasMorePages() ? '' : 'disabled' }}">
+                                      <a class="page-link" href="{{ $inspections->nextPageUrl() }}">
+                                        {{-- <i class="fa-solid fa-angle-right"></i> --}}
+                                        <i>Next</i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>

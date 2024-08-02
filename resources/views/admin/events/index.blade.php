@@ -94,10 +94,36 @@
                                  </tbody>
                             </table>
                             
-                            <div class="d-flex justify-content-center">
-                                <div class="d-flex justify-content-center mt-4">
-                                    {{ $events->links('vendor.pagination.bootstrap-4') }} 
-                                </div>
+                            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                <p class="mb-2 me-3">
+                                    Page {{ $events->currentPage() }} of {{ $events->lastPage() }}, showing {{ $events->count() }} records out of {{ $events->total() }} total, starting on record {{ $events->firstItem() }}, ending on record {{ $events->lastItem() }}
+                                </p> 
+                                <nav aria-label="Page navigation example mb-2">
+                                  <ul class="pagination mb-2 mb-sm-0">
+                                    <!-- Previous Page Link -->
+                                    <li class="page-item {{ $events->onFirstPage() ? 'disabled' : '' }}">
+                                      <a class="page-link" href="{{ $events->previousPageUrl() }}">
+                                        {{-- <i class="fa-solid fa-angle-left"></i> --}}
+                                        <i>Previous</i>
+                                      </a>
+                                    </li>
+
+                                    <!-- Pagination Elements -->
+                                    @for ($i = 1; $i <= $events->lastPage(); $i++)
+                                      <li class="page-item {{ $events->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $events->url($i) }}">{{ $i }}</a>
+                                      </li>
+                                    @endfor
+
+                                    <!-- Next Page Link -->
+                                    <li class="page-item {{ $events->hasMorePages() ? '' : 'disabled' }}">
+                                      <a class="page-link" href="{{ $events->nextPageUrl() }}">
+                                        {{-- <i class="fa-solid fa-angle-right"></i> --}}
+                                        <i>Next</i>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </nav>
                             </div>
                             
                     
