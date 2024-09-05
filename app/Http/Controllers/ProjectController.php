@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\ProjectMenu;
 use Illuminate\Http\Request;
+use Exception;
 
 class ProjectController extends Controller
 {
@@ -26,42 +27,62 @@ class ProjectController extends Controller
             'land_size' => 'required|string|max:255',
             'project_menu_id' => 'required|exists:project_menus,id',
             'content' => 'required|string',
-            'brochure' => 'required|mimes:pdf|max:20240',
-            'land_payment_plan' => 'required|mimes:jpeg,png,jpg,gif|max:20240',
-            'subscription_form' => 'required|mimes:pdf|max:20240',
-            'video_link' => 'required|string', 
-            'image' => 'required|mimes:jpeg,png,jpg,gif|max:20240', 
+            'brochure' => 'nullable|mimes:pdf|max:90240', // Use 'nullable' if the file is optional
+            'land_payment_plan' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240',
+            'subscription_form' => 'nullable|mimes:pdf|max:90240',
+            'video_link' => 'nullable|string',
+            'image' => 'required|mimes:jpeg,png,jpg,gif|max:9048', // Add max file size check
         ]);
-
-       
-        $brochurePath = $request->file('brochure')->getClientOriginalName();
-        $request->file('brochure')->move(public_path('projectDocument/brochures'), $brochurePath);
-
-        $landPaymentPlanPath = $request->file('land_payment_plan')->getClientOriginalName();
-        $request->file('land_payment_plan')->move(public_path('projectDocument/landPaymentPlans'), $landPaymentPlanPath);
-
-        $subscriptionFormPath = $request->file('subscription_form')->getClientOriginalName();
-        $request->file('subscription_form')->move(public_path('projectDocument/subscriptionForms'), $subscriptionFormPath);
-
-        $imagePath = $request->file('image')->getClientOriginalName();
-        $request->file('image')->move(public_path('projectDocument/projectsImages'), $imagePath);
-
-        Project::create([
-            'title' => $request->title,
-            'sub_title' => $request->title,
-            'location' => $request->location,
-            'land_size' =>  $request->land_size,
-            'project_menu_id' =>  $request->project_menu_id,
-            'content' => $request->content,
-            'brochure' => 'projectDocument/brochures/' . $brochurePath,
-            'land_payment_plan' => 'projectDocument/landPaymentPlans/' . $landPaymentPlanPath,
-            'subscription_form' => 'projectDocument/subscriptionForms/' . $subscriptionFormPath,
-            'video_link' => $request->video_link,
-            'image' => 'projectDocument/projectsImages/' . $imagePath,
-        ]);
-
-        return redirect()->route('admin.project.create')->with('success', 'Project created successfully.');
+    
+        try {
+            // Initialize paths
+            $brochurePath = null;
+            $landPaymentPlanPath = null;
+            $subscriptionFormPath = null;
+            $imagePath = null;
+    
+            // Check if files are uploaded and process them
+            if ($request->hasFile('brochure')) {
+                $brochurePath = $request->file('brochure')->getClientOriginalName();
+                $request->file('brochure')->move(public_path('projectDocument/brochures'), $brochurePath);
+            }
+    
+            if ($request->hasFile('land_payment_plan')) {
+                $landPaymentPlanPath = $request->file('land_payment_plan')->getClientOriginalName();
+                $request->file('land_payment_plan')->move(public_path('projectDocument/landPaymentPlans'), $landPaymentPlanPath);
+            }
+    
+            if ($request->hasFile('subscription_form')) {
+                $subscriptionFormPath = $request->file('subscription_form')->getClientOriginalName();
+                $request->file('subscription_form')->move(public_path('projectDocument/subscriptionForms'), $subscriptionFormPath);
+            }
+    
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->getClientOriginalName();
+                $request->file('image')->move(public_path('projectDocument/projectsImages'), $imagePath);
+            }
+    
+            // Create the project
+            Project::create([
+                'title' => $request->title,
+                'sub_title' => $request->sub_title,
+                'location' => $request->location,
+                'land_size' => $request->land_size,
+                'project_menu_id' => $request->project_menu_id,
+                'content' => $request->content,
+                'brochure' => $brochurePath ? 'projectDocument/brochures/' . $brochurePath : null,
+                'land_payment_plan' => $landPaymentPlanPath ? 'projectDocument/landPaymentPlans/' . $landPaymentPlanPath : null,
+                'subscription_form' => $subscriptionFormPath ? 'projectDocument/subscriptionForms/' . $subscriptionFormPath : null,
+                'video_link' => $request->video_link,
+                'image' => $imagePath ? 'projectDocument/projectsImages/' . $imagePath : null,
+            ]);
+    
+            return redirect()->route('admin.project.create')->with('success', 'Project created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'There was an error creating the project.');
+        }
     }
+    
 
     public function edit($id){
         $project = Project::findOrFail( decrypt($id));

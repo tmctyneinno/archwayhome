@@ -37,69 +37,107 @@
                                         </ul>
                                     </div>
                                 @endif
-                
-                                
+             
                                 <form method="POST"  action="{{ route('admin.project.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Title</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" placeholder="Title" name="title" id="title" required>
+                                            @error('title')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Sub title</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" placeholder="Sub title" name="sub_title" id="sub_title" required>
+                                            @error('sub_title')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Location</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" placeholder="Location" name="location"  id="location" required>
+                                            @error('location')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Land Size</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" placeholder="Land size" name="land_size"  id="land_size" required>
+                                            @error('land_size')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Select Project type</label>
                                         <div class="col-sm-9">
-                                            <select class="form-control default-select mb-3" name="project_menu_id" required>
+                                            <select class="form-select mb-3" name="project_menu_id" required>
                                                 <option selected disabled>Select Project type</option>
                                                 @foreach ($projectMenus as $projectMenu)
                                                     <option value="{{ $projectMenu->id }}">{{ $projectMenu->name }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('project_menu_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
-                                        <div class="col-sm-9">
-                                            <div class="">
-                                                <textarea name="content" id="content" class="form-control" required></textarea>
-                                            </div>
+                                        <div class="mb-3 col-sm-9">
+                                            <label class="form-label">Content</label>
+                                            <textarea id="ckeditor" class="form-control"  name="content" rows="8" spellcheck="false" required> </textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Brochure</label>
                                         <div class="col-sm-9">
                                             <input type="file" class="form-control" placeholder="Location" name="brochure" id="brochure" accept="application/pdf" >
+                                            @error('brochure')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Land Payment Plan</label>
                                         <div class="col-sm-9">
                                             <input type="file" class="form-control" placeholder="Location" name="land_payment_plan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" >
+                                            @error('land_payment_plan')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Subcription Form</label>
                                         <div class="col-sm-9">
-                                            <input type="file" class="form-control"  name="subscription_form" id="landPaymentPlan" accept="application/pdf" >
+                                            <input type="file" class="form-control"  name="subscription_form" id="subscription_form" accept="application/pdf" >
+                                            @error('subscription_form')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     
@@ -107,13 +145,19 @@
                                         <label class="col-sm-3 col-form-label form-label"> Video Link</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" placeholder="Video link"  name="video_link" id="video_link" >
+                                            @error('video_link')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     
+                                   <!-- Image Upload -->
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Project Image</label>
                                         <div class="col-sm-9">
-                                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required onchange="previewImage(event)">
+                                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required  onchange="previewImage(event)">
                                             @error('image')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -132,8 +176,20 @@
                                     </div>
                                    
                                 </form>
+     
+
                                 <script>
                                     // Initialize CKEditor
+                                  
+                
+                                    // Initialize CKEditor
+                                    CKEDITOR.replace('ckeditor');
+
+                                    // Sync CKEditor content with the form before submission
+                                    function syncEditorContent() {
+                                        const content = CKEDITOR.instances.ckeditor.getData(); // Get data from CKEditor
+                                        document.querySelector('textarea[name="content"]').value = content; // Sync content
+                                    }
 
                                     function previewImage(event) {
                                         const input = event.target;
@@ -151,10 +207,7 @@
                                         }
                                     }
                                 </script>
-                                <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-                                <script>
-                                    CKEDITOR.replace('content');
-                                </script>
+                                
                             </div>
                             
                         </div>

@@ -44,15 +44,13 @@
   <div id="preloader">
     <div id="status"></div>
   </div>
-  
-      
-      @include('partials.navbar');
+      @include('partials.navbar')
       
       <main>
         @yield('content')
       </main>
      
-      @include('partials.footer');
+      @include('partials.footer')
     </div>
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>

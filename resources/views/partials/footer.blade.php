@@ -1,5 +1,41 @@
 
+<style>
+    /* WhatsApp Button CSS */
+    .whatsapp-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 50px;
+        height: 50px;
+    }
 
+    .whatsapp-widget img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .whatsapp-widget:hover img {
+        transform: scale(1.1);
+    }
+
+    .modal-dialog {
+        max-height: 90vh; /* Set a maximum height for the modal */
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .modal-body {
+        overflow-y: auto; /* Enables vertical scrolling */
+        max-height: 90vh; /* Limits the height of the modal body to ensure space for scrolling */
+    }
+
+    </style>
+  
+  
 <div class="content-line m-0">
     <div class="content-line-inner bg-theme2 pb-6 pt-6 p-5">
         <div class="container">
@@ -11,7 +47,7 @@
                     <p class="white">We can help you realize your dream of a new home</p>
                 </div>
                 <div class="col-lg-3">
-                    <a href="{{ route('home.pages', 'projects') }}" class="nir-btn-black float-lg-end float-none">Fine More
+                    <a href="{{ route('home.pages', 'projects') }}" class="nir-btn-black float-lg-end float-none">Find More
                         Project</a>
                 </div>
             </div>
@@ -99,7 +135,19 @@
                            @empty
                                <p> No Post</p>
                            @endforelse
-                           
+                           <div class="social-links">
+                                <ul>
+                                    <li><a href="{{ $sociallink->facebook }}"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="{{ $sociallink->twitter }}"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                    {{-- <li><a href="{{ $sociallink->instagram }}"><i class="fab fa-instagram" aria-hidden="true"></i></a></li> --}}
+                                    <li><a href="{{ $sociallink->linkedin }}"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                            <div >
+                                <a style=" background: #fedc56 " href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">
+                                    Book Inspection
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -110,16 +158,10 @@
         <div class="container">
             <div class="copyright-inner d-md-flex align-items-center justify-content-between">
                 <div class="copyright-text">
-                    <p class="m-0 white">  &copy; {{ date('Y') }}  {{$contactUs->company_name }} . All rights reserved.</p>
+                    <!-- <p class="m-0 white">  &copy; {{ date('Y') }}  {{$contactUs->company_name }} . All rights reserved.</p> -->
+                    <p class="m-0 white">  &copy; {{ date('Y') }}  <a href="https://morgansconsortium.com">Tyneside Innovation</a> . All rights reserved.</p>
                 </div>
-                <div class="social-links">
-                    <ul>
-                        <li><a href="{{ $sociallink->facebook }}"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="{{ $sociallink->twitter }}"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                        {{-- <li><a href="{{ $sociallink->instagram }}"><i class="fab fa-instagram" aria-hidden="true"></i></a></li> --}}
-                        <li><a href="{{ $sociallink->linkedin }}"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -129,6 +171,27 @@
   <div id="back-to-top">
     <a href="#"></a>
   </div>
+    
+    <!-- WhatsApp Button HTML -->
+    <a href="https://wa.me/+2348037412674" class="whatsapp-widget" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+    </a>
+    <!-- Add this code just before the closing </body> tag -->
+    <script type="text/javascript">
+        (function () {
+            var options = {
+                whatsapp: "+2348037412674", 
+                call_to_action: "Message us", 
+                position: "right", 
+            };
+            var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+            s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        })();
+    </script>
+
+
   
   
   <div id="search1">
@@ -138,21 +201,11 @@
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
   </div>
-  
   <div class="modal fade log-reg" id="exampleModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog"> 
+        <div class="modal-content" >
             <div class="modal-body">
                 <div class="post-tabs">
-  
-                    <ul class="nav nav-tabs nav-pills nav-fill" id="postsTab" role="tablist">
-                        <li class="nav-item active" role="presentation">
-                            <button aria-controls="register" aria-selected="true" class="nav-link"
-                                data-bs-target="#register" data-bs-toggle="tab" id="register-tab" role="tab"
-                                type="button">Book Inspection</button>
-                        </li>
-                    </ul>
-  
                     <div class="tab-content blog-full" id="postsTabContent ">
                         @if (session('success'))
                             <script>
@@ -202,11 +255,32 @@
                                           </select>
                                            
                                         </div>
+                                       
                                         <div class="form-group mb-2">
-                                          <label>Date of Inspection</label>
-                                          <input required type="date" name="inspectionDate" class="form-control"
-                                              id="phone" placeholder="Date">
+                                            <label for="inspectionDate">Date of Inspection</label>
+                                            <input
+                                                required
+                                                type="date"
+                                                name="inspectionDate"
+                                                class="form-control"
+                                                id="inspectionDate"
+                                                placeholder="Date"
+                                            />
                                         </div>
+                                        <script>
+                                            const inspectionDateInput = document.getElementById('inspectionDate');
+
+                                            inspectionDateInput.addEventListener('input', function () {
+                                                const selectedDate = new Date(this.value);
+                                                const day = selectedDate.getUTCDay(); // Sunday - Saturday : 0 - 6
+
+                                                // If the selected day is not Tuesday (2) or Wednesday (3), clear the input
+                                                if (day !== 2 && day !== 3) {
+                                                    this.value = '';
+                                                    alert('Please select a Tuesday or Wednesday.');
+                                                }
+                                            });
+                                        </script>
                                         <div class="form-group mb-2">
                                             <div class="mb-2 captcha">
                                                 <span>{!! captcha_img('math') !!}</span>

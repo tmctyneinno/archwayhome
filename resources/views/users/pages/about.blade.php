@@ -24,27 +24,6 @@
   <div class="container">
       <div class="about-image-box">
          
-            <div class="row d-flex align-items-center justify-content-between text-lg-start text-center">
-                <div class="col-lg-7 col-sm-12 mb-2">
-                    <div class="about-content">
-                        <h4 class="theme d-inline-block">Executive Summary</h4>
-                    
-                        {{-- <h3 class="border-b mb-2 pb-2">{{$aboutUs->title}}</h3> --}}
-                        <p class="border-b mb-2 pb-2 text-justify " >
-                        {!! ($executiveSummary->content) !!}
-                   
-                        </p>
-                        
-                    </div>
-                </div>
-                <div class="col-lg-5 col-sm-12 mb-4">
-                    <div class="about-image p-3 box-shadow position-relative d-flex justify-content-center align-items-center">
-                        <img src="{{ asset($executiveSummary->image)}}" alt class="w-50 ">
-                    
-                    </div>
-                </div>
-            </div>     
-       
           <div class="row d-flex align-items-center justify-content-between text-lg-start text-center">
               <div class="col-lg-7 col-sm-12 mb-4">
                   <div class="about-content">
@@ -53,7 +32,6 @@
                       <p class="border-b mb-2 pb-2 text-justify" style="text-align: justify;">
                         {!! ($aboutUs->content) !!}
                       </p>
-                      
                   </div>
               </div>
               <div class="col-lg-5 col-sm-12 mb-4">
@@ -73,38 +51,167 @@
     
   
   {{-- Your existing Blade section --}}
-  <section class="our-team " style="background-image: url({{ asset('assets/images/shape-1.png') }});">
+  <section class="our-team " style="">
     <div class="container">
       <div class="section-title mb-6 pb-1 w-75 text-center mx-auto">
         <h2 class="m-0"> Our <span>Team </span></h2>
       </div>
-      <div class="team-main  animation">
-        <div class="row shop-slider">
-          @forelse ($teams as $team)
-          <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-            <div class="team-list">
-              <div class="team-image">
-                <img src="{{ asset($team->image) }}" alt="team" style=" width: 320px; height: 400;   object-fit: cover; ">
+      <div class="team-main ">
+          <div class="row mb-3">
+            @forelse ($teams as $team)
+              @if ($loop->first)
+              <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                <div class="team-image" style=" ;">
+                  <img  src="{{ asset($team->image) }}" alt="team" style="width: 477px; height: 550px;box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5); ">
+                </div>
               </div>
-              <div class="team-content text-center p-3 bg-white">
-                <h4 class="mb-0 text-uppercase"><a href="{{ route('users.team.detail', encrypt($team->id))}}">{{$team->name}}</a></h4>
-                <p class="mb-0 text-uppercase">{{$team->position}}</p>
-              </div>
-            </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                  <h2 class="border-b" style="color:#000052">{{$team->name}}</h2>
+                  <h5 class="theme">{{$team->position}}</h5>
+                  <p class="mb-3 text-justify">
+                      {!! Str::limit( $team->content, 920, '') !!}
+                  </p>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalTeam" class="nir-btn">Read more <i class="fa fa-arrow-right white pl-1"></i></a>
+                </div>
+              @endif
+            @empty
+              <p>No Data</p>
+            @endforelse
           </div>
-          @empty
-          <p>No Data</p>
-          @endforelse
+
+          <div class="section-title mb-6 pb-1 w-75 text-center mx-auto">
+            <h2 class="m-0"> <span>Management </span></h2>
+          </div>
+
+          <div class="row">
+            @forelse ($teams as $team)
+                @if ($loop->first)
+                    @continue
+                @endif
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="position-relative" style="width:auto;">
+                        <div class="position-relative" style="
+                            height: 400px; 
+                            object-fit: cover;
+                            border-radius: 20px;
+                            box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);">
+                            
+                            <img src="{{ asset($team->image) }}" alt="team" class="img-fluid" style="height: 100%; object-fit: cover; border-radius: 20px;">
+                            
+                            <!-- Floating button with data attributes -->
+                            <a href="#" 
+                              data-bs-toggle="modal" 
+                              data-bs-target="#exampleModalManagement" 
+                              data-name="{{$team->name}}" 
+                              data-position="{{$team->position}}"
+                              data-content="{{ $team->content }}"
+                              class="btn btn-primary position-absolute" 
+                              style="background: rgba(0, 0, 82, 0.7); bottom: 10px; left: 50%; transform: translateX(-50%);">
+                                Learn more
+                            </a>
+                        </div>
+                        
+                        <div class="team-content text-center p-3 bg-white">
+                            <h4 class="mb-0 text-uppercase">
+                                <a href="{{ route('users.team.detail', encrypt($team->id)) }}">
+                                    {{$team->name}}
+                                </a>
+                            </h4>
+                            <p class="mb-0 text-uppercase">{{$team->position}}</p>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <p>No Data</p>
+            @endforelse
         </div>
+
+
+
       </div>
     </div>
   </section>
   
+
+<!-- Team-->
+<div class="modal modal-dialog-scrollable  " id="exampleModalTeam" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        @forelse ($teams as $team)
+          @if ($loop->first)
+            <div class="col-lg-12">
+              <h2 class="border-b" style="color:#000052">{{$team->name}}</h2>
+              <h5 class="theme">{{$team->position}}</h5>
+                <p class="mb-3 text-justify">
+                    {!! $team->content!!}
+                </p>
+            </div>
+          @endif
+        @empty
+          <p>No Data</p>
+        @endforelse
+        </div>
+       
+      </div>
+    </div>
+</div>
   
-  
+<!-- Management -->
 
-
-
+<div class="modal modal-dialog-scrollable " id="exampleModalManagement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6 id="modalPosition"></h6>
+                <p id="modalContent"></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @endsection
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var exampleModalManagement = document.getElementById('exampleModalManagement');
+    
+    exampleModalManagement.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        
+        var name = button.getAttribute('data-name');
+        var position = button.getAttribute('data-position');
+        var content = button.getAttribute('data-content');
+        
+        var modalTitle = exampleModalManagement.querySelector('.modal-title');
+        var modalPosition = exampleModalManagement.querySelector('#modalPosition');
+        var modalContent = exampleModalManagement.querySelector('#modalContent');
+        
+        modalTitle.textContent = name;
+        modalPosition.textContent = position;
+        modalContent.innerHTML = content;
+    });
+});
+
+</script>
+<style>
+.modal-dialog {
+    max-height: 90vh; /* Set a maximum height for the modal */
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.modal-body {
+    overflow-y: auto; /* Enables vertical scrolling */
+    max-height: 70vh; /* Limits the height of the modal body to ensure space for scrolling */
+}
+
+</style>

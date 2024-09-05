@@ -38,7 +38,6 @@ class ServiceController extends Controller
 
     public function edit($id)
     {
-        // dd($id);
         $service = Service::findOrFail(decrypt($id));
         return view('admin.service.edit', compact('service'));
     }

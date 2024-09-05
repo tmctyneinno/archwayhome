@@ -110,11 +110,12 @@ class HomeController extends Controller
     public function detailsService($id){
         $decryptedId = decrypt($id);
         $service = Service::findOrFail($decryptedId);
-        if (!$service) {
-            abort(404); 
-        }
 
-        return view('users.pages.service-details', compact('service'));
+        $relatedServices = Service::where('id', '!=', $decryptedId)
+                                  ->latest()
+                                  ->paginate(3);
+    
+        return view('users.pages.service-details', compact('service','relatedServices'));
     }
     
     

@@ -3,14 +3,14 @@
 namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 trait AdminTrait
 {
     private function validateMenu(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'url' => 'required|string|max:255',
+            // 'url' => 'required|string|max:255',
             'dropdown_items.*' => 'nullable|string|max:255',
         ]);
     }
@@ -18,7 +18,8 @@ trait AdminTrait
     private function createDropdownItems($menuItem, $dropdownItems)
     {
         foreach ($dropdownItems as $dropdownItem) {
-            $menuItem->dropdownItems()->create(['name' => $dropdownItem]);
+            $url = Str::slug($dropdownItem);
+            $menuItem->dropdownItems()->create(['name' => $dropdownItem, 'slug' => $url]);
         }
     }
     

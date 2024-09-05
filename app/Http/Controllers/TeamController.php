@@ -77,7 +77,7 @@ class TeamController extends Controller
 
         $team->update($teamData);
 
-        return redirect()->route('admin.settings.content')
+        return redirect()->back()
                         ->with('success', 'Team updated successfully.');
     }
 
@@ -86,7 +86,7 @@ class TeamController extends Controller
         $team = Team::findOrFail(decrypt($id));
         $team->delete();
 
-        return redirect()->route('admin.settings.content')
+        return redirect()->back()
                          ->with('success', 'Team deleted successfully.');
     }
 

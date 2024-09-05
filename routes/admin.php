@@ -88,7 +88,7 @@ Route::prefix('admin')->group(function () {
         Route::put('/project/{id}', [ProjectController::class, 'update'])->name('admin.project.update');
         Route::get('project/{id}', [ProjectController::class, 'destroy'])->name('admin.project.destroy');
 
-        //Blog
+        //Blog 
         Route::get('post/index', [BlogController::class, 'index'])->name('admin.post.index');
         Route::get('post/create/', [BlogController::class, 'createPost'])->name('admin.post.create');
         Route::post('post/store', [BlogController::class, 'storePost'])->name('admin.post.store');

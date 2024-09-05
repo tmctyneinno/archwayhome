@@ -67,14 +67,9 @@
                                             </td>
                                             <td>{{ $post->created_at->format('d F Y') }}</td>
                                             <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
-                                                        <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{ route('admin.post.edit',  encrypt($post->id) ) }}">Edit</a>
-                                                        <a class="dropdown-item text-danger" href="{{ route('admin.post.destroy', encrypt($post->id) )  }}" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
-                                                    </div>
+                                                <div class="d-flex">
+                                                    <a class="btn btn-primary " style="margin-right: 5px;" href="{{ route('admin.post.edit',  encrypt($post->id) ) }}">Edit</a>
+                                                    <a class="btn btn-danger" href="{{ route('admin.post.destroy', encrypt($post->id) )  }}" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -90,7 +85,7 @@
                             <div class="d-flex align-items-center justify-content-between flex-wrap">
                                 <p class="mb-2 me-3">
                                     Page {{ $posts->currentPage() }} of {{ $posts->lastPage() }}, showing {{ $posts->count() }} records out of {{ $posts->total() }} total, starting on record {{ $posts->firstItem() }}, ending on record {{ $posts->lastItem() }}
-                                </p> 
+                                </p>  
                                 <nav aria-label="Page navigation example mb-2">
                                   <ul class="pagination mb-2 mb-sm-0">
                                     <!-- Previous Page Link -->

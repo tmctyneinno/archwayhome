@@ -69,21 +69,16 @@
                                             <td>{{ \Carbon\Carbon::parse($contact->contactsDate)->format('d F Y') }}</td>
                                             <td>{{ $contact->created_at->format('d F Y') }}</td>
                                             <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
-                                                        <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                       <a class="dropdown-item text-primary" href="{{ route('admin.contact.show', encrypt($contact->id) )  }}" >View</a>
-
-                                                       <a class="dropdown-item text-danger" href="{{ route('admin.contact.destroy', encrypt($contact->id) )  }}" onclick="return confirm('Are you sure you want to delete this Booking contacts?');">Delete</a>
-                                                    </div>
+                                                <div class="d-flex">
+                                                    <a class="btn btn-primary " style="margin-right: 5px;" href="{{ route('admin.contact.show', encrypt($contact->id) )  }}">Edit</a>
+                                                    <a class="btn btn-danger" href="{{ route('admin.contact.destroy', encrypt($contact->id) ) }}" onclick="return confirm('Are you sure you want to delete this Contact ?');">Delete</a>
                                                 </div>
+                                               
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="7" class="text-center">No Booking contacts items found.</td>
+                                            <td colspan="7" class="text-center">No contacts items found.</td>
                                         </tr>
                                     @endforelse
                                     

@@ -11,7 +11,7 @@
             </ol>
         </div>
         <!-- row -->
-
+ 
         <div class="row">
             <div class="col-lg-6">
                 <div class="card">
@@ -62,16 +62,13 @@
                                                 <img src="{{ asset($projectMenu->image) }}" class="img-thumbnail" height="30" alt="{{ $projectMenu->name }}"  style="max-width: 70px;"/>
                                             </td>
                                             <td>{{ $projectMenu->created_at->format('d F Y') }}</td>
+                                            
                                             <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
-                                                        <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{ route('admin.projectMenu.edit',  encrypt($projectMenu->id) ) }}">Edit</a>
-                                                        <a class="dropdown-item text-danger" href="{{ route('admin.projectMenu.destroy', encrypt($projectMenu->id) )  }}" onclick="return confirm('Are you sure you want to delete this project?');">Delete</a>
-                                                    </div>
+                                                <div class="d-flex">
+                                                    <a class="btn btn-primary " style="margin-right: 5px;" href="{{ route('admin.projectMenu.edit',  encrypt($projectMenu->id) ) }}">Edit</a>
+                                                    <!-- <a class="btn btn-danger" href="{{ route('admin.projectMenu.destroy', encrypt($projectMenu->id) )  }}" onclick="return confirm('Are you sure you want to delete this project?');">Delete</a> -->
                                                 </div>
+                                                
                                             </td>
                                         </tr> 
                                     @empty

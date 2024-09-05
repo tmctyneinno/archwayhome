@@ -9,8 +9,8 @@ use App\Models\Post;
 class BlogController extends Controller
 {
     public function index(){
-        $posts = Post::latest()->get();
-        return view('admin.blog.index', compact('posts'));
+        // $posts = Post::latest()->get();
+        return view('admin.blog.index');
     }
 
     public function createPost(){

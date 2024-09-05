@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    /**
+    /** 
      * Bootstrap any application services.
      *
      * @return void
@@ -98,12 +98,12 @@ class AppServiceProvider extends ServiceProvider
         View::share('homeprojects', Project::latest()->take(3)->get());
         View::share('menuItems', MenuItem::with('dropdownItems')->get());
         View::share('sliders', Slider::all());
-        View::share('teams', Team::all());
+        View::share('teams', Team::all()); 
         View::share('policies', PrivacyPolicy::first());
         View::share('termsCondition', TermsConditions::first());
         View::share('posts', Post::paginate(8));
         View::share('recentPosts', Post::inRandomOrder()->take(3)->get());
-        View::share('projectMenus',ProjectMenu::latest()->get());
+        View::share('projectMenus',ProjectMenu::get());
         View::share('quicklinks', QuickLink::inRandomOrder()->take(4)->get());
         View::share('services', Service::latest()->get());
         $admin = Auth::guard('admin')->user();

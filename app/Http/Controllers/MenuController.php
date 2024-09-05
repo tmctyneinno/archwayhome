@@ -6,9 +6,11 @@ use App\Models\ProjectMenu;
 use Illuminate\Http\Request;
 use App\Models\MenuItem;
 use Illuminate\Support\Str;
+use App\Http\Traits\AdminTrait;
 
 class MenuController extends Controller
 {
+    use AdminTrait;
     public function creatMenu(){
         return view('admin.menu.create');
     }
@@ -19,7 +21,7 @@ class MenuController extends Controller
     }
 
     public function storeMenu(Request $request){
-        $this->validateMenu($request);
+        $this->validateMenu($request); 
         $menuItem = MenuItem::create($request->only('name',));
         $menuItem['url'] = Str::slug($request->name);
         if ($request->has('dropdown_items')) {
@@ -37,14 +39,22 @@ class MenuController extends Controller
     public function updateMenu(Request $request, $id)
     {
         $this->validateMenu($request);
+
         $menuItem = MenuItem::findOrFail($id);
-        $menuItem->update($request->only('name'));
+        // Update the URL only if 'name' is provided
+        if ($request->has('name')) {
+            $menuItem->name = $request->name;
+            $menuItem->url = Str::slug($request->name);
+        }
+        $menuItem->save();
+        
         $menuItem->dropdownItems()->delete();
         if ($request->has('dropdown_items')) {
             $this->createDropdownItems($menuItem, $request->dropdown_items);
-        }
-        return redirect()->route('admin.menu.index')->with('success', 'Menu item updated successfully!');
+        } 
+        return redirect()->back()->with('success', 'Menu item updated successfully!');
     }
+    
     
     public function destroyMenu($id)
     {

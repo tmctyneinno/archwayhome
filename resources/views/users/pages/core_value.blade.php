@@ -24,10 +24,22 @@
                     <div
                         class="trend-item box-shadow bg-white d-flex align-items-center justify-content-between p-3">
                         
-                        <div class="trend-content-main w-75">
+                        <div class="trend-content-main w-100">
                             <div class="trend-content">
-                                <h5 class="theme mb-1">Vision Statement</h5>
-                                <p class="mb-0">{{ $whyChooseUs->vision }}</p>
+                                <div class="accrodion-grp faq-accrodion faq-accrodion1" id="accordionExample">
+                                    <div class="accrodion active">
+                                        <h2 class="accordion-title">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <h5 class="theme mb-1">Vision Statement</h5>
+                                        </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <p class="mb-0">{{ $whyChooseUs->vision }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -37,10 +49,21 @@
                         class="trend-item box-shadow bg-white d-flex align-items-center justify-content-between p-3">
                         
                         <div class="trend-content-main w-100">
-                            <div class="trend-content">
-                                <h5 class="theme mb-1">Mission Statement</h5>
-                                <p class="mb-0">{{ $whyChooseUs->mission }} </p>
+                            <div class="accrodion-grp faq-accrodion faq-accrodion1" id="accordionExamplemission">
+                                <div class="accrodion active">
+                                    <h2 class="accordion-title">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                                        <h5 class="theme mb-1">Mission Statement</h5>
+                                    </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse " data-bs-parent="#accordionExamplemission">
+                                        <div class="accordion-body">
+                                            <p class="mb-0">{{ $whyChooseUs->mission }}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                           
                         </div>
                     </div>
                 </div>

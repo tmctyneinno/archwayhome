@@ -10,7 +10,7 @@ class Project extends Model
     use HasFactory;
     protected $fillable = [ 
         'title',
-        'sub_title',
+        'sub_title', 
         'location',
         'land_size',
         'project_menu_id',

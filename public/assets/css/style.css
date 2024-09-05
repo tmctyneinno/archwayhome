@@ -68,7 +68,8 @@ footer {
 body {
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  text-align: justify;
+  font-size: 17px;
   line-height: 1.5;
   font-family: 'AeonikRegular', Arial, sans-serif;
   overflow-x: hidden;
@@ -3698,19 +3699,23 @@ section.call-to-action.maincounter {
   background-size: cover;
   background-attachment: fixed;
   padding: 4.65rem 0 129px;
-  background-color: #e5f8ed; }
+  /* background-color: #e5f8ed;  */
+}
   .our-team .team-image {
-    overflow: hidden;
-    transition: all ease-in-out 0.5s; }
+    /* overflow: hidden; */
+    /* transition: all ease-in-out 0.5s;  */
+  }
     .our-team .team-image img {
-      transition: all ease-in-out 0.5s;
+      /* transition: all ease-in-out 0.5s; */
       width: 100%; 
-      border-radius: 50%; 
-      object-fit: cover;
+      border-radius: 0px 0px 0px 0px;
+      /* border-radius: 50%;  */
+      /* object-fit: cover; */
     }
     .our-team .team-image:hover img {
-      transition: all ease-in-out 0.5s;
-      transform: scale(1.1); }
+      /* transition: all ease-in-out 0.5s; */
+      /* transform: scale(1.1); */
+     }
   .our-team .team-list {
     overflow: hidden; }
     .our-team .team-list .team-content {
