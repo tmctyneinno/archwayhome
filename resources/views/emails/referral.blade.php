@@ -5,7 +5,7 @@ Dear **{{ $referralDetails->fullname }}**,
 Congratulations! Your registration as a consultant with Archway Homes and Investment Limited was successful.
 
 Here are your login details:
-- **Website**: [ArchwayHomes](https://archwayhome.com)
+- **Website**: [ArchwayHomes](https://archwayhomes.com.ng)
 - **Consultant ID / Username**: {{ $userId }}
 {{-- - **Password**: {{ $password }} --}}
 - **Your Upline's name is**: {{ $referralDetails->fullname }}
@@ -17,8 +17,11 @@ Kindly log in to the portal to explore more details about our available products
 You can register new consultants into your team by sharing your online registration form through the invitation URL:
 ({{ $referralLink }})
 
+You can join our WhatsApp group using [this link](https://chat.whatsapp.com/ERpxDDCqq9yJ7jI06lhfJg).
+
+
 For client registration, please use the following link:
-(https://archwayhome.com/consultant-form.php?cid={{ $userId }})
+(https://archwayhomes.com.ng/consultant-form.php?cid={{ $userId }})
 
 Connect with us on social media for updates and news:
 

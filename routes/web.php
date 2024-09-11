@@ -46,8 +46,6 @@ Route::post('/post/comment', [HomeController::class, 'storeComment'])->name('com
 Route::get('/{page}', [PagesController::class, 'index'])->name('home.pages');
 Route::get('/consultant-form/referral/{referralCode}', [PagesController::class, 'index']);
 
-
-
 Route::get('/team/{id}', [TeamController::class, 'show'])->name('users.team.detail'); 
 Route::get('/team', [FormController::class, 'submitForm'])->name('users.submit.form');
 Route::post('/submit-inspection', [FormController::class, 'submitInspection'])->name('submit-inspection');

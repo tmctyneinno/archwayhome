@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Terms and Conditions</label>
-                            <textarea id="ckeditor" class="form-control" placeholder="Terms and Conditions" name="content" rows="8" spellcheck="false" required> {{ isset($termsCondition) ? $termsCondition->content : '' }}</textarea>
+                            <textarea id="ckeditor" class="form-control" placeholder="" name="content" rows="8" spellcheck="false" required> {{ isset($termsCondition) ? $termsCondition->content : '' }}</textarea>
                         </div>
                        
                        

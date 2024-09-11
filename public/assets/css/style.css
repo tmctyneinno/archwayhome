@@ -1702,7 +1702,7 @@ header #navbar {
           border-color: #eeeeee transparent transparent transparent;
           position: absolute;
           right: 24px;
-          top: 45px;
+          top: 45px; 
           z-index: 3;
           opacity: 0;
           -webkit-transition: all 400ms linear;

@@ -41,7 +41,7 @@
                          </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Content</label>
-                            <textarea id="ckeditor" class="form-control" placeholder="Content" name="about-us" rows="8" spellcheck="false" required> {{ isset($aboutUs) ? $aboutUs->content : '' }}</textarea>
+                            <textarea id="ckeditor" name="content" class="form-control" placeholder="Content" rows="8" spellcheck="false" required> {{ isset($aboutUs) ? $aboutUs->content : '' }}</textarea>
                         </div>
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Header Image </label>
