@@ -22,16 +22,20 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'sub_title' => 'required|string|max:255',
+            'sub_title' => 'required|string|max:255', 
             'location' => 'required|string|max:255',
             'land_size' => 'required|string|max:255',
+            'land_price' => 'required|string|max:255',
+            'second_land_size' => 'nullable|string|max:255',
+            'second_land_price' => 'nullable|string|max:255',
             'project_menu_id' => 'required|exists:project_menus,id',
             'content' => 'required|string',
-            'brochure' => 'nullable|mimes:pdf|max:90240', // Use 'nullable' if the file is optional
+            'brochure' => 'nullable|mimes:pdf|max:90240',
             'land_payment_plan' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240',
-            'subscription_form' => 'nullable|mimes:pdf|max:90240',
+            'second_payment_plan' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240',
+            'subscription_forms' => 'nullable|mimes:pdf|max:20240', 
             'video_link' => 'nullable|string',
-            'image' => 'required|mimes:jpeg,png,jpg,gif|max:9048', // Add max file size check
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:20240', 
         ]);
     
         try {
@@ -51,6 +55,11 @@ class ProjectController extends Controller
                 $landPaymentPlanPath = $request->file('land_payment_plan')->getClientOriginalName();
                 $request->file('land_payment_plan')->move(public_path('projectDocument/landPaymentPlans'), $landPaymentPlanPath);
             }
+
+            if ($request->hasFile('second_land_payment_plan')) {
+                $secondlandPaymentPlanPath = $request->file('second_land_payment_plan')->getClientOriginalName();
+                $request->file('second_land_payment_plan')->move(public_path('projectDocument/landPaymentPlans'), $landPaymentPlanPath);
+            }
     
             if ($request->hasFile('subscription_form')) {
                 $subscriptionFormPath = $request->file('subscription_form')->getClientOriginalName();
@@ -68,10 +77,14 @@ class ProjectController extends Controller
                 'sub_title' => $request->sub_title,
                 'location' => $request->location,
                 'land_size' => $request->land_size,
+                'land_price' => $request->land_price,
+                'second_land_size' => $request->second_land_size,
+                'second_land_price' => $request->second_land_price,
                 'project_menu_id' => $request->project_menu_id,
                 'content' => $request->content,
                 'brochure' => $brochurePath ? 'projectDocument/brochures/' . $brochurePath : null,
                 'land_payment_plan' => $landPaymentPlanPath ? 'projectDocument/landPaymentPlans/' . $landPaymentPlanPath : null,
+                'second_land_payment_plan' => $landPaymentPlanPath ? 'projectDocument/landPaymentPlans/' . $secondlandPaymentPlanPath : null,
                 'subscription_form' => $subscriptionFormPath ? 'projectDocument/subscriptionForms/' . $subscriptionFormPath : null,
                 'video_link' => $request->video_link,
                 'image' => $imagePath ? 'projectDocument/projectsImages/' . $imagePath : null,
@@ -99,19 +112,27 @@ class ProjectController extends Controller
             'sub_title' => 'required|string|max:255', 
             'location' => 'required|string|max:255',
             'land_size' => 'required|string|max:255',
+            'land_price' => 'required|string|max:255',
+            'second_land_size' => 'nullable|string|max:255',
+            'second_land_price' => 'nullable|string|max:255',
             'project_menu_id' => 'required|exists:project_menus,id',
             'content' => 'required|string',
-            'brochure' => 'nullable|mimes:pdf|max:20240',
-            'landPaymentPlan' => 'nullable|mimes:jpeg,png,jpg,gif|max:20240',
-            'subscription_forms' => 'nullable|mimes:pdf|max:20240', 
-            'video_link' => 'required|string',
+            'brochure' => 'nullable|mimes:pdf|max:90240',
+            'land_payment_plan' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240',
+            'second_land_payment_plan' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240',
+            'subscription_form' => 'nullable|mimes:pdf|max:20240', 
+            'video_link' => 'nullable|string',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:20240', 
         ]);
         $project = Project::findOrFail($id);
-        $data = $request->only(['title', 'sub_title', 'location', 'content', 'brochure', 'video_link', 'land_size', 'project_menu_id', 'subscription_form']);
+        $data = $request->only([
+            'title', 'sub_title', 'location', 
+            'content', 'brochure', 'video_link', 
+            'land_size', 'land_price', 'second_land_size', 
+            'second_land_price', 'project_menu_id', 'subscription_form'
+        ]);
 
         if ($request->hasFile('brochure')) {
-          
             if ($project->brochure) {
                 $oldBrochurePath = public_path($project->brochure);
                 if (file_exists($oldBrochurePath)) {
@@ -125,8 +146,7 @@ class ProjectController extends Controller
         }
 
        
-        if ($request->hasFile('landPaymentPlan')) {
-          
+        if ($request->hasFile('land_payment_plan')) {
             if ($project->land_payment_plan) {
                 $oldLandPaymentPlanPath = public_path($project->land_payment_plan);
                 if (file_exists($oldLandPaymentPlanPath)) {
@@ -134,9 +154,23 @@ class ProjectController extends Controller
                 }
             }
 
-            $imagePath = $request->file('landPaymentPlan')->getClientOriginalName();
-            $request->file('landPaymentPlan')->move(public_path('projectDocument/landPaymentPlans'), $imagePath);
+            $imagePath = $request->file('land_payment_plan')->getClientOriginalName();
+            $request->file('land_payment_plan')->move(public_path('projectDocument/landPaymentPlans'), $imagePath);
             $data['land_payment_plan'] = 'projectDocument/landPaymentPlans/' . $imagePath;
+        }
+
+        if ($request->hasFile('second_land_payment_plan')) {
+          
+            if ($project->second_land_payment_plan) {
+                $oldSecondLandPaymentPlanPath = public_path($project->second_land_payment_plan);
+                if (file_exists($oldSecondLandPaymentPlanPath)) {
+                    unlink($oldSecondLandPaymentPlanPath);
+                }
+            }
+
+            $imageSecondPath = $request->file('second_land_payment_plan')->getClientOriginalName();
+            $request->file('second_land_payment_plan')->move(public_path('projectDocument/landPaymentPlans'), $imageSecondPath);
+            $data['second_land_payment_plan'] = 'projectDocument/landPaymentPlans/' . $imageSecondPath;
         }
 
         if ($request->hasFile('subscription_forms')) {

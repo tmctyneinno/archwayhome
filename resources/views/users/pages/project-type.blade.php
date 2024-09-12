@@ -39,13 +39,9 @@
                           <div class="col-lg-6 col-md-6 mb-4">
                               <div class="trend-item box-shadow rounded">
                                   <div class="trend-image">
-                                      <img src="{{ asset ($project->image)}}" alt="{{ $project->title}}" style="width: 400px; height: 267px; object-fit: cover;">
-                                      
-                                      <div class="trend-meta d-flex align-items-center justify-content-between">
-                                        <div class="entry-author">
-                                          <i class="flaticon-location-pin theme"></i>
-                                            <span>{{ $project->location }}</span>
-                                        </div>
+                                    <img src="{{ asset($project->image) }}" alt="{{ $project->title }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 300px;">
+
+                                      <div class="trend-meta align-items-center justify-content-between">
                                           <a href="{{ route('home.project.details', encrypt($project->id))}}"
                                               class="tags bg-theme2 white px-3 py-1">{{ $project->projectMenu->name}}</a>
                                       </div>
@@ -55,7 +51,7 @@
                                       <h4><a href="{{ route('home.project.details', encrypt($project->id))}}">{{ $project->title}}</a>
                                       </h4>
                                       <p class="mb-0">
-                                        {!! Str::limit($project->content, 30) !!}
+                                        {!! Str::limit($project->content, 50) !!}
                                       </p>
                                   </div>
                                   <ul class="d-flex align-items-center justify-content-between bg-grey p-3 px-4">
@@ -112,11 +108,7 @@
                               <div class="form-group mb-2">
                                   <div class="input-box">
                                       <select class="niceSelect">
-                                          <option value="1">Locations</option>
-                                          <option value="2">Boston</option>
-                                          <option value="3">03</option>
-                                          <option value="4">Chicago</option>
-                                          <option value="5">Denver</option>
+                                          <option value="1">Lagos</option>
                                       </select>
                                   </div>
                               </div>
@@ -124,11 +116,9 @@
                                   <div class="input-box">
                                       <select class="niceSelect">
                                           <option value="1">All Types</option>
-                                          <option value="2">Apartment</option>
-                                          <option value="3">Villa</option>
-                                          <option value="4">Flat</option>
-                                          <option value="5">Rooms</option>
-                                          <option value="5">House</option>
+                                          @foreach ($projects as $project)
+                                              <option value="{{ $project->title}}">{{ $project->title}}</option>
+                                          @endforeach
                                       </select>
                                   </div>
                               </div>
@@ -147,11 +137,8 @@
                                   <div>
                                       <div class="trend-item box-shadow">
                                           <div class="trend-image">
-                                              <img src="{{ asset($project->image)}}" alt="{{ $project->title}}"
-                                              style=" width: 400px; height: 290px; object-fit: cover; "
-                                              >
-                                              <a href="#" class="flash bg-theme1 white px-3 py-2"><i
-                                                      class="fa fa-flash"></i></a>
+                                            <img src="{{ asset($project->image) }}" alt="{{ $project->title }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 300px;">
+
                                               <div
                                                   class="trend-meta d-flex align-items-center justify-content-between">
                                                  

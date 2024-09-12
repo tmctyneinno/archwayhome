@@ -74,16 +74,53 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Land Size</label>
+                                        <label class="col-sm-3 col-form-label form-label">First Land Size</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Land size" name="land_size"  id="land_size" required>
-                                            @error('land_size')
+                                            <input type="text" class="form-control" placeholder="First Land size" name="land_size"  id="land_size"  required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">First Land Price</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="First Land Price" name="land_price"  id="land_price"  required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Upload Land Payment Plan</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" class="form-control" placeholder="Location" name="land_payment_plan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" >
+                                            @error('land_payment_plan')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
                                         </div>
                                     </div>
+                                    <hr>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Second Land Size</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Second Land size" name="second_land_size"  id="second_land_size"  required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Second Land Price</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Second Land Price" name="second_land_price"  id="second_land_price"   required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Upload Land Payment Plan</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" class="form-control" placeholder="Location" name="second_land_payment_plan" id="second_land_payment_plan" accept="image/png, image/jpeg, image/gif" >
+                                            @error('land_payment_plan')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <hr>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Select Project type</label>
                                         <div class="col-sm-9">
@@ -118,17 +155,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Upload Land Payment Plan</label>
-                                        <div class="col-sm-9">
-                                            <input type="file" class="form-control" placeholder="Location" name="land_payment_plan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" >
-                                            @error('land_payment_plan')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    </div>
+                                   
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Subcription Form</label>
                                         <div class="col-sm-9">
@@ -184,7 +211,7 @@
                 
                                     // Initialize CKEditor
                                     CKEDITOR.replace('ckeditor');
-
+ 
                                     // Sync CKEditor content with the form before submission
                                     function syncEditorContent() {
                                         const content = CKEDITOR.instances.ckeditor.getData(); // Get data from CKEditor
@@ -219,4 +246,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection 

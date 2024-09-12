@@ -44,13 +44,13 @@
                                     @if(isset($project))
                                         @method('PUT')
                                     @endif
-                                    <div class="mb-3 row align-items-center">
+                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Title</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" placeholder="Title"  value="{{ old('title', $project->title ?? '') }}"  name="title" id="title" required>
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
+                                   <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Sub title</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" placeholder="Sub title" value="{{ old('title', $project->sub_title ?? '') }}" name="sub_title" id="sub_title" required>
@@ -63,17 +63,56 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Land Size</label>
+                                        <label class="col-sm-3 col-form-label form-label">First Land Size</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" placeholder="Land size" name="land_size"  id="land_size" value="{{ $project->land_size }}"  required>
                                         </div>
                                     </div>
                                     <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">First Land Price</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="First Land Price" name="land_price"  id="land_price" value="{{ $project->land_price }}"  required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Upload First Land Payment Plan</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" class="form-control" placeholder="" name="land_payment_plan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" >
+                                            @if(isset($project) && $project->land_payment_plan)
+                                                <img id="image-preview" src="{{ isset($project) ? asset($project->land_payment_plan) : '' }}" alt="Image" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Second Land Size</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Second Land size" name="second_land_size"  id="second_land_size" value="{{ $project->second_land_size }}"  required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Second Land Price</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Second Land Price" name="second_land_price"  id="second_land_price" value="{{ $project->second_land_price }}"  required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label">Upload Land Second Payment Plan</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" class="form-control" placeholder="" name="second_land_payment_plan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" >
+                                            @if(isset($project) && $project->second_land_payment_plan)
+                                                <img id="image-preview" src="{{ isset($project) ? asset($project->second_land_payment_plan) : '' }}" alt="Image" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    
+                                    <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Select Project type</label>
                                         <div class="col-sm-9">
-                                            <select class="form-control default-select mb-3" name="project_menu_id" required>
+                                            <select class="form-control  mb-3" name="project_menu_id" required>
                                                 <option  selected disabled>Select Project type</option>
-                                                @foreach ($projectMenus as $menu)
+                                                @foreach ($projectMenus as $menu) 
                                                     <option value="{{ $menu->id }}" {{ $menu->id == $project->project_menu_id ? 'selected' : '' }}>
                                                         {{ $menu->name }}
                                                     </option>
@@ -85,10 +124,10 @@
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
                                         <div class="col-sm-9">
                                             <div class="">
-                                                <textarea name="content" id="content" class="form-control" required>{{ old('content', $project->content ?? '') }}</textarea>
+                                                <textarea name="content" id="ckeditor" class="form-control" required>{{ old('content', $project->content ?? '') }}</textarea>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> 
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Brochure</label>
                                         <div class="col-sm-9">
@@ -98,19 +137,11 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Upload Land Payment Plan</label>
-                                        <div class="col-sm-9">
-                                            <input type="file" class="form-control" placeholder="Location" name="landPaymentPlan" id="land_payment_plan" accept="image/png, image/jpeg, image/gif" >
-                                            @if(isset($project) && $project->land_payment_plan)
-                                                <img id="image-preview" src="{{ isset($project) ? asset($project->land_payment_plan) : '' }}" alt="Image" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
-                                            @endif
-                                        </div>
-                                    </div>
+                                    
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Subcription Form</label>
                                         <div class="col-sm-9">
-                                            <input type="file" class="form-control"  name="subscription_forms" id="subscription_forms" accept="application/pdf" >
+                                            <input type="file" class="form-control"  name="subscription_form" id="subscription_forms" accept="application/pdf" >
                                             @if(isset($project) && $project->subscription_form)
                                                <a href="{{ asset($project->subscription_form) }}" target="_blank" class="text-primary">View Subcription Form</a>
                                             @endif
@@ -120,7 +151,7 @@
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label"> Video Link</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Video link" value="{{ old('title', $project->video_link ?? '') }}" name="video_link" id="video_link" required>
+                                            <input type="text" class="form-control" placeholder="Video link" value="{{ old('title', $project->video_link ?? '') }}" name="video_link" id="video_link" >
                                         </div>
                                         
                                     </div>
@@ -180,11 +211,9 @@
                                         }
                                     }
                                 </script>
-                                <script src="https://cdn.ckeditor.com/4.22.0/standard/ckeditor.js"></script>
-                                {{-- <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.css" /> --}}
-
+                                
                                 <script>
-                                    CKEDITOR.replace('content');
+                                    CKEDITOR.replace('ckeditor');
                                 </script>
                             </div>
                             

@@ -52,7 +52,7 @@
                                         <th>Title</th>
                                         <th>Content</th>
                                         <th>Project Type</th>
-                                        <th>Video Link</th>
+                                        <th>Land Size</th>
                                         <th>Image</th>
                                         <th>DATE   </th>
                                         <th>ACTION</th>
@@ -65,7 +65,7 @@
                                             <td>{{ $project->title }}</td>
                                             <td>{!! Str::limit($project->content, 30) !!}</td>
                                             <td>{{ $project->projectMenu->name ?? 'null' }}</td>
-                                            <td>{{ $project->video_link }}</td>
+                                            <td>{{ $project->land_size }}</td>
 
                                             <td>
                                                 <img src="{{ asset($project->image) }}" class="img-thumbnail" height="30" alt="{{ $project->title }}"  style="max-width: 100px;"/>

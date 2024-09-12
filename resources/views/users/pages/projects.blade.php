@@ -29,8 +29,9 @@
                 @forelse ($projectMenus as $projectMenu)
                   <div class="col-lg-4 col-md-6 mb-4">
                       <div class="trend-item box-shadow rounded">
+                        
                           <div class="trend-image">
-                              <img src="{{ asset( $projectMenu->image ) }}" alt="{{ $projectMenu->name }}" style="width: 800px; height: 350px; object-fit: cover;">
+                            <img src="{{ asset($projectMenu->image) }}" alt="{{ $projectMenu->title }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 300px;">
                               <div class="trend-meta d-flex align-items-center justify-content-between">
                                 <a href="{{ route('users.projects.type',  $projectMenu->slug ) }}" class="tags bg-theme2 white px-3 py-1">
                                   {{ $projectMenu->name }}
