@@ -22,7 +22,7 @@ trait AdminTrait
             $menuItem->dropdownItems()->create(['name' => $dropdownItem, 'slug' => $url]);
         }
     }
-    
+     
     private function validateSlider(Request $request, $isNew = true)
     {
         $rules = [

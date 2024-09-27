@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">First Land Size</label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-9"> 
                                             <input type="text" class="form-control" placeholder="First Land size" name="land_size"  id="land_size"  required>
                                         </div>
                                     </div>
@@ -180,9 +180,23 @@
                                         </div>
                                     </div>
                                     
+                                    <div class="mb-3 row ">
+                                        <label class="col-sm-3 col-form-label form-label">Banner Image</label>
+                                        <div class="col-sm-9">
+                                            <input id="image_banner" type="file" class="form-control @error('image_banner') is-invalid @enderror" name="image_banner" accept="image/jpeg,image/png,image/gif" onchange="previewProjectImageBanner(event)">
+                                            @error('image_banner')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
+                                            <img id="image-banner" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
+                                        </div>
+                                    </div>
+
                                    <!-- Image Upload -->
                                     <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Project Image</label>
+                                        <label class="col-sm-3 col-form-label form-label">Flyer Image</label>
                                         <div class="col-sm-9">
                                             <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required  onchange="previewImage(event)">
                                             @error('image')
@@ -233,6 +247,24 @@
                                             reader.readAsDataURL(input.files[0]);
                                         }
                                     }
+
+                                    function previewProjectImageBanner(event) {
+                                        const input = event.target;
+                                        const preview = document.getElementById('image-banner');
+                                        
+                                        if (input.files && input.files[0]) {
+                                            const reader = new FileReader();
+                                            
+                                            reader.onload = function(e) {
+                                                preview.src = e.target.result;
+                                                preview.style.display = 'block';
+                                            };
+                                            
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+                                    }
+
+
                                 </script>
                                 
                             </div>

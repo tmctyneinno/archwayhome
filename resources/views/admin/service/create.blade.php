@@ -47,14 +47,7 @@
                                             <input type="text" class="form-control" placeholder="Title" name="title" id="title" required>
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Icon class</label>
-                                        <div class="col-sm-9">
-                                            <div class="">
-                                                <textarea name="icon_class" class="form-control" required></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
                                         <div class="col-sm-9">
@@ -63,7 +56,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+ 
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Image</label>
                                         <div class="col-sm-9">

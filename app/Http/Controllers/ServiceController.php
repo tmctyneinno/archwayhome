@@ -20,7 +20,7 @@ class ServiceController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required',
-            'icon_class' => 'required',
+            // 'icon_class' => 'required',
             'content' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
@@ -40,14 +40,14 @@ class ServiceController extends Controller
     {
         $service = Service::findOrFail(decrypt($id));
         return view('admin.service.edit', compact('service'));
-    }
+    } 
 
     public function update(Request $request, $id)
-    {
+    { 
         // Validate the incoming request data
         $validated = $request->validate([
             'title' => 'required',
-            'icon_class' => 'required',
+            // 'icon_class' => 'required',
             'content' => 'required', 
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:32768', 
         ]);
@@ -64,7 +64,7 @@ class ServiceController extends Controller
        
         $service->update([
             'title' => $request->title,
-            'icon_class' => $request->icon_class,
+            // 'icon_class' => $request->icon_class,
             'content' => $request->content,
         ]);
     

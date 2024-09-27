@@ -190,6 +190,7 @@ class SettingsController extends Controller
             'first_address' => 'required|string',
             'second_address' => '',
             'site_logo' => 'image|mimes:jpeg,png,jpg,gif|max:4048',
+            'footer_logo' => 'image|mimes:jpeg,png,jpg,gif|max:4048',
         ]);
 
         $contactUs = ContactUs::findOrFail($id);
@@ -208,6 +209,22 @@ class SettingsController extends Controller
             }
 
             $contactUs->site_logo = 'contactUsImages/' . $imageName;
+        }
+
+        if ($request->hasFile('footer_logo')) {
+            $imageFooter = $request->file('footer_logo');
+            $imageNameFooter = time() . '.' . $imageFooter->getClientOriginalExtension();
+            $imageFooter->move(public_path('contactUsImages'), $imageNameFooter);
+
+            // Delete old footer_logo file if exists
+            if ($contactUs->footer_logo) {
+                $oldImagePath = public_path($contactUs->footer_logo);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
+            $contactUs->footer_logo = 'contactUsImages/' . $imageNameFooter;
         }
 
         $contactUs->company_name = $validated['company_name'];

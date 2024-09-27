@@ -39,7 +39,7 @@
                           <div class="col-lg-6 col-md-6 mb-4">
                               <div class="trend-item box-shadow rounded">
                                   <div class="trend-image">
-                                    <img src="{{ asset($project->image) }}" alt="{{ $project->title }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 300px;">
+                                    <img src="{{ asset($project->image_banner) }}" alt="{{ $project->title }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 300px;">
 
                                       <div class="trend-meta align-items-center justify-content-between">
                                           <a href="{{ route('home.project.details', encrypt($project->id))}}"
@@ -51,14 +51,12 @@
                                       <h4><a href="{{ route('home.project.details', encrypt($project->id))}}">{{ $project->title}}</a>
                                       </h4>
                                       <p class="mb-0">
-                                        {!! Str::limit($project->content, 50) !!}
+                                        {!! Str::limit($project->content, 40) !!}
                                       </p>
                                   </div>
-                                  <ul class="d-flex align-items-center justify-content-between bg-grey p-3 px-4">
-                                      {{-- <li class="me-2"><i class="fa fa-eye"></i> 3 Beds</li> --}}
-                                      {{-- <li class="me-2"><i class="fa fa-heart"></i> 2 Baths</li> --}}
+                                  {{-- <ul class="d-flex align-items-center justify-content-between bg-grey p-3 px-4">
                                       <li><i class="fa fa-comments"></i>{{ $project->land_size }}</li>
-                                  </ul>
+                                  </ul> --}}
                               </div>
                           </div>
                         @empty
@@ -137,7 +135,7 @@
                                   <div>
                                       <div class="trend-item box-shadow">
                                           <div class="trend-image">
-                                            <img src="{{ asset($project->image) }}" alt="{{ $project->title }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 300px;">
+                                            <img src="{{ asset($project->image_banner) }}" alt="{{ $project->title }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 300px;">
 
                                               <div
                                                   class="trend-meta d-flex align-items-center justify-content-between">
@@ -157,11 +155,11 @@
                                                 {!! Str::limit($project->content, 30) !!}
                                               </p>
                                           </div>
-                                          <ul
+                                          {{-- <ul
                                               class="d-flex align-items-center justify-content-between bg-grey p-3 px-4">
                                              
                                               <li><i class="fa fa-comments"></i> {{ $project->land_size }} </li>
-                                          </ul>
+                                          </ul> --}}
                                       </div>
                                   </div>
                                 @empty

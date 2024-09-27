@@ -36,6 +36,7 @@ class ProjectController extends Controller
             'subscription_forms' => 'nullable|mimes:pdf|max:20240', 
             'video_link' => 'nullable|string',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:20240', 
+            'image_banner' => 'nullable|mimes:jpeg,png,jpg,gif|max:20240', 
         ]);
     
         try {
@@ -70,6 +71,11 @@ class ProjectController extends Controller
                 $imagePath = $request->file('image')->getClientOriginalName();
                 $request->file('image')->move(public_path('projectDocument/projectsImages'), $imagePath);
             }
+
+            if ($request->hasFile('image_banner')) {
+                $imageBannerPath = $request->file('image_banner')->getClientOriginalName();
+                $request->file('image_banner')->move(public_path('projectDocument/projectsImages'), $imageBannerPath);
+            }
     
             // Create the project
             Project::create([
@@ -88,6 +94,7 @@ class ProjectController extends Controller
                 'subscription_form' => $subscriptionFormPath ? 'projectDocument/subscriptionForms/' . $subscriptionFormPath : null,
                 'video_link' => $request->video_link,
                 'image' => $imagePath ? 'projectDocument/projectsImages/' . $imagePath : null,
+                'image_banner' => $imageBannerPath ? 'projectDocument/projectsImages/' . $imageBannerPath : null,
             ]);
     
             return redirect()->route('admin.project.create')->with('success', 'Project created successfully.');
@@ -123,6 +130,7 @@ class ProjectController extends Controller
             'subscription_form' => 'nullable|mimes:pdf|max:20240', 
             'video_link' => 'nullable|string',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:20240', 
+            'image_banner' => 'nullable|mimes:jpeg,png,jpg,gif|max:20240', 
         ]);
         $project = Project::findOrFail($id);
         $data = $request->only([
@@ -199,6 +207,20 @@ class ProjectController extends Controller
             $imagePath = $request->file('image')->getClientOriginalName();
             $request->file('image')->move(public_path('projectDocument/projectsImages'), $imagePath);
             $data['image'] = 'projectDocument/projectsImages/' . $imagePath;
+        }
+
+        if ($request->hasFile('image_banner')) {
+          
+            if ($project->image_banner) {
+                $oldImagePath = public_path($project->image_banner);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
+            $imageBannerPath = $request->file('image_banner')->getClientOriginalName();
+            $request->file('image_banner')->move(public_path('projectDocument/projectsImages'), $imageBannerPath);
+            $data['image_banner'] = 'projectDocument/projectsImages/' . $imageBannerPath;
         }
 
         $project->update($data);

@@ -95,43 +95,48 @@ class MenuController extends Controller
 
    
 
-    public function updateProjectMenu(Request $request)
+    public function updateProjectMenu(Request $request, $id)
     {
+        // Validate the request
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
 
-        $existingMenu = ProjectMenu::where('name', $request->name)->first();
+        // Find the existing project menu by its ID
+        $existingMenu = ProjectMenu::find($id);
 
-        if ($existingMenu && $existingMenu->image) {
-            // Delete the existing image file
-            $imagePath = public_path($existingMenu->image);
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
+        if (!$existingMenu) {
+            return back()->with('error', 'Project Menu not found.');
+        }
+
+        // Prepare the data for updating the record
+        $updateData = ['name' => $request->name]; // Update the name
+
+        // Check if a new image is uploaded
+        if ($request->hasFile('image')) {
+            // If an existing image is present, delete it
+            if ($existingMenu->image) {
+                $imagePath = public_path($existingMenu->image);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath); // Delete old image
+                }
             }
+
+            // Upload the new image
+            $imageName = $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('projectType'), $imageName);
+            $updateData['image'] = 'projectType/' . $imageName; // Add image path to the update data
         }
 
-        // Upload new image
-        $imageName = $request->file('image')->getClientOriginalName();
-        $request->file('image')->move(public_path('projectType'), $imageName);
-
-        if ($existingMenu) {
-        
-            $existingMenu->update([
-                'name' => $request->name,
-                'image' => 'projectType/'.$imageName,
-            ]);
-        } else {
-        
-            ProjectMenu::create([
-                'name' => $request->name,
-                'image' => 'projectType/'.$imageName,
-            ]);
-        }
+        // Update the existing record with the new data
+        $existingMenu->update($updateData);
 
         return back()->with('success', 'Project Menu updated successfully.');
     }
+
+    
+
 
 
     public function destroyProjectMenu($id)

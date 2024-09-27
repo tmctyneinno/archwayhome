@@ -53,19 +53,8 @@
                                             <textarea id="caption" class="form-control" placeholder="Caption"  name="caption" required></textarea>
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Additional Text</label>
-                                        <div class="col-sm-9">
-                                            <textarea id="caption" class="form-control" placeholder="Additional Text" name="additional_text" required></textarea>
-                                        </div>
-                                    </div>
                                    
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Button Text</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Button Text" name="button_text"  id="button_text" required>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Image</label>
                                         <div class="col-sm-9">

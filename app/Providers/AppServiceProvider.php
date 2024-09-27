@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $projects = Project::latest()->paginate(20);
-        View::share('projects', $projects);
+        View::share('projects', $projects); 
         $totalProjects = $projects->count();
         View::share('totalProjects', $totalProjects);
         $consultant = Consultant::latest()->get();

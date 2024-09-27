@@ -231,7 +231,8 @@ img {
   background: #f1f1f1 !important; }
 
 .bg-lgrey {
-  background: #fbfbfb !important; }
+  background: #fbfbfb ; 
+}
 
 .bg-theme {
   background: #000052 !important; } 
@@ -2700,12 +2701,13 @@ nav.navbar.navbar-default.navbar-sticky-in .logo-black {
     font-size: 58px; }
   .why-us .why-us-item:hover {
     background: #FEDC56 !important;
+    border-radius: 10px; 
     transform: translateY(-5px);
     transition: all ease-in-out 0.5s;
     cursor: pointer; }
     .why-us .why-us-item:hover h4 a, .why-us .why-us-item:hover h3 a, .why-us .why-us-item:hover i, .why-us .why-us-item:hover p {
       color: #fff !important; }
-
+ 
 @media (max-width: 1100px) {
   .trending-topic-counter .trending-topic-counter-inner {
     width: 86%;

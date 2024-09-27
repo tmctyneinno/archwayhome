@@ -62,7 +62,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="footer-about">
                         {{-- <img src="{{ asset($contactUs->site_logo) }}" alt style=" width: 150px; height: 80px; object-fit: cover; "> --}}
-                        <img src="{{ asset($contactUs->site_logo) }}" alt style=" width: 120px;  object-fit: cover; ">
+                        <img src="{{ asset($contactUs->footer_logo) }}" alt style=" width: 120px;  object-fit: cover; ">
                         {{-- <p class="mt-3 mb-3 white text-white">
                             {!! Str::limit($aboutUs->content, 60) !!}
                         </p> --}}
@@ -74,11 +74,8 @@
                             <li class="white"><strong>Phone:</strong> {{ $contactUs->first_phone }},  {{ $contactUs->second_phone }}  </li><br>
                             <li class="white"><strong>Location:</strong> {{ $contactUs->first_address }}</li><br>
                             <li class="white"><strong>Email:</strong> 
-                              <a href="#"
-                                    class="__cf_email__"
-                                    data-cfemail="">{{ $contactUs->first_email }}, {{ $contactUs->second_email }}
-                              </a>
-                             
+                                {{ $contactUs->first_email }}, <br>
+                                {{ $contactUs->second_email }}
                             </li><br>
                             <li class="white"><strong>Website:</strong> {{ $contactUs->website_link}}</li>
                         </ul>
@@ -158,8 +155,8 @@
         <div class="container">
             <div class="copyright-inner d-md-flex align-items-center justify-content-between">
                 <div class="copyright-text">
-                    <!-- <p class="m-0 white">  &copy; {{ date('Y') }}  {{$contactUs->company_name }} . All rights reserved.</p> -->
-                    <p class="m-0 white">  &copy; {{ date('Y') }}  <a href="https://morgansconsortium.com">Tyneside Innovation</a> . All rights reserved.</p>
+                    <p class="m-0 white">  &copy; {{ date('Y') }}  {{$contactUs->company_name }}. All rights reserved.</p>
+                    {{-- <p class="m-0 white">  &copy; {{ date('Y') }}  <a href="https://archwayhomes.com.ng/">Archway Homes and Investment Limited</a> . All rights reserved.</p> --}}
                 </div>
                 
             </div>

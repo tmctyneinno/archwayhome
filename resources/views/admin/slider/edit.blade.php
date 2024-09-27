@@ -49,29 +49,13 @@
                                             <textarea id="caption" class="form-control" placeholder="Caption" name="caption">{{ $slider->caption }}</textarea>
                                         </div>
                                     </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Additional Text</label>
-                                        <div class="col-sm-9">
-                                            <textarea id="additional_text" class="form-control" placeholder="Additional Text" name="additional_text" required>{{ $slider->additional_text }}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Button URL</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Button URL" value="{{ $slider->button_url }}" name="button_url"  id="button_url" required>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label form-label">Button Text</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="Button Text" value="{{ $slider->button_text }}"  name="button_text"  id="button_text" required>
-                                        </div>
-                                    </div>
+                                    
+                                    
+                                  
                                     <div class="mb-3 row ">
                                         <label class="col-sm-3 col-form-label form-label">Image</label>
                                         <div class="col-sm-9">
-                                            <input id="image" type="file"  class="form-control @error('image') is-invalid @enderror" name="image"  onchange="previewImage(event)" required>
+                                            <input id="image" type="file"  class="form-control @error('image') is-invalid @enderror" name="image"  onchange="previewImage(event)" >
                                             @error('image')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

@@ -13,8 +13,8 @@
                     <h2 class="text-black font-w600">Team</h2>
                     <p class="mb-0">Welcome to {{ $contactUs->company_name}}</p>
                 </div>
-                <a href="{{route('admin.slider.index')}}" class="btn btn-primary rounded light">View Teams</a>
-            </div>
+                <a href="{{route('admin.team.getTeam')}}" class="btn btn-primary rounded light">View Teams</a>
+            </div> 
             <div class="row justify-content-center"> 
                 <div class="col-xl-6 col-lg-12 align-center">
                     <div class="card">
@@ -56,7 +56,7 @@
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
                                         <div class="col-sm-9">
-                                            <textarea id="content" class="form-control" placeholder="Content"  name="content" required></textarea>
+                                            <textarea id="ckeditor" class="form-control" placeholder=""  name="content" required></textarea>
                                         </div>
                                     </div>
                                    
@@ -99,9 +99,8 @@
                                         }
                                     }
                                 </script>
-                                <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
                                 <script>
-                                    CKEDITOR.replace('content');
+                                    CKEDITOR.replace('ckeditor');
                                 </script>
                             </div>
                             

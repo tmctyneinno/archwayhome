@@ -45,12 +45,12 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" placeholder="Name" name="name" id="name" value="{{ $projectMenu->name}}" required>
                                     </div>
-                                </div>
+                                </div> 
 
                                 <div class="mb-3 row align-items-center">
                                     <label class="col-sm-3 col-form-label form-label">Image</label>
                                     <div class="col-sm-9">
-                                        <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required onchange="previewImage(event)">
+                                        <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" onchange="previewImage(event)">
                                         @error('image')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

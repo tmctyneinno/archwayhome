@@ -85,48 +85,51 @@
                       <div class="property-detail mb-4 bg-lgrey p-4 border">
                           <h4 class="border-b pb-2">Property Details</h4>
                           <div class="row">
-                              <div class="col-lg">
-                                  <ul class="pro-inline-item">
-                                    @php
-                                    if($projectDetails->land_size && $projectDetails->land_price) {
-                                    @endphp
-                                        <li class="d-block fw-bold lh-lg">First Property Size : 
-                                            <span class="fw-normal float-end">{{  $projectDetails->land_size}}</span>
-                                        </li>
-                                        <li class="d-block fw-bold lh-lg">First Property Price : 
-                                            <span class="fw-normal float-end">₦{{ $projectDetails->land_price}}</span>
-                                        </li>
-                                        <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3 mb-2">
-                                            <a href="{{ asset($projectDetails->land_payment_plan) }}" data-lightbox="gallery" class="white"> Payment Plan</a>
-                                        </li>
-                                    
-                                    @php
-                                        }
-                                    @endphp
-                                    
-                                  </ul>
-                              </div>
-                              <div class="col-lg">
-                                  <ul class="pro-inline-item">
-                                    @php
-                                    if($projectDetails->land_size && $projectDetails->land_price) {
-                                    @endphp
-                                        <li class="d-block fw-bold lh-lg">Second Property Size : 
-                                            <span class="fw-normal float-end">{{  $projectDetails->second_land_size}}</span>
-                                        </li>
-                                        <li class="d-block fw-bold lh-lg">Second Property Price : 
-                                            <span class="fw-normal float-end">₦{{ $projectDetails->second_land_price}}</span>
-                                        </li>
-                                        <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3 mb-2">
-                                            <a href="{{ asset($projectDetails->second_land_payment_plan) }}" data-lightbox="gallery" class="white"> Payment Plan</a>
-                                        </li>
-                                    
-                                    @php
-                                        }
-                                    @endphp
-                                    
-                                  </ul>
-                              </div>
+                              
+                             
+                            <div class="col-lg">
+                                <ul class="pro-inline-item">
+                                  @php
+                                  if($projectDetails->land_size && $projectDetails->land_price) {
+                                  @endphp
+                                      <li class="d-block fw-bold lh-lg">First Property Size : 
+                                          <span class="fw-normal float-end">{{  $projectDetails->land_size}}</span>
+                                      </li>
+                                      <li class="mb-1 d-block fw-bold lh-lg">First Property Price : 
+                                          <span class="fw-normal float-end">₦{{ $projectDetails->land_price}}</span>
+                                      </li>
+                                      <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3 mb-2">
+                                          <a href="{{ asset($projectDetails->land_payment_plan) }}" data-lightbox="gallery" class="white"> Payment Plan</a>
+                                      </li>
+                                  
+                                  @php
+                                      }
+                                  @endphp
+                                   
+                                </ul>
+                            </div>
+                            <div class="col-lg">
+                                <ul class="pro-inline-item">
+                                  @php
+                                  if($projectDetails->land_size && $projectDetails->land_price) {
+                                  @endphp
+                                      <li class="d-block fw-bold lh-lg">Second Property Size : 
+                                          <span class="fw-normal float-end">{{  $projectDetails->second_land_size}}</span>
+                                      </li>
+                                      <li class="mb-1 d-block fw-bold lh-lg">Second Property Price : 
+                                          <span class="fw-normal float-end">₦{{ $projectDetails->second_land_price}}</span>
+                                      </li>
+                                      <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3 mb-2">
+                                          <a href="{{ asset($projectDetails->second_land_payment_plan) }}" data-lightbox="gallery" class="white"> Payment Plan</a>
+                                      </li>
+                                  
+                                  @php
+                                      }
+                                  @endphp
+                                  
+                                </ul>
+                            </div>
+
                               <ul class="pro-inline-item">
                                 <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#bookInspectionModal" class="white me-2">
@@ -227,7 +230,7 @@
                                   <div>
                                       <div class="trend-item box-shadow">
                                         <div class="trend-image">
-                                            <img src="{{ asset($relatedProject->image) }}" alt="{{ $relatedProject->title }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 300px;">
+                                            <img src="{{ asset($relatedProject->image_banner) }}" alt="{{ $relatedProject->title }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 300px;">
                                             <div
                                               class="trend-meta align-items-center ">
                                              

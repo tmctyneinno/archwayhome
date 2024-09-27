@@ -18,6 +18,7 @@ class ContactUs extends Model
         'first_address',
         'second_address',
         'site_logo',
+        'footer_logo',
         'website_link'
     ];
 }

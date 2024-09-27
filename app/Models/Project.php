@@ -24,6 +24,7 @@ class Project extends Model
         'subscription_form',
         'video_link',
         'image',
+        'image_banner',
     ];
  
     public function projectMenu()

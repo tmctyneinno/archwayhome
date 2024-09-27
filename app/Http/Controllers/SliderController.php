@@ -38,13 +38,13 @@ class SliderController extends Controller
    
     public function storeSlider(Request $request)
     { 
-        dd('j');
+      
         try{
             $this->validateSlider($request); 
             $imagePath = $this->uploadImageSlider($request->image);
             
             Slider::create(array_merge($request->only([
-                'title', 'caption', 'additional_text', 'button_url', 'button_text'
+                'title', 'caption', 
             ]), ['image' => $imagePath]));
 
             return redirect()->route('admin.slider.index')->with('success', 'Slider created successfully.');
@@ -61,19 +61,35 @@ class SliderController extends Controller
 
     public function updateSlider(Request $request, $id)
     {
-       
         $this->validateSlider($request, false);
         $slider = Slider::findOrFail($id);
+
         if ($request->hasFile('image')) {
             $imagePath = $this->uploadImageSlider($request->image);
-            $slider->update(['image' => $imagePath]);
+            $slider->image = $imagePath; 
         }
- 
-        $slider->update($request->only([
-            'title', 'caption', 'additional_text', 'button_url', 'button_text'
-        ]));
+
+        $slider->update($request->only(['title', 'caption']));
+
+        if ($request->hasFile('image')) {
+            $slider->save();
+        }
 
         return redirect()->route('admin.slider.index')->with('success', 'Slider updated successfully.');
+    }
+ 
+    protected function validateSlider(Request $request, $isCreate)
+    {
+        $rules = [
+            'title' => 'required|string|max:255',
+            'caption' => 'nullable|string',
+        ];
+
+        if ($isCreate) {
+            $rules['image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
+        }
+
+        $request->validate($rules);
     }
 
     public function destroySlider($slider)

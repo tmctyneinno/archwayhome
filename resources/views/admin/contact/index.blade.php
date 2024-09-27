@@ -89,7 +89,7 @@
                             <div class="d-flex align-items-center justify-content-between flex-wrap">
                                 <p class="mb-2 me-3">
                                     Page {{ $contacts->currentPage() }} of {{ $contacts->lastPage() }}, showing {{ $contacts->count() }} records out of {{ $contacts->total() }} total, starting on record {{ $contacts->firstItem() }}, ending on record {{ $contacts->lastItem() }}
-                                </p> 
+                                </p>  
                                 <nav aria-label="Page navigation example mb-2">
                                   <ul class="pagination mb-2 mb-sm-0">
                                     <!-- Previous Page Link -->

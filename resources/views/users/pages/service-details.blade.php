@@ -43,6 +43,7 @@
                 </div>
             </div>
         </div>
+        <br>
 
          <!-- Related Services Section -->
          <div class="related-services">
@@ -51,8 +52,8 @@
                 @foreach ($relatedServices as $relatedService)
                     <div class="col-md-4 mb-4">
                         <div class="related-service-card">
-                            <img src="{{ asset($relatedService->image) }}" alt="{{ $relatedService->title }}" class="w-100" style="width: 450px; height: 250px; object-fit: cover;">
-                            <h4>{{ $relatedService->title }}</h4>
+                            <img src="{{ asset($relatedService->image) }}" alt="{{ $relatedService->title }}" class="w-80 mb-1" style="width: 380; height: 200px; object-fit: cover; border-radius: 5px;">
+                            <h5 >{{ $relatedService->title }}</h5>
                             <a href="{{ route('service.detail', encrypt($relatedService->id)) }}" class="btn btn-primary" style="background: #000052; border-color:#000052">View Details</a>
                         </div>
                     </div>

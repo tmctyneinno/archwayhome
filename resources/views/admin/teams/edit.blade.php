@@ -14,7 +14,7 @@
                     <p class="mb-0">Welcome to {{ $contactUs->company_name}}</p>
                 </div>
                 <a href="{{route('admin.team.getTeam')}}" class="btn btn-primary rounded light">View Teams</a>
-            </div>
+            </div> 
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-12 align-center">
                     <div class="card">

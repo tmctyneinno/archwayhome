@@ -53,12 +53,13 @@
                                         <th>Content</th>
                                         <th>Project Type</th>
                                         <th>Land Size</th>
-                                        <th>Image</th>
+                                        <th>Banner Image</th>
+                                        <th>Flyer Image</th>
                                         <th>DATE   </th>
                                         <th>ACTION</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody> 
                                     @forelse ($projects as $index => $project)
                                         <tr>
                                             <td><strong>{{  $index + 1 }}</strong></td>
@@ -66,7 +67,9 @@
                                             <td>{!! Str::limit($project->content, 30) !!}</td>
                                             <td>{{ $project->projectMenu->name ?? 'null' }}</td>
                                             <td>{{ $project->land_size }}</td>
-
+                                            <td>
+                                                <img src="{{ asset($project->image_banner) }}" class="img-thumbnail" height="30" alt="{{ $project->title }}"  style="max-width: 100px;"/>
+                                            </td>
                                             <td>
                                                 <img src="{{ asset($project->image) }}" class="img-thumbnail" height="30" alt="{{ $project->title }}"  style="max-width: 100px;"/>
                                             </td>

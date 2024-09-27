@@ -51,9 +51,6 @@
                                         <th class="width80">#</th>
                                         <th>Title</th>
                                         <th>Caption</th>
-                                        <th>Additional text</th>
-                                        <th>Button url</th>
-                                        <th>Button text</th>
                                         <th>Image</th>
                                         <th>DATE   </th>
                                         <th>ACTION</th>
@@ -65,9 +62,6 @@
                                             <td><strong>{{  $index + 1 }}</strong></td>
                                             <td>{{ $slider->title }}</td>
                                             <td>{{ $slider->caption }}</td>
-                                            <td>{{ $slider->additional_text }}</td>
-                                            <td>{{ $slider->button_url }}</td>
-                                            <td>{{ $slider->button_text }}</td>
                                             <td>
                                                 <img src="{{ asset($slider->image) }}" class="img-thumbnail" height="30" alt="{{ $slider->title }}"  style="max-width: 100px;"/>
                                             </td>

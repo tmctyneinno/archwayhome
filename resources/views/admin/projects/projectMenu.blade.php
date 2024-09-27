@@ -11,7 +11,7 @@
             </ol>
         </div>
         <!-- row -->
- 
+  
         <div class="row">
             <div class="col-lg-6">
                 <div class="card">
@@ -66,7 +66,6 @@
                                             <td>
                                                 <div class="d-flex">
                                                     <a class="btn btn-primary " style="margin-right: 5px;" href="{{ route('admin.projectMenu.edit',  encrypt($projectMenu->id) ) }}">Edit</a>
-                                                    <!-- <a class="btn btn-danger" href="{{ route('admin.projectMenu.destroy', encrypt($projectMenu->id) )  }}" onclick="return confirm('Are you sure you want to delete this project?');">Delete</a> -->
                                                 </div>
                                                 
                                             </td>
@@ -169,10 +168,6 @@
                     </div>
                 </div>
             </div>
-          
-           
-            
-           
         </div>
     </div>
 </div>

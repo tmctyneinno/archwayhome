@@ -47,7 +47,7 @@
                         </div>
                        
                         <div class="mb-3 col-md-10">
-                            <label class="form-label"> Site Logo </label>
+                            <label class="form-label"> Header Logo </label>
                             <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="site_logo"  onchange="previewImage(event)">
                             @error('image')
                                 <span class="invalid-feedback" role="alert">
@@ -59,6 +59,22 @@
                             @endif
                             <img id="image-preview" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
                         </div>
+                        <small class="mb-3 text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
+                           
+
+                        <div class="mb-3 col-md-10">
+                            <label class="form-label"> Footer Logo </label>
+                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="footer_logo"  onchange="previewImageFooter(event)">
+                            @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            @if(isset($contactUs)) 
+                            <img src="{{ asset($contactUs->footer_logo) }}" alt="{{ $contactUs->title }}" class="img-thumbnail mt-2" width="200">
+                            @endif
+                            <img id="image-preview-footer" src="" alt="Image Preview" class="img-thumbnail mt-2" style="display:none; max-width: 200px;">
+                        </div>
                         <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
                            
                     </div>
@@ -68,6 +84,21 @@
                     function previewImage(event) {
                         const input = event.target;
                         const preview = document.getElementById('image-preview');
+                        
+                        if (input.files && input.files[0]) {
+                            const reader = new FileReader();
+                            
+                            reader.onload = function(e) {
+                                preview.src = e.target.result;
+                                preview.style.display = 'block';
+                            };
+                            
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                    function previewImageFooter(event) {
+                        const input = event.target;
+                        const preview = document.getElementById('image-preview-footer');
                         
                         if (input.files && input.files[0]) {
                             const reader = new FileReader();
