@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Service Detail</li>
                     </ul>
-                </nav>
+                </nav> 
              
             </div>
         </div>
@@ -48,9 +48,9 @@
          <!-- Related Services Section -->
          <div class="related-services">
             <h3>Related Services</h3>
-            <div class="row">
+            <div class="row ">
                 @foreach ($relatedServices as $relatedService)
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-6 mb-4">
                         <div class="related-service-card">
                             <img src="{{ asset($relatedService->image) }}" alt="{{ $relatedService->title }}" class="w-80 mb-1" style="width: 380; height: 200px; object-fit: cover; border-radius: 5px;">
                             <h5 >{{ $relatedService->title }}</h5>

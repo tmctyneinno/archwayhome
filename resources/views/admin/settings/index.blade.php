@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <h4 class="card-title"> Settings</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body"> 
                         <div class="row">
                             @if(session('success'))
                                 <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -37,8 +37,7 @@
                             <div class="col-sm-2">
                                 <div class="nav flex-column nav-pills mb-3" role="tablist">
                                     <a href="{{ route('admin.settings.content') }}" class="nav-link show active">Why choose us</a>
-                                    {{-- <a href="{{ route('admin.settings.corevalue') }}" class="nav-link ">Core value</a>  --}}
-                                    <a href="{{ route('admin.settings.executiveSummary') }}" class="nav-link ">Executive Summary</a>
+                                    <a href="{{ route('admin.coreValue.index') }}" class="nav-link ">Core Value</a>
                                     <a href="{{ route('admin.settings.aboutUs') }}"  class="nav-link " >About us</a>
                                     <a href="{{ route('admin.settings.contactUs') }}"  class="nav-link" >Contact us</a>
                                     <a href="{{ route('admin.termsCondition.index') }}"  class="nav-link" >Terms Condition</a>

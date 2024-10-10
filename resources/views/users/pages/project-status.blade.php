@@ -15,7 +15,7 @@
                 </nav>
             </div>
         </div>
-    </div>
+    </div> 
     <br>
     <div class="dot-overlay"></div>
 </section>

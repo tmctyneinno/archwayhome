@@ -18,6 +18,7 @@ class Project extends Model
         'second_land_price',
         'project_menu_id', 
         'content',
+        'amenities_image',
         'brochure',
         'land_payment_plan',
         'second_land_payment_plan',

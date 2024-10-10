@@ -128,6 +128,21 @@
                                             </div>
                                         </div>
                                     </div> 
+
+                                    <div class="mb-3 row ">
+                                        <label class="col-sm-3 col-form-label form-label"> Amenities Image</label>
+                                        <div class="col-sm-9">
+                                            <input id="amenities" type="file" class="form-control @error('amenities') is-invalid @enderror" name="amenities_image" accept="image/jpeg,image/png,image/gif" onchange="previewProjectAmenities(event)">
+                                            @error('amenities')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
+                                            <img id="amenities-project-preview" src="{{ isset($project) ? asset($project->amenities_image) : '' }}" alt="Image Preview" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
+                                        </div>
+                                    </div>
+
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Brochure</label>
                                         <div class="col-sm-9">
@@ -169,7 +184,7 @@
                                             <img id="image-banner" src="{{ isset($project) ? asset($project->image_banner) : '' }}" alt="Image Preview" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
                                         </div>
                                     </div>
-
+                                    
                                     <div class="mb-3 row ">
                                         <label class="col-sm-3 col-form-label form-label">Flyer Image</label>
                                         <div class="col-sm-9">
@@ -193,6 +208,21 @@
                                 </form>
                                 <script>
                                     // Initialize CKEditor
+                                    function previewProjectAmenities(event){
+                                        const input = event.target;
+                                        const preview = document.getElementById('amenities-project-preview');
+                                        
+                                        if (input.files && input.files[0]) {
+                                            const reader = new FileReader();
+                                            
+                                            reader.onload = function(e) {
+                                                preview.src = e.target.result;
+                                                preview.style.display = 'block';
+                                            };
+                                            
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+                                    }
                                     function previewProjectImage(event) {
                                         const input = event.target;
                                         const preview = document.getElementById('image-project-preview');
@@ -227,7 +257,7 @@
                                     function previewProjectImageBanner(event) {
                                         const input = event.target;
                                         const preview = document.getElementById('image-banner');
-                                        
+                                         
                                         if (input.files && input.files[0]) {
                                             const reader = new FileReader();
                                             

@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
+<style>
+    .info-item {
+        word-wrap: break-word; /* Forces the text to break if it's too long */
+        max-width: 100%; /* Ensures that the content does not exceed the container */
+    }
+</style>
 
 <section class="contact-main pt-0 pb-10 bg-grey">
   <div class="map">
@@ -15,153 +20,147 @@
   <div class="container">
       <div class="contact-info-main">
           <div class="row">
-              <div class="col-lg-10 col-offset-lg-1 mx-auto">
-                  <div class="contact-info bg-white pt-10 pb-10 px-5">
-                      <div class="contact-info-title text-center mb-4 px-5">
-                          <h3 class="mb-1">INFORMATION ABOUT US</h3>
-                          <p class="mb-0">
-                            We are always open for cooperation and looking for new promising projects.
-                          </p>
-                      </div>
-                      <div class="contact-info-content row mb-1">
-                          <div class="col-lg-4 col-md-6 mb-4">
-                              <div class="info-item bg-lgrey px-4 py-5 border-all text-center">
-                                  <div class="info-icon mb-2">
-                                      <i class="fa fa-map-marker"></i>
-                                  </div>
-                                  <div class="info-content">
-                                      <p class="m-0">{{ $contactUs->first_address}}</p>
-                                      <p class="m-0">{{ $contactUs->second_address}}</p>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-lg-4 col-md-6 mb-4">
-                              <div class="info-item bg-lgrey px-4 py-5 border-all text-center">
-                                  <div class="info-icon mb-2">
-                                      <i class="fa fa-phone"></i>
-                                  </div>
-                                  <div class="info-content">
-                                      <p class="m-0">{{ $contactUs->first_phone}}</p>
-                                      <p class="m-0">{{ $contactUs->second_phone}}</p>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-lg-4 col-md-12 mb-4">
-                              <div class="info-item bg-lgrey px-4 py-5 border-all text-center">
-                                  <div class="info-icon mb-2">
-                                      <i class="fa fa-envelope"></i>
-                                  </div>
-                                  <div class="info-content ps-4">
-                                      <p class="m-0"><a href="#" class="__cf_email__"
-                                              data-cfemail="">{{ $contactUs->first_email}}</a>
-                                      </p>
-                                      <p class="m-0"><a href="#" class="__cf_email__"
-                                              data-cfemail="">{{ $contactUs->second_email}}</a>
-                                      </p>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div id="contact-form1" class="contact-form px-5">
-                          <div class="contact-info-title text-center mb-4 px-5">
-                              <h3 class="mb-1">Keep in Touch</h3>
-                              <p class="mb-0">We’ll get back to you soon</p>
-                          </div>
-                          <div id="contactform-error-msg"></div>
-                            @if (session('success'))
-                                <script>
-                                    toastr.success("{{ session('success') }}");
-                                </script>
-                            @endif
-                      
-                            @if ($errors->any())
-                                @foreach ($errors->all() as $error)
-                                    <script>
-                                        toastr.error("{{ $error }}");
-                                    </script>
-                                @endforeach
-                            @endif
-                        <form method="post" action="{{ route('contact.store') }}" name="contactform2" id="contactform">
+            <div style="background:#000052; border-radius:8px" class="col-lg-6 col-offset-lg-1 mx-auto contact-info bg-white pt-10 pb-10 px-4" >
+                <div    id="contact-form1" class="contact-form px-5">
+                    <div class="contact-info-title text-center mb-4 px-5">
+                        <h3 class="mb-1">Keep in Touch</h3>
+                        <p class="mb-0">We’ll get back to you soon</p>
+                    </div>
+                    <div class=" " id="contactform-error-msg"></div>
+                    <br>
+                        <!-- Contact Form -->
+                        <form action="{{route('contact.store')}}" class="contact-form" method="POST" id="contactUsForm">
                             @csrf
-                            <div class="form-group mb-2">
-                                <input type="text" name="first_name" class="form-control" id="fullname" placeholder="First Name">
+                            <div class="row">
+                                <div class="form-group mb-2">
+                                    <input type="text" name="first_name" class="form-control" id="fullname" placeholder="First Name">
+                                    @error('first_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="text" name="last_name" class="form-control" id="llastname" placeholder="Last Name">
+                                    @error('last_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="text" name="phone" class="form-control" id="phnumber" placeholder="Phone">
+                                    @error('phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                               
+                                
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea required class="form-control" cols="30" rows="5" name="comments" id="comments"></textarea>
+                                        @error('comments')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class=" mt-3 text-center">
+                                        <button type="submit" class="nir-btn g-recaptcha"
+                                                data-sitekey="{{ config('services.recaptcha.siteKey') }}"
+                                                data-callback="onContactUsSubmit" data-action="submit" id="submit2">Send Message
+                                        </button>
+                                    </div>
+                                    
+
+                                </div>
                             </div>
-                            <div class="form-group mb-2">
-                                <input type="text" name="last_name" class="form-control" id="llastname" placeholder="Last Name">
-                            </div>
-                            <div class="form-group mb-2">
-                                <input type="email" name="email" class="form-control" id="email" placeholder="Email">
-                            </div>
-                            <div class="form-group mb-2">
-                                <input type="text" name="phone" class="form-control" id="phnumber" placeholder="Phone">
-                            </div>
-                            <div class="textarea mb-2">
-                                <textarea name="comments" placeholder="Enter a message"></textarea>
-                            </div>
-                            
-                            <div class="comment-btn text-center">
-                                <button type="submit" class="nir-btn g-recaptcha"
-                                        data-sitekey="{{ config('services.recaptcha.siteKey') }}"
-                                        data-callback="onSubmit" data-action="submit" id="submit2">Send Message
-                                </button>
-                            </div>
-                        </form> 
-                        <script>
-                            function onSubmit(token) {
-                              document.getElementById("contactform").submit();
+                        </form>
+                         <!-- JavaScript for reCAPTCHA callback -->
+                         <script>
+                            function onContactUsSubmit(token) {
+                                if (navigator.onLine) {
+                                    // Proceed to submit the form if online
+                                    document.getElementById('g-recaptcha-response').value = token;
+                                    document.getElementById("contactUsForm").submit();
+                                } else {
+                                    alert("You need an active internet connection to submit the form.");
+                                }
+                                // document.getElementById("contactUsForm").submit();
                             }
+                         
+                            grecaptcha.ready(function() {
+                                grecaptcha.execute('{{ config('services.recaptcha.siteKey') }}', { action: 'submit' }).then(function(token) {
+                                    document.getElementById("submit2").disabled = false; // Enable button after token is received
+                                }).catch(function(error) {
+                                    console.error("reCAPTCHA error:", error);
+                                    document.getElementById("submit2").disabled = false; // Enable button on error
+                                });
+                            });
                         </script>
-                        <script type="text/javascript">
-                            jQuery(document).ready(function ($) {
-                               $('#contactform').submit(function (event) {
-                                   event.preventDefault(); 
-                                   
-                                   $.ajaxSetup({
-                                       headers: {
-                                           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                       }
-                                   });
-                                   var formData = $(this).serialize();
-                                    // Clear any previous error messages
-                                    $('#contactform-error-msg').html('');
-                                    alert(formData);
-                       
-                                   $.ajax({
-                                       type: 'POST',
-                                    //    url: $(this).attr('action'),
-                                       url: '{{ route("contact.store") }}',
-                                       data: formData,
-                                       dataType: 'json',
-                                       success: function (response) {
-                                           if (response.success) {
-                                               toastr.success(response.message);
-                                               // Clear the form fields if needed
-                                                $('#contactform')[0].reset();
-                                            //    setTimeout(function() {
-                                            //        window.location.reload(); 
-                                            //    }, 2000); 
-                                               console.log('Form submitted successfully.');
-                                               
-                                           } else {
-                                               if (response.errors) {
-                                                   toastr.error("Failed to submit form. Please check your input.");
-                                                   console.error('Error occurred:', response.errors);
-                                                   // Display validation errors if any
-                                                   $.each(response.errors, function (key, value) {
-                                                       $('#contactform-error-msg').html('<div class="alert alert-danger alert-dismissible fade show">'+value+'</div>');
-                                                   });
-                                               } else {
-                                                   toastr.error("Failed to submit form. Unknown error occurred.");
-                                                   console.error('Unknown error occurred:', response);
-                                               }
-                                           }
-                                       },
-                                   });
-                               });
-                           });
-                       </script>
                         
-                      </div>
+          
+                    </div>
+                </div>
+              <div class="col-lg-6 col-offset-lg-1 mx-auto">
+                  <div class="contact-info bg-white pt-10 pb-10 px-3">
+                    <div class="contact-info-title text-center mb-4 px-3">
+                        <h3 class="mb-1">INFORMATION ABOUT US</h3>
+                        <p class="mb-0">
+                        We are always open for cooperation and looking for new promising projects.
+                        </p>
+                    </div>
+                    <div class="contact-info-content row mb-1">
+                        <div class="col-lg-1 col-md-6 "></div>
+                        <div class="col-lg-10 col-md-6 mb-3">
+                            <div class="info-item bg-lgrey px-4 py-5 border-all text-center">
+                                <div class="info-icon mb-2">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <div class="info-content">
+                                    <p class="m-0">{{ $contactUs->first_address}}</p>
+                                    <p class="m-0">{{ $contactUs->second_address}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 "></div>
+
+                        <div class="col-lg-1 col-md-6 "></div>
+                        <div class="col-lg-10 col-md-6 mb-3">
+                            <div class="info-item bg-lgrey px-4 py-5 border-all text-center">
+                                <div class="info-icon mb-2">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="info-content text-wrap text-break">
+                                    <p class="m-0">{{ $contactUs->first_phone }}</p>
+                                    <p class="m-0">{{ $contactUs->second_phone }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 "></div>
+                        
+                        <div class="col-lg-1 col-md-6 "></div>
+                        <div class="col-lg-10 col-md-12 mb-4">
+                            <div class="info-item bg-lgrey px-4 py-5 border-all text-center">
+                                <div class="info-icon mb-2">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <div class="info-content ps-4">
+                                    <p class="m-0"><a href="#" class="__cf_email__"
+                                            data-cfemail="">{{ $contactUs->first_email}}</a>
+                                    </p>
+                                    <p class="m-0"><a href="#" class="__cf_email__"
+                                            data-cfemail="">{{ $contactUs->second_email}}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 "></div>
+
+                    </div>
+
+                     
                   </div>
               </div>
           </div>

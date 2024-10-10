@@ -14,7 +14,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SettingsController extends Controller
-{
+{ 
     use SettingsTrait;
     public function WhyChooseUs(){ 
         return view('admin.settings.index');
@@ -24,10 +24,14 @@ class SettingsController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'why_choose_us' => 'required|string',
-                'mission' => 'required|string',
-                'vision' => 'required|string',
-                'core_value' => 'required|string',
+                'first_title' => 'required|string',
+                'first_content' => 'required|string',
+                'second_title' => 'required|string',
+                'second_content' => 'required|string',
+                'third_title' => 'required|string',
+                'third_content' => 'required|string',
+                'four_title' => 'required|string',
+                'four_content' => 'required|string',
                 'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
             ]);
 
@@ -38,10 +42,14 @@ class SettingsController extends Controller
             }
     
             WhyChooseUs::create([
-                'why_choose_us_statements' => $validatedData['why_choose_us'],
-                'mission' => $validatedData['mission'],
-                'vision' => $validatedData['vision'],
-                'core_values' => $validatedData['core_value'],
+                'first_title' => $validatedData['first_title'],
+                'first_content' => $validatedData['first_content'],
+                'second_title' => $validatedData['second_title'],
+                'second_content' => $validatedData['second_content'],
+                'third_title' => $validatedData['third_title'],
+                'third_content' => $validatedData['third_content'],
+                'four_title' => $validatedData['four_title'],
+                'four_content' => $validatedData['four_content'],
                 'image' => 'whyChooseUsImage/'.$imageName
             ]);
     
@@ -59,10 +67,14 @@ class SettingsController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'why_choose_us' => 'required|string',
-                'mission' => 'required|string',
-                'vision' => 'required|string',
-                'core_value' => 'required', 
+                'first_title' => 'required|string',
+                'first_content' => 'required|string',
+                'second_title' => 'required|string',
+                'second_content' => 'required|string',
+                'third_title' => 'required|string',
+                'third_content' => 'required|string',
+                'four_title' => 'required|string',
+                'four_content' => 'required|string',
                 'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
             ]);
     
@@ -76,10 +88,14 @@ class SettingsController extends Controller
             } 
     
             $whyChooseUs->update([
-                'why_choose_us_statements' => $validatedData['why_choose_us'],
-                'mission' => $validatedData['mission'],
-                'vision' => $validatedData['vision'],
-                'core_values' => $validatedData['core_value'],
+                'first_title' => $validatedData['first_title'],
+                'first_content' => $validatedData['first_content'],
+                'second_title' => $validatedData['second_title'],
+                'second_content' => $validatedData['second_content'],
+                'third_title' => $validatedData['third_title'],
+                'third_content' => $validatedData['third_content'],
+                'four_title' => $validatedData['four_title'],
+                'four_content' => $validatedData['four_content'],
             ]);
     
             return redirect()->back()->with('success', 'Why Choose Us statement updated successfully.');
@@ -240,7 +256,7 @@ class SettingsController extends Controller
 
         return redirect()->back()->with('success', 'Contact us updated successfully.');
     }
-
+ 
     public function storeExecutiveSummary(Request $request){
         $validated = $request->validate([
             'content' => 'required',
@@ -261,7 +277,7 @@ class SettingsController extends Controller
         //  return redirect()->route('admin.settings.content')->with('success', 'Data created successfully.');
    
     }
-
+ 
     public function updateExecutiveSummary(Request $request, $id){
         $validated = $request->validate([
             'content' => 'required',

@@ -17,7 +17,7 @@ class ServiceController extends Controller
     }
 
     public function store(Request $request)
-    {
+    { 
         $validated = $request->validate([
             'title' => 'required',
             // 'icon_class' => 'required',

@@ -45,6 +45,7 @@ class PagesController extends Controller
             $referralDetails = Consultant::where('referralCode', $referralCode)->first();
            
             if ($referralDetails) {
+                // dd($referralDetails);
                 $banks = $this->fetchBanks(); 
                 return view('users.pages.consultant-form', compact('referralDetails', 'banks'));
             } else {
@@ -62,7 +63,7 @@ class PagesController extends Controller
        
         if (in_array($slug, $specialPages)) {
             $projectType = ProjectMenu::where('slug', $slug)->first();
-
+ 
             if (!$projectType) {
                 return view('errors.404'); 
             }

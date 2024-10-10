@@ -4,7 +4,7 @@ use App\Http\Controllers\BookInspection;
 use App\Http\Controllers\ConsultantFormController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\ExecutiveSummaryController;
+use App\Http\Controllers\CoreValueController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\QuicklinkController;
 use App\Http\Controllers\ServiceController;
@@ -54,7 +54,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/slider/{id}/edit', [SliderController::class, 'editSlider'])->name('admin.slider.edit');
         Route::put('/slider/{id}', [SliderController::class, 'updateSlider'])->name('admin.slider.update');
         Route::get('/slider/{id}', [SliderController::class, 'destroySlider'])->name('admin.slider.destroy');
-        //Why choose us
+        //Why choose us 
         Route::get('/settings/content', [SettingsController::class, 'WhyChooseUs'])->name('admin.settings.content');
         Route::post('/settings/store/why-choose-us', [SettingsController::class, 'storeWhyChooseUs'])->name('admin.settings.store_why_choose_us');
         Route::put('/settings/update/why-choose-us/{id}', [SettingsController::class, 'updateWhyChooseUs'])->name('admin.settings.update_why_choose_us');
@@ -62,10 +62,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/settings/about-us', [SettingsController::class, 'getAboutUs'])->name('admin.settings.aboutUs');
         Route::post('/settings/store/about-us', [SettingsController::class, 'storeAboutUs'])->name('admin.settings.storeAboutus');
         Route::put('/settings/update/about-us/{id}', [SettingsController::class, 'updateAboutUs'])->name('admin.settings.updateAboutus');
-        //Executive Summary
-        Route::get('/settings/executive-summary', [ExecutiveSummaryController::class, 'index'])->name('admin.settings.executiveSummary');
-        Route::post('/settings/store/executive-summary', [SettingsController::class, 'storeExecutiveSummary'])->name('admin.settings.storeExecutiveSummary');
-        Route::put('/settings/update/executive-summary/{id}', [SettingsController::class, 'updateExecutiveSummary'])->name('admin.settings.updateExecutiveSummary');
+        //Core Value 
+        Route::get('/settings/core-value', [CoreValueController::class, 'index'])->name('admin.coreValue.index');
+        Route::post('/settings/store/core-value', [CoreValueController::class, 'storeCoreValue'])->name('admin.settings.storeCoreValue');
+        Route::put('/settings/update/core-value/{id}', [CoreValueController::class, 'updateCoreValue'])->name('admin.settings.updateCoreValue');
         //Office Hours 
         Route::get('/settings/office/hours/index', [SettingsController::class, 'indexOfficeHours'])->name('admin.officeHours.index');
         Route::post('/settings/store/office-hours', [SettingsController::class, 'storeOfficeHours'])->name('admin.office-hours.store');
@@ -95,7 +95,7 @@ Route::prefix('admin')->group(function () {
         Route::get('post/{id}/edit', [BlogController::class, 'editPost'])->name('admin.post.edit');
         Route::put('/post/{id}', [BlogController::class, 'updatePost'])->name('admin.post.update');
         Route::get('post/{id}', [BlogController::class, 'destroyPost'])->name('admin.post.destroy');
-        //Teams
+        //Teams 
         Route::get('/team/index', [TeamController::class, 'getTeam'])->name('admin.team.getTeam');
         Route::get('/team/create', [TeamController::class, 'create'])->name('admin.team.create');
         Route::post('/team/store', [TeamController::class, 'store'])->name('admin.team.store');

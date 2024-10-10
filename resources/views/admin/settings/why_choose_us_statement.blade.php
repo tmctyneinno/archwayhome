@@ -13,15 +13,43 @@
                     @csrf
                     @if(isset($whyChooseUs))
                         @method('PUT')
-                    @endif 
+                    @endif  
                     <div class="row">
                         <div class="mb-3 col-md-10"> 
-                            <label class="form-label">Why Choose Us Statements</label>
-                            <textarea id="why_choose_us" class="form-control" placeholder="Why Choose Us Statements" name="why_choose_us" rows="8" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->why_choose_us_statements : '' }}</textarea>
+                            <label class="form-label">First Title</label>
+                            <input class="form-control" placeholder="First Title" name="first_title" required value="{{ isset($whyChooseUs) ? $whyChooseUs->first_title : '' }} "/>
+                        </div>
+                        <div class="mb-3 col-md-10">  
+                            <label class="form-label">First Content</label>
+                            <textarea  class="form-control" name="first_content" rows="5" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->first_content : '' }}</textarea>
+                        </div>
+                        <div class="mb-3 col-md-10"> 
+                            <label class="form-label">Second Title</label>
+                            <input class="form-control" placeholder="Second Title" name="second_title" required value="{{ isset($whyChooseUs) ? $whyChooseUs->second_title : '' }} "/>
+                        </div>
+                        <div class="mb-3 col-md-10"> 
+                            <label class="form-label">Second Content</label>
+                            <textarea  class="form-control" name="second_content" rows="5" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->second_content : '' }}</textarea>
+                        </div>
+                        <div class="mb-3 col-md-10"> 
+                            <label class="form-label">Third Title</label> 
+                            <input class="form-control" placeholder="Third Title" name="third_title" required value="{{ isset($whyChooseUs) ? $whyChooseUs->third_title : '' }} "/>
+                        </div>
+                        <div class="mb-3 col-md-10"> 
+                            <label class="form-label">Third Content</label>
+                            <textarea  class="form-control" name="third_content" rows="5" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->third_content : '' }}</textarea>
+                        </div>
+                        <div class="mb-3 col-md-10"> 
+                            <label class="form-label">Four Title</label>
+                            <input class="form-control" placeholder="Four Title" name="four_title" required value="{{ isset($whyChooseUs) ? $whyChooseUs->four_title : '' }} "/>
+                        </div>
+                        <div class="mb-3 col-md-10"> 
+                            <label class="form-label">Four Content</label>
+                            <textarea  class="form-control" name="four_content" rows="5" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->four_content : '' }}</textarea>
                         </div>
                         <div class="mb-3 col-md-10"> 
                             <label class="form-label">Why Choose Us Image</label>
-                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required onchange="previewImage(event)">
+                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image"  onchange="previewImage(event)">
                             @error('image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -36,30 +64,16 @@
                                 <img src="{{ asset($whyChooseUs->image) }}" alt="{{ $whyChooseUs->title }}" class="img-thumbnail mt-2" width="200">
                             @endif
                         </div>
-                        
-                        <div class="mb-3 col-md-10">
-                            <label class="form-label">Our core value </label>
-                            <textarea id="core_value" class="form-control" placeholder="Mission Statements" name="core_value" rows="8" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->core_values : '' }} </textarea>
-                        </div>
-                        <div class="mb-3 col-md-10">
-                            <label class="form-label">Mission statement</label>
-                            <textarea id="caption" class="form-control" placeholder="Mission Statements" name="mission" rows="8" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->mission : '' }} </textarea>
-                        </div>
-                        <div class="mb-3 col-md-10">
-                            <label class="form-label">Vision statement</label>
-                            <textarea id="caption" class="form-control" placeholder="Vision Statements" name="vision" rows="8" spellcheck="false" required> {{ isset($whyChooseUs) ? $whyChooseUs->vision : '' }} </textarea>
-                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">{{ isset($whyChooseUs) ? 'Update' : 'Add' }}</button>
-                </form>
+
+                    
             </div>
         </div>
     </div>
 </div>
-<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
 <script>
-    CKEDITOR.replace('core_value');
-    CKEDITOR.replace('why_choose_us');
     function previewImage(event) {
         const input = event.target;
         const preview = document.getElementById('image-preview');

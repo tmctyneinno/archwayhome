@@ -77,6 +77,9 @@
                           <p class="mb-3">
                             {!! $projectDetails->content !!}
                           </p>
+                          <div class="position-relative mb-3 w-50">
+                            <img src="{{ asset($projectDetails->amenities_image) }}" alt="image">
+                          </div>
                           <div class="position-relative mb-3">
                             <img src="{{ asset($projectDetails->image) }}" alt="image">
                           </div>
@@ -86,7 +89,6 @@
                           <h4 class="border-b pb-2">Property Details</h4>
                           <div class="row">
                               
-                             
                             <div class="col-lg">
                                 <ul class="pro-inline-item">
                                   @php
@@ -122,71 +124,47 @@
                                       <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3 mb-2">
                                           <a href="{{ asset($projectDetails->second_land_payment_plan) }}" data-lightbox="gallery" class="white"> Payment Plan</a>
                                       </li>
-                                  
                                   @php
                                       }
                                   @endphp
-                                  
+                                </ul>
+                            </div>
+                          </div>
+                        <div class="row">
+                            <div class="col-lg">
+                                <ul class="pro-inline-item">
+                                    <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#bookInspectionModal" class="white me-2">
+                                        Book a Tour
+                                        </a>
+                                    </li>
+                                    <li>
+                                        @php
+                                        if($projectDetails->subscription_form) {
+                                        @endphp
+                                            <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3 mb-2">
+                                                <a href="{{ asset($projectDetails->subscription_form) }}" target="_blank" class="white"> View Subscription Form</a>
+                                            </li>
+                                        @php
+                                            }
+                                        @endphp
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg">
+                                <ul class="pro-inline-item">
+                                    <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3">
+                                        <a href="{{ asset($projectDetails->image_banner) }}" class="white me-2" data-lightbox="gallery">
+                                        View Image
+                                        </a>
+                                    </li>
+                                    
                                 </ul>
                             </div>
 
-                              <ul class="pro-inline-item">
-                                <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#bookInspectionModal" class="white me-2">
-                                      Book a Tour
-                                    </a>
-                                </li>
-                                <li>
-                                    @php
-                                    if($projectDetails->subscription_form) {
-                                    @endphp
-                                        <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3 mb-2">
-                                            <a href="{{ asset($projectDetails->subscription_form) }}" target="_blank" class="white"> View Subscription Form</a>
-                                        </li>
-                                    @php
-                                        }
-                                    @endphp
-                                </li>
-                              </ul>
                           </div>
                       </div>
-                      {{-- <div class="property-detail mb-4 bg-grey p-4">
-                          <h4 class="border-bottom pb-2">Offices Amenities</h4>
-                          <div class="row">
-                              <div class="col-lg">
-                                  <ul class="pro-inline-item">
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> Electricity</li>
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> Water
-                                      </li>
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> Gated Community</li>
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> Maximum Security</li>
-                                  </ul>
-                              </div>
-                              <div class="col-lg">
-                                  <ul class="pro-inline-item">
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> Good Drainage</li>
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> Sola-powered Street Light</li>
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> Lawn</li>
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> Dishwasher</li>
-                                  </ul>
-                              </div>
-                              <div class="col-lg">
-                                  <ul class="pro-inline-item">
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> Microwave</li>
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> TV Cable</li>
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> WiFi</li>
-                                      <li class="d-block lh-lg"><i class="fa fa-check theme"></i> Refrigerator
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div> --}}
-                     
-
                   </div>
-
-              
-               
               </div>
           </div>
 
@@ -258,56 +236,6 @@
                               </div>
                           </div>
                       </div>
-                      {{-- <div class="sidebar-item top-post">
-                          <h3>Popular Destination</h3>
-                          <div class="row">
-                              <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
-                                  <div class="trend-item">
-                                      <div class="trend-image">
-                                          <img src="images/destination/destination13.jpg" alt="image">
-                                          <div class="trend-content pt-2">
-                                              <h6 class="mb-0"><a href="listing-leftfilter.html">Los Angeles</a>
-                                              </h6>
-                                              <span>28 Properties</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
-                                  <div class="trend-item">
-                                      <div class="trend-image">
-                                          <img src="images/destination/destination14.jpg" alt="image">
-                                          <div class="trend-content pt-2">
-                                              <h6 class="mb-0"><a href="listing-leftfilter.html">New York</a></h6>
-                                              <span>45 Properties</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
-                                  <div class="trend-item">
-                                      <div class="trend-image">
-                                          <img src="images/destination/destination15.jpg" alt="image">
-                                          <div class="trend-content pt-2">
-                                              <h6 class="mb-0"><a href="listing-leftfilter.html">Florida</a></h6>
-                                              <span>32 Properties</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-lg-6 col-md-6 col-sm-6">
-                                  <div class="trend-item">
-                                      <div class="trend-image">
-                                          <img src="images/destination/destination16.jpg" alt="image">
-                                          <div class="trend-content pt-2">
-                                              <h6 class="mb-0"><a href="listing-leftfilter.html">Texas</a></h6>
-                                              <span>51 Properties</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div> --}}
                   </div>
               </div>
           </div>

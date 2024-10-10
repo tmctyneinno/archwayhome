@@ -42,8 +42,8 @@
                                         <th>Name</th>
                                         <th>DATE   </th>
                                         <th>ACTION</th>
-                                    </tr>
-                                </thead>
+                                    </tr> 
+                                </thead> 
                                 <tbody>
                                     @forelse ($quicklinks as $index => $quicklink)
                                         <tr>

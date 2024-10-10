@@ -23,7 +23,7 @@ class AdminController extends Controller
         return view('admin.users.index', [
             'bheading' => 'Index',
             'breadcrumb' => 'Index',
-        ]);
+        ]); 
     }
 
 }

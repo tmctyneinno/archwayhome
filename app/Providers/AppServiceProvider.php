@@ -6,7 +6,7 @@ use App\Models\Contact;
 use App\Models\ContactUs;
 use App\Models\AboutUs;
 use App\Models\Event;
-use App\Models\ExecutiveSummary;
+use App\Models\CoreValue;
 use App\Models\Faqs;
 use App\Models\FaqsSubmitForm;
 use App\Models\Gallery;
@@ -91,7 +91,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('inspections', $inspection);
         View::share('contactUs', ContactUs::first());
         View::share('aboutUs', AboutUs::first());
-        View::share('executiveSummary', ExecutiveSummary::first());
+        View::share('coreValue', CoreValue::first()); 
         View::share('officeHour', OfficeHours::first());
         View::share('whyChooseUs', WhyChooseUs::first());
         View::share('sociallink', Sociallink::first());

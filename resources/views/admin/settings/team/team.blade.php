@@ -14,7 +14,7 @@
                             @endif
                         </div>
                     </div>
-                    <script>
+                    <script> 
                             window.setTimeout(function() {
                             var alert = document.getElementById('success-alert');
                             if (alert) {

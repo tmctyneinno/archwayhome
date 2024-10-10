@@ -26,7 +26,7 @@ class ConsultantFormController extends Controller
     public function store(Request $request)
     { 
         try{
-        // $request->validate([
+   
             $validator = Validator::make($request->all(), [
                 'fullname' => 'required|string|max:255',
                 'phone' => 'required|string|max:20',
@@ -41,8 +41,7 @@ class ConsultantFormController extends Controller
                 'account_name' => 'required|string|max:255',
                 'account_number' => 'required|string|max:255',
                 'bank' => 'required|string|max:255',
-                // 'captcha' => 'required|captcha', // Commented captcha validation
-                'g-recaptcha-response' => ['required', new Recaptcha],
+                'g-recaptcha-response' => 'required',
                 'referral_code' => 'nullable|string',
             ],[
                 'con_email.same' => 'The confirm email must match the email.',
@@ -51,11 +50,23 @@ class ConsultantFormController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json([
-                    'success' => false, 
-                    'errors' => $validator->errors()->all()
-                ]);
+                return redirect()->back()->withErrors($validator)->withInput();
             }   
+
+            $recaptcha = $request->input('g-recaptcha-response');
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => config('services.recaptcha.secretKey'),
+                'response' => $recaptcha,
+                'remoteip' => $request->ip(), 
+            ]);
+        
+            $recaptchaData = $response->json(); 
+            $recaptcha_success = $recaptchaData['success'] ?? false; 
+        
+            // If reCAPTCHA validation fails
+            if (!$recaptcha_success) {
+                return redirect()->back()->withInput()->withErrors(['recaptcha' => 'Please verify that you are not a robot.']);
+            }
         
             $userId = substr(strtoupper($request->fullname), 0, 3) . '-' . mt_rand(1000, 9999);
             $password = Str::random(10);
@@ -95,14 +106,11 @@ class ConsultantFormController extends Controller
                 $this->sendNoReferralEmail($referralDetails, $referralLink,  $userId, $password);
             }
 
-            // return redirect()->back()->with('success', 'Consultant form sent successfully!');
-            return response()->json(['success' => true, 'successs' => 'Consultant form sent successfully!']);
+            return redirect()->back()->with('success', 'Consultant form sent successfully!');
             
         } catch (Exception $e) {
-            Log::error('Error in store method: ' . $e->getMessage());
-            return response()->json([
-                'success' => false,
-                'errors' => $e->getMessage() // Make sure this is an array
+            return redirect()->back()->withInput()->withErrors([
+                'errors' => $e->getMessage()
             ]);
         }
     }
@@ -112,7 +120,7 @@ class ConsultantFormController extends Controller
         $companyName = 'Archway Homes and Investment Limited'; 
         Mail::to($referralDetails->email)->send(new NoReferralEmail($companyName, $referralDetails, $referralLink, $userId, $password));
     }
-
+ 
     private function generateReferralCode()
     {
         return strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 8));

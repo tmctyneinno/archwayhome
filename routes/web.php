@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BookInspection;
 use App\Http\Controllers\CaptchaController;
 use App\Http\Controllers\ConsultantFormController;
@@ -37,15 +38,13 @@ Route::get('projects/{type}', [ProjectController::class, 'projectsType'])->name(
 Route::post('/consultant-form', [ConsultantFormController::class, 'store'])->name('consultant-form.store');
 Route::post('/book-inspection', [BookInspection::class, 'store'])->name('book-inspection.store');
 
-// Route::get('/login', [HomeController::class, 'login'])->name('home.login');
-// Route::get('/registration', [HomeController::class, 'registration'])->name('home.registration');
 Route::get('/project/{id}', [HomeController::class, 'detailsProject'])->name('home.project.details');
 Route::get('/post/details/{id}', [HomeController::class, 'detailsPost'])->name('post-details');
 Route::post('/post/comment', [HomeController::class, 'storeComment'])->name('comments.store');
 
 Route::get('/{page}', [PagesController::class, 'index'])->name('home.pages');
 Route::get('/consultant-form/referral/{referralCode}', [PagesController::class, 'index']);
-
+ 
 Route::get('/team/{id}', [TeamController::class, 'show'])->name('users.team.detail'); 
 Route::get('/team', [FormController::class, 'submitForm'])->name('users.submit.form');
 Route::post('/submit-inspection', [FormController::class, 'submitInspection'])->name('submit-inspection');
@@ -54,4 +53,12 @@ Route::post('/contact/store', [ContactFormController::class, 'store'])->name('co
 Route::post('/faq/store', [FAQController::class, 'submitForm'])->name('submit.faq.form');
 Route::get('/reload/captcha', [CaptchaController::class, 'reloadCaptcha'])->name('reload.captcha');
 
+Route::get('/mail/test-email', function () {
+    Mail::raw('This is a test email!', function ($message) {
+        $message->to('kajanap986@craftapk.com')
+                ->subject('Test Email');
+    });
+
+    return 'Email sent!';
+});
 

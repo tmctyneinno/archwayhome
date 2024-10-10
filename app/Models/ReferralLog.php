@@ -22,5 +22,5 @@ class ReferralLog extends Model
     {
         return $this->belongsTo(Consultant::class, 'referrer_id');
     }
-}
+} 
  

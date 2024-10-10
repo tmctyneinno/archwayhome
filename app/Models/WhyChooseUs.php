@@ -10,10 +10,14 @@ class WhyChooseUs extends Model
     use HasFactory;
 
     protected $fillable = [
-        'why_choose_us_statements', 
-        'core_values', 
-        'mission', 
-        'vision', 
+        'first_title', 
+        'first_content', 
+        'second_title',  
+        'second_content', 
+        'third_title',  
+        'third_content', 
+        'four_title',  
+        'four_content', 
         'image'
     ];
 }

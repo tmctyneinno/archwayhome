@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ExecutiveSummary extends Model
+class CoreValue extends Model
 {
     use HasFactory;
-
+    protected $table = 'core_values';
     protected $fillable = [
-        'content', 
-        'image', 
+        'core_values', 
+        'mission', 
+        'vision', 
+        'image'
     ];
 }

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-
+ 
 
 class AdminLoginController extends Controller
 {   

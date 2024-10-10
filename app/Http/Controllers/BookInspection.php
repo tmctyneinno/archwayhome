@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Inspection;
 use Illuminate\Http\Request;
 use Http;
+use Twilio\Rest\Client;
+use App\Mail\InspectionBooked;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class BookInspection extends Controller
 {
@@ -22,8 +25,8 @@ class BookInspection extends Controller
             'project' => 'required|string',
             'inspectionDate' => 'required|date',
             'g-recaptcha-response'=> 'required',
-        ],);
-
+        ],); 
+ 
         $recaptcha = $request->input('g-recaptcha-response');
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
             'secret' => config('services.recaptcha.secretKey'),
@@ -51,6 +54,35 @@ class BookInspection extends Controller
         $inspection->project = $request->input('project');
         $inspection->inspection_date = $request->input('inspectionDate');
         $inspection->save();
+
+        // Prepare the inspection details
+        $inspectionDetails = [
+            'fullname' => $request->input('fullname'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'project' => $request->input('project'),
+            'inspectionDate' => $request->input('inspectionDate'),
+        ];
+
+        // Send email
+        Mail::to('eshanokpe@gmail.com')->send(new InspectionBooked($inspectionDetails));
+
+        $twilio = new Client(env('TWILIO_SID'), env('TWILIO_AUTH_TOKEN'));
+
+        $whatsappMessage = "New Inspection Booking:\n" .
+                        "Name: {$inspectionDetails['fullname']}\n" .
+                        "Email: {$inspectionDetails['email']}\n" .
+                        "Phone: {$inspectionDetails['phone']}\n" .
+                        "Project: {$inspectionDetails['project']}\n" .
+                        "Date: {$inspectionDetails['inspectionDate']}";
+
+        $twilio->messages->create(
+            'whatsapp:+2348139267960' , // WhatsApp recipient
+            [
+                'from' => env('TWILIO_WHATSAPP_FROM'),
+                'body' => $whatsappMessage
+            ]
+        );
 
         return redirect()->back()->with('success', 'Book Inspection Form Submitted successfully.');
 

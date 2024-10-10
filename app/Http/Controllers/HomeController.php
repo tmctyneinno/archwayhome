@@ -113,7 +113,7 @@ class HomeController extends Controller
 
         $relatedServices = Service::where('id', '!=', $decryptedId)
                                   ->latest()
-                                  ->paginate(3);
+                                  ->paginate(2); 
     
         return view('users.pages.service-details', compact('service','relatedServices'));
     }

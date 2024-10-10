@@ -9,7 +9,7 @@
                         <i class="fa fa-calendar white"></i>
                         <span id="currentDate"></span>
                     </a>
-                </li>
+                </li> 
                 
                 <script>
                     // Get current date

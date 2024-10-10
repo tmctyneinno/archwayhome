@@ -223,7 +223,7 @@
                                 <div class="col-lg-6">
                                     <div class="blog-image">
                                         <a href="#"
-                                            style="background-image: url( {{ asset('assets/images/trending/trending5.jpg')}});"></a>
+                                            style="background-image: url( {{ asset('assets/images/bookInspection/bookInspectionImg.jpg')}});"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -237,7 +237,7 @@
                                         <div class="form-group mb-2">
                                             <input required type="email" name="email" class="form-control" id="email"
                                                 placeholder="Email Address">
-                                        </div>
+                                        </div> 
                                         <div class="form-group mb-2">
                                              <input required type="phone" name="phone" class="form-control"
                                                 id="phone" placeholder="Phone">
@@ -271,36 +271,41 @@
                                                 const selectedDate = new Date(this.value);
                                                 const day = selectedDate.getUTCDay(); // Sunday - Saturday : 0 - 6
 
-                                                // If the selected day is not Tuesday (2) or Wednesday (3), clear the input
-                                                if (day !== 2 && day !== 3) {
+                                                // If the selected day is not Wednesday (2) or Saturday (3), clear the input
+                                                if (day !== 3 && day !== 6) {
                                                     this.value = '';
-                                                    alert('Please select a Tuesday or Wednesday.');
+                                                    alert('Please select Wednesday or Saturday.');
                                                 }
                                             });
                                         </script>
-                                        <div class="form-group mb-2">
-                                            <div class="mb-2 captcha">
-                                                <span>{!! captcha_img('math') !!}</span>
-                                                <button type="button" class="btn btn-danger reload" id="reload">&#x21bb;</button>
-                                            </div>
-                                            <label>Enter Captcha</label>
-                                            <input type="text" name="captcha" class="form-control @error('captcha') is-invalid @enderror" placeholder="Enter Captcha" >
-                                       
-                                          </div>
+                                        
                                         <div class="comment-btn mb-2 pb-2 text-center border-b ">
-                                            <button type="submit" class="nir-btn" id="bookInspection">Send Message
+                                            <button type="submit" class="nir-btn g-recaptcha"
+                                                    data-sitekey="{{ config('services.recaptcha.siteKey') }}"
+                                                    data-callback="onBookInspectionSubmit" data-action="submit" id="bookInspection">Send Message
                                             </button>
                                         </div>
                                         <div id="contactform-error-msg"></div>
                                        
                                     </form>
-                                    <script>
-                                        function onSubmit(token) {
-                                          document.getElementById("bookInspection").submit();
+                                   
+                                     <script>
+                                        function onBookInspectionSubmit(token) {
+                                            if (navigator.onLine) {
+                                                document.getElementById('g-recaptcha-response').value = token;
+                                                document.getElementById("bookInspection").submit();
+                                            } else {
+                                                alert("You need an active internet connection to submit the form.");
+                                            }
                                         }
-                                        $('#bookInspection').submit(function(event) {
-                                            event.preventDefault(); 
-                                             $('#bookInspection').unbind('submit').submit(); 
+                                     
+                                        grecaptcha.ready(function() {
+                                            grecaptcha.execute('{{ config('services.recaptcha.siteKey') }}', { action: 'submit' }).then(function(token) {
+                                                document.getElementById("bookInspection").disabled = false; // Enable button after token is received
+                                            }).catch(function(error) {
+                                                console.error("reCAPTCHA error:", error);
+                                                document.getElementById("bookInspection").disabled = false; // Enable button on error
+                                            });
                                         });
                                     </script>
                                     
@@ -330,20 +335,7 @@
                     </ul>
   
                     <div class="tab-content blog-full" id="postsTabContent ">
-                        {{-- @if (session('success'))
-                            <script>
-                                toastr.success("{{ session('success') }}");
-                            </script>
-                        @endif --}}
-                
-                        @if ($errors->any())
-                            @foreach ($errors->all() as $error)
-                                <script>
-                                    toastr.error("{{ $error }}");
-                                </script>
-                            @endforeach
-                        @endif
-  
+                       
                         <div aria-labelledby="register-tab" class="tab-pane fade active show" role="tabpanel">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -430,11 +422,11 @@
                         <ul>
                             <li class="d-block mb-1"><i class="fa fa-map-marker-alt me-2"></i>{{ $contactUs->first_address}}</li>
                             <li class="d-block mb-1"><i class="fa fa-phone-alt me-2"></i>{{ $contactUs->first_phone}}</li>
-                            <li class="d-block mb-1"><i class="fa fa-envelope-open me-2"></i><a
-                                    href="#" class="__cf_email__"
-                                    data-cfemail="85f6f0f5f5eaf7f1c5f7e0e4e9f6edece0e9e1abe6eae8">{{ $contactUs->first_email}}</a>
+                            <li class="d-block mb-1"><i class="fa fa-envelope-open me-2"></i>
+                                <a href="#" >{{ $contactUs->first_email}}</a>,<br/>
+                                <a href="#" >{{ $contactUs->second_email}}</a>
                             </li>
-                            <li class="d-block"><i class="fa fa-clock me-2"></i> Open Time: 09.00am to 6.00pm</li>
+                            <li class="d-block"><i class="fa fa-clock me-2"></i> Open Time: {{ $officeHour->content }}</li>
                         </ul>
                     </div>
                 </div>

@@ -12,7 +12,7 @@
         Preloader end
     ********************-->
   <!--**********************************
-        Nav header start
+        Nav header start 
     ***********************************-->
     <div class="nav-header">
         <a href="{{ route('admin.index') }}" class="brand-logo">

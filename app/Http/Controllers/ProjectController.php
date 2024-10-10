@@ -30,6 +30,7 @@ class ProjectController extends Controller
             'second_land_price' => 'nullable|string|max:255',
             'project_menu_id' => 'required|exists:project_menus,id',
             'content' => 'required|string',
+            'amenities_image' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240', 
             'brochure' => 'nullable|mimes:pdf|max:90240',
             'land_payment_plan' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240',
             'second_payment_plan' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240',
@@ -45,8 +46,13 @@ class ProjectController extends Controller
             $landPaymentPlanPath = null;
             $subscriptionFormPath = null;
             $imagePath = null;
-    
+            $amenitiesPath = null;
+
             // Check if files are uploaded and process them
+            if ($request->hasFile('amenities_image')) {
+                $amenitiesPath = $request->file('amenities_image')->getClientOriginalName();
+                $request->file('amenities_image')->move(public_path('projectDocument/amenitiesImages'), $amenitiesPath);
+            }
             if ($request->hasFile('brochure')) {
                 $brochurePath = $request->file('brochure')->getClientOriginalName();
                 $request->file('brochure')->move(public_path('projectDocument/brochures'), $brochurePath);
@@ -88,6 +94,7 @@ class ProjectController extends Controller
                 'second_land_price' => $request->second_land_price,
                 'project_menu_id' => $request->project_menu_id,
                 'content' => $request->content,
+                'amenities_images' => $amenitiesPath ? 'projectDocument/amenitiesImages/' . $amenitiesPath : null,
                 'brochure' => $brochurePath ? 'projectDocument/brochures/' . $brochurePath : null,
                 'land_payment_plan' => $landPaymentPlanPath ? 'projectDocument/landPaymentPlans/' . $landPaymentPlanPath : null,
                 'second_land_payment_plan' => $landPaymentPlanPath ? 'projectDocument/landPaymentPlans/' . $secondlandPaymentPlanPath : null,
@@ -112,8 +119,7 @@ class ProjectController extends Controller
 
     public function update(Request $request,  $id)
     {
-        // dd($request->file('subscription_forms'));
-
+       
         $request->validate([
             'title' => 'required|string|max:255',
             'sub_title' => 'required|string|max:255', 
@@ -124,6 +130,7 @@ class ProjectController extends Controller
             'second_land_price' => 'nullable|string|max:255',
             'project_menu_id' => 'required|exists:project_menus,id',
             'content' => 'required|string',
+            'amenities_image' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240', 
             'brochure' => 'nullable|mimes:pdf|max:90240',
             'land_payment_plan' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240',
             'second_land_payment_plan' => 'nullable|mimes:jpeg,png,jpg,gif|max:90240',
@@ -139,6 +146,19 @@ class ProjectController extends Controller
             'land_size', 'land_price', 'second_land_size', 
             'second_land_price', 'project_menu_id', 'subscription_form'
         ]);
+
+        if ($request->hasFile('amenities_image')) {
+            if ($project->amenities_image) {
+                $oldAmenitiesPath = public_path($project->amenities_image);
+                if (file_exists($oldAmenitiesPath)) {
+                    unlink($oldAmenitiesPath);
+                }
+            }
+
+            $amenitiesPath = $request->file('amenities_image')->getClientOriginalName();
+            $request->file('amenities_image')->move(public_path('projectDocument/amenitiesImages'), $amenitiesPath);
+            $data['amenities_image'] = 'projectDocument/amenitiesImages/' . $amenitiesPath;
+        }
 
         if ($request->hasFile('brochure')) {
             if ($project->brochure) {
