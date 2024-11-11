@@ -8,14 +8,12 @@ use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+  
 class ContactFormController extends Controller
 { 
     public function index(){
         return view('admin.contact.index');
     }
-
-   
 
     public function store(Request $request)
     {

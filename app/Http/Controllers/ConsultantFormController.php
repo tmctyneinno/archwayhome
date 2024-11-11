@@ -48,7 +48,7 @@ class ConsultantFormController extends Controller
                 'g-recaptcha-response.required' => 'Please select the reCAPTCHA checkbox.',
                 'g-recaptcha-response' => 'The reCAPTCHA validation failed.',
             ]);
-
+ 
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }   
@@ -91,7 +91,7 @@ class ConsultantFormController extends Controller
             $consultant->save();
 
             $referralDetails = Consultant::where('referralCode', $referralCode)->first();
-            $referralLink = "https://archwayhome.com/consultant-form/referral/{$referralCode}";
+            $referralLink = "https://archwayhomes.com.ng/consultant-form/referral/{$referralCode}";
 
             if($request->has('referral_code') && $request->referral_code){
                 $this->sendReferralEmail($referralCode, $referralDetails, $referralLink,  $userId, $password);

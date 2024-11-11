@@ -20,7 +20,7 @@ You can register new consultants into your team by sharing your online registrat
 You can join our WhatsApp group using [this link](https://chat.whatsapp.com/ERpxDDCqq9yJ7jI06lhfJg).
 
 For client registration, please use the following link:
-(https://archwayhomes.com.ng/consultant-form.php?cid={{ $userId }})
+(https://archwayhomes.com.ng/consultant-form?cid={{ $userId }})
 
 Connect with us on social media for updates and news:
 
