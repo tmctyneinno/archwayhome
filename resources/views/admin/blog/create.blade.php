@@ -20,7 +20,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Add Post</h4>
-                        </div>
+                        </div> 
                         <div class="card-body">
                             <div class="basic-form">
                                 @if(session('success'))

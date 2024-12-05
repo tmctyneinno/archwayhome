@@ -20,7 +20,11 @@ class ConsultantFormController extends Controller
 {
     
     public function index(){
-        return view('admin.consultant.index');
+        $consultants = Consultant::select('*')
+        ->withCount(['referralsMade as total_referrals_made', 'referralsReceived as total_referrals_received'])
+        ->latest()->paginate(20); 
+        
+        return view('admin.consultant.index', compact('consultants'));
     }
  
     public function store(Request $request)
@@ -88,7 +92,7 @@ class ConsultantFormController extends Controller
             $consultant->bank = $request->bank;
             $consultant->referralCode = $referralCode;
             $consultant->password = bcrypt($password);
-            $consultant->save();
+            $consultant->save(); 
 
             $referralDetails = Consultant::where('referralCode', $referralCode)->first();
             $referralLink = "https://archwayhomes.com.ng/consultant-form/referral/{$referralCode}";

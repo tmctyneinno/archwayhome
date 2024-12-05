@@ -8,7 +8,7 @@
         <div class="like-title float-left">
             <a href="#" class="reply-toggle nir-btn mr-2">Reply</a>
         </div>
-    </div>
+    </div> 
     
     <div class="reply-form" style="display: none;">
         <form id="replyForm_{{ $comment->id }}" class="mt-2">

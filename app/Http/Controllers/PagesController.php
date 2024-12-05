@@ -31,10 +31,10 @@ class PagesController extends Controller
             'terms-conditions'  => 'users.pages.terms-conditions',
             'privacy-policy'  => 'users.pages.privacy-policy',
         ];
-       
+        
         if (array_key_exists($slug, $pages)) {
             $banks = $this->fetchBanks(); 
-            return view($pages[$slug], compact('banks',));
+            return view($pages[$slug], compact('banks'));
         }
 
         // Handle referral links
@@ -48,7 +48,7 @@ class PagesController extends Controller
                 // dd($referralDetails);
                 $banks = $this->fetchBanks(); 
                 return view('users.pages.consultant-form', compact('referralDetails', 'banks'));
-            } else {
+            } else { 
                 // If referral code is not found, return 404
                 return view('errors.404');
             }

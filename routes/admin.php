@@ -1,5 +1,7 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
+use App\Models\PrivacyPolicy;
+use App\Exports\ConsultantsExport;
 use App\Http\Controllers\BookInspection;
 use App\Http\Controllers\ConsultantFormController;
 use App\Http\Controllers\ContactFormController;
@@ -10,8 +12,6 @@ use App\Http\Controllers\QuicklinkController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SociallinkController;
-use App\Models\PrivacyPolicy;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\SettingsController;
@@ -95,6 +95,7 @@ Route::prefix('admin')->group(function () {
         Route::get('post/{id}/edit', [BlogController::class, 'editPost'])->name('admin.post.edit');
         Route::put('/post/{id}', [BlogController::class, 'updatePost'])->name('admin.post.update');
         Route::get('post/{id}', [BlogController::class, 'destroyPost'])->name('admin.post.destroy');
+        
         //Teams 
         Route::get('/team/index', [TeamController::class, 'getTeam'])->name('admin.team.getTeam');
         Route::get('/team/create', [TeamController::class, 'create'])->name('admin.team.create');
@@ -159,6 +160,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/consultant/index', [ConsultantFormController::class, 'index'])->name('admin.consultant.index');
         Route::get('/consultant/show/{id}', [ConsultantFormController::class, 'show'])->name('admin.consultant.show');
         Route::get('/consultant/destroy/{id}', [ConsultantFormController::class, 'destroy'])->name('admin.consultant.destroy');
+        Route::get('/consultants/export', function () {
+            return Excel::download(new ConsultantsExport, 'consultants.xlsx');
+        })->name('admin.consultants.export');
+
         //Book Inspection
         Route::get('/inspection/index', [BookInspection::class, 'index'])->name('admin.inspection.index');
         Route::get('/inspection/show/{id}', [BookInspection::class, 'show'])->name('admin.inspection.show');

@@ -10,7 +10,7 @@
                 
             </ol>
         </div>
-        <!-- row -->
+        <!-- row --> 
  
         <div class="row">
             <div class="col-lg-12">
@@ -37,6 +37,12 @@
                         <div class="clearfix">
                             <h3 class="card-title">Consultant List</h3>
                         </div>
+                        <div class="clearfix mb-3 text-end">
+                            <a href="{{ route('admin.consultants.export') }}" class="btn btn-success">
+                                Download Excel
+                            </a>
+                        </div>
+                        
                       
                     </div>
 
@@ -56,7 +62,7 @@
                                         <th>DATE   </th>
                                         <th>ACTION</th>
                                     </tr>
-                                </thead>
+                                </thead> 
                                 <tbody>
                                     @forelse ($consultants as $index => $consultant)
                                         <tr>

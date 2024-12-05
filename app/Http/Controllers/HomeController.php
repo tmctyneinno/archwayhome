@@ -64,7 +64,7 @@ class HomeController extends Controller
     public function about(){
         return view('home.about');
     }
-   
+    
 
     public function detailsPost($id){
         $decryptedId = decrypt($id);

@@ -5,7 +5,7 @@
             <div class="box-comment__icon"><span class="icon custom-font-person"></span></div>
         </div>
         <div class="unit-body">
-            <div class="box-comment__body">
+            <div class="box-comment__body"> 
                 <h5>{{ $comment->author_name }}</h5>
                 <time datetime="{{ $comment->created_at->format('Y-m-d') }}">{{ $comment->created_at->format('M d, Y') }}</time>
                 <p>{{ $comment->content }}</p>

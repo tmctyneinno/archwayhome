@@ -152,17 +152,17 @@
                                             @error('amenities')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
-                                                </span>
+                                                </span> 
                                             @enderror
                                             <small class="text-danger">Maximum file size: 2MB. Allowed file types: JPEG, PNG, JPG, GIF.</small>
                                             <img id="amenities-project-preview" src="{{ isset($project) ? asset($project->amenities_image) : '' }}" alt="Image Preview" class="img-thumbnail mt-2" style="{{ isset($project) ? '' : 'display:none;' }} max-width: 200px;">
                                         </div>
-                                    </div>
+                                    </div> 
 
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Upload Brochure</label>
                                         <div class="col-sm-9">
-                                            <input type="file" class="form-control" placeholder="Location" name="brochure" id="brochure" accept="application/pdf" >
+                                            <input type="file" class="form-control" placeholder="Brochure" name="brochure" id="brochure" accept="application/pdf" >
                                             @error('brochure')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

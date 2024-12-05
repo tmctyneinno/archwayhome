@@ -12,7 +12,7 @@ class Post extends Model
         'title', 
         'content', 
         'image', 
-    ];
+    ]; 
 
     public function comments()
     {

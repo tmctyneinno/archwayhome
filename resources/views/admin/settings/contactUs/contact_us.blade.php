@@ -7,7 +7,7 @@
             <div class="basic-form">
                
                 <form method="POST" action="{{ isset($contactUs) ? route('admin.settings.updateContactUs', $contactUs->id) : route('admin.settings.storeContactUs') }}" enctype="multipart/form-data">
-                    @csrf
+                    @csrf 
                     @if(isset($contactUs))
                         @method('PUT')
                     @endif

@@ -171,7 +171,7 @@
             });
             
             const formData = new FormData(this);
-            $.ajax({
+            $.ajax({ 
                 type: 'POST',
                 url: '{{ route("comments.store") }}',
                 data: formData,

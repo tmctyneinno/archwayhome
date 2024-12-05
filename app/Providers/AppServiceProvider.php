@@ -54,7 +54,7 @@ class AppServiceProvider extends ServiceProvider
         $consultant = Consultant::latest()->get();
         $consultants = Consultant::select('*')
             ->withCount(['referralsMade as total_referrals_made', 'referralsReceived as total_referrals_received'])
-            ->latest()->paginate(20);
+            ->latest()->paginate(20); 
             
         $totalConsultant = $consultant->count();
         View::share('totalConsultant', $totalConsultant);
@@ -87,7 +87,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('totalEvent', $totalEvent);
 
         View::share('consultant', $consultant);
-        View::share('consultants', $consultants);
+        // View::share('consultants', $consultants);
         View::share('inspections', $inspection);
         View::share('contactUs', ContactUs::first());
         View::share('aboutUs', AboutUs::first());

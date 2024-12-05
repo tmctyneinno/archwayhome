@@ -41,7 +41,7 @@ Route::post('/book-inspection', [BookInspection::class, 'store'])->name('book-in
 Route::get('/project/{id}', [HomeController::class, 'detailsProject'])->name('home.project.details');
 Route::get('/post/details/{id}', [HomeController::class, 'detailsPost'])->name('post-details');
 Route::post('/post/comment', [HomeController::class, 'storeComment'])->name('comments.store');
-
+ 
 Route::get('/{page}', [PagesController::class, 'index'])->name('home.pages');
 Route::get('/consultant-form/referral/{referralCode}', [PagesController::class, 'index']);
  
