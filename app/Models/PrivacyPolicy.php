@@ -11,5 +11,5 @@ class PrivacyPolicy extends Model
 
     protected $fillable = [
         'content',
-    ];
+    ]; 
 }

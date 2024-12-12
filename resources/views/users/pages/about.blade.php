@@ -99,7 +99,7 @@
           <div class="section-title mb-6 pb-1 w-75 text-center mx-auto">
             <h2 class="m-0"> <span>Management </span></h2>
           </div>
-
+ 
           <div class="row justify-content-center mb-4">
             @forelse ($teams as $team)
                 @if ($loop->first)

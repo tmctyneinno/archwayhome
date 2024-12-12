@@ -20,11 +20,9 @@ class ConsultantFormController extends Controller
 {
     
     public function index(){
-        $consultants = Consultant::select('*')
-        ->withCount(['referralsMade as total_referrals_made', 'referralsReceived as total_referrals_received'])
-        ->latest()->paginate(20); 
-        
-        return view('admin.consultant.index', compact('consultants'));
+       
+
+        return view('admin.consultant.index', );
     }
  
     public function store(Request $request)

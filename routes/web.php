@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BookInspection;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\CaptchaController;
 use App\Http\Controllers\ConsultantFormController;
 use App\Http\Controllers\ContactFormController;
@@ -32,6 +33,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
  
 Auth::routes();
+Route::get('home/subscribe', [NewsletterController::class, 'index'])->name('newsletter.get');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('projects/{type}', [ProjectController::class, 'projectsType'])->name('users.projects.type');

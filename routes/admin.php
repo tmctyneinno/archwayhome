@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\PrivacyPolicy;
 use App\Exports\ConsultantsExport;
 use App\Http\Controllers\BookInspection;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ConsultantFormController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\EventController;
@@ -163,6 +164,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/consultants/export', function () {
             return Excel::download(new ConsultantsExport, 'consultants.xlsx');
         })->name('admin.consultants.export');
+        Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+        Route::get('/subscribe', [NewsletterController::class, 'showContacts'])->name('newsletter.get');
 
         //Book Inspection
         Route::get('/inspection/index', [BookInspection::class, 'index'])->name('admin.inspection.index');
