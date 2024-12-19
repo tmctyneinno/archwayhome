@@ -90,7 +90,7 @@ Route::prefix('admin')->group(function () {
         Route::get('project/{id}', [ProjectController::class, 'destroy'])->name('admin.project.destroy');
 
         //Blog 
-        Route::get('post/index', [BlogController::class, 'index'])->name('admin.post.index');
+        Route::get('post/index', [BlogController::class, 'index'])->name('admin.post.index'); 
         Route::get('post/create/', [BlogController::class, 'createPost'])->name('admin.post.create');
         Route::post('post/store', [BlogController::class, 'storePost'])->name('admin.post.store');
         Route::get('post/{id}/edit', [BlogController::class, 'editPost'])->name('admin.post.edit');

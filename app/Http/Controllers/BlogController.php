@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\Post; 
-
+ 
 class BlogController extends Controller
 {
     public function index(){
@@ -21,8 +21,8 @@ class BlogController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required',
-            'content' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:5048',
+            'content' => 'required|string',
+            'image' => 'required|image|max:5048',
         ]);
 
        

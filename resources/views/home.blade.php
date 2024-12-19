@@ -64,6 +64,7 @@
                           <p class="mb-0">
                             {!! Str::limit($homeproject->content, 50) !!}
                           </p>
+                          <a href="{{ $homeproject->video_link}}">{{ $homeproject->video_link}}</a>
                          
                       </div>
                       

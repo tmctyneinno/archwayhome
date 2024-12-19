@@ -22,7 +22,7 @@
                             <h4 class="card-title">Edit Post</h4>
                         </div>
                         <div class="card-body">
-                            <div class="basic-form">
+                            <div class="basic-form"> 
                                 @if(session('success'))
                                     <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert" >
                                         {{ session('success') }}
@@ -61,7 +61,7 @@
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Image</label>
                                         <div class="col-sm-9">
-                                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" onchange="previewImage(event)">
+                                            <input id="image" accept="image/*"  type="file" class="form-control @error('image') is-invalid @enderror" name="image" onchange="previewImage(event)">
                                             @error('image')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

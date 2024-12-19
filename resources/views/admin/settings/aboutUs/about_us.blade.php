@@ -42,7 +42,7 @@
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Content</label>
                             <textarea id="ckeditor" name="content" class="form-control" placeholder="Content" rows="8" spellcheck="false" required> {{ isset($aboutUs) ? $aboutUs->content : '' }}</textarea>
-                        </div>
+                        </div> 
                         <div class="mb-3 col-md-10">
                             <label class="form-label">Header Image </label>
                             <input id="header_image" type="file" class="form-control @error('image') is-invalid @enderror" name="header_image"  onchange="previewImagebg(event)">

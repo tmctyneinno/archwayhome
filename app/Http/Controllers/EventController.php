@@ -19,15 +19,15 @@ class EventController extends Controller
         //  dd($request->all());
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'video_link' => 'required|string|max:255',
+            'video_link' => 'required|string|max:255', 
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
        
         $images = $request->file('images');
         $numImages = count($images);
 
-        if ($numImages < 3 || $numImages > 7) {
-            return redirect()->back()->withErrors(['images' => 'Please upload between 3 and 7 images.']);
+        if ($numImages < 1 || $numImages > 7) {
+            return redirect()->back()->withErrors(['images' => 'Please upload between 1 and 7 images.']);
         }
         
        

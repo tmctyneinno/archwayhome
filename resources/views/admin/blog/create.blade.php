@@ -38,9 +38,9 @@
                                     </div>
                                 @endif
                 
-                                
-                                <form method="POST"  action="{{ route('admin.post.store') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('admin.post.store') }}" enctype="multipart/form-data" class="">
                                     @csrf
+                               
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Title</label>
                                         <div class="col-sm-9">
@@ -49,18 +49,17 @@
                                     </div>
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Content</label>
-                                        <div class="col-sm-9">
-                                            <div class="">
-                                                <textarea name="content" id="ckeditor" class="form-control" required></textarea>
-                                            </div>
+                                        <div class="mb-3 col-sm-9">
+                                            <label class="form-label">Content</label>
+                                            <textarea id="ckeditor" class="form-control"  name="content" rows="8" spellcheck="false" required> </textarea>
                                         </div>
                                     </div>
                                     
                                     
                                     <div class="mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label form-label">Image</label>
-                                        <div class="col-sm-9">
-                                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" required onchange="previewImage(event)">
+                                        <div class="col-sm-9"> 
+                                            <input id="image" type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" name="image" required onchange="previewImage(event)">
                                             @error('image')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -80,7 +79,7 @@
                                    
                                 </form>
                                 <script>
-                                    // Initialize CKEditor
+                            
                                     CKEDITOR.replace('ckeditor');
 
                                     function previewImage(event) {
@@ -97,6 +96,10 @@
                                             
                                             reader.readAsDataURL(input.files[0]);
                                         }
+                                    }
+                                    function syncEditorContent() {
+                                        const content = CKEDITOR.instances.ckeditor.getData(); // Get data from CKEditor
+                                        document.querySelector('textarea[name="content"]').value = content; // Sync content
                                     }
                                 </script>
                                 

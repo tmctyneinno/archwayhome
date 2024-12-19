@@ -130,7 +130,7 @@
                                 </ul>
                             </div>
                           </div>
-                        <div class="row">
+                        <div class="row mb-4">
                             <div class="col-lg">
                                 <ul class="pro-inline-item">
                                     <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3">
@@ -140,7 +140,7 @@
                                     </li>
                                     <li>
                                         @php
-                                        if($projectDetails->subscription_form) {
+                                        if($projectDetails->subscription_form) { 
                                         @endphp
                                             <li class="detail-inline-item bg-theme1 px-4 py-1 white me-3 mb-2">
                                                 <a href="{{ asset($projectDetails->subscription_form) }}" target="_blank" class="white"> View Subscription Form</a>
@@ -161,8 +161,21 @@
                                     
                                 </ul>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <iframe
+                                    width="560"
+                                    height="315"
+                                    src="{{ $projectDetails->video_link}}"
+                                    title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
 
-                          </div>
                       </div>
                   </div>
               </div>
